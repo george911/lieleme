@@ -1,0 +1,45 @@
+	  <table class='table table-hover'>
+	    <thead style='color:#aaaaaa;font-size:12px;weight:bold'>
+		    <th></th>
+		    <th>用户名</th>
+		    <th>年龄</th>
+		    <th>地点</th>
+		    <th>当前雇主</th>
+		    <th>职位</th>
+		    <th>行业</th>
+		    <th>备注</th>
+	  </thead>
+	  <% @my_talents.each do |f| %>
+		  <tr>
+	      <td width="30px">
+		      <%= link_to image_tag(f.avatar.url, size:'30x30',class: 'img-circle'),user_path(id:f.id),target:"_blank" %>
+	      </td>
+  	      <td>
+		  <%= f.user_name %>
+	      </td>
+	      <td>
+		  <%= remove_unwanted_words distance_of_time_in_words(Date.today,f.birthday) unless f.birthday == nil %>
+	      </td>
+	      <td>
+		      <%= f.city %>
+	      </td>
+	      <td>
+		      <% if f.works.find_by(uptonow: true)  %> <!-- find_by可用作判断, where不用作判断-->
+			<% work = f.works.where(uptonow: true).take %>
+			<% else work = f.works.where(leave_date: f.works.maximum(:leave_date)).take %><!--加take可以用.employer-->
+		      <% end %>
+	    	      <%=  work.employer unless work==nil %>
+	      </td>
+	      <td>
+		      <%= f.title %>
+	      </td>
+	      <td>
+		      <%= work.industry %>
+	      </td>
+	      <td>
+	  	  <%= f.reviews.find_by(author_id:current_user.id).body unless f.reviews.find_by(author_id:current_user) == nil %>
+              </td>
+	    </tr>
+            <% end %>
+    </table>
+

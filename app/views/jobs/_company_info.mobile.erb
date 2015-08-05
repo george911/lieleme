@@ -1,0 +1,28 @@
+<div id='company'>
+	<div class='row' style='background-color:#f2f1ee'>
+        <div>
+          <%= render "jobs/mobile/poster.mobile.erb" %>
+        </div>
+    </div>
+    <div class='row' style='padding:15px 30px 15px 30px'><!--row里面的div用padding失去作用，必须用col-格式-->
+        <div class='' >
+          <%= render "jobs/mobile/employer.mobile.erb" %>
+        </div>
+    </div>
+    <div class='row' style='background-color:#f2f1ee;padding:15px 30px 15px 30px'>
+        <div style='padding-bottom:10px'>
+          <span class='faint' >这些伯乐参与了推荐</span>
+        </div>
+        <div>
+          <%= render "jobs/mobile/hunter.mobile.erb" %>
+        </div>
+    </div>
+    <div class='row' style=''>
+        <div style='padding:15px 30px 15px 30px'>
+          <!--从views/comments下面取模板-->
+          <%= render @job.comments.order('top asc,created_at asc') %>
+
+          
+        </div>
+    </div>
+</div>

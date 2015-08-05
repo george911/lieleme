@@ -1,0 +1,139 @@
+<div id='job_list'>
+	<%= notice %>
+	<% @jobs.each do |f| %>
+    <a class="list-group-item">
+      <table>
+	<tr>
+		<td style='vertical-align:top'><%= image_tag(User.find(f.user_id).avatar.url,size:'40x40',class: 'avatar-refer-poster') %></td>
+		<td style='padding-left:10px'>
+		    <p><b><%= f.title %></b></p>
+		    <p>
+		      <%= f.role %>
+		      <!-- Button trigger modal -->
+		      <a data-toggle="modal" data-target="#myModal_<%= f.id %>"> <!--这个id如果不加每个iteration的modal都会跳出第一项-->
+			 详细 
+			</a>
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal_<%= f.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+	                    <div class="modal-content">
+		              <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel"><span style='font-size:20px;'><%= f.title %></span></h4>
+			      </div>
+			      <div class="modal-body">
+          			      <!--职位详情-->
+            			      <div class='row'>
+              			      <div class='col-lg-7'>
+                    			<table>
+                      			  <tr><td valign='top'><strong>地点:</strong></td><td><%= f.city %> | <%= f.addr %></td></tr>
+                      			  <tr><td><strong>行业:</strong></td><td><%= f.industry.present? ? f.industry : '面议' %></td></tr>
+                      			  <tr><td><strong>年薪:</strong></td><td><%= f.base_pay.present? ? "#{f.base_pay}人民币 x  #{f.month}" : '面议' %></td></tr>
+                      			  <tr><td><strong>奖金:</strong></td><td><%= f.bonus.present? ? "#{f.bonus} 人民币" : '面议' %></td></tr>
+                      			  <tr><td><strong>发布时间:</strong></td><td><%= f.created_at.strftime("%Y-%m-%d") %></td></tr>
+                      			  <tr><td><strong>最后回复:</strong></td><td>2014-10-20</td></tr>
+                      			  <tr><td><strong>备忘:</strong></td><td><%= f.memo %></td></tr>
+                    				</table>
+              			      </div><!--cl-lg-3-->
+           
+                          <div class='col-lg-5'>
+                            <p><span style='font-size:35px;font-family:Georgia;color:#fa6464'><%= f.commission %></span><span style='font-size:10px;'>现金奖励</span></p>
+                            <p>经验要求:<%= f.work_year %>年</p>
+                            <table>
+                             <% f.experiences.each do |f| %>
+                            	 <tr>
+                              	   <td style='font-size:12px'><%= f.skill %></td>
+                            	   <td>&nbsp;<% (f.year<=10 ? "#{(f.year+1)/2}" : 5).to_i.times do %>
+                            	     <span style="margin-left:-3px;border-radius:1px;background-color:#ff632f;color:#ffffff;" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                         <% end %>
+                                 	   </td>
+                            	   <td style='font-size:10px'>&nbsp;
+                            	     <%= f.year %>年
+                            	   </td>
+                               </tr>
+                             <% end %>
+                           </table> 
+                          </div> 
+                        </div><!--row-->
+
+                        <div><br /></div>
+                        <div class='row'>
+                          <div class='col-lg-7' id='orange'>
+                            <button class='btn'>关注</button>
+                            <button class='btn'>分享</button>
+                            <button class='btn'>预约</button>
+                            <button class='btn'>领取任务</button>
+                          </div>
+                         
+                          <div class='col-lg-4' style = 'margin-left:-15px'  >
+                            <div class='col-lg-2'  >
+				     <%= button_to "推荐#{@talent.user_name}", job_line_items_path(job_id:f.id),class: 'btn btn-success',form:{target: '_blank'} %><!--job_id必须带上,@user从session[:talent_id]里来-->
+                            </div>
+                            
+                          </div>
+                        </div>
+
+                        <div class='row'>
+                          <div class='col-lg-10'>
+                            <p class='green_title'>工作职责· · · · · ·</p>
+                            <p class='text'><%= f.role.gsub(/\n/,'</p><p class="text">').html_safe unless f.role.blank? %></p>
+                          </div>
+                        </div>
+
+                        <div class='row'>
+                          <div class='col-lg-10'>
+                            <p class='green_title'>职位要求· · · · · ·</p>
+                            <p class='text'><%= f.requirement.gsub(/\n/,'</p><p class="text">').html_safe unless f.requirement.blank? %></p>
+                          </div>
+                        </div>
+
+                        <div class='row'>
+                          <div class='col-lg-4'>
+                            <p class='green_title'>汇报对象:</p>
+                                <% if f.bosses != nil %>
+                      	  <% f.bosses.each do |f| %>
+                      	  <p class='text'><%= f.title %></p><!--text为了段落缩进-->
+                                <% end %> 
+                            <% end %>
+                          </div>
+                          <div class='col-lg-4'>
+                            <p class='green_title'>下属:</p>
+                              <% if f.subordinates != nil %>
+                      	  <table>
+                          	    <% f.subordinates.each do |f| %>
+                      	      <tr>
+                      	        <td><%= f.title %>&nbsp;&nbsp;</td>
+                      		<td><%= f.num %>人</td>
+                      	      </tr>
+                      	        <% end %>
+                      	   </table>
+                                  <% end %>
+                          </div>
+                        </div><!--row-->
+
+                        <div class='row'>
+                          <div class='col-lg-10'>
+                            <p class='green_title'>公司简介· · · · · ·</p>
+                            <!--把/n换成回车并且插入段落标记和首行缩进-->
+                            <p class='text'><%= f.company_info.gsub(/\n/,'</p><p class="text">').html_safe unless f.company_info.blank? %></p>
+                          </div>
+                       </div> 
+
+		    </div><!--modal body-->
+            		
+		  </div><!--modal-content-->
+		 </div><!--modal-dialog-->
+	       </div><!-- end modal-->
+		    </p>
+	    	</td>
+
+	</tr>
+      </table>
+     </a>
+   <% end %> 
+      <table>
+          <%= controller.controller_name == "search" ? (paginate @jobs,remote: :true) : (paginate @jobs) %>
+      </table>
+</div><!-- job_list-->
+

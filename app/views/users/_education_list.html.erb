@@ -1,0 +1,17 @@
+<div class='row'>
+<table>
+<% @user.educations.each do |education| %>
+	<tr ><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><!--第一行-->
+	  <td><%= education.enter_school %>&nbsp;~&nbsp;<%= education.uptonow ? "现在" : education.leave_school %></td>
+	  <td style='padding-left:30px'><%= education.school %></td>
+        </tr>
+	<tr><!--第二行-->
+          <td></td>
+	  <td style='padding-left:30px'><%= education.degree %>&nbsp;|&nbsp;<%= education.major %></td>
+  </tr>
+	<tr style='border-bottom: 1px solid #eeeeee'><td>&nbsp;</td><td>&nbsp;</td></tr>
+<% end %>
+    </table>
+</div>
+

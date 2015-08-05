@@ -1,0 +1,21 @@
+<% @summaries.each do |summary| %>
+  <%= form_for([@user,summary],remote: true) do |f| %>
+	  <div class='row' style='margin-bottom:5px;'>
+		  	<div class='col-lg-3'>		  
+				<table>
+				  <tr >
+				    <td style='padding:5px'>
+				    		  <%= f.text_area :content, class: "form-control" %>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<div>
+				<br>
+				<%= submit_tag "保存", class: "btn" %>
+			</div>
+	  </div>
+	  <hr>	  
+    <% end %>
+<% end %>
+

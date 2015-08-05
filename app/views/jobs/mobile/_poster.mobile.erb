@@ -1,0 +1,9 @@
+<div class=' text-center' style='font-family:Arial,"STHeiti", "华文黑体";padding-top:60px;padding-bottom:10px;font-size:20px'>
+  <strong><%= @job.poster.user_name %></strong>
+</div>
+<div class='text-center'>
+  <%= image_tag(@job.poster.avatar.url,size:'50x50',class:'img-circle') %>
+</div>
+<div class=' text-center faint' style='padding-top:10px;padding-bottom:25px'>
+  最近发了<%= @job.poster.sent_offer_count %>个offer
+</div>

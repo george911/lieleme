@@ -1,0 +1,71 @@
+<div class="container-fluid"><!--Use .container-fluid for a full width container, spanning the entire width of your viewport.-->
+    <section class="container"><!--Use .container for a responsive fixed width container.-->
+        <div class="container-page"> 
+            
+            <div class="col-md-4"><!--col-md对应的Container width：970px -->
+               
+                <h3 class="dark-grey">自我介绍</h3>
+
+                
+                  <div class='row' style='margin-top:60px'><!--row可以完整的封装内部的div,如果不用，内部的div会超出well-->
+
+                    <%= form_for @user, url: wizard_path, method: :put do |f| %><!--url发送当前的路径,填education会重定向到work-->
+                      <% if @user.errors.any? %>
+                          <div id="error_explanation">
+                            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+                            <ul>
+                            <% @user.errors.full_messages.each do |msg| %>
+                              <li><%= msg %></li>
+                            <% end %>
+                            </ul>
+                          </div>
+                        <% end %>
+                     
+                        <% if @user.user_type == '猎头' %>
+                          <%= render 'summary_hunter',f1:f %>
+                        <% else %>
+                          <%= render 'summary_normal',f1:f %>
+                      	<% end %>
+
+                        <div class='col-lg-6'>
+                      	  <%= f.submit "继续",class: "btn btn-success btn-block pull-right" %> <!--url:wizard_path自动返回show action,进入next step-->
+                              <% end %>
+                        </div>
+                      </div><!--row end-->
+                
+            </div><!-- end col-md-4-->
+
+            <div class="col-md-6" style='margin-top:60px'>
+                <br />
+                <br />
+                <br />
+                <table>
+                  <tr>
+                    <td><span class="fa fa-check text-success step_info">&nbsp;&nbsp;</span></td><td class='step_info'>注册基本信息</td>
+                  </tr>
+                  <tr>
+                    <td><span class="fa fa-check text-success step_info">&nbsp;&nbsp;</span></td><td class='step_info'>填写个人评价</td>
+                  </tr>
+                  <tr>
+                    <td></td><td class='step_info'>输入工作履历</td>
+                  </tr>
+                  <tr>
+                    <td></td><td class='step_info'>完善教育背景</td>
+                  </tr>
+                  <tr>
+                    <td></td><td class='step_info'>撰写薪资要求</td>
+                  </tr>
+                  <tr>
+                    <td></td><td class='step_info'>完成</td>
+                  </tr>
+                </table>
+                    
+            </div><!--col-md-6 end-->
+
+        </div>
+    </section>
+</div>
+
+
+

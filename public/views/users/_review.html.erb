@@ -1,0 +1,55 @@
+  <hr />
+  <% @user.reviews.order('top asc, created_at desc').each do |review| %><!--置顶-->
+  <% @author=User.find(review.author_id) %>
+  
+  <div class='row'>
+    <div class='col-lg-3'>
+      <table>
+        <% if @user.works.find_by(employer: review.employer).present? and @user.works.find_by(employer: review.employer).join_date.present? and @user.works.find_by(employer: review.employer).leave_date.present? %>
+        <tr><td><small><%= @user.works.find_by(employer: review.employer).join_date.strftime("%Y-%m") unless @user.works.find_by(employer: review.employer) == nil %>&nbsp;~&nbsp;<%= @user.works.find_by(employer: review.employer).leave_date.strftime("%Y-%m") unless @user.works.find_by(employer: review.employer) == nil %></small></td></tr>
+        <tr><td><small><%= review.employer %></small></td></tr>
+        <tr><td><small><%= @user.works.find_by(employer: review.employer).title unless @user.works.find_by(employer: review.employer) == nil %></small></td></tr>
+        <% end %>
+      </table>
+    </div>
+    
+    <div class='col-lg-6'>
+      <% if review.author_id != nil %>
+        <div class='row'>
+		<table>
+		  <tr>
+			  <td><% review.rating.to_i.times do %>
+      	     		    <span style="margin-left:-3px;border-radius:1px;background-color:#ff632f;color:#ffffff;" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+		    <% end %>
+			  </td>
+		  </tr>
+		  <tr>
+			  <td>
+				  "<%= review.body %>"
+			  </td>
+		  </tr>
+		</table>
+        </div>
+
+        <div class="row" >
+          <table>
+            <tr>
+              <td style='padding-left:250px'><%= image_tag(@author.avatar.url(:small),size:'20x20',class: 'img-square') unless review.author_id == nil%></td>
+            </tr>
+            <tr>
+              <td style='padding-left:250px'><small><%= @author.user_name %><%= @author.title.present? ? " #{@author.title}" : nil %></small></td>
+            </tr>
+            <tr>
+              <td style='padding-left:250px'><small><%= review.created_at.strftime("%m-%d") %></small></td>
+            </tr>
+          </table>
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+
+
+  
+  <% end %>
+

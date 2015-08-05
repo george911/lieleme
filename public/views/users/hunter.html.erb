@@ -1,0 +1,104 @@
+<div class='container' style='padding-top:80px;' ><p id="notice"><%= notice %></p><!--注册好返回这里有一条提示-->
+	<div class='col-lg-6'>
+		      <!--标题行/头像-->
+		      <div class = 'row'>
+		        <div class='col-lg-12'style='padding:0px'>
+			  <table style='padding-left:0px'>
+				  <tr><td colspan='3' style='padding-left:0px'><%= image_tag(@user.avatar.url,size: '130x130', class: "img-square") %></td>
+				      <td style='padding-left:30px'>
+					      <p><h3><%= @user.user_name %></h3></p>
+					      <p><h5><%= @user.title %></h5></p>
+					      <table>
+						<tr>
+						  <td><%= hidden_div_if @user.industry == nil do %>
+							<div class='focus-job'><span style='padding:10px 10px'><%= @user.industry %></span></div>
+						        <% end %></td>
+						  <td><%= hidden_div_if @user.focus_job1 == nil do %>
+							<div class='focus-job'><span style='padding:10px 10px'><%= @user.focus_job1 %></span></div>
+						        <% end %></td>
+						  <td><%= hidden_div_if @user.focus_job2 == nil do %>
+							<div class='focus-job'><span style='padding:10px 10px'><%= @user.focus_job2 %></span></div>
+							<% end %></td>
+						  <td><%= hidden_div_if @user.focus_job3 ==nil do %>
+							<div class='focus-job'><span style='padding:10px 10px'><%= @user.focus_job3 %></span></div>
+							<% end %></td>
+						</tr>
+					      </table>
+				      </td>
+				  </tr>
+			  </table>
+		        </div>
+
+		    </div><!--end row-->
+
+
+		    <div class='row'>
+			    <br>
+		    </div>
+  
+		  <div class='row'>
+		    <div class='col-lg-12' style='border-bottom: 2px solid #eeeeee;padding:0px 0px 25px 0px'>
+		      <h4 style="color:#007722"><b>自我介绍</b></h4>
+		      <% if @user.summaries != nil %>
+		      <% @user.summaries.each do |f| %>
+		            <%= f.content %>
+		        <% end %>
+		      <% end %>
+		    </div><!--col-->
+		  </div>
+
+		  <!--案例和反馈-->
+
+		  <div class='row'>
+			  <div class='col-lg-8' style='padding:20px 0px 20px 0px;color:#007722'>
+				  <h4><b>案例和反馈</b></h4>
+			  </div>
+			  <div class='col-lg-4' style='padding:20px 0px 20px 0px;color:#3b5893'>
+				  <h5>
+				  成功案例 | 进行中
+				  </h5>
+			  </div>
+		  </div><!--row-->
+
+		  <div class='row'>
+			  <% @user.line_items.where.not(comment:nil).each do |f| %>
+				<div class='row'>
+					<div class='col-lg-3'>
+						    <p><b><%= f.title %></b></p>
+						    <p><%= f.created_at.strftime("%b %Y") %></p>
+						    <p><span style='font-size:17px;font-family:Arial,"Microsoft YaHei", "微软雅黑";color:#fa6464'><%= f.status %></span></p>
+					</div>
+					<div class='col-lg-6'>
+					        “<%= f.comment %>”
+			    	</div><!--col-lg-4-->
+					<div class='col-lg-3'>
+					  <h3 style='margin:0px'><%= Rate.find_by(rateable_id:f.id).stars unless Rate.find_by(rateable_id:f.id) ==nil%></h3>
+					    <%= rating_for f, "service" %>
+					</div>
+				</div>
+				<hr style='border-top: 1px solid #cccccc'>
+			  <% end %>
+		    </div> <!--end row -->
+		  
+
+  </div><!--end col-lg-6 -->
+
+  <div class='col-lg-3'>
+	  <div style='background-color:#f5f5f2'class='well'>
+		  <div class='row' style='border-bottom:1px solid #aaaaaa;margin:10px 10px'>
+ 		    <h3><%= @user.line_items.where(status: "offer").sum(:commission) %>&nbsp;<span style='font-size:10px;color:green;font-family:"Microsoft YaHei",微软雅黑'>累计佣金</span></h3>
+    		  </div>
+		  <div class='row' style='border-bottom:1px solid #aaaaaa;margin:10px 10px'>
+			  <h3><%= User.where(id:@user.bank_id).size %>&nbsp;<span style='font-size:10px;color:green;font-family:"Microsoft YaHei",微软雅黑'>个注册候选人</span></h3>
+    		  </div>
+		  <div class='row' style='border-bottom:1px solid #aaaaaa;margin:10px 10px'>
+			  <h3><%= @user.line_items.size %>&nbsp;<span style='font-size:10px;color:green;font-family:"Microsoft YaHei",微软雅黑'>次推荐</span></h3>
+    		  </div>
+		  <div class='row' style='border-bottom:1px solid #aaaaaa;margin:10px 10px'>
+			  <h3><%= @user.line_items.where(status:"offer").size %>&nbsp;<span style='font-size:10px;color:green;font-family:"Microsoft YaHei",微软雅黑'>次成单</span></h3>
+    		  </div>
+      </div>
+   </div>
+    	    
+	  
+</div><!--end container-->

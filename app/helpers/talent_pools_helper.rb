@@ -1,0 +1,2 @@
+module TalentPoolsHelper
+end

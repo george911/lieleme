@@ -1,0 +1,53 @@
+<% @works.each do |work| %>
+  <%= form_for([@user,work],remote: true) do |f| %>
+	  <div class='row' style='margin-bottom:5px;'>
+		  	<div class='col-lg-3'>		  
+				<table>
+				  <tr >
+				    <td style='padding:5px'>
+				    		  <%= f.date_select :join_date,discard_day:true,start_year:1980, end_year:Date.today.year %>
+					</td>
+				  </tr>
+				  <tr>
+				  	<td>
+						  ~&nbsp;<%= f.date_select :leave_date,discard_day:true,start_year:1980,class: "form-control small",end_year:Date.today.year %>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<div class='col-lg-4'>
+				<table>
+				  <tr >
+				    <td style='padding:5px'>
+				    	<%= f.text_field :employer,class: "form-control small" %>
+					</td>
+					<td>
+						<%= f.text_field :industry,class: "form-control small" %>
+					</td>
+				  </tr>
+				  <tr>
+				  	<td style='padding:5px'>
+				  	  <%= f.text_field :title, class: "form-control small" %>
+					</td>
+				  </tr>
+				  <tr>
+				  	<td style='padding:5px' colspan="2">
+				  	  <%= f.text_area :job_scope, class: "form-control",rows: 2, cols: 30 %>
+					</td>
+				  </tr>
+				  <tr>
+				  	<td style='padding:5px'>
+				  	  <%= submit_tag "保存", class: "btn" %>
+					</td>
+				  </tr>
+				</table>
+
+						  
+			</div>
+
+	  </div>
+	  <hr>	  
+
+    <% end %>
+<% end %>
+

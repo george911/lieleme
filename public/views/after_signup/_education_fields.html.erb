@@ -1,0 +1,15 @@
+<div>
+	<%= f.label :school, "学校" %><%= link_to "删除这段学历", '#', class: "remove_fields pull-right" %>
+	<%= f.text_field :school, class: "form-control" %><br>
+	<%= f.label :enter_school, "入学时间" %>
+	<%= f.date_select :enter_school, class: "form-control", discard_day: true, start_year:1980, end_year:Date.today.year %><br><br>
+	<%= f.label :leave_school, "毕业时间" %>
+	<%= f.date_select :leave_school, class: "form-control", discard_day: true, start_year:1980, end_year:Date.today.year %><br>
+	<%= f.check_box :uptonow %><br>
+	<%= f.label :major, "专业" %>
+	<%= f.text_field :major,class: "form-control" %><br>
+	<%= f.label :degree,"学位" %><br>
+	<%= f.select :degree,User::DEGREE_TYPES %><br>
+	<%= f.hidden_field :_destroy %>
+	
+</div>

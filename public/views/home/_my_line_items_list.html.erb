@@ -1,0 +1,46 @@
+	  <table class='table table-hover'>
+	    <thead style='color:#aaaaaa;font-size:12px;weight:bold'>
+		    <th></th>
+		    <th>用户名</th>
+		    <th>状态</th>
+		    <th>职位</th>
+		    <th>客户</th>
+		    <th>联系人</th>
+		    <th>推荐日期</th>
+		    <th>反馈</th>
+	  </thead>
+	  <% @my_line_items.order('updated_at desc').each do |f| %>
+	    <% if User.find_by id: f.talent_id %>
+	      <% talent = User.find_by id: f.talent_id %>
+	      <% job = Job.find_by id: f.job_id %>
+	      <% hr = User.find_by id: job.user_id %> 
+	    <tr>
+	      <td width="30px">
+		<% if talent.present? %>
+		  <%= link_to image_tag(talent.avatar.url, size:'30x30',class: 'img-circle'),user_path(id:talent.id),target:"_blank" %>
+	        <% end %>
+	      </td>
+	      <td>
+		      <%= talent.present? ? (link_to "#{talent.user_name}",user_path(talent),method: :get,target: :_blank) : f.name %></td>
+	      <td>
+		      <%= f.status %>
+	      </td>
+	      <td>
+		      <%= link_to "#{job.title}",job_path(job),target: :_blank %>
+	      </td>
+	      <td>
+		      <%= job.employer %>
+	      </td>
+	      <td>
+		      <%= link_to "#{hr.user_name}",user_path(hr), target: :_blank %>
+	      </td>
+	      <td>
+		      <%= f.created_at.strftime("%y-%m-%d") %>
+	      </td>
+	      <td>
+		      <%= f.comment %>
+	      </td>
+	    </tr>
+            <% end %>
+            <% end %>
+    </table>

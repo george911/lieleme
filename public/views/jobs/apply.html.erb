@@ -1,0 +1,129 @@
+<!-- 本文件用来显示我的职位的应聘简历列表-->
+<div class='container'>
+<table style='margin-top:100px'class='table table-triped'>
+  <thead>
+	  <th></th>
+	  <th>候选人</th>
+	  <th>状态</th>
+	  <th>城市</th>
+	  <th>年龄</th>
+	  <th>雇主</th>
+	  <th>职位</th>
+	  <th>学校</th>
+	  <th>学历</th>
+	  <th>月薪</th>
+	  <th>年薪</th>
+	  <th>期望薪资</th>
+	  <th>手机</th>
+	  <th>邮箱</th>
+   </thead>
+  
+   <tbody id='line_item' >
+	  <% @job.line_items.order("updated_at desc").each do |f| %>
+	    <% talent = User.find(f.talent_id) %>
+		<tr class='hover'>
+		  <td >
+		      
+		  <button  class='comment' data-toggle="modal" data-target="#comment_<%=f.id%>">
+ 服务评价
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="comment_<%=f.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">服务评价</h4>
+      </div>
+      <div class="modal-body">
+      	请您对<%= f.user.user_name %>评价<br>
+      	<%= rating_for f, "service" %>
+        
+      	<%= form_tag job_line_item_path(id:f.id,job_id:@job.id),method: :put do |line_item| %>
+							        
+							        <div class="form-group">
+							            <label for="message-text" class="control-label"></label>
+							            <%= text_area_tag :comment, nil,placeholder: "输入评语",class: "form-control"  %><!--第一个参数是输入params的id,第二个是输入的内容，因为我们从params[:comment]输入，所以这个为nil,注意如果漏掉，则后面的参数会变成输入的内容而发生错误-->
+							        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
+        <%= submit_tag "确认", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+		  
+		  
+		  </td>
+		  <td><%= link_to "#{talent.user_name}",user_path(talent),target:"_blank" %></td>
+		  <td >
+			<!-- Button trigger modal -->
+			<a type="button" data-toggle="modal" data-target="#lineitem_<%=f.id%>">
+			  <%= f.status %>
+			</a>
+
+			<!-- Modal -->
+			<div class="modal fade" id="lineitem_<%=f.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			<div class="modal-content">
+							<div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title">面试进度</h4>
+						    </div>
+		      				<div class="modal-body">
+		      						<%= form_tag job_line_item_path(id:f.id,job_id:@job.id),method: :put do |line_item| %>
+							        <div class="form-group">
+							            <label for="recipient-name" class="control-label">下一步状态</label>
+							              
+										<%= select_tag :status,"<option>Reject</option><option>turndown</option><option>发送到line</option><option>等待反馈</option><option>初面</option><option>最后面试</option><option>Offer</option><option>保证期</option><option>推荐成功</option>".html_safe, class: 'form-control' %> <!--这种写法是最保险的，否则会出问题。-->
+							        </div>
+							        <div class="form-group">
+							            <label for="message-text" class="control-label">给推荐者反馈</label>
+							            <%= text_area_tag :feedback, nil,class: "form-control"  %><!--第一个参数是输入params的id,第二个是输入的内容，因为我们从params[:comment]输入，所以这个为nil,注意如果漏掉，则后面的参数会变成输入的内容而发生错误-->
+							        </div>
+							</div>
+					        <div class="modal-footer">
+								    <button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
+							        <%= submit_tag "确认", class: "btn btn-primary" %>
+							        <% end %>	
+					        </div>
+
+				      
+			</div><!--modal-content-->
+			</div>
+			</div>
+      	  </td>
+		  <td><%= talent.city %></td>
+		  <td><%= age(talent.birthday) %></td>
+		  <% if talent.works.find_by(uptonow: true)  %> <!-- find_by可用作判断, where不用作判断-->
+		  <td><%= talent.works.where(uptonow: true).take.employer %></td>
+		  <td><%= talent.works.where(uptonow: true).take.title %></td>
+		  <% else %>
+		  <td><%= talent.works.where(leave_date: talent.works.maximum(:leave_date)).take.employer %></td><!--加take可以用.employer-->
+		  <td><%= talent.works.where(leave_date: talent.works.maximum(:leave_date)).take.title %></td><!--加take可以用.employer-->
+		  <% end %>
+		  <% if talent.educations.find_by(degree: "本科") %>
+		  <td><%= talent.educations.where(degree:"本科").take.school %></td>
+		  <td><%= "本科" %></td>
+		  <% elsif talent.educations.find_by(degree: "硕士") %>
+		  <td><%= talent.educations.where(degree:"硕士").take.school %></td>
+		  <td><%= "硕士" %></td>
+		  <% else %>
+		  <td><%= talent.educations.first.school %></td>
+		  <td><%= talent.educations.first.degree %></td>
+		  <% end %>
+		  <td><%= talent.base_salary %></td>
+		  <td><%= (talent.base_salary ||=0)*(talent.month_num||=0)+(talent.bonus||=0)+(talent.housing||=0)+(talent.transport||=0)+(talent.retention_bonus||=0) %></td>
+		  <td><%= talent.expect_package %></td>
+		  <td><%= talent.mobile %></td>
+		  <td><%= talent.email %></td>
+	        </tr>	
+	<% end %>
+</tbody>
+</table>
+</div>
+

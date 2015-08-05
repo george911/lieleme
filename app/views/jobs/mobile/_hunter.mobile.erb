@@ -1,0 +1,5 @@
+<div >
+  <% @job.senders.first(10).each do |f| %>
+	  <%= link_to image_tag(f.avatar.url(:small),size:"30x30",class: 'img-squre'),user_path(f),target:"_blank" %>&nbsp;&nbsp;
+	<% end %>
+</div>

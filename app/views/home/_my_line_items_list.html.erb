@@ -1,0 +1,65 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+    <h4>我送的候选人&nbsp;&nbsp;
+      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"  aria-controls="collapseOne">
+          <i style='color:white' class='glyphicon glyphicon-search'></i>
+        </a>
+    </h4>
+  </div>
+  <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+    <div class='panel-body'>
+  	  <%= form_tag my_line_items_path,method: :get,remote:true do %>
+  	  <%= text_field_tag :my_query,nil, style:"height:30px",placeholder:"搜索我送的候选人",class: 'form-control' %><!--class至少要放到第三个参数-->
+		<%= submit_tag "",style:'display:none'  %>
+      <% end %>
+    </div>
+  </div>
+  <table class='table table-hover'>
+	    <thead style='color:#aaaaaa;font-size:12px;weight:bold'>
+	      <tr class='warning'>
+		    <th></th>
+		    <th>用户名</th>
+		    <th>状态</th>
+		    <th>职位</th>
+		    <th>客户</th>
+		    <th>联系人</th>
+		    <th>推荐日期</th>
+		    <th>反馈</th>
+		  </tr>
+	  </thead>
+	  <% if @my_line_items.present? %>
+	  <% @my_line_items.order('updated_at desc').each do |f| %>
+	    <tr>
+	      <td width="30px">
+		<% if f.recipient.present? %>
+		  <%= link_to image_tag(f.recipient.avatar.url, size:'30x30',class: 'img-circle'),user_path(f.recipient),target:"_blank" %>
+	  	<% else %>
+	  	  <%= image_tag("missing.png", class: 'img-circle',size:'30x30') %>
+	   	<% end %>
+	      </td>
+	      <td>
+		      <%= f.recipient.present? ? (link_to "#{f.recipient.user_name}",user_path(f.recipient),method: :get,target: :_blank) : f.name %></td>
+	      <td>
+		      <%= f.status %>
+	      </td>
+	      <td>
+		      <%= link_to "#{f.job.title}",job_path(f.job),target: :_blank %>
+	      </td>
+	      <td>
+		      <%= f.job.employer %>
+	      </td>
+	      <td>
+		      <%= link_to "#{f.job.poster.user_name}",user_path(f.job.poster), target: :_blank %>
+	      </td>
+	      <td>
+		      <%= f.created_at.strftime("%y-%m-%d") %>
+	      </td>
+	      <td>
+		      <%= f.comment %>
+	      </td>
+	    </tr>
+            <% end %>
+	    <%= paginate @my_line_items %>
+          <% end %>
+    </table>
+</div>

@@ -1,0 +1,38 @@
+					  <a href='#' class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"><!--href不能丢掉,否则系统不认为它是link-->
+		                    <span style="color:white">职位邀请
+		                      <% if current_user.received_line_items.where(status:"等待应聘").count != 0 %>
+			                      <span class='badge'><%= current_user.received_line_items.where(status:"等待应聘").count %></span>
+			                    <% end %></span>
+                        <span class="caret" style="color:white"></span>
+                      </a>
+
+                      <!--下拉菜单中的项目-->
+	                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+		                    <li role='presentation'>
+		                      <%= link_to "所有邀请",job_invites_path,style:"padding-left:10px" %>
+                        </li>
+                        <li role='presentation'>
+                          <%= link_to "我的应聘",my_apply_path,style:"padding-left:20px" %>
+                        </li>
+		                    <!--避免在我的任务里面冲突导致escape_javascript失效-->
+		                      <% if action_name != "job_invites" %>
+			                      <%@pending_invites = current_user.received_line_items.where(status:'等待应聘') %>
+		                      <% end %>
+		                    <li role="presentation" class="divider"></li>
+		                    <% if @pending_invites != nil %>
+	                          <% @pending_invites.each do |f| %>
+			                        <li role="presentation"  >
+			                          <table style="margin-left:10px">
+			                            <tr id="tr_invite_<%=f.id%>">
+				                            <td width="100px">
+				                        	    <li><%= link_to "#{f.job.title}",job_path(f.job) %></li>
+				                        	    <li><%= link_to "#{f.job.employer}",job_path(f.job) %></li>
+				                            </td>
+				        
+			                            </tr>
+			                          </table>
+			                        </li>
+			                        <li id = "invite_<%= f.id %>" role="presentation" class="divider"></li>
+			                      <% end %>
+                        <% end %>
+	                    </ul>  

@@ -1,0 +1,1 @@
+<%= link_to my_talents_path,style:'color:white' do %>  简历库  <% unless current_user.talent_pools.unread_by(current_user).count == 0 %>    <span class='badge'><%= current_user.talent_pools.unread_by(current_user).count %></span>  <% end %><% end %>

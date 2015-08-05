@@ -1,0 +1,123 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+    <h4>我的任务&nbsp;&nbsp;
+      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"  aria-controls="collapseOne">
+          <i style='color:white' class='glyphicon glyphicon-search'></i>
+        </a>
+    </h4>
+  </div>
+  <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+    <div class='panel-body'>
+  	  <%= form_tag my_talents_path,method: :get,remote:true do %>
+ 		<%= text_field_tag :my_query,nil, class: 'form-control' %><!--class至少要放到第三个参数-->
+          <%= submit_tag "",style:'display:none'  %>
+      <% end %>
+    </div>
+  </div>
+
+  <table class='table table-hover' id="my_invite" >
+	    <thead style='color:#aaaaaa;font-size:12px;weight:bold'>
+	      <tr class='warning'>
+		    <th></th>
+		    <th>职位名</th>
+		    <th>我的推荐</th>
+		    <th>客户</th>
+	    	<th>职位联系人</th>
+		    <th>发布日期</th>
+		  </tr>
+	</thead>
+	<% @my_invites.order('created_at desc').each do |invite| %>
+		<tr class='hover' id = "tr_invite_<%= invite.id %>">
+			<td>
+			  <button id= "<%= invite.job_id %>" type='button' class='refer' data-toggle="modal" data-target="#myModal">
+	   <!-- <%= link_to '推荐',new_job_line_item_path(job_id:invite.job_id) %>--><!--带上job_id是为了推荐方便-->
+		 推荐
+  	</button>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div style='width:400px' class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+		      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      <h4 class="modal-title" id="myModalLabel">推荐候选人</h4>
+	      </div>
+
+	      <div class="modal-body">
+              <!-- Modal body content -->
+		<%= form_for @line_item, url: job_line_items_path(job_id:invite.job_id), method: :post do |f| %>
+  		  <% if @line_item.errors.any? %>
+    		  <div id="error_explanation">
+      		  <h2><%= pluralize(@line_item.errors.count, "error") %> prohibited this line_item from being saved:</h2>
+      			<ul>
+      				<% @line_item.errors.full_messages.each do |message| %>
+        		        	<li><%= message %></li>
+      				<% end %>
+      			</ul>
+    		  </div>
+  		<% end %>
+       
+		<div class='input-group col-lg-7'>
+			<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+			<%= f.text_field :email, class: 'form-control',placeholder:'输入邮箱地址' %>
+		</div>
+		<br>
+		<div class='input-group col-lg-7'>
+			<span class="input-group-addon"><i style='width:14px' class="fa fa-mobile"></i></span>
+			<%= f.text_field :mobile, class: 'form-control input',placeholder:'输入手机号' %>
+		</div>
+		<br>
+		<div class='input-group col-lg-7'>
+			<span class="input-group-addon"><i style='width:14px' class="fa fa-user"></i></span>
+			<%= f.text_field :name, class: 'form-control input',placeholder:'对方姓名' %>
+		</div>
+	
+	        </div><!--modal body end -->
+              		
+  	        <div class="modal-footer">
+		      <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+		      <%= f.submit "分享",class: 'btn btn-danger' %>
+		      </div>
+	  	<% end %>	
+
+            </div>
+          </div>
+        </div>
+      </div>
+			</td>
+			<td>
+				<div>
+					<%= link_to "#{invite.job.title}",job_path(invite.job),target: :_blank %>
+				</div>
+				<% if invite.accept == nil %>
+				  <div id = "invite_<%= invite.id%>" >
+					<%= link_to accept_invite_path(invite_id:invite.id,job_id:invite.job_id), id:"accept_invites_#{invite.job_id}",method: :patch,remote:true do %>
+				  <!--在已关闭任务页面隐藏接受和拒绝按钮-->
+				     <% if action_name == "my_invites"  %>
+						<i class='glyphicon glyphicon-ok'></i>
+					<% end %>
+				     <% end %>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<%= link_to reject_invite_path(invite_id:invite.id,job_id:invite.job_id), id:"reject_invites_#{invite.job_id}",method: :patch,remote:true do %>
+				     <% if action_name == "my_invites" %>
+						<i class='glyphicon glyphicon-remove'></i>
+				     <% end %>
+				<% end %>
+				  </div>
+				<% end %>
+			</td>
+			<td>
+				<%= link_to "#{current_user.referal_num(invite.job.id)}",my_referals_path(job_id:invite.job.id), id: "#{invite.job.id}_num" %>
+			</td>
+			<td>
+			  <%= invite.job.employer %>
+			</td>
+			<td>
+			  <%= link_to "#{invite.job.poster.user_name}",user_path(invite.job.poster),target: :_blank %>
+		  	</td>
+			<td>
+			  <%= invite.job.created_at.strftime("%y-%m-%d") %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+</div>

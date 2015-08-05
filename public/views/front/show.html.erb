@@ -1,0 +1,138 @@
+<section style="background:#18bc9c;">
+        <div class="container">
+            <div class="row">
+                <div class="board">
+                    <!-- <h2>Welcome to IGHALO!<sup>™</sup></h2>-->
+                    
+
+                     <div class="tab-content" style='margin-bottom:0px'>
+                      <div class="tab-pane fade in active" id="home">
+
+                          <h5 class="head" style='color:white;font-size:60px;font-family:"Microsoft Yahei",微软雅黑'>分享职位,赢得奖金 <span style="color:#f48260;">♥</span></h5>
+                          <p class="narrow" style='color:white;font-size:25px'>
+                              分享职位,引爆您的朋友圈！
+                          </p>
+                          <p >
+                            <%= link_to "即可体验", jobs_path, class: 'btn btn-success btn-outline-rounded green',target: "_blank" %>
+                                
+                            </p>
+                      </div>
+                       <div class="tab-pane fade" id="messages">
+                          <h5 class="head"style='color:white;font-size:60px;font-family:"Microsoft Yahei",微软雅黑'>寻找猎头,精准招聘</h5>
+                          <p class="narrow"style='color:white;font-size:25px'>
+                             挑选中意的猎头，开启招聘众包的大航海时代！
+                          </p>
+                          
+                          <p>
+                            <%= link_to "即可体验", search_path, class: 'btn btn-success btn-outline-rounded green',target: "_blank" %>
+                            
+                        </p>
+                      </div>
+                      <div class="tab-pane fade" id="profile">
+                          <h5 class="head"style='color:white;font-size:60px;font-family:"Microsoft Yahei",微软雅黑'>人才银行,永远增值</h5>
+                          <p class="narrow"style='color:white;font-size:25px'>
+                              您的猎头专属简历库将像资产一样不断增值！
+                          </p>
+                          
+                          <p>
+                            <%= link_to "即可体验", users_path, class: 'btn btn-success btn-outline-rounded green',target: "_blank" %>
+
+                        </p>
+                          
+                      </div>
+                     
+                      
+                      
+<div class="clearfix"></div>
+</div>
+
+                    <div class="board-inner" style='padding-top:0px;'>
+                    <ul class="nav nav-tabs" id="myTab">
+                    <div class="liner"></div>
+                     <li class="active">
+                     <a href="#home" data-toggle="tab">
+                      <span class="round-tabs one">
+                              <i class="glyphicon glyphicon-share-alt"></i>
+                      </span> 
+                  </a></li>
+                  <li><a href="#messages" data-toggle="tab">
+                     <span class="round-tabs three">
+                          <i class="glyphicon glyphicon-user"></i>
+                     </span> </a>
+                     </li>
+                  <li><a href="#profile" data-toggle="tab">
+                     <span class="round-tabs two">
+                         <i class="glyphicon glyphicon-usd"></i>
+                     </span> 
+                    </a>
+                 </li> 
+                     </ul></div>
+
+</div><!--board-->
+</div>
+</div>
+</section>
+<section style="background:#">
+  <div class='container'style='margin-left:30px'>
+    <div class='col-lg-12'>
+	    <h1 align='center'style='color:#f48260'>这里的世界很精彩</h1>
+    </div>
+    <% @offers.first(3).each do |f| %>
+    	 <div class='col-lg-4' style='padding-top:20px;padding-right:0px'>
+        	   <div class = '' style='background:#efefef;padding-top:30px;padding-bottom:30px;border-radius:2px'>
+        	      <% @user=User.find_by"id = ?",f.user_id %>
+                      <% @job=Job.find_by"id = ?",f.job_id %>
+        	      <% if @user != nil %>
+        	        <%= link_to image_tag(@user.avatar.url(:medium),size:"150x150", class: " img-circle"), user_path(@user),target: :_blank %>
+        	        <h4 align='center' style='font-family:"Microsoft Yahei",微软雅黑,arival;color:#6f6f6f'>
+                    <%= @user.user_name %></h4>
+        	        <h4 align='center' style='color:#6f6f6f'>
+				<span style='font-size:10px'>成功猎取</span><%= f.title %>&nbsp;&middot;&nbsp;<%= f.commission %></h4>
+                      <% end %>
+             </div><!-- -->
+      	     <div class='col-lg-6'style='height:50px;background:#efefef;margin:2px 0px 0px 0px;border-radius:2px;padding:15px;'>
+      		    <%= rating_for f, "service",style:"padding-top:30px" %>
+      	     </div>
+      	     <div class='col-lg-6'style='height:50px;background:#efefef;margin:2px 0px 0px 0px;border-left:1px solid white;border-radius:2px;padding:15px;;color:#6f6f6f'>
+      	       <span class='glyphicon glyphicon-map-marker'></span>
+      		     <%= @user.city %>
+      	     </div>
+             <div class='col-lg-12' style='padding:5px;background:#cccccc;;color:#6f6f6f'>
+		     <% if @user.focus_job1 != nil %>
+		       &nbsp;&nbsp;<span class='text-center' style='background:#efefef;border-radius:20px'>
+                         &nbsp;<%= @user.focus_job1 %>&nbsp;
+		       </span>&nbsp;
+	     	       <% end %>
+		     <%if @user.focus_job2 != nil %>
+                       <span class='text-center' style='display:inline;height:20px;background:#efefef;margin:12px auto;border-radius:20px'>
+			       <span style='width:100%'>&nbsp;<%= @user.focus_job2 %>&nbsp;</span>
+                       </span>&nbsp;
+	     	       <% end %>
+		     <%if @user.focus_job3 != nil  %>
+                       <span class='text-center' style='background:#efefef;margin:12px auto;border-radius:20px'>
+                       	     &nbsp;<%= @user.focus_job3 %>&nbsp;
+                       </span>
+	     	       <% end %>
+             </div>
+         <div class='col-lg-12'style='background:#a8a8a8;height:120px;color:white;padding:30px;'>
+           <% if @user.summaries != nil %>
+    	     <% @user.summaries.each do |f| %>
+    		     <%= truncate(f.content,length:150) %>
+    	     <% end %>
+     	 <% end %>
+         </div>
+    	   <br>
+	   <div class='col-lg-12'style='background:#a8a8a8;height:120px;color:white;padding:0px 50px 0px 50px;'>
+	      <%= link_to "查看简历",user_path(@user), class: 'btn',style:'margin-top:30px;display:block;background:transparent;border:1px solid gray' %>
+      	   </div>
+             </div><!--col-lg-4在81行-->
+          <% end %>
+    <div class='col-lg-12'>
+      <h1 align='center' style='color:#f48260'>你的精彩在哪里</h1>
+    </div>
+  </div>
+</section>
+
+                   
+
+    

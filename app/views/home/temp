@@ -1,0 +1,9 @@
+
+  <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+    <div class='panel-body'>
+  	  <%= form_tag my_talents_path,id:"search",method: :get,remote:true do %>
+ 		<%= text_field_tag :my_query,nil, class: 'form-control' %><!--class至少要放到第三个参数-->
+          <%= submit_tag "",id:"search",style:'display:none'  %>
+      <% end %>
+    </div>
+  </div>

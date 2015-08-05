@@ -1,0 +1,99 @@
+<div class='container' style='padding-top:80px'>
+	<div class='col-lg-3' style='padding-right:0px'>
+		<div class='well' style='margin-bottom:5px'>
+		  <div class='row'>
+			  <div class='col-lg-4'>
+				  <!--头像-->
+				  <%= image_tag(@user.avatar.url,size:'70x70',class: 'avatar-refer-talent' ) %>
+			    <% @user.reviews.average(:rating).to_i.times do |f|  %>
+			      <span style="color: #fcb82b;" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+			    <% end %>
+
+			  </div>
+		          <div class='col-lg-8' >
+				  <p style='color:#1db0ed;margin-bottom:0px'><%= @user.user_name %></p>
+				  <p style='margin-bottom:0px'><%= @user.title %> &nbsp;<%= @user.city %></p>
+				  <p style='font-size:12px;padding:0px'>
+				  <% if @user.works != nil %>
+           				<% @user.works.first(3).each do |f| %>
+    	     				<% if f != @user.works.last %>
+	       				<%= f.employer %> | <!-- |不能放在<% %>里-->
+      	     				<% else %>
+	       				<%= f.employer %>
+             				<% end %>
+           				<% end %>
+					<% end %>
+				  </p>
+
+			  </div>
+		  </div>
+
+		  <div class='row'>
+			  <div class ='col-lg-12'>
+			  </div>
+			  <div class ='col-lg-3'>
+			    <p style='font-family:Arial,"Microsoft YaHei", "微软雅黑"'>经验</p>
+			    <p><% @sum = 0 %>
+			       <% @user.works.each do |f| %>
+			       <% @sum += (remove_unwanted_words distance_of_time_in_words(f.leave_date, f.join_date)).to_i %>
+			       <% end %>
+			       <%= @sum %>
+			       </p>
+			  </div>
+			  <div class ='col-lg-5'>
+			    <p style='font-family:Arial,"Microsoft YaHei", "微软雅黑"'>平均在职时间</p>
+		            <p><%= number_with_precision((@sum.to_f/@user.works.size unless @user.works.size == 0), precision:1) %>
+		              </p>
+		          </div>
+			  <div class ='col-lg-4'>
+			    <p style='font-family:Arial,"Microsoft YaHei", "微软雅黑"'>基本月薪</p>
+			    <p><%= @user.base_salary %></p>
+			  </div>
+			  
+		  </div><!--end row-->
+	  </div><!-- end well-->
+	  <div style='margin-top:0px'class='well'>
+	    <h4 style='color:#1db0ed;font-size:18px'>工作经验</h4>	 
+	    <hr>
+            <% if @user.summaries != nil %>
+            <% @user.summaries.each do |f| %>
+		<p><%= f.content %></p>
+    		<% end %>
+	    <% end %>
+	    <hr>
+	    <h4 style='color:#1db0ed;font-size:18px'>教育经历</h4>
+<% if @user.educations != nil %>
+  <% @user.educations.each do |f| %>
+    <table style='font-size:12px'>
+      <tr>
+	<td class="education" style='font-family:Arial,"Microsoft YaHei", "微软雅黑";font-size:12px'><%= f.enter_school.strftime("%b %Y") %> - 
+	<%= f.leave_school.strftime("%b %Y") %></td>
+<td class="education" style='font-family:Arial,"Microsoft YaHei", "微软雅黑";font-size:13px'>&nbsp;&nbsp;&nbsp;&nbsp;<%= f.school %></td>
+      </tr>
+      <tr>
+	 <td class="education"></td>
+         <td class="education" style='font-family:Arial,"Microsoft YaHei", "微软雅黑";font-size:12px'>&nbsp;&nbsp;&nbsp;&nbsp;<%= f.major %> | <%= f.degree %></td>
+      </tr>
+    </table>
+    <% end %>
+<% end %>
+	    </div>
+	</div>
+  	
+	<div class='col-lg-6' >
+		<div class='list-group'>
+			<a class="list-group-item">
+			  <div><%= form_tag job_search_path,method: :get,remote:true do %><!--注意contrller转换到search_controller-->
+			    <div class="input-group col-sm-9" style='margin:auto'><!--搜索框居中-->
+          		      <%= text_field_tag :query,nil, class: 'form-control input-sm',placeholder:'搜索适合他/她的职位'  %>
+			      <span class='input-group-btn'><%= submit_tag "搜索", name:nil, class: 'btn btn-info btn-sm' %></span><!--通过job_search.js.erb实现render--> </div>
+	  		    <% end %>
+      			  </div>
+			</a>
+			<div id='job_list'>
+		   	 <%= render 'search/job_list' %>	
+  		        </div><!-- job_list-->
+		</div><!--list-group-->
+  	</div>
+
+</div>

@@ -1,0 +1,36 @@
+<div class='col-lg-8'>
+  <div class='row' >
+    <% if comment.user_id != nil %>
+        <div class='col-lg-8'>
+          <table>
+                <tr>
+                  <% @author=User.find(comment.user_id) %>
+                  <td >
+              	    <%= image_tag(@author.avatar.url(:small),class: 'img-circle') unless comment.user_id == nil%>
+                  </td>
+          	      <td><!--tr如果不加td的话下一个tr不会重启一行-->
+                    &nbsp;&nbsp;<%= @author.user_name %>
+                    <%= @author.works.last.title.present? ? " #{@author.works.last.title} |" : '找工作中 |' %>
+                    <%= remove_unwanted_words distance_of_time_in_words(Date.today,@author.birthday) unless @author.birthday == nil %>&nbsp;|&nbsp;
+                  </td>
+                  <td>
+                    <%= rating_for_user @job, @author, "job_rating"%>
+                  </td>
+                </tr>
+                <tr>
+          	      <td></td>
+                  <td id='comment_body'>
+                    "<%= comment.body %>"
+                  </td>
+                </tr>
+          </table>
+        </div>
+
+        <div class='col-lg-2'>
+          <small>
+            发表于<%= comment.created_at.strftime("%m-%d") %>
+          </small>
+        </div>
+    <% end %>
+  </div>
+</div>

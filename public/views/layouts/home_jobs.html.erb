@@ -1,0 +1,21 @@
+<div class='container' style='padding-top:80px'>
+  <% content_for :content do %>
+    <div style='color:#3097ee' id="" class='col-lg-1'>
+	    <br>
+	    <br>
+	    <br>
+      <p><%= link_to "职位", my_talents_path %></p>
+      <p>任务</p>
+      <p>事件</p>
+      <p>设置</p>
+      <p>帮助</p>
+    </div>
+    
+    <div class='col-lg-11'>
+	      <%= yield %>
+    </div>
+
+  <% end %>
+</div>
+<%= render template: "layouts/application" %>
+

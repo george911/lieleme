@@ -1,0 +1,41 @@
+	  <table class='table table-hover'>
+	    <thead style='color:#aaaaaa;font-size:12px;weight:bold'>
+		    <th>职位名</th>
+		    <th>公司</th>
+	    	    <th>简历数</th>
+		    <th>发送到line</th>
+	    	    <th>初面</th>
+		    <th>最后面试</th>
+		    <th>赏金</th>
+		    <th>备注</th>
+	</thead>
+	<% @my_jobs.order('created_at desc').each do |f| %>
+		<tr>
+			<td>
+			  <%= f.title %>
+			</td>
+			<td>
+			  <%= f.employer %>
+			</td>
+			<td>
+				<%= link_to "#{f.line_items.size unless f.line_items == nil}",job_apply_path(job_id:f.id) %>
+			</td>
+			<td>
+			  <%= f.line_items.where("status LIKE ? or status LIKE ? or status LIKE ?", "发送到line","初面","最后面试").size unless f.line_items == nil %>
+		  	</td>
+			<td>
+				<%= f.line_items.where(status: "初面").size unless f.line_items == nil %>
+			</td>
+			<td>
+				<%= f.line_items.where(status: "最后面试").size unless f.line_items == nil %>
+			</td>
+			<td>
+				<%= f.commission %>
+			</td>
+			<td>
+				<%= f.memo %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+		    

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title><%= @job.title %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  
+  <!-- ie8 和ie9s support-->
+  <script src="/respondjs/html5shiv.js"></script>
+  <script src="/respondjs/respond.min.js"></script>
+      
+  <!-- Bootstrap core JavaScript 一定要在head和底部都放，否则下拉菜单实现不了========================================================= -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <!--/Users/George/site2.0/app/views/devise/registrations/new.html.erb 要用到勾的图像-->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body  class='<%= controller.controller_name %>'>
+  <nav class= 'navbar-fixed-top' style='background-color:#f27a31'>
+      <div class='col-xs-1' style='margin-left:-20px'><!--确保logo靠左边-->
+        <%= image_tag("logo.png",style:'padding-top:2px;') %>
+      </div>
+       <div class='col-xs-3'>
+      </div>
+      <div class='col-xs-6'>
+        <div class="input-group" style='padding:4px;'>
+          <span class="input-group-addon" id="basic-addon1" style='background-color:transparent;border:solid 1px white;border-right:0px'>
+            <%= link_to "职位信息",mobile_show_job_path(forwarder:@forwarder.id,id:@job.id),style:'color:white;',remote:true %></span>
+          <span class="input-group-addon" id="basic-addon2" style='background-color:transparent;border:solid 1px white;'>
+            <%= link_to "公司信息",mobile_show_company_path(forwarder:@forwarder.id,id:@job.id),style:'color:white;',remote:true %></span>
+        </div>
+      </div>
+   
+  </nav>
+
+  <%= render 'job' %>
+  
+</body>
+

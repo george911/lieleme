@@ -1,0 +1,23 @@
+
+<div class='row' style='margin:0px 0px 0px 8px;border-bottom:1px solid #eeeeee'>
+  <div class='col-lg-8' style='padding-left:0px'><h3>热招职位</h3></div>
+  <div class='col-lg-4'><%= paginate @jobs %></div>
+  
+</div>
+<div style='margin-left:20px;'>
+
+	<% if @jobs != nil %>
+		<% @jobs.each do |job| %>
+		  <div class='row' style='border-bottom:1px solid #eeeeee;'>
+			  <ul style='list-style-type:none;padding:10px 0px 10px 0px'>
+				  <li><strong><%= job.title %></strong></li>
+				  <li>城市:&nbsp;&nbsp;<%= job.city %></li>
+				  <li>发布日期:&nbsp;&nbsp;<%= job.created_at.strftime("%m-%d") %></li>
+				  <li>工作内容:&nbsp;&nbsp;<%= truncate(job.role,lenth:350) %></li>
+			  	  <li class="pull-right"><%= link_to "详细内容 >", job_path(job) %></li>
+			  </ul>
+		  </div>
+	    <% end %>
+	<% end %>
+    </fieldset>
+</div>

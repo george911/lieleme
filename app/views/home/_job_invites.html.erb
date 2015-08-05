@@ -1,0 +1,60 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+    <h4>我的职位邀请&nbsp;&nbsp;
+      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"  aria-controls="collapseOne">
+          <i style='color:white' class='glyphicon glyphicon-search'></i>
+        </a>
+    </h4>
+  </div>
+  <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+    <div class='panel-body'>
+  	  <%= form_tag my_talents_path,method: :get,remote:true do %>
+ 		<%= text_field_tag :my_query,nil, class: 'form-control' %><!--class至少要放到第三个参数-->
+          <%= submit_tag "",style:'display:none'  %>
+      <% end %>
+    </div>
+  </div>
+  <table class='table table-hover'>
+	    <thead style='color:#aaaaaa;font-size:12px;weight:bold'>
+	      <tr class='warning'>
+		    <th>公司</th>
+		    <th>职位</th>
+		    <th>状态</th>
+		    <th>猎头</th>
+		    <th>邀请日期</th>
+		  </tr>
+	  </thead>
+	  <% if @job_invites.present? %>
+	  <% @job_invites.order('updated_at desc').each do |f| %>
+	    <tr>
+	      <td>
+		      <%= f.job.employer %></td>
+	      <td>
+		      <%= link_to "#{f.job.title}",job_path(f.job),target: :_blank %></td>
+	      </td>
+	      <td>
+	        <% if f.status == "等待应聘" %>
+			<%= link_to job_accept_path(f.job), method: :patch do %>
+			  <i class='glyphicon glyphicon-ok'></i>
+			<% end %>
+			<%= link_to job_reject_path(id:f.id), method: :patch do %>
+			  <i class='glyphicon glyphicon-remove'></i>
+			<% end %>
+		<% elsif f.status == "reject" %>
+			已拒绝
+		<% else %>
+			已应聘
+		<% end %>
+	      </td>
+	      <td>
+		      <%= link_to "#{f.sender.user_name}",user_path(f.sender), target: :_blank %>
+	      </td>
+	      <td>
+		      <%= f.created_at.strftime("%y-%m-%d") %>
+	      </td>
+	    </tr>
+            <% end %>
+	    <%= paginate @job_invites %>
+          <% end %>
+    </table>
+</div>

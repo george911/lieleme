@@ -1,0 +1,27 @@
+            <div class="col-lg-5"><!--col-md对应的Container width：970px -->
+	      <h4>为您推荐以下猎头:</h4>
+		<div class='well'>
+			<% @hunters.each_with_index do |user,index| %>
+			    <div class='row' style='padding-top:10px'>			      
+			      <div class='col-lg-2'>
+			        <%= image_tag(user.avatar.url(:small),class: 'avatar' )%>
+			      </div>
+			      <div id='<%= "#{user.user_name}排第#{index+1}位"%>' class='col-lg-6'>
+			        <p>
+				<%= link_to "#{user.user_name}",user_path(user),target:"_blank" %></p>
+				<p>总共成了<%= user.offers.count %>个offer</p>
+				<p><%= user.industry %>行业活跃猎头</p>
+				<p><hr></p>
+			      </div>
+			      <div class='col-lg-4'>
+			        <div id = '<%= user.id %>'>
+					<%= button_to( "邀请做单",invite_path(user_id:user.id,job_id:@job.id),class:"invite-btn",remote: true, id: user.id) %> 
+			        </div>
+	    	      </div>
+		    </div>
+	  		<% end %>
+		</div><!--为您推荐一下猎头-->
+		<div class ='col-md-12'>
+		  <%= link_to "完成",next_wizard_path,class: 'btn btn-success' %>
+		</div>
+  </div>

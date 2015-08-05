@@ -1,0 +1,81 @@
+require 'spec_helper'
+
+  feature 'Sign up' do
+    
+    scenario "with blank email" do
+      visit (sign_up_path)
+      fill_in 'user_mobile', with: '123'
+      click_on '注册'
+      expect(page).to have_content("邮箱不能为空")
+      expect(page).to have_content("密码不能为空")
+    end
+
+    scenario "with blank password" do
+      visit (sign_up_path)
+      #fill_in 'user_mobile', with: '123'
+      fill_in 'email', with: 'test@12.com'
+      click_on '注册'
+      expect(page).to have_content("密码不能为空")
+      expect(page).not_to have_content("邮箱不能为空")
+    end
+
+    scenario "注册后应聘" ,js:true do
+      hunter = create(:user,id:101,user_name:"David",user_type:"猎头") 
+      hr = create(:user,id:100,user_name:"Zach",user_type:"人事")
+      job =create(:job,id:1,poster_id:hr.id,employer:"微软",title:"软件工程师")
+      line_item = create(:line_item, email:"test@test.com",job_id:job.id,sender_id:hunter.id)
+      talent = create(:user,id:102,user_name:"Mary",user_type:"求职者")
+
+      visit root_path
+      fill_in "user_email", with:"david@example.com"
+      fill_in "user_password", with:"11111111"
+      click_on "登录"
+      visit job_path(id:job.id)
+      click_on "推荐"
+      fill_in "line_item_email", with:"mary@example.com"
+      click_on "发送"
+      expect(page).to have_content("喜您成功推荐以下候选人到软件工程师职位")
+      expect(page).to have_content("Mary")
+
+      visit job_path(id:job.id)
+      click_on "推荐"
+      fill_in "line_item_email", with:"1@1.com"
+      click_on "发送"
+      expect(page).to have_content("您已经成功推荐以下候选人")
+      expect(page).to have_content("1@1.com")
+      visit job_path(id:job.id)
+      click_on "推荐"
+      fill_in "line_item_email", with:"2@2.com"
+      click_on "发送"
+      expect(page).to have_content("您已经成功推荐以下候选人")
+      expect(page).to have_content("2@2.com")
+
+      # 注册
+      visit sign_out_path
+      visit sign_up_path
+      fill_in "email", with: "1@1.com"
+      fill_in "password", with: "11111111"
+      fill_in "user_password_confirmation", with:"11111111"
+      click_on "注册"
+      click_on "继续"
+      click_on "下一步"
+      click_on "继续"
+      click_on "完成"
+      expect(page).to have_content("已经为您推荐以下职位")
+      expect(page).to have_content("软件工程师")
+      
+      visit sign_out_path
+      visit root_path
+      fill_in "user_email", with:"david@example.com"
+      fill_in "user_password", with:"11111111"
+      click_on "登录"
+      visit job_path(id:job.id)
+      click_on "推荐"
+      fill_in "line_item_email", with:"3@3.com"
+      click_on "发送"
+      expect(page).to have_content("您已经成功推荐以下候选人")
+      expect(page).to have_content("3@3.com")
+    end
+
+  end
+    

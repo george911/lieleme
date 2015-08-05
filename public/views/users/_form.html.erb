@@ -1,0 +1,91 @@
+<div class='row'>
+<h4>自我评价和总结&nbsp;<%= link_to "修改",edit_user_summary_path(user_id: @user), class: "btn-orange", remote:true %></h4>
+  <div class='col-lg-10' style='padding-left:20px' id="summary-content">
+    <%= render "summary_list" %>
+  </div>
+</div>
+<div class='row'>
+<h4>工作经历&nbsp;<%= link_to "修改",edit_user_work_path(user_id: @user), class: "btn-orange", remote:true %></h4>
+  <div class='col-lg-10' style='padding-left:20px' id="work-content">
+    <%= render "work_list" %>
+  </div>
+</div>
+
+<div class='row'>
+<h4>教育经历&nbsp;<%= link_to "修改",edit_user_education_path(user_id: @user), class: "btn-orange", remote:true %></h4>
+  <div class='col-lg-10' style='padding-left:20px' id="education-content">
+    <%= render "education_list" %>
+  </div>
+</div>
+
+<div class='row'>
+<h4>薪资状况&nbsp;<%= link_to "修改",user_editsalary_path(user_id: @user), class: "btn-orange", remote:true %></h4>
+  <div class='col-lg-10' style='padding-left:20px' id="salary-content">
+    <%= render "salary_list" %>
+  </div>
+</div>
+
+<div class='row basic'>
+<h4>基本信息</h4>
+  <div class='col-lg-8'>
+    <%= form_for(@user) do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+
+      <div class='col-lg-6'>
+        <li><%= f.label :手机 %></li>
+        <li><%= f.text_field :mobile,class: "form-control" %></li>
+      </div>
+
+      <div class='col-lg-6'>
+        <li><%= f.label :用户名 %></li>
+        <li><%= f.text_field :user_name,class: "form-control" %></li>
+      </div>
+
+      <div class='col-lg-6'>
+        <li><%= f.label :真实姓名 %></li>
+        <li><%= f.text_field :true_name,class: "form-control" %></li>
+      </div>
+
+      <div class='col-lg-6'>
+        <li><%= f.label :用户类型 %></li>
+        <li><%= f.text_field :user_type,class: "form-control" %></li>
+      </div>
+
+      <div class='col-lg-6'>
+        <li><%= f.label :邮箱 %></li>
+        <li><%= f.text_field :email,class: "form-control" %></li>
+      </div>
+
+      <div class='col-lg-6'>
+        <li><%= f.label :生日 %></li>
+        <li><%= f.date_select :birthday,class: "form-control" %></li>
+      </div>
+
+      <div class='col-lg-6'>
+        <li><%= f.label :城市 %></li>
+        <li><%= f.text_field :city,class: "form-control" %></li>
+      </div>
+
+      <div class='col-lg-6'>
+        <li><%= f.label :职衔 %></li>
+        <li><%= f.text_field :title,class: "form-control" %></li>
+      </div>
+
+      <div class='col-lg-12'>
+        <br>
+        <%= f.submit "更新", class: "btn" %>
+      </div>
+    </div>
+  <% end %>
+</div>

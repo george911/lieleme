@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--只为调换hunter简历的背景成白色-->
+<html lang="en">
+<head>
+  <title>猎友会-在线有偿职位分享</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <!-- Bootstrap core JavaScript 一定要在head和底部都放，否则下拉菜单实现不了
+========================================================= -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  <!--/Users/George/site2.0/app/views/devise/registrations/new.html.erb 要用到勾的图像-->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body  class='<%= controller.controller_name %>'>
+  <!--div of modal,trigger link is put to navbar--> 
+  <%= render 'layouts/search_tips' %>
+
+<!--navbar-inverse设置bar的颜色是黑色-->
+<nav class="navbar navbar-color navbar-fixed-top">
+      <ul class="nav navbar-nav">
+	      <!--<li class="active"><a href="#"></a></li>-->
+	      <li style='padding-top:10px;padding-left:26px'><%= image_tag "猎友会.png" %></li>
+      </ul>  
+      <div class="container">
+        <div class="navbar-header">      
+          <%= render 'layouts/search_form' %>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+	      
+          <% if user_signed_in? %>
+          <% else %> 
+          	<%= render 'layouts/signin_form' %>
+	        <% end %> 
+        </div><!--/.navbar-collapse -->
+      </div><!-- container-->
+</nav>
+
+<div id="content"><%= content_for?(:content) ? yield(:content) : yield %></div>
+<div class='row'>
+</div>
+  <%= render 'layouts/footer' %>
+</body>
+
+</html>

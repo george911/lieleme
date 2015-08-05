@@ -1,0 +1,70 @@
+<!-- notice提醒 -->
+<% if notice %>
+<div class="modal fade" id="notice_popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+    <div class="modal-body">
+	    <span style='color:red;font-size:20px'>恭喜您</span><br>
+	    <%= notice %> 
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+<% end %>
+
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+    <h4>我的应聘记录&nbsp;&nbsp;
+      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"  aria-controls="collapseOne">
+          <i style='color:white' class='glyphicon glyphicon-search'></i>
+        </a>
+    </h4>
+  </div>
+  <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+    <div class='panel-body'>
+  	  <%= form_tag my_talents_path,method: :get,remote:true do %>
+ 		<%= text_field_tag :my_query,nil, class: 'form-control' %><!--class至少要放到第三个参数-->
+          <%= submit_tag "",style:'display:none'  %>
+      <% end %>
+    </div>
+  </div>
+
+  <table class='table table-hover'>
+	    <thead style='color:#aaaaaa;font-size:12px;weight:bold'>
+	      <tr class='warning'>
+		    <th>公司</th>
+		    <th>职位</th>
+		    <th>应聘进展</th>
+		    <th>推荐人</th>
+		    <th>推荐日期</th>
+		  </tr>
+	  </thead>
+	  <% if @my_apply.present? %>
+	  <% @my_apply.order('updated_at desc').each do |f| %>
+	    <tr>
+	      <td>
+		      <%= f.job.employer %></td>
+	      <td>
+		      <%= link_to "#{f.job.title}",job_path(f.job),target: :_blank %></td>
+	      </td>
+	      <td>
+		      <%= f.status %>
+	      </td>
+	      <td>
+	      	<a data-trigger="hover" href="users/<%=f.sender_id%>" target="_blank" data-container="body" data-toggle="popover" data-placement="top" data-content="Mobile:<%= f.sender.mobile %> Email:<%= f.sender.email %>">
+ 				<%= f.sender.user_name %>
+			</a>
+
+	      </td>
+	      <td>
+		      <%= f.created_at.strftime("%y-%m-%d") %>
+	      </td>
+	    </tr>
+            <% end %>
+	    <%= paginate @my_apply %>
+          <% end %>
+    </table>
+</div>

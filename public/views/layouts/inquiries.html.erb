@@ -1,0 +1,23 @@
+<div class='container' >
+  <% content_for :content do %>
+	  <div class="container-fluid">
+	      <div class="row">
+		        <div class="col-sm-3 col-md-2 sidebar">
+		          <ul class="nav nav-sidebar" >
+				    <li class="active"><%= link_to "联系我们", new_inquiry_path,style:'color:white'  %></li>
+				    <li style='color:white'><%= link_to "加入我们", ourjobs_path,style:'color:white'  %></li>
+				    <li style='color:white'><%= link_to "投资我们", invest_path,style:'color:white'  %></li>
+				    <li style='color:white'><%= link_to "投诉与建议", new_inquiry_path,style:'color:white'  %></li>
+				    <li style='color:white'><%= link_to "帮助", users_path,style:'color:white'  %></li>
+		          </ul>
+		        </div>
+		        <div class="col-sm-7 col-md-6 " style='padding-top:70px'>
+			      <%= yield %>
+		        </div>
+	      </div><!--end row-->
+	  </div>
+  <% end %>
+</div>
+
+<%= render template: "layouts/application" %>
+

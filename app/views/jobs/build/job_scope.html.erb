@@ -1,0 +1,65 @@
+<div class="col-md-4"><!--col-md对应的Container width：970px -->
+  <br><br>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+	<div class='col-md-12'>
+	    <h4>工作内容和要求</h4>
+    	</div>
+	<div class='row'>
+	</div>
+    </div>
+    <div class="panel-body">
+                <%= form_for @job, url: wizard_path, method: :put do |f| %>
+                  <% if @job.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+                      <ul>
+                      <% @job.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                      <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+
+                <div class="col-lg-12" style='padding-top:10px'>
+                  <%= f.text_area :role,class: 'form-control',placeholder:"工作内容" %>
+                </div>
+                <div class="col-lg-12" style='padding-top:20px'>
+                  <%= f.text_area :requirement,class: 'form-control',placeholder:'工作要求' %>
+                </div>
+                <div class="col-lg-6" style='padding-top:20px'>
+                  <%= f.text_field :work_year, class: 'form-control',placeholder:'最少工作经验' %>
+                </div>
+
+                <!--为了留出和下面按钮的空隔-->
+                  <div class="form-group col-lg-3 " >
+                  </div>
+
+                <div class='col-lg-12'>
+                  <table>
+                  <% @job.experiences.each do |exp| %>
+                      <tr>
+                        <td><%= exp.skill %></td>
+                	<td><%= exp.year %></td>
+                        <td>年</td>
+                      </tr>
+                  <% end %>
+                  </table>
+                </div>
+
+                <div class="col-lg-12" style='margin-top:20px'>
+                  <%= f.fields_for :experiences,@job.experiences.build do |builder| %>
+                  <%= render 'skill_fields',f:builder %>
+                   <%= link_to_add_fields "增加",f,:experiences %>
+                  <% end %>                
+                </div>
+
+                <div class='col-lg-12' style='padding-top:20px'>
+                  <%= f.submit "继续", class: 'btn btn-success' %>
+                </div>
+                <% end %>
+	</div>
+  </div>
+</div>

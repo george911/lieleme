@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school: MyString
+  enter_school: 2014-12-15
+  leave_school: 2014-12-15
+  major: MyString
+  degree: MyString
+  user_id: 
+
+two:
+  school: MyString
+  enter_school: 2014-12-15
+  leave_school: 2014-12-15
+  major: MyString
+  degree: MyString
+  user_id: 

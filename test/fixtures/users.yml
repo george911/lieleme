@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mobile: MyString
+  user_name: MyString
+  true_name: MyString
+  user_type: MyString
+  email: MyString
+  base_salary: 1
+  month_num: 1
+  bonus: 1
+  housing: 1
+  transport: 1
+  stock: MyString
+  stock_num: 1
+  retention_bonus: 1
+  expect_package: 1
+  expect_month_salary: 1
+  birthday: 2014-12-10
+  city: MyString
+  title: MyString
+
+two:
+  mobile: MyString
+  user_name: MyString
+  true_name: MyString
+  user_type: MyString
+  email: MyString
+  base_salary: 1
+  month_num: 1
+  bonus: 1
+  housing: 1
+  transport: 1
+  stock: MyString
+  stock_num: 1
+  retention_bonus: 1
+  expect_package: 1
+  expect_month_salary: 1
+  birthday: 2014-12-10
+  city: MyString
+  title: MyString

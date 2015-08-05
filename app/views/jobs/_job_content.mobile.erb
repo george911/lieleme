@@ -1,0 +1,32 @@
+    <div class='row'>
+      <div class='col-xs-12'>
+      
+        <h4><strong><%= @job.title %></strong></h4>
+      </div>
+    </div>
+    
+    <div class='row'>
+      <div class='col-xs-6'>
+      	<table >
+      		<tr><td class='faint interval'style='width:20%;vertical-align: top;'>地址:</td><td class='interval'><%= @job.city %>&nbsp;|&nbsp;<%= @job.addr %></td></tr>
+      		<tr><td class='faint interval'style='width:20%;vertical-align: top;'>薪资:</td><td class='interval'><%= @job.base_pay %>&times;<%= @job.month %><td></tr>
+      		<tr><td class='faint interval'style='width:20%;vertical-align: top;'>经验:</td>
+      			<td class='interval'>
+      		 	  <table>
+      	          <% @job.experiences.each do |f| %>
+      	           <tr>
+      	              <td style='font-size:12px'><%= f.skill %>&nbsp;&nbsp;<%= f.year %>年</td>
+      	            </tr>
+      	          <% end %>
+     			  </table> 
+ 				</td>
+ 			</tr>
+ 			<tr><td class='faint interval'style='width:20%;vertical-align: top;'>备注:</td><td class='interval'><%= @job.memo %></td></tr>
+      	</table>
+  	  </div>
+  	  <div class='col-xs-5'>
+  	  	<p><span style='font-size:25px;font-family:Georgia;color:#fa6464'><%= @job.commission %></span><span style='font-size:8px;'>推荐奖</span></p>
+  	  </div>
+    </div>
+
+

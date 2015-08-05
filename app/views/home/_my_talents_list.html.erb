@@ -1,0 +1,106 @@
+<%= form_tag email_multiple_path,id: "email" do %>
+    <%= submit_tag "envelope.png",style:"padding: 10px;background-color:transparent;border:0px" %>
+<br><br>
+<div class='panel panel-primary'>
+  <div style='height:50px' class='panel-heading'>
+    <h5>我的简历库
+    </h5>
+  </div>
+	  <table class='table table-hover' >
+	    <thead style='color:#aaaaaa;font-size:12px;weight:bold'>
+	      <tr class='warning'>
+		    <th></th>
+		    <th>候选人</th>
+		    <th>年龄</th>
+		    <th>地点</th>
+		    <th>当前雇主</th>
+		    <th>职位</th>
+		    <th>行业</th>
+		    <th>备注</th>
+		    <th><input type="checkbox" id="selectAll" value="selectAll"></th>
+		  </tr>
+	  </thead>
+	  <tbody>
+	  <% @my_talents.each do |f| %>
+	    <tr class='<%= f.sent_resume(current_user).unread?(current_user) ? "red" : "" %>'>
+	      <td width="30px">
+		      <%= link_to image_tag(f.avatar.url, size:'30x30',class: 'img-circle'),user_path(id:f.id),target:"_blank",id:"talent_#{f.user_name}" %>
+	      </td>
+	      <td id='user_<%=f.id %>'>
+		<a type="button" id="popup_<%=f.id%>" tabindex="0" data-trigger="hover" data-container="body" title="联系方式" data-toggle="popover" data-placement="top" data-content="<%= "#{f.email} #{f.mobile}"%>">
+	          <%= f.user_name %></a>
+	          <% if f.bank_id == current_user.id %>
+		    <i style='color:red' class='glyphicon glyphicon-star'></i>
+		  <% end %>
+	      </td>
+	      <td>
+		  <%= remove_unwanted_words distance_of_time_in_words(Date.today,f.birthday) unless f.birthday == nil %>
+	      </td>
+	      <td>
+		      <%= f.city %>
+	      </td>
+	      <td>
+		      <% if f.works.find_by(uptonow: true)  %> <!-- find_by可用作判断, where不用作判断-->
+			<% work = f.works.where(uptonow: true).take %>
+			<% else work = f.works.where(leave_date: f.works.maximum(:leave_date)).take %><!--加take可以用.employer-->
+		      <% end %>
+	    	      <%=  work.employer unless work==nil %>
+	      </td>
+	      <td>
+		      <%= f.title %>
+	      </td>
+	      <td>
+		      <%= work.industry if work.present? %>
+	      </td>
+	      <td>
+			<% if f.reviews.find_by(author_id:current_user.id) %>
+			  <%= f.reviews.find_by(author_id:current_user.id).body %>
+			  <% @review = f.reviews.find_by(author_id:current_user.id) %>
+			<% else %>
+			  <% @review = Review.new %>
+			<% end %>
+				<!-- Button trigger modal -->
+				<a href="" data-toggle="modal" id = "note_<%= f.id %>" data-target="#review_<%=f.id %>" style='float:right'>
+				  <span class='glyphicon glyphicon-pencil'></span>
+				  </a>
+	
+				  <!-- Modal -->
+					<div class="modal fade" id="review_<%=f.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog modal-sm" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel">输入对候选人的备注</h4>
+					      </div>
+					      <div class="modal-body">
+					      	<div class='row'>
+					      	  <div class='col-lg-12'>
+							  <div style='display:none'>
+								  <%= form_for([f,@review]) do |review| %>
+						      <%= review.text_area :body, class: 'form-control', id: "review_body_#{f.id}",rows:2,cols:15 %>
+					        <%= review.submit "保存", class: 'btn btn-success' %>
+					<% end %>
+				</div>
+					            <%= form_for([f,@review]) do |review| %>
+						      <%= review.text_area :body, class: 'form-control', id: "review_body_#{f.id}",rows:2,cols:15 %>
+					          </div>
+					        </div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					        <%= review.submit "保存", class: 'btn btn-success' %>
+					        	<% end %>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
+	      </td>
+	      <td><%= check_box_tag "my_talent_ids[]",f.id %></td>
+            </tr>
+    <% end %>
+    </tbody>
+    </table>
+</div>
+<% end %><!-- email multiple end -->
+<%= paginate(@my_talents) %>

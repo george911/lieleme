@@ -1,0 +1,118 @@
+<% @my_interviews.each do |f| %>
+    <div class='row ' >
+        <div class='col-lg-5' style='padding:0px;border-bottom: solid 1px #eeeeee'>
+	          <div class='col-lg-2' style='padding:0px;margin-bottom:10px;margin-top:5px'>
+	            <%= image_tag((current_user.user_type == "猎头" ) ? f.recipient.avatar.url : f.sender.avatar.url, class: 'avatar', size:'65x65') %>
+	          </div>
+	          <div class='col-lg-10' style='margin-left:0px;margin-bottom:10px;margin-top:5px;font-size:12px;padding-left:10px;'>
+	            <div class='row' >
+	            	<div class='col-lg-2' style='padding:0px;font-size:15px;font-color:#006fa6'>
+	        			<%= current_user.user_type == "猎头" ? (link_to "#{f.recipient.user_name}",user_path(f.recipient), target:"_blank",style:'color:#006fa6') : (    link_to "#{f.sender.user_name}",user_path(f.sender), style:"color:#006fa6",   target:"_blank") %>
+	            	</div>
+	            	<div class='col-lg-10 text-right' style='padding-right:0px'>
+	            		<%= f.datetime %>&nbsp;<%= f.address.blank? ? "地点待定" : "@ #{f.address}" %><!--出现过输入框的不会是nil -->
+	            	</div>
+	            </div>
+        
+	            <div class='row'>
+	              <div class='col-lg-8' style='padding:0px'>	          	
+	        	    <% if f.content == "有职位推荐" %>
+	    		    <%= "推荐#{f.job.employer}的" %><%= link_to "#{f.job.title}职位",job_path(f.job), style:'color: #006fa6',target:"_blank" unless f.job.nil? %>
+	                <% else %>
+	        	      <%= f.content %>
+	                <% end %>
+	              </div>
+	              <div class='col-lg-4 text-right' style='padding-right:0px'>
+	              	<% if f.accept == true %>
+	              	   已接受
+	              	<% elsif f.accept == false %>
+	              	   已拒绝
+	              	<% else %>
+	              	   等待接受
+	              	<% end %>
+	              </div>
+	            </div>
+    
+	    		<div class='row' style='margin-top:5px'>
+	    			<% if current_user.user_type == "猎头" %>
+	    			  <%= "反馈:#{f.feedback}" %>
+			  	<% else %>
+	      			  <%= hidden_div_if f.accept != nil  do %>
+	      				<div id = "interview_<%= "#{f.id}" %>" style='float:left'>
+						<%= link_to accept_interview_path(interview_id:f.id,id:f.id), id:"accept_#{f.id}",remote:true do %>
+	    				  	  <i class='glyphicon glyphicon-ok'></i>
+	    				    <% end %>
+	    				    &nbsp;&nbsp;
+					    <!-- interview_id用来escape_javascript render ,reject_#{f.id}用来测试-->
+					    <%= link_to reject_interview_path(interview_id:f.id,id:f.id), id:"reject_#{f.id}",remote:true do %>
+	    				  	  <i class='glyphicon glyphicon-remove'></i>
+	    				    <% end %>
+	    				    &nbsp;&nbsp;
+	    				</div>
+	    			  <% end %>
+	    			<div>
+					<a data-toggle="collapse" href="#collapse_<%= f.id %>" id='feedback_<%= f.id %>' aria-expanded="false" aria-controls="collapseExample">
+	        			  <span style='font-size:12px' class='glyphicon glyphicon-envelope' ></span>
+	        			</a>
+    	
+	        	    	<div class="collapse" id="collapse_<%= f.id %>">
+  	    					<div class='well' >
+							
+							<%= form_for f,url:user_interview_path(user_id:f.recipient_id,id:f.id) do |intv| %>
+	        	  				<div class='row' >
+	        	  				  <div style='margin-top:10px' class='col-lg-6'>
+	        	  				    <%= intv.text_field :feedback, class:"form-control" %>
+	        	  				  </div>
+	        	  				  <div style='margin-top:10px' class='col-lg-6 text-right'>
+	        	  				    <%= intv.submit "发送回复", class:"btn btn-success" %>
+	        	  				  </div>
+	        	  				</div>
+	        	  				<% end %>
+	        	  			  
+	        				</div>
+	          			</div>
+	    			</div>
+
+	    			<% end %>
+
+	        	</div>
+
+	            <div class='row'>
+	              <div class='col-lg-12' style='padding:0px'>
+	                <% if current_user.user_type == "猎头" %>
+				<a id='modify_<%= f.id %>' data-toggle="collapse" href="#collapse_<%= f.id %>" aria-expanded="false" aria-controls="collapseExample">
+	        			  <span class='glyphicon glyphicon-pencil' ></span>
+	        			</a>
+    	
+	        	    	<div class="collapse" id="collapse_<%= f.id %>">
+  	    					<div class='well' >
+  	    					  
+	        	  				<%= form_for f,url:user_interview_path(user_id:f.recipient_id,id:f.id) do |intv| %>
+	        	  				<div class='row'  >
+	        	  				  <div class='col-lg-4' >
+	    					    	<%= intv.select :content,Interview::INTERVIEW_REASONS.collect { |p| [p,p, {:'data-id' => f.id}]},class:'form-control' %>
+	        	  				  </div>
+	        	  				  <div id='job_<%= f.id %>'  class='col-lg-8 text-right <%= f.job_id.nil? ? "hidden" : nil%>'>
+	        	  				    <%= intv.collection_select :job_id,current_user.received_invitations(accept:true),"job_id","job_title",prompt:true %>
+	        	  				  </div>
+	        	  				</div>
+	        	  				<div class='row' >
+	        	  				  <div style='margin-top:10px' class='col-lg-6'>
+	        	  				    <%= intv.text_field :datetime,size:20, class:"form-control" %>
+	        	  				  </div>
+	        	  				  <div style='margin-top:10px' class='col-lg-6 text-right'>
+	        	  				    <%= intv.submit "更新面试邀请", class:"btn btn-success" %>
+	        	  				  </div>
+	        	  				</div>
+	        	  				<% end %>
+	        	  			  
+	        				</div>
+	          			</div>
+	          	  	<% end %>
+	          	  </div>
+        		</div>
+
+        	</div>
+          </div>
+    </div>
+<% end %>

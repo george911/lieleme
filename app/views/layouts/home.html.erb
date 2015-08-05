@@ -1,0 +1,52 @@
+<div style='padding-top:80px'>
+  <% content_for :content do %>
+  <!--在这里设置位置才能奏效-->
+    <div style='padding-left:26px'>
+      <div style='color:#3097ee' id="" class='col-lg-1'>
+	    <br>
+	    <br>
+      <p><% if current_user.user_type == "猎头" %>
+   	   <%= link_to "人才", my_talents_path %>
+         <% elsif current_user.user_type == "求职者" %>
+	   <%= link_to "职位邀请", job_invites_path %>
+	 <% elsif current_user.user_type == "人事" %>
+	   <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">职位</a>
+	   <div class="collapse" id="collapseExample">
+		<p>&nbsp;<%= link_to "招聘中",my_jobs_path %><p>
+		<p>&nbsp;<%= link_to "暂停中",my_pending_jobs_path %><p>
+		<p>&nbsp;<%= link_to "已关闭",my_closed_jobs_path %><p>
+           </div>
+         <% end %>
+      	</p>
+      <p><% if current_user.user_type == "猎头" %>
+	   <%= link_to "推荐",my_line_items_path %>
+ 	 <% elsif current_user.user_type == "求职者" %>
+	   <%= link_to "面试",my_interviews_path %>
+   	<% elsif current_user.user_type == "人事" %>
+           <%= link_to "新建",new_job_path %>
+        <% end %></p>
+      <p><% if current_user.user_type == "猎头" %>
+	   <a id='task' data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">任务</a>
+	   <div class="collapse" id="collapseExample">
+		<p>&nbsp;<%= link_to "当前任务",my_invites_path %><p>
+		<p>&nbsp;<%= link_to "暂停任务",pending_invites_path %><p>
+		<p>&nbsp;<%= link_to "已关闭任务",closed_invites_path %><p>
+           </div>
+	 <% elsif current_user.user_type == "求职者" %>
+	   <%= link_to "我的应聘", my_apply_path %>
+         <% end %></p>
+      <p><% if current_user.user_type == "猎头" %>
+	      <%= link_to "面试",my_interviews_path %>
+      <% end %></p>
+      <p>
+	<%= link_to "收藏",my_savings_path %>
+      </p>
+    </div>
+    
+    <div class='col-lg-11' style='padding-top:0px;margin-left:0px'>
+	      <%= yield %>
+    </div>
+    </div>
+  <% end %>
+</div>
+<%= render template: "layouts/application" %>

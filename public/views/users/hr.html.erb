@@ -1,0 +1,155 @@
+<div class='container' style = 'margin-top:70px' >
+  <!--标题行/头像-->
+  <div class='well col-lg-7'>
+    <p id="notice"><%= notice %></p><!--注册好返回这里有一条提示-->
+    <div class = 'row'>
+        <div class='col-lg-12'>
+          			<%= @user.user_name.present? ? "#{@user.user_name} | " : "佚名 | " %>
+          			<%= @user.city.present? ? "#{@user.city} | ": "全国 | " %>
+          			<%= @user.title.present? ? " #{@user.title} | " : '找工作中 | ' %>
+				        <%= remove_unwanted_words distance_of_time_in_words(Date.today,@user.birthday) unless @user.birthday == nil %>&nbsp;<!--注意I18n翻译的过程会出错，需要在cn.yml里设置-->
+          		<!--avatar的size设置必须要这样，用@user.avatar.url(:small)不管用--> 
+          		<%= image_tag(@user.avatar.url,size: '50x50', class: "img-circle") %>
+          	    <% if @user.educations.first != nil %>
+          	      <%= @user.educations.first.school %><%= @user.educations.first.degree %>&nbsp;|
+              	<% end %>
+		<% if @user.works.size >=1 %>                  
+          	      <!--随机产生全部工作单位，index并不是works的id,是一个iteration的计数器,注意do里面要加index的对应-u -->
+		      <% @user.works.shuffle.each_with_index do |f,u| %>
+            	      <%= f.employer %><!--自动加一个空格-->
+                    <%= "|" unless u == @user.works.size-1 %> <!--最后一次不加|-->                 
+                  <% end %>
+                <% else %>
+                  工作单位保密&nbsp;
+                <% end %>
+        </div><!--col-lg-6-->
+    </div><!--end row-->
+
+  <div style='margin-top:20px' class='row'>
+    <div class='col-lg-12'>
+  	<table>
+		<tr>
+			<td style='padding-right:5px'><%= link_to '推荐',user_refer_path, class: 'btn-orange' %></td>
+	    		<td style='padding-right:5px'><%= link_to '关注',user_refer_path, method: :get, class: 'btn-orange' %></td>
+	    		<td style='padding-right:5px'><%= link_to '面试',user_refer_path, method: :get, class: 'btn-orange' %></td>
+		<tr>
+       </table>
+    </div>
+  </div>
+  
+  <div class='row'>
+    <div class='col-lg-8'>
+      <h4 style="color:#007722">自我介绍· · · · · ·</h4>
+      <% if @user.summaries != nil %>
+      <% @user.summaries.each do |f| %>
+      	<div class='col-lg-12'>
+      		<%= f.content %>
+      	</div>
+      <% end %>
+      <% end %>
+    </div><!--col-->
+
+    <!-- 评价-->
+    <div class='col-lg-4'>
+      <table>
+	<tr>
+		<td>第一轮成功率&nbsp;</td>
+		<td><% (((@total_apply_num.to_f-@fail_num.to_f)/(@total_apply_num >0 ? @total_apply_num.to_f : 1))*5).to_i.times do |f| %>    
+      	<span style="margin-left:-3px;border-radius:1px;background-color:#ff632f;color:#ffffff;" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+<% end %></td>
+	</tr>
+        <tr>
+		<td>评价</td>
+		<td><% 5.times do |f| %>
+      	  		<% if f<@user.reviews.average(:rating).to_i %>
+				<span style="margin-left:-3px;border-radius:1px;background-color:#ff632f;color:#ffffff;" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+			<% else %>
+				<span style="margin-left:-3px;border-radius:1px;background-color:#bbbbbb;color:#ffffff;" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+			<% end %>
+
+  <% end %></td>
+	</tr>
+      </table>
+    </div>
+  </div>
+  
+  <div class='row'>
+    <div class='col-lg-5'>
+      <h4 style='color:#007722'>教育经历· · · · · ·</h4>
+      <% if @user.educations != nil %>
+      <% @user.educations.each do |f| %>
+      <div class='col-lg-7'>
+    	  <%= f.enter_school.strftime("%b %Y") %> - 
+    	  <%= f.uptonow ? "现在" : f.leave_school.strftime("%b %Y") %>
+      </div>
+    	<div class='col-lg-5'>
+    	  <table>
+    	    <tr><td><%= f.school %></td></tr>
+    	    <tr><td><%= f.major %> | <%= f.degree %></td></tr>
+        </table> 
+      </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div><!--end row-->
+
+  <div class='row'>
+    <div id="accordion" role="tablist" aria-multiselectable="true">
+      <div class='col-lg-8 list'>
+        <%= link_to "#{@user.reviews.count}条评论" %>
+      </div>
+      <div class='col-lg-4 list'>
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <% if current_user != nil and @user.reviews.find_by(author_id: current_user.id)  %>
+          		    <span id='label-4'>修改对他的评价</span>
+                          <% else %>
+            		  <span id='label-3'>我来评价他</span>
+                <% end %>
+
+        </a>
+      </div>
+    </div>
+  </div><!--row-->
+
+  <div class='row'>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" style="margin:0px;">
+      <div class='col-lg-6'>
+        <div class="panel-body">
+            <%= form_for([@user,@review]) do |f| %>
+              <div class='col-lg-7'>
+                <%= f.text_area :body,cols: 60, rows: 4, class: "form-control" %>
+		          
+		            <table>
+                  <tr>
+                    <td><%= f.label :你们共同的雇主 %></td>
+                    <td><%= f.label :置顶, class: "pull-right"%><%= f.check_box :top %></td>
+                  </tr>
+                  <tr>
+                    <td class='review'><%= f.select :employer,@user.works.collect { |p| [ p.employer ] } %></td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class='col-lg-5'>
+		<table>
+		  <tr><td ><%= f.radio_button :rating,1 %>&nbsp;<span style='background-color:#ff632f;color:#ffffff' class="glyphicon glyphicon-star" aria-hidden="true"></span></td></tr>
+		  <tr><td><%= f.radio_button :rating,2 %>&nbsp;<span style='background-color:#ff632f;color:#ffffff' class="glyphicon glyphicon-star" aria-hidden="true"></span><span style='background-color:#ff632f;color:#ffffff' class="glyphicon glyphicon-star" aria-hidden="true"></span></td></tr>
+		  <tr><td><%= f.radio_button :rating,3 %>&nbsp;<span style='background-color:#ff632f;color:#ffffff' class="glyphicon glyphicon-star" aria-hidden="true"></span><span style='background-color:#ff632f;color:#ffffff' class="glyphicon glyphicon-star" aria-hidden="true"></span><span style="background-color:#ff632f;color:#ffffff" class="glyphicon glyphicon-star" aria-hidden="true"></span></td></tr>
+		  <tr><td><%= f.radio_button :rating,4 %>&nbsp;<span style="background-color:#ff632f;color:#ffffff" class="glyphicon glyphicon-star" aria-hidden="true"></span><span style="background-color:#ff632f;color:#ffffff" class="glyphicon glyphicon-star" aria-hidden="true"></span><span style="background-color:#ff632f;color:#ffffff" class="glyphicon glyphicon-star" aria-hidden="true"></span><span style='background-color:#ff632f;color:#ffffff' class="glyphicon glyphicon-star" aria-hidden="true"></span></td></tr>
+		  <tr><td><%= f.radio_button :rating,5 %>&nbsp;<span style="background-color:#ff632f;color:#ffffff" class="glyphicon glyphicon-star" aria-hidden="true"></span><span style="background-color:#ff632f;color:#ffffff" class="glyphicon glyphicon-star" aria-hidden="true"></span><span style="background-color:#ff632f;color:#ffffff" class="glyphicon glyphicon-star" aria-hidden="true"></span><span style="background-color:#ff632f;color:#ffffff" class="glyphicon glyphicon-star" aria-hidden="true"></span><span style="background-color:#ff632f;color:#ffffff" class="glyphicon glyphicon-star" aria-hidden="true"></span></td></tr>
+		  <tr style='height:40px'><td><%= f.submit '发表', class: "btn btn-success btn-xs" %></td></tr>
+	        </table>
+	      </div><!--end col-lg-5-->
+  	        <% end %> <!-- end form_for-->
+        </div>
+      </div>
+    </div>
+  </div> <!--end row -->
+
+  <div id='content' class='col-lg-12'>
+    <%= render(partial:'review')%> <!--这句话是从views/users/下面取模板对比views/jobs/show.html.erb-->
+  </div>
+
+</div><!--end well-->
+</div><!--end container-->
+

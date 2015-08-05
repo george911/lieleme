@@ -1,0 +1,93 @@
+cn:
+  active_admin:
+    dashboard: "首页"
+    batch_actions:
+      button_label: "操作"
+      action_label: "删除"
+      delete_confirmation: "确认删除吗?"
+    logout: "退出"
+    new_model: "新建"
+    any: "任意"
+    filters:
+      predicates:
+        contains: "包括"
+        equals: "等于"
+        starts_with: "以···开头"
+        ends_with: "以···结尾"
+      buttons:
+        filter: "搜索"
+        clear: "清除"
+    search_status:
+      headline: "搜索内容"
+      current_filters: "当前搜索器"
+
+  views:
+    pagination:
+      first: "首页"
+      last: "末尾"
+      previous: "前页"
+      next: "后页"
+      truncate: "&hellip;"
+
+# 翻译sign_up页的date_select和生日的月份
+  date:
+    order:
+      - :day 
+      - :month
+      - :year
+    month_names: [一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月]
+    formats:
+      long: "%Y-%m-%d"
+  time:
+    formats:
+      long: "%Y-%m-%d %H:%M:%S"
+
+# 为了distance_in_words设置
+  datetime: 
+    distance_in_words:
+      x_minutes: "今天"
+      less_than_x_minutes: "今天"
+      over_x_years:
+        one:    "1 年前"
+        other:  "%{count} 前"
+      x_days:   "1 years"
+      almost_x_years:   
+        one:    "1 year"
+        other:  "%{count} years"
+      about_x_years:
+        one:    "1"
+        other:  "%{count}"
+      about_x_hours: "今天"
+      
+# 出错提示
+  errors:
+    messages:
+      not_saved:        "出现错误"
+  activerecord:
+    errors:
+      models:
+        line_item:
+          attributes:
+            email:
+              invalid: "请输入正确格式的邮箱地址"
+            name:
+              blank: "姓名不能为空"
+        user:
+          attributes:
+            password_confirmation:
+              confirmation:     "密码没有确认"
+            password:
+              too_short:          "密码太短"
+              blank:            "密码不能为空"
+            email:
+              blank:            "邮箱不能为空"
+            
+#devise翻译
+  devise:
+    registrations:
+      user:
+        signed_up:      "恭喜您，注册成功!" # 注册后的提示
+    sessions:
+      user:
+        signed_in:      "登录成功"
+

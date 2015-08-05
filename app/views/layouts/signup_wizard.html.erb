@@ -1,0 +1,8 @@
+<!-- 背景色在每个对应controller的css文件里单独设定-->
+<% content_for :content do %>
+    <div class="signup_wizard">
+      <%= yield %> 
+    </div>
+<% end %>
+<%= render template: "layouts/application" %>
+

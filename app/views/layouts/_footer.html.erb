@@ -1,0 +1,37 @@
+<footer style='margin-top:100px;padding-bottom: 220px;background:#545454;color:#ffffff;'>
+    <div align='center'  style='padding-top: 50px'>
+      <div class='col-lg-2'>
+      </div>
+        <div class='col-lg-2'>
+	         <ul align='left'style='list-style-type:none'>
+	           <li><%= link_to "公司介绍",about_us_path, style:'color:white' %></li>
+	           <li>最新资讯</li>
+		   <li><%= link_to "共享条款",share_policy_path, style:'color:white' %></li>
+	           <li>隐私条款</li>
+	           <li>联系我们</li>
+	           <li>薪资报告</li>
+	         </ul>
+        </div>
+	      <div class='col-lg-2'>
+	        <ul align='left' style='list-style-type:none'>
+	          <li><%= link_to "联系我们", new_inquiry_path,style:'color:white'  %></li>
+	          <li><%= link_to "加入我们", vacancies_path,style:'color:white'  %></li>
+	          <li><%= link_to "投资我们", invest_path,style:'color:white'  %></li>
+	          <li>投诉与建议</li>
+	          <li>在线帮助</li>
+	        </ul>
+        </div>
+      <div class='col-lg-4'>
+	      <ul align='left' style='list-style-type:none'>
+	        <li>我们的社区</li>
+	        <li style='display:inline'><%= link_to image_tag("wechat.jpeg",size:"30x30", style:"border-radius:2px") %></li>
+	        <li style='display:inline'><%= link_to image_tag("weibo.jpeg",size:"30x30", style:"border-radius:2px") %></li>
+	        <li style='display:inline'><%= link_to image_tag("linkedin.png",size:"35x35", style:"border-radius:2px") %></li>     
+	      </ul>
+      </div>
+    </div>
+    <div align='center'class='col-lg-12'>
+	    <%= image_tag("logo.png") %><br>
+	    <span style='font-size:12px'>© 2014-2015 猎乐网络科技有限公司</span>
+    </div>
+  </footer>

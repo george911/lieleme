@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  addr: MyString
+  city: MyString
+  industry: MyString
+  commission: 1
+  role: MyText
+  requirement: MyText
+  base_pay: 1
+  month: 1
+  bonus: MyString
+  allowance: 1
+  stock: MyString
+  stock_num: 1
+  concall_date: 2014-12-10
+  user_id: 1
+  peer: MyString
+  memo: MyText
+  company_info: MyText
+  work_year: 1
+
+two:
+  title: MyString
+  addr: MyString
+  city: MyString
+  industry: MyString
+  commission: 1
+  role: MyText
+  requirement: MyText
+  base_pay: 1
+  month: 1
+  bonus: MyString
+  allowance: 1
+  stock: MyString
+  stock_num: 1
+  concall_date: 2014-12-10
+  user_id: 1
+  peer: MyString
+  memo: MyText
+  company_info: MyText
+  work_year: 1

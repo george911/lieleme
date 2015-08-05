@@ -1,0 +1,55 @@
+<!--注意：所有的内容必须在一个div里，否则增加按钮失效-->
+<div>
+  <div class='row'>
+    <div class='col-lg-3'>
+	    <%= f.label :employer, "公司名字" %>
+    </div>
+    <div class='col-lg-9'>
+	    <%= f.text_field :employer,class: "form-control" %>
+    </div>
+  </div>
+  <div class='row' style='margin-top:20px'>
+    <div class='col-lg-3'>
+	    <%= f.label :industry, "行业" %>
+    </div>
+    <div class='col-lg-9'>
+	<%= f.text_field :industry,class: "form-control" %>
+    </div>
+  </div>
+  <div class='row' style='margin-top:20px'>
+    <div class='col-lg-3'>
+	    <%= f.label :join_date, "加入时间" %>
+    </div>
+    <div class='col-lg-9'>
+	<%= f.date_select :join_date,discard_day:true,start_year:1980,class: "form-control", end_year:Date.today.year %>
+    </div>
+  </div>
+  <div class='row' style='margin-top:20px'>
+    <div class='col-lg-3'>
+      <%= f.label :leave_date, "离开时间" %>
+    </div>
+    <div class='col-lg-9'>
+	    <%= f.date_select :leave_date,discard_day:true,start_year:1980,class: "form-control",end_year:Date.today.year %>
+      &nbsp;&nbsp;<%= f.label :"在职" %>
+      <%= f.check_box :uptonow %>
+    </div>	
+  </div>
+  <div class='row' style='margin-top:20px'>
+    <div class='col-lg-3'>
+	    <%= f.label :title, "职位头衔" %>
+    </div>
+    <div class='col-lg-9'>
+	<%= f.text_field :title,class: "form-control" %>
+    </div>
+  </div>
+  <div class='row' style='margin-top:20px'>
+    <div class='col-lg-3'>
+	    <%= f.label :job_scope, "工作内容" %>
+    </div>
+    <div class='col-lg-9'>
+	<%= f.text_area :job_scope,class: "form-control",rows:"3" %>
+    </div>	
+  </div>
+	<%= f.hidden_field :_destroy %>
+	<%= link_to "删除工作经验", '#', class: "remove_fields pull-right" %>
+</div>

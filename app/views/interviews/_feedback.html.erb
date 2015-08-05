@@ -1,0 +1,20 @@
+	        	    	<a data-toggle="collapse" href="#collapse_<%= f.id %>" aria-expanded="false" aria-controls="collapseExample">
+	        			  <span class='glyphicon glyphicon-envelope' ></span>
+	        			</a>
+    	
+	        	    	<div class="collapse" id="collapse_<%= f.id %>">
+  	    					<div class='well' >
+  	    					  
+	        	  				<%= form_for f do |intv| %>
+	        	  				<div class='row' >
+	        	  				  <div style='margin-top:10px' class='col-lg-6'>
+	        	  				    <%= intv.text_field :feedback, class:"form-control" %>
+	        	  				  </div>
+	        	  				  <div style='margin-top:10px' class='col-lg-6 text-right'>
+	        	  				    <%= intv.submit "发送回复", class:"btn btn-success" %>
+	        	  				  </div>
+	        	  				</div>
+	        	  				<% end %>
+	        	  			  
+	        				</div>
+	          			</div>

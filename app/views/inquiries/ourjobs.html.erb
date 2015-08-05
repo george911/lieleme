@@ -1,0 +1,67 @@
+
+<div class='col-lg-8'>
+  <div class='row' >
+    <h4>关于猎友会</h4>
+	    故事从一个因为猎头而抓狂的Ruby工程师说起:
+	    自从他在网站上贴出自己的简历后, 每天有10多个猎头找到他，都是推荐Java和PHP的职位,而且薪资也不匹配。“难道专业的猎头就这么少么?”
+	    这是他的不满，也是程序猿共同的困惑。
+	    没错，猎友会就是为了改变这种局面而诞生的中国首家猎头O2O平台, 我们基于数据挖掘向HR和求职者推荐猎头帮助他们完成招聘。
+	    我们关心的是你的才华而不是公司的要求
+	    我们不等职位空缺，如果你合适直接把你送入公司
+	    我们提供的不是猎头而是经纪人, 帮助你一步步提升自己的身价
+  </div>
+  <div class='row'>
+    <h4>你将获得的福利</h4>
+      <ul>
+    	<li>每年春季,额外增加1小时/天的运动假</li>
+    	<li>免费健身房</li>
+    	<li>乒羽俱乐部</li>
+    	<li>日本冲绳潜水5日培训 or 泰国7日瑜伽培训，都将获得相应执照</li>
+    	<li>人才中介师培训, 让你体验当兼职猎头的感觉(以及额外收入)</li>
+    	<li>分享会—Rails大牛，我们将请他们来做技术交流</li>
+    	<li>买书基金</li>
+    	<li>免费公寓</li>
+      </ul>
+  </div>
+  <div class='row'>
+    <h4>一个Mentor</h4>
+    每位进入公司的新员工都将认领一个Mentor
+    <ul>
+	    <li>帮你融入团队</li>
+	    <li>教你工作流程</li>
+	    <li>传授独门秘籍</li>
+	    <li>请你吃顿大餐</li>
+    </ul>
+  </div>
+  <div class='row'>
+  	<h4>一些挑战</h4>
+  	<ul>
+  	  <li>Hackthon: 每年一次, 35小时,小组协作, 高效完成一款产品</li>
+  	  <li>Outing: 草原负重徒步30公里或者骑行爬上垂直500米的山坡<li>
+  	</ul>
+  </div>
+  <div class='row'>
+  	<h4>一些挑战</h4>
+  	<ul>
+  	  <li>自由的工作时间</li>
+  	  <li>13寸Retina Macbook Pro<li>
+  	  <li>Dell 23寸显示屏</li>
+  	  <li>人体工学座椅</li>
+  	</ul>
+  </div>
+</div>
+<div style='margin-left:20px;'>
+	<% if @jobs != nil %>
+		<% @jobs.each do |job| %>
+		  <div class='row' style='border-bottom:1px solid #eeeeee;'>
+			  <ul style='list-style-type:none;padding:10px 0px 10px 0px'>
+				  <li><strong><%= job.title %></strong></li>
+				  <li>城市:&nbsp;&nbsp;<%= job.city %></li>
+				  <li>发布日期:&nbsp;&nbsp;<%= job.created_at.strftime("%m-%d") %></li>
+				  <li>工作内容:&nbsp;&nbsp;<%= truncate(job.role,lenth:350) %></li>
+			  	  <li class="pull-right"><%= link_to "详细内容 >", job_path(job) %></li>
+			  </ul>
+		  </div>
+	    <% end %>
+	<% end %>
+</div>

@@ -1,0 +1,31 @@
+<!--这个是职位应聘的人选,和apply.html.erb（HR视角单个职位猎头上传的人选list)不同-->
+<% if can? :read, LineItem %>
+
+    <table class='table table-striped'>
+      <% @job.line_items.each do |line_item| %>
+        <% if line_item.recipient.present? %>
+          <tr>
+    	<td width='70px'>
+    	  <% if line_item.status.present? %>
+    	    <button class='status-flag'><%= link_to line_item.status %></button>
+    	  <% end %>
+            </td>
+    	<td width='50px'>
+    	  <%= link_to image_tag(line_item.recipient.avatar.url,size:'30x30'), id: "#{line_item.recipient_id}", action: 'show', controller: 'users', host:'localhost:3000'  %>
+    	</td>
+    	<td>
+     	  <%= remove_unwanted_words distance_of_time_in_words(Date.today,line_item.recipient.birthday) unless line_item.recipient.birthday == nil%> | <%= line_item.recipient.educations.first.school unless line_item.recipient.educations.first == nil %> | <% line_item.recipient.works.each do |f| %>
+              <% if f != line_item.recipient.works.last %>
+    	    <%= f.employer %> | <!-- |不能放在<% %>里-->
+              <% else %>
+                <%= f.employer %>
+              <% end %>
+              <% end %>
+            </td> 
+          </tr>
+      <% end %>
+      <% end %>
+    </table>
+<% else %>
+  对不起，您没有权限
+<% end %>

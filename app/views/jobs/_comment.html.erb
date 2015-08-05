@@ -1,0 +1,21 @@
+<% @job.comments.order('top desc,created_at desc').each do |comment| %>
+  <% if comment.user_id != nil %>
+    <table>
+      <tr>
+	<td><!--tr如果不加td的话下一个tr不会重启一行-->
+          <% @author=User.find(comment.user_id) %>
+          <%= @author.user_name %>
+          <%= @author.works.last.title.present? ? " #{@author.works.last.title} |" : '找工作中 |' %>
+          <%= remove_unwanted_words distance_of_time_in_words(Date.today,@author.birthday) unless @author.birthday == nil %>
+        </td>
+        <td><%= comment.rating %></td>
+      </tr>
+      <tr>
+        <td id='comment_body'>
+          <%= comment.body %>
+        </td>
+        <td style='border-bottom:1px dashed #dddddd'>有用</td>
+      </tr>
+    </table>
+<% end %>
+<% end %>

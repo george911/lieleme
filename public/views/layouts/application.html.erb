@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>猎友会-在线有偿职位分享</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <!-- Bootstrap core JavaScript 一定要在head和底部都放，否则下拉菜单实现不了
+========================================================= -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  <!--/Users/George/site2.0/app/views/devise/registrations/new.html.erb 要用到勾的图像-->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body  class='<%= controller.controller_name %>'>
+<!--navbar-inverse设置bar的颜色是黑色-->
+<nav class="navbar navbar-color navbar-fixed-top">
+      <ul class="nav navbar-nav">
+	      <!--<li class="active"><a href="#"></a></li>-->
+	      <li style='padding-top:10px;padding-left:26px'><%= image_tag "猎友会.png" %></li>
+      </ul>  
+      <div class="container">
+        <div class="navbar-header">      
+  
+            <!--问题一，Project name 怎会和form分成两行?-->
+            <%= form_tag search_path, method: "get",class:"navbar navbar-form" do %>
+              <%= text_field_tag :query, params[:query], class:'form-control' %>
+              <%= select_tag :q,options_for_select([['职位'],['人才'],['猎头']]),class:'form-control' %>
+              <%= submit_tag "搜索",class:"btn btn-success" %>
+            <% end %>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+	  <% if user_signed_in? %>
+        <ul class="nav navbar-nav " style='padding-left:200px'><!--ul要和form放在并列的位置才能在一行内显示-->
+          <li><%= image_tag current_user.avatar.url(:small),size: '30x30',style: 'border-radius:3px;margin-top:10px;' %></li>
+          <li class="dropdown">
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span style='color:white'><%= current_user.user_name unless current_user==nil %><span><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">我的佣金</a></li>
+              <li><a href="#">个人设置</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">帮助中心</li>
+              <li><a href="#"><%= link_to '退出',sign_out_path %></a></li>
+            </ul>
+          </li>
+	  <li ><%= link_to "人才库", my_talents_path,style:'color:white' %></li>
+	  <li ><%= link_to "Hot job", my_jobs_path,style:'color:white' %></li><!--style要放到后面-->
+      </ul>
+<% else %> 
+	<ul class="nav navbar-nav navbar-right">
+		<li><%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+	        	<%= f.submit "登录",class: 'btn btn-success  navbar-right navbar-form',style:'width:50px;height:34px;' %>
+    			<%= f.password_field :password, placeholder: '密码',class: 'navbar-form form-group form-control navbar-right',style:'margin-left:20px;margin-right:5px',autocomplete: "off" %>
+			<%= f.email_field :email,style:"padding-right:30px",placeholder: '注册邮箱', class: 'navbar-form form-group form-control navbar-right',autofocus: true %>
+		<% end %><!--form end --></li>
+		<li><%= button_to '加入',sign_up_path,method: :get, class: 'btn btn-success navbar-form navbar-right',style:'margin-left: 10px;margin-right: 10px;width:50px;height:34px;'  %> </li>
+	</ul>
+	<% end %> 
+        </div><!--/.navbar-collapse -->
+      </div><!-- container-->
+</nav>
+
+<div id="content"><%= content_for?(:content) ? yield(:content) : yield %></div>
+<div class='row'>
+</div>
+
+  <footer style='margin-top:100px;padding-bottom: 220px;background:#545454;color:#ffffff;'>
+    <div align='center'  style='padding-top: 50px'>
+      <div class='col-lg-2'>
+      </div>
+        <div class='col-lg-2'>
+	  <ul align='left'style='list-style-type:none'>
+	    <li><%= link_to "公司介绍",about_us_path, style:'color:white' %></li>
+	    <li>最新资讯</li>
+	    <li>服务条款</li>
+	    <li>隐私条款</li>
+	    <li>联系我们</li>
+	    <li>薪资报告</li>
+	  </ul>
+        </div>
+	<div class='col-lg-2'>
+	  <ul align='left' style='list-style-type:none'>
+	    <li><%= link_to "联系我们", new_inquiry_path,style:'color:white'  %></li>
+	    <li><%= link_to "加入我们", ourjobs_path,style:'color:white'  %></li>
+	    <li><%= link_to "投资我们", invest_path,style:'color:white'  %></li>
+	    <li>投诉与建议</li>
+	    <li>在线帮助</li>
+	  </ul>
+        </div>
+      <div class='col-lg-4'>
+	  <ul align='left' style='list-style-type:none'>
+	    <li>我们的社区</li>
+	    <li style='display:inline'><%= link_to image_tag("wechat.jpeg",size:"30x30", style:"border-radius:2px") %></li>
+	    <li style='display:inline'><%= link_to image_tag("weibo.jpeg",size:"30x30", style:"border-radius:2px") %></li>
+	    <li style='display:inline'><%= link_to image_tag("linkedin.png",size:"35x35", style:"border-radius:2px") %></li>
+
+	  </ul>
+        </div>
+    </div>
+    <div align='center'class='col-lg-12'>
+	    <%= image_tag("猎友会.png") %><br>
+	    <span style='font-size:12px'>© 2014-2015 猎友电子商务有限公司</span>
+    </div>
+  </footer>
+
+</body>
+
+</html>

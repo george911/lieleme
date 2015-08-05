@@ -1,0 +1,9 @@
+<% @subordinates.each do |sub| %>
+  <div class='col-lg-10' style='padding-left:20px' >
+    <%= form_for([@job,sub],remote: true ) do |f|  %>
+	<%= f.text_field :title %>
+	<%= f.submit "更新" %><!--job_boss_path-->
+    <% end %>
+  </div>
+<% end %>
+

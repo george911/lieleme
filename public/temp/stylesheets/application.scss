@@ -1,0 +1,65 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *(导入stylesheets下面所有的scss文件)
+ *= require_tree .
+ *= require_self
+ */
+html,body {
+// 设置顶端颜色条
+.navbar-color {
+  background: #3b5893;}
+
+// 职位列表前面的红旗
+.well {
+  background: #ffffff;
+  }
+  
+.red-flag {
+  background-color: #f12b3c }
+.orange-flag {
+  background-color: #f89406;}
+.purple-flag {
+  background-color: #663576;
+  }
+.green-flag {
+  background-color: #468847;}
+.blue-flag {
+  background-color: #7568f4;}
+
+.job_flag {
+  height: 25px;
+  width: 70px;
+  border-radius: 5px;
+  font-size: 10px;
+  padding: 5px;
+  color: #ffffff;} // 字体颜色
+
+	select {
+		display: inline-block;
+		height: 34px;
+		font-size: 13px;
+		line-height: 18px;
+		color: #555555;
+		border: 1px solid #ccc;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+
+}
+
+
+.container {
+  margin-left:100px;}
+
+
+}

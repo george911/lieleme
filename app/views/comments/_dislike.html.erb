@@ -1,0 +1,6 @@
+		    <div id="comment_<%=@comment.id%>">
+		      <div style='margin:10px 0px 0px 0px'>
+		        <span style='font-size:20px;'><%= judge=@comment.get_likes.size-@comment.get_dislikes.size %></span>
+		      </div>
+		      <div style='margin-bottom:10px'><%= judge>0 ? "有用" : "没用" %></div>
+		    </div>

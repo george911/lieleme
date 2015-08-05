@@ -1,0 +1,108 @@
+<%= form_for @user, url: wizard_path, method: :put do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<div class="container-fluid">
+  <section class="container">
+    <div class="container-page">				
+	    <div class="col-md-4" style='margin-top:60px'>
+ 	<h3 class="dark-grey">填写您的收入状况</h3>
+      
+	<div class="form-group col-lg-6">
+          <%= f.label :基本月薪 %><br>
+          <%= f.text_field :base_salary,class: "form-control" %>
+        </div>
+	
+	<div class="form-group col-lg-6">
+          <%= f.label :发放月数 %><br>
+          <%= f.text_field :month_num,class: "form-control" %>
+        </div>
+	
+	<div class="form-group col-lg-6">
+          <%= f.label :去年奖金 %><br>
+          <%= f.text_field :bonus,class: "form-control" %>
+        </div>
+	
+	<div class="form-group col-lg-6">
+          <%= f.label :房屋补助 %><br>
+          <%= f.text_field :housing,class: "form-control" %>
+        </div>
+	
+	<div class="form-group col-lg-6">
+          <%= f.label :交通补助 %><br>
+    	  <%= f.text_field :transport,class: "form-control" %>
+  	</div>
+	
+	<div class="form-group col-lg-6">
+    	  <%= f.label :续约奖金 %><br>
+    	  <%= f.text_field :retention_bonus,class: "form-control" %>
+  	</div>
+
+	<div class="form-group col-lg-6 select">
+    	  <%= f.label :股票选项 %><br>
+          <%= f.select :stock, ["股票","期权"] %>
+  	</div>
+	
+	<div class="form-group col-lg-6">
+    	  <%= f.label :股数 %><br>
+    	  <%= f.text_field :stock_num,class: "form-control" %>
+  	</div>
+	
+	<div class="form-group col-lg-6">
+    	  <%= f.label :期望年薪 %><br>
+          <%= f.text_field :expect_package,class: "form-control" %>
+  	</div>
+	
+	<div class="form-group col-lg-6">
+    	  <%= f.label :期望月薪 %><br>
+    	  <%= f.text_field :expect_month_salary,class: "form-control" %>
+  	</div>
+	
+  <div class="col-lg-3">
+  </div>
+
+	<div class="col-lg-6">
+          <%= f.submit "保存",class: "btn btn-success btn-block" %>
+  </div>
+	
+  <% end %>
+      </div><!--col-md-4-->
+      
+      <div class="col-md-6" style='margin-top:60px'>
+            <br />
+                  <br />
+                  <br />
+                  <table>
+                    <tr>
+                      <td><span class="fa fa-check text-success step_info">&nbsp;&nbsp;</span></td><td class='step_info'>注册基本信息</td>
+                    </tr>
+                    <tr>
+                      <td><span class="fa fa-check text-success step_info">&nbsp;&nbsp;</span></td><td class='step_info'>填写个人评价</td>
+                    </tr>
+                    <tr>
+                      <td><span class="fa fa-check text-success step_info">&nbsp;&nbsp;</span></td><td class='step_info'>完善教育背景</td>
+                    </tr>
+                    <tr>
+                      <td><span class="fa fa-check text-success step_info">&nbsp;&nbsp;</span></td><td class='step_info'>输入工作履历</td>
+                    </tr>
+                    <tr>
+                      <td><span class="fa fa-check text-success step_info">&nbsp;&nbsp;</span></td><td class='step_info'>填写薪资要求</td>
+                    </tr>
+                    <tr>
+                      <td></td><td class='step_info'>完成</td>
+                    </tr>
+                  </table>
+       </div>
+    </div>
+  </section>
+</div>
+

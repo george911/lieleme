@@ -1,0 +1,7 @@
+            <ul class="nav navbar-nav " style='padding-left:200px'><!--ul要和form放在并列的位置才能在一行内显示-->
+              <li><%=  render 'layouts/my_avatar' %></li>
+              <li class='dropdown'><%= render 'layouts/my_dropdown' %></li>
+              <li><%= link_to "首页", root_path, style:'color:white' %></li>
+              <li ><%= render 'layouts/my_jobs' %></li><!--style要放到后面-->
+            </ul>
+

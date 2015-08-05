@@ -1,0 +1,2 @@
+module SubordinatesHelper
+end

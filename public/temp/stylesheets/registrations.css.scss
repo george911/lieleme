@@ -1,0 +1,18 @@
+// Place all the styles related to the Registrations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.registrations {
+
+//账户类型css设置
+.type select {//找到注册类型选择
+  background:#fffffe;//颜色要改动其他才能设置
+  width: 145px;
+  height: 34px;
+  }
+
+.step_info {
+  font-size: 16px;
+  padding-bottom:10px;
+  }
+}
+

@@ -1,0 +1,279 @@
+<div style='padding-top:80px' class='container' >
+  <div class='row'>
+    <%= notice %>
+  </div>
+  
+  <div class='row'>
+    <div class='col-lg-6'>
+    <p id='title'>
+      <table>
+        <tr>
+          <td><span style='font-size:20px'><%= @job.title %></span></td>
+        </tr>
+        <tr>
+          <td><%= rating_for @job, "job_rating" %></td>
+        </tr>
+      </table>
+    </p>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-lg-3'>
+      <table>
+        <tr><td><strong>坐标:</strong></td><td><%= @job.city %> | <%= @job.addr %></td></tr>
+        <tr><td><strong>行业:</strong></td><td><%= @job.industry.present? ? @job.industry : '面议' %></td></tr>
+	<% if @job.base_pay != 0 %>
+	  <tr><td><strong>年薪:</strong></td><td><%= @job.base_pay.present? ? "#{@job.base_pay}人民币 x  #{@job.month}" : '面议' %></td></tr>
+        <% end %>
+        <tr><td><strong>奖金:</strong></td><td><%= @job.bonus.present? ? "#{@job.bonus} 人民币" : '面议' %></td></tr>
+        <tr><td width='60px'><strong>发布时间:</strong></td><td><%= @job.created_at.strftime("%Y-%m-%d") %></td></tr>
+        <tr><td><strong>最后回复:</strong></td><td>2014-10-20</td></tr>
+        <tr><td><strong>备忘:</strong></td><td><%= @job.memo %></td></tr>
+      </table>
+    </div><!--cl-lg-3-->
+ 
+    <div class='col-lg-4'>
+      <p><span style='font-size:35px;font-family:Georgia;color:#fa6464'><%= @job.commission %></span><span style='font-size:10px;'>现金奖励</span></p>
+      <p>经验要求:<%= @job.work_year %>年</p>
+      <table>
+       <% @job.experiences.each do |f| %>
+      	 <tr>
+        	   <td style='font-size:12px'><%= f.skill %></td>
+      	   <td>&nbsp;<% (f.year<=10 ? "#{(f.year+1)/2}" : 5).to_i.times do %>
+      	     <span style="margin-left:-3px;border-radius:1px;background-color:#ff632f;color:#ffffff;" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                   <% end %>
+           	   </td>
+      	   <td style='font-size:10px'>&nbsp;
+      	     <%= f.year %>年
+      	   </td>
+         </tr>
+       <% end %>
+     </table> 
+    </div> 
+  </div><!--row-->
+
+  <div><br /></div>
+  <div class='row'>
+    <div class='col-lg-4' id='orange'>
+      <button class='btn-orange'>关注</button>
+      <button class='btn-orange'>分享</button>
+      <button class='btn-orange'>预约</button>
+      <button class='btn-orange'>领取任务</button>
+    </div>
+   
+    <div class='col-lg-4'  >
+      <div class='col-lg-2' >
+	<button type='button' class='btn btn-xs btn-success' data-toggle="modal" data-target="#myModal">
+	   <!-- <%= link_to '推荐',new_job_line_item_path(@job) %>--><!--带上job_id是为了推荐方便-->
+		 推荐
+  	</button>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div style='width:400px' class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+		      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      <h4 class="modal-title" id="myModalLabel">推荐您的朋友或者同事</h4>
+	      </div>
+
+	      <div class="modal-body">
+              <!-- Modal body content -->
+		<%= form_for @line_item, url: job_line_items_path(job_id:@job.id), method: :post do |f| %>
+  		  <% if @line_item.errors.any? %>
+    		  <div id="error_explanation">
+      		  <h2><%= pluralize(@line_item.errors.count, "error") %> prohibited this line_item from being saved:</h2>
+      			<ul>
+      				<% @line_item.errors.full_messages.each do |message| %>
+        		        	<li><%= message %></li>
+      				<% end %>
+      			</ul>
+    		  </div>
+  		<% end %>
+       
+		<div class='input-group col-lg-7'>
+			<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+			<%= f.text_field :email, class: 'form-control',placeholder:'输入邮箱地址' %>
+		</div>
+		<br>
+		<div class='input-group col-lg-7'>
+			<span class="input-group-addon"><i style='width:14px' class="fa fa-mobile"></i></span>
+			<%= f.text_field :mobile, class: 'form-control input',placeholder:'输入手机号' %>
+		</div>
+		<br>
+		<div class='input-group col-lg-7'>
+			<span class="input-group-addon"><i style='width:14px' class="fa fa-user"></i></span>
+			<%= f.text_field :name, class: 'form-control input',placeholder:'对方姓名' %>
+		</div>
+	
+	        </div><!--modal body end -->
+              		
+  	        <div class="modal-footer">
+		      <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+		      <%= f.submit "分享",class: 'btn btn-danger' %>
+		      </div>
+	  	<% end %>	
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-lg-2'><!-- 与推荐按钮并列-->
+	<%= button_to '应聘',job_accept_path(@job),method: :get, class: 'btn btn-success btn-xs' %>
+      </div>
+      
+    </div>
+  </div>
+
+  <div><!--divide-->
+    <br />  <br />
+  </div>
+
+  <div class='row'>
+    <div class='col-lg-6'>
+      <!--把/n换成回车并且插入段落标记和首行缩进-->
+      <p class='text'><%= @job.company_info.gsub(/\n/,'</p><p class="text">').html_safe unless @job.company_info.blank? %></p>
+    </div>
+ </div> 
+
+  <div class='row'>
+    <div class='col-lg-6'>
+      <p class='green_title'>工作职责· · · · · ·</p>
+      <p class='text'><%= @job.role.gsub(/\n/,'</p><p class="text">').html_safe unless @job.role.blank? %></p>
+    </div>
+  </div>
+
+  <div><!--divide-->
+    <br />
+  </div>
+
+  <div class='row'>
+    <div class='col-lg-6'>
+      <p class='green_title'>职位要求· · · · · ·</p>
+      <p class='text'><%= @job.requirement.gsub(/\n/,'</p><p class="text">').html_safe unless @job.requirement.blank? %></p>
+    </div>
+  </div>
+
+  <div><!--divide-->
+    <br />
+  </div>
+
+  <div class='row'>
+    <div class='col-lg-2'>
+      <p class='green_title'>汇报对象:</p>
+          <% if @job.bosses != nil %>
+	  <% @job.bosses.each do |f| %>
+	  <p class='text'><%= f.title %></p><!--text为了段落缩进-->
+          <% end %> 
+      <% end %>
+    </div>
+    <div class='col-lg-2'>
+      <p class='green_title'>下属:</p>
+        <% if @job.subordinates != nil %>
+	  <table>
+    	    <% @job.subordinates.each do |f| %>
+	      <tr>
+	        <td><%= f.title %>&nbsp;&nbsp;</td>
+		<td><%= f.num %>人</td>
+	      </tr>
+	        <% end %>
+	   </table>
+            <% end %>
+    </div>
+  </div><!--row-->
+
+  <div><!--divide-->
+    <br />
+  </div>
+  
+  <div><!--divide-->
+    <br />
+  </div>
+
+  
+
+  <div class='row'>
+    <div role="tabpanel">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">评论</a></li>
+        <li role="presentation"><a href="#apply" aria-controls="apply" role="tab" data-toggle="tab">申请者</a></li>
+        <li role="presentation"><a href="#poster" aria-controls="poster" role="tab" data-toggle="tab">关于招聘者</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <!--评论tab-->
+        <div role="tabpanel" class="tab-pane active" id="home">
+            <div id="accordion" role="tablist" aria-multiselectable="true">
+              <div class='row'>
+                  <div class='col-lg-3 list'>
+                      <%= link_to "#{@job.comments.count}条评论", job_comments_path(@job),remote:true %>
+
+                  </div>
+
+                  <div class='col-lg-5 list no_underline'>
+                     <!--collapse-->
+                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                   
+                              <% if (current_user != nil) and (@job.comments.find_by user_id: current_user.id)  %>
+                                <span class='no_underline' id='label-1'>修改点评</span>
+                              <% else %>
+                                <span id='label-2'>我也说两句</span>
+                              <% end %>
+                     </a>
+                  </div>
+              </div><!--row-->
+
+              <div class='row'>
+                  <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" style="margin:0px;">
+                    <div class='col-lg-4'>
+                      <div class="panel-body">
+
+                            <%= form_for([@job,@comment]) do |f| %>
+                            <%= f.text_area :body, placeholder:'请输入评论',class: "form-control" %>
+                      </div>
+                    </div> 
+                    <div class='col-lg-3'>
+                      <table>
+                        <tr>
+                          <td>总体评价</td><td><%= rating_for @job, "job_rating" %></td>
+                        </tr>
+                        <tr>
+                          <td>反馈速度</td><td><%= rating_for @job, "feedback" %></td>
+                        </tr>
+                      </table>
+                    
+                      <div >
+                        <%= f.submit '发表',class: "btn btn-success" %>
+                        <% end %>
+                      </div>
+                    </div><!--col-lg-->
+                  </div>
+              </div><!--row-->
+
+            </div><!--accordion-->
+            <div class='row'>
+              <%= render @job.comments.order('top asc,created_at asc') %> <!--这句话是从views/comments/下面取模板-->
+            </div>
+          </div>
+
+      <!--应聘者-->
+      <div role="tabpanel" class="tab-pane" id="apply">
+	<%= render "apply" %>
+      </div>
+      <!--招聘者界面-->
+      <div role="tabpanel" class="tab-pane" id="poster">
+        <br>
+          <%= image_tag(@poster.avatar.url(:small),class: "img-rounded") %>
+        
+      </div>
+
+
+    </div><!-- Tab panes -->
+
+  </div>
+</div><!--row-->
+</div>

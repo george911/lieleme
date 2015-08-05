@@ -1,0 +1,71 @@
+<div class='col-lg-6'>
+  <%= form_for(@user, remote: true) do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  <div class='row salary'>
+    <div class='col-lg-6'>
+      <li><%= f.label :基本月薪 %></li>
+      <li><%= f.number_field :base_salary, class: "form-control small" %></li>
+    </div>
+
+    <div class='col-lg-6'>
+      <li><%= f.label :发放数目 %></li>
+      <li><%= f.number_field :month_num, class: "form-control small" %>个月</li>
+    </div>
+
+    <div class='col-lg-12'>
+      <li><%= f.label :奖金 %></li>
+      <li><%= f.number_field :bonus, class: "form-control small" %></li>
+    </div>
+
+    <div class='col-lg-12'>
+      <li><%= f.label :住房津贴 %></li>
+      <li><%= f.number_field :housing, class: "form-control small" %></li>
+    </div>
+
+    <div class='col-lg-12'>
+      <li><%= f.label :交通补助 %></li>
+      <li><%= f.number_field :transport, class: "form-control small" %></li>
+    </div>
+
+    <div class='col-lg-6'>
+      <li><%= f.label :股票期权 %></li>
+      <li><%= f.select :stock,["股票","期权","无"] %></li>
+    </div>
+
+    <div class='col-lg-6'>
+      <li><%= f.label :股数 %></li>
+      <li><%= f.number_field :stock_num, class: "form-control small" %></li>
+    </div>
+
+    <div class='col-lg-12'>
+      <li><%= f.label :续约奖 %></li>
+      <li><%= f.number_field :retention_bonus, class: "form-control small" %></li>
+    </div>
+
+    <div class='col-lg-6'>
+      <li><%= f.label :期望年薪 %></li>
+      <li><%= f.number_field :expect_package, class: "form-control small" %></li>
+    </div>
+
+    <div class='col-lg-6'>
+      <li><%= f.label :期望月薪 %></li>
+      <li><%= f.number_field :expect_month_salary, class: "form-control small" %></li>
+    </div>
+    
+    <div class='col-lg-12'>
+      <br>
+      <%= f.submit "保存", class: "btn" %>
+    </div>
+  </div>
+  <% end %>

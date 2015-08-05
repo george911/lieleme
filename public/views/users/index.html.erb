@@ -1,0 +1,80 @@
+<div class = 'container' style='margin-top:80px'>
+  <div class='well col-lg-6'>
+  	<div class='row'>
+	    <div class='col-lg-9'>
+	      <h3>合适的候选人</h3>
+	      <p>显示&nbsp;<%= @users.size %>位候选人</p>
+	    </div>
+	    <div class='col-lg-3'>
+	      <%= paginate @users %>
+	    </div>
+    </div>
+  
+  <% @users.each do |user| %>
+  <div class='row'>
+	  <div class='col-lg-12' style='padding-top:16px'>
+	    <table>
+	      <tr >
+				<td style = "vertical-align: top"> <!-- vertical-align用在table的td里可以顶部对齐，html经典书286页-->
+				  <%= link_to image_tag(user.avatar.url, size: '95x95',class: 'avatar-index'),user_path(user), target: "_blank" %>
+				</td>
+				<td style = 'padding-left:15px'>
+				      <p>
+				      <%= link_to "#{user.user_name}",user_path(user),style: "font-size:18px;color:#1db0ed", target:"_blank" %>
+					  </p>
+					  <p style='font-family:Arial,"Microsoft YaHei", "微软雅黑"'>
+					    <%= user.title %>
+					  </p>
+					  <p style='color: #a0a0a0;'>
+					    <% collection = user.summaries.pluck(:content) %>
+					    <%= truncate(collection.join(),length:150) %>&nbsp;
+					    <%= link_to "详细内容",user_path(user),class: "xiangxi",style: 'color:#3b5893',target:"_blank" %>
+				    <%=  %></p>
+			    </td>
+	       </tr>
+	       <tr style='border-bottom: 1px solid #eeeeee;'>
+				 <td>
+				 </td>
+				 <td style = 'font-family:Arial,"Microsoft YaHei", "微软雅黑";padding-left:15px;padding-bottom:20px'>
+						 <%= user.city %>&nbsp;|
+						 <% @sum = 0 %>
+						 <% user.works.each do |f| %>
+							 <% if f.leave_date != nil and f.join_date != nil %>
+								 <% @sum += (remove_unwanted_words distance_of_time_in_words(f.leave_date, f.join_date)).to_i %>
+							 <% end %>
+					   	<% end %>
+						<%= @sum %><span style='font-size: 10px'>年经验</span>&nbsp;|
+						<%= number_with_precision(user.reviews.average(:rating), precision:1) %>&nbsp;
+						<% user.reviews.average(:rating).to_i.times do |f|  %>
+						  <span style="font-size:10px;color: #fcb82b;margin-left:-5px" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+						   <% end %>
+						   &nbsp;|
+						<%= number_with_precision((@sum.to_f/user.works.size unless user.works.size == 0), precision:1) %><span style='font-size: 10px'>年平均在职时间</span>&nbsp;|
+						<% @total_apply_num = LineItem.where(talent_id: user.id).size %>
+						<% @fail_num = LineItem.where(talent_id: user.id).where(status: "HR拒绝").size %>
+						<% if @total_apply_num != 0 %>
+						  <%= number_to_percentage(
+						  	(number_with_precision(
+						  		  (@total_apply_num.to_f-@fail_num.to_f)/@total_apply_num,precision:2
+						  		  ).to_f*100),precision:0 
+						  	  ) %>						  	
+						<span style='font-size: 10px'>应聘成功率</span>&nbsp;|
+						<% end %>
+						<%= user.base_salary %><span style='font-size: 10px'>基本月薪</span>
+				</td>
+	      </tr>
+	    </table>
+	  </div>
+  </div>
+  <% end %>
+
+  <div class='row'>
+    <div class='col-lg-5'>
+
+    </div>
+    <div class='col-lg-2'>
+      <%= paginate @users %>
+    </div>
+  </div>
+  </div>
+</div><!--container-->

@@ -1,0 +1,9 @@
+<!--为什么要带上@job是因为jobs/_boss_field模板需要用到job_id找到@job-->
+<% @bosses.each do |boss| %>
+  <div class='col-lg-10' style='padding-left:20px' >
+    <%= form_for([@job,boss],remote: true ) do |b|  %>
+	<%= b.text_field :title %>
+	<%= b.submit "更新" %><!--job_boss_path-->
+    <% end %>
+  </div>
+<% end %>

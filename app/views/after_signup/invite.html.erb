@@ -1,0 +1,43 @@
+<div class="container" style='margin-top:80px'>
+  <div class="well col-lg-6">
+    <span style='color:#fa6464'><%= notice %></span>
+    <%= hidden_div_if @invites.empty? do %>
+    <h3 style='color:#fa6464'>已经为您推荐以下职位</h3>
+	<table class='table'>
+	    <thead>
+		    <th>职位</th>
+		    <th>月薪</th>
+		    <th>年终奖</th>
+		    <th>地址</th>
+		    <th>推荐人</th>
+		    <th></th>
+	    </thead>
+	    
+	<% @invites.each do |f| %>
+	      <tr>
+		      <td>
+			      <%= link_to "#{f.job.title}",job_path(f.job),target:"_blank" %>
+		      </td>
+		      <td>
+			      <%= f.job.base_pay %>
+		      </td>
+		      <td>
+			      <%= f.job.bonus %>
+		      </td>
+		      <td>
+			      <%= f.job.city %>&nbsp;<%= f.job.addr %>
+		      </td>
+		      <td>
+			      <%= link_to "#{f.sender.user_name}",user_path(f.sender),target:"_blank" %>
+		      </td>
+		      <td>
+      				<div class='col-lg-2'><!-- 与推荐按钮并列-->
+				  <%= link_to '应聘',job_accept_path(f.job),method: :patch, class: 'btn btn-success btn-xs', target:"_blank" %>
+      				</div>
+		      </td>
+		</tr> 
+       <% end %>
+     </table>
+     <% end %>
+  </div>
+</div>

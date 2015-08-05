@@ -1,0 +1,41 @@
+<%= form_for(@inquiry) do |f| %>
+  <% if @inquiry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inquiry.errors.count, "error") %> prohibited this inquiry from being saved:</h2>
+
+      <ul>
+      <% @inquiry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-md-6">
+ 
+    <%= f.text_field :name, class:'form-control',placeholder: '姓名' %>
+  </div>
+  <div class="col-md-6">
+
+    <%= f.text_field :employer, class:'form-control',placeholder: '公司' %>
+  </div>
+  <div class="col-md-6">
+
+    <%= f.text_field :title, class:'form-control', style: 'margin-top:20px',placeholder: '职位'  %>
+  </div>
+  <div class="col-md-6" style='margin-top:20px'>
+    <%= f.select :inquiry_type,["我要招人","我要投资","商务合作","其他"] %>
+  </div>
+  <div class="col-md-6">
+    <%= f.text_field :mobile, class:'form-control',style:'margin-top:20px',placeholder: '手机'  %>
+  </div>
+  <div class="col-md-6">
+    <%= f.text_field :email, class:'form-control',style:'margin-top:20px',placeholder: '邮箱'  %>
+  </div>
+  <div class="col-md-12">
+    <%= f.text_area :content, class:'form-control',style:'margin-top:20px',placeholder: '输入您的内容'  %>
+  </div>
+  <div class="col-md-12">
+    <%= f.submit "发送",class: 'btn btn-success',style:'margin-top:20px'%>
+  </div>
+<% end %>

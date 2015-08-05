@@ -1,0 +1,31 @@
+<% if can? :read, LineItem %>
+
+    <table class='table table-striped'>
+      <% @job.line_items.each do |line_item| %>
+        <% if line_item.talent_id !=nil %>
+          <tr>
+    	<td width='70px'>
+              <% @talent=User.find(line_item.talent_id) %>
+    	  <% if line_item.status.present? %>
+    	    <button class='status-flag'><%= link_to line_item.status %></button>
+    	  <% end %>
+            </td>
+    	<td width='50px'>
+    	  <%= link_to image_tag(@talent.avatar.url,size:'30x30'), id: "#{line_item.talent_id}", action: 'show', controller: 'users', host:'localhost:3000'  %>
+    	</td>
+    	<td>
+     	  <%= remove_unwanted_words distance_of_time_in_words(Date.today,@talent.birthday) unless @talent.birthday == nil%> | <%= @talent.educations.first.school unless @talent.educations.first == nil %> | <% @talent.works.each do |f| %>
+              <% if f != @talent.works.last %>
+    	    <%= f.employer %> | <!-- |不能放在<% %>里-->
+              <% else %>
+                <%= f.employer %>
+              <% end %>
+              <% end %>
+            </td> 
+          </tr>
+      <% end %>
+      <% end %>
+    </table>
+<% else %>
+  对不起，您没有权限
+<% end %>

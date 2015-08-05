@@ -1,0 +1,51 @@
+<div class="container-fluid"><!--Use .container-fluid for a full width container, spanning the entire width of your viewport.-->
+    <section class="container"><!--Use .container for a responsive fixed width container.-->
+        <div class="container-page"> 
+            <div class="col-md-4"><!--col-md对应的Container width：970px -->
+
+                  <%= form_for @job, url: wizard_path, method: :put do |f| %>
+                    <% if @job.errors.any? %>
+                      <div id="error_explanation">
+                        <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+                        <ul>
+                        <% @job.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+
+                    <div class="col-lg-6">
+                      <%= f.label :base_pay %><br>
+                      <%= f.text_field :base_pay,class: 'form-control' %>
+                    </div>
+                    <div class="col-lg-6">
+                      <%= f.label :month %><br>
+                      <%= f.text_field :month,class: 'form-control' %>
+                    </div>
+                    <div class="col-lg-6">
+                      <%= f.label :bonus %><br>
+                      <%= f.text_field :bonus,class: 'form-control' %>
+                    </div>
+                    <div class="col-lg-6">
+                      <%= f.label :allowance %><br>
+                      <%= f.text_field :allowance,class: 'form-control' %>
+                    </div>
+                    <div class="col-lg-6 select">
+                      <%= f.label :stock %><br>
+                      <%= f.select:stock,["股票","期权"],class: 'form-control' %>
+                    </div>
+                    <div class="col-lg-6">
+                      <%= f.label :stock_num %><br>
+                      <%= f.text_field :stock_num,class: 'form-control' %>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <%= f.submit "保存",class: 'btn btn-success' %>
+                    </div>
+                  <% end %>
+</div>
+</div>
+</section>
+</div>

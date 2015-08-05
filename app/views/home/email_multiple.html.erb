@@ -1,0 +1,21 @@
+<div class='col-md-8'>
+    <div class='col-md-7'>
+      <%= form_tag send_email_path do %>
+    	  <h4>发送邮件给:
+        <% @my_talents.each do |my_talent| %>
+    	  <%= hidden_field_tag "my_talent_ids[]", my_talent.id %>
+    	  <%= my_talent.user_name %>
+      <% end %></h4>
+    <hr style='height:1px;background:#dddddd'>
+      <%= text_field_tag :subject,nil,class: "form-control",placeholder:"主题" %>
+      <br>
+    </div>
+    <div class='col-md-7'>
+      <%= text_field_tag :content,nil,class: "form-control",placeholder:"邮件内容" %>
+      <br>
+    </div>
+    <div class='col-md-6'>
+      <%= submit_tag "群发邮件", class: "btn btn-primary" %>
+    </div>
+    <% end %>
+</div>

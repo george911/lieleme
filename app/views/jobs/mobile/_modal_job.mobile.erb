@@ -1,0 +1,53 @@
+<button type='button' class='transparent-btn' data-toggle="modal" data-target="#myModal">
+        推荐
+      </button>
+
+         <!-- Modal -->
+         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                 <div style='width:400px' class="modal-dialog">
+                   <div class="modal-content">
+                     <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                 <h4 class="modal-title" id="myModalLabel">推荐您的朋友或者同事</h4>
+               </div>
+
+               <div class="modal-body">
+                     <!-- Modal body content -->
+           <%= form_for @line_item, url: job_line_items_path(job_id:@job.id), method: :post do |f| %>
+               <% if @line_item.errors.any? %>
+                 <div id="error_explanation">
+                   <h2><%= pluralize(@line_item.errors.count, "error") %> prohibited this line_item from being saved:</h2>
+                   <ul>
+                     <% @line_item.errors.full_messages.each do |message| %>
+                             <li><%= message %></li>
+                     <% end %>
+                   </ul>
+                 </div>
+             <% end %>
+              
+           <div class='input-group col-lg-7'>
+             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+             <%= f.text_field :email, class: 'form-control',placeholder:'输入邮箱地址' %>
+           </div>
+           <br>
+           <div class='input-group col-lg-7'>
+             <span class="input-group-addon"><i style='width:14px' class="fa fa-mobile"></i></span>
+             <%= f.text_field :mobile, class: 'form-control input',placeholder:'输入手机号' %>
+           </div>
+           <br>
+           <div class='input-group col-lg-7'>
+             <span class="input-group-addon"><i style='width:14px' class="fa fa-user"></i></span>
+             <%= f.text_field :name, class: 'form-control input',placeholder:'对方姓名' %>
+           </div>
+         
+                 </div><!--modal body end -->
+                         
+                   <div class="modal-footer">
+                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                 <%= f.submit "发送",class: 'btn btn-danger' %>
+                 </div>
+             <% end %> 
+
+                   </div>
+                 </div>
+               </div>

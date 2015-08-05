@@ -1,0 +1,13 @@
+<div class='col-lg-10'>
+  <div class='row pull-right'>
+	  <%= form_tag my_talents_path,method: :get,remote:true do %>
+  	  <%= text_field_tag :my_query,nil, class: 'form-control' %><!--class至少要放到第三个参数-->
+		<%= submit_tag "",style:'display:none'  %>
+	<% end %>
+  </div>
+  <br>
+  <br>
+  <div class='row' id='my_talents_list'>
+	  <%= render 'my_talents_list' %>
+  </div>
+</div>

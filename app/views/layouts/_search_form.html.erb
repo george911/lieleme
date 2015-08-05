@@ -1,0 +1,7 @@
+<!--问题一，Project name 怎会和form分成两行?-->
+            <%= form_tag search_path, method: "get",class:"navbar navbar-form" do %>
+              <%= text_field_tag :query, params[:query], class:'form-control' %>
+              <%= select_tag :q,options_for_select([['职位'],['人才'],['猎头']]),class:'form-control' %>
+	            <%= submit_tag "搜索",class:"btn btn-success" %>
+              <a style='color:white;font-size:12px' data-toggle="modal" data-target=".bs-example-modal-sm">搜索贴士</a>
+	          <% end %>

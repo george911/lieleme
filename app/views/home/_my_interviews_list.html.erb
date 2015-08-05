@@ -1,0 +1,108 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+  	<h4>我的面试</h4>
+  </div>
+  <table class='table table-hover'>
+  	<thead style='color:#aaaaaa;font-size:12px;weight:bold'>
+	  <tr class='warning'>
+	  	<th></th>
+		<th>地点</th>
+		<th>时间</th>
+		<th>面试原因</th>
+		<th><%= current_user.user_type == "猎头" ? "反馈" : "接受/拒绝" %></th>
+		<th>修改</th>
+	  </tr>
+	</thead>
+    <tbody>
+  <% @my_interviews.each do |f| %>
+
+	         
+	         	<tr>
+	         		<td>
+	         			<%= image_tag((current_user.user_type == "猎头" ) ? f.recipient.avatar.url : f.sender.avatar.url, class: 'img-squre', size:'30x30') %>
+	         			<%= current_user.user_type == "猎头" ? (link_to "#{f.recipient.user_name}",user_path(f.recipient), target:"_blank",style:'color:#006fa6') : (link_to "#{f.sender.user_name}",user_path(f.sender), style:"color:#006fa6",   target:"_blank") %>
+	         		</td>
+	         		<td>
+	         			<%= f.address.blank? ? "地点待定" : "#{f.address}" %>
+	         		</td>
+	         		<td>
+	         			<%= f.datetime %>
+	         		</td>
+	         		<td>
+	         			<% if f.content == "有职位推荐" and f.job.present? %>
+	    		    	  <%= link_to "#{f.job.title}", job_path(f.job), style:'color: #006fa6',target:"_blank" %>
+	                	<% else %>
+	        	    	  <%= f.content %>
+	                	<% end %>
+	         		</td>
+
+	         		<td>
+	         			<% if current_user.user_type == "猎头" %>
+	    			  		<%= if f.accept == true
+	    			  			  "已接受"
+	    			  			elsif f.accept == false
+	    			  			  "已拒绝" 
+	    			  			else
+	    			  			  "等待接受"
+	    			  			end %>
+	    			  		<%= f.feedback.present? ? ":#{f.feedback}" : "#{f.feedback}" %>
+			  			<% elsif f.accept == nil %>
+	      						<div id = "interview_<%= "#{f.id}" %>" style='float:left'>
+								<%= link_to accept_interview_path(interview_id:f.id,id:f.id), id:"accept_#{f.sender.user_name}",method: :patch,remote:true do %>
+	    						  	  <i class='glyphicon glyphicon-ok'></i>
+	    						    <% end %>
+	    						    &nbsp;&nbsp;
+							    <!-- interview_id用来escape_javascript render ,reject_#{f.id}用来测试-->
+							    <%= link_to reject_interview_path(interview_id:f.id,id:f.id), id:"reject_#{f.id}",method: :patch, remote:true do %>
+	    						  	  <i class='glyphicon glyphicon-remove'></i>
+	    						    <% end %>
+	    						    &nbsp;&nbsp;
+	    						</div>
+	    				<% else %>
+	    						<%= f.accept ? (render 'interviews/accept') : (render 'interviews/reject') %>
+	    				<% end %>
+	    			</td>
+	    			<td>
+	    				<% if current_user.user_type == "猎头" %>
+	    				  	<%= link_to edit_user_interview_path(id:f.id,user_id:f.recipient_id),id:"modify_#{f.id}" do %>
+	    				  	  <i class='glyphicon glyphicon-pencil'></i>
+	    				  	<% end %>
+	    				<% elsif current_user.user_type == "求职者" %>
+
+	    					<!-- Button trigger modal -->
+							<a id = "trigger_<%= f.id %>" data-toggle="modal" data-target="#Modal_<%= f.id %>" href="">
+							  <i class='glyphicon glyphicon-envelope'></i>
+							</a>
+							
+							<!-- Modal -->
+							<div class="modal fade" id="Modal_<%= f.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							  <div class="modal-dialog modal-sm" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							        <h4 class="modal-title" id="myModalLabel">回复:<%= f.sender.user_name %></h4>
+							      </div>
+							      <div class="modal-body">
+							        <%= form_for f,url:user_interview_path(user_id:f.recipient_id,id:f.id) do |intv| %>
+										<%= intv.text_area :feedback, class:"form-control", cols:10,rows:2 %>
+								  </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							        <%= intv.submit "发送回复", class:"btn btn-success"%>
+
+	        	  					<% end %>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+
+	    				<% end %>
+	    			</td>
+
+	         	</tr>
+	         
+
+    <% end %>
+  </tbody>
+  </table>
+ </div>

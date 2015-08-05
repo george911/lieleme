@@ -1,0 +1,19 @@
+<div class="container" style='margin-top:80px'>
+  <div class="row">
+    <aside class="col-md-3">
+      <div class="user_info">
+        <%= render 'shared/user_info' %>
+      </div>
+      <div class="stats">
+        <%= render 'shared/stats' %>
+      </div>
+      <section class="micropost_form">
+        <%= render 'shared/micropost_form' %>
+      </section>
+    </aside>
+    <div class="col-md-5">
+      <h3>最新动态</h3>
+      <%= render 'shared/feed' %>
+    </div>
+  </div>
+</div>

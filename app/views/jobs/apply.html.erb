@@ -1,0 +1,157 @@
+<div style='padding-top:80px'>
+  <!--在这里设置位置才能奏效-->
+    <div style='padding-left:26px'>
+      <div style='color:#3097ee' id="" class='col-lg-1'>
+	    <br>
+	    <br>
+	    <br>
+      <p><a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">职位</a>
+	   <div class="collapse" id="collapseExample">
+		<p>&nbsp;<%= link_to "招聘中",my_jobs_path %><p>
+		<p>&nbsp;<%= link_to "暂停中",my_pending_jobs_path %><p>
+		<p>&nbsp;<%= link_to "已关闭",my_closed_jobs_path %><p>
+           </div>
+      	</p>
+      <p><%= link_to "新建",new_job_path %>
+        </p>
+    </div>
+    
+    <div class='col-lg-11' style='margin-left:-20px'>
+	  <div   style='margin-top:50px;' class="panel panel-primary">
+	    <div class="panel-heading"><h4><%= "#{@job.employer}的#{@job.title}职位候选人" %></h4></div>
+		<!-- 本文件用来显示我的职位的应聘简历列表-->
+		<table class='table table-hover'>
+		  <thead>
+		    <tr class='warning'>
+			  <th></th>
+			  <th>状态</th>
+			  <th>城市</th>
+			  <th>年龄</th>
+			  <th>雇主</th>
+			  <th>职位</th>
+			  <th>学校</th>
+			  <th>学历</th>
+			  <th>月薪</th>
+			  <th>年薪</th>
+			  <th>期望薪资</th>
+			  <th></th>
+		     </tr>
+		   </thead>
+		  
+		   <tbody id='line_item' >
+			  <% @job.line_items.where.not(recipient_id:nil).order("updated_at desc").each do |f| %>
+				
+			    <% unless f.recipient.not_interview_by(f.sender) and @job.interview %><!-- 之所以不用unless f.interviewed == false是因为line_item只在候选人接受面试才会update 		line_item.interviewed, 之前已经面过的人不会更新interviewed-->
+				<tr class='hover'>
+				  <td><%= link_to "#{f.recipient.user_name}",user_path(f.recipient),target:"_blank" %><i style='color:red'><%= f.recipient.unread?(current_user) ? "new" 		: "" %></i></td>
+				  <td >
+					<!-- Button trigger modal -->
+					<a id='status_<%= f.id %>' href='' data-toggle="modal" data-target="#lineitem_<%=f.id%>"><!--href如果不加，capybara click_on捕捉不到link-->
+					  <%= f.status %>
+					</a>
+		
+					<!-- Modal -->
+					<div class="modal fade" id="lineitem_<%=f.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					<div class="modal-content">
+									<div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								        <h4 class="modal-title">面试进度</h4>
+								    </div>
+				      				<div class="modal-body">
+				      						<%= form_for([@job,f]) do |line_item| %>
+									        <div class="form-group">
+									            <label for="recipient-name" class="control-label">下一步状态</label>
+									              
+												<%= select_tag :status,"<option>reject</option><option>turndown</option><option>发送到line</option><option>等待反馈</option		><option>初面</option><option>最后面试</option><option>offer</option><option>保证期</option><option>推荐成功</option>".		html_safe, class: 'form-control' %> <!--这种写法是最保险的，否则会出问题。-->
+									        </div>
+									        <div class="form-group">
+									            <label for="message-text" class="control-label">给推荐者反馈</label>
+									            <%= text_area_tag :feedback, nil,class: "form-control"  %><!--第一个参数是输入params的id,第二个是输入的内容，因为我们从params[		:comment]输入，所以这个为nil,注意如果漏掉，则后面的参数会变成输入的内容而发生错误-->
+									        </div>
+									</div>
+							        <div class="modal-footer">
+										    <button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
+									        <%= submit_tag "确认", class: "btn btn-primary" %>
+									        <% end %>	
+							        </div>
+		
+						      
+					</div><!--modal-content-->
+					</div>
+					</div>
+		      	  	  </td>
+				  <td><%= f.recipient.city %></td>
+				  <td><%= age(f.recipient.birthday) %></td>
+				  <% if f.recipient.works.find_by(uptonow: true)  %> <!-- find_by可用作判断, where不用作判断-->
+				  <td><%= f.recipient.works.where(uptonow: true).take.employer %></td>
+				  <td><%= f.recipient.works.where(uptonow: true).take.title %></td>
+				  <% else %>
+				  <td><% if f.recipient.works.where(leave_date: f.recipient.works.maximum(:leave_date)).present? %>
+					  <%= f.recipient.works.where(leave_date: f.recipient.works.maximum(:leave_date)).take.employer %>
+				      <% end %></td><!--加take可以用.employer-->
+			          <td><% if f.recipient.works.where(leave_date: f.recipient.works.maximum(:leave_date)).present? %>
+					  <%= f.recipient.works.where(leave_date: f.recipient.works.maximum(:leave_date)).take.title %>
+				      <% end %></td><!--加take可以用.employer-->
+				  <% end %>
+				  <% if f.recipient.educations.find_by(degree: "本科") %>
+				  <td><%= f.recipient.educations.where(degree:"本科").take.school %></td>
+				  <td><%= "本科" %></td>
+				  <% elsif f.recipient.educations.find_by(degree: "硕士") %>
+				  <td><%= f.recipient.educations.where(degree:"硕士").take.school %></td>
+				  <td><%= "硕士" %></td>
+			  	  <% elsif f.recipient.educations.present? %>
+				  <td><%= f.recipient.educations.first.school %></td>
+				  <td><%= f.recipient.educations.first.degree %></td>
+				  <% end %>
+				  <td><%= f.recipient.base_salary %></td>
+				  <td><%= (f.recipient.base_salary ||=0)*(f.recipient.month_num||=0)+(f.recipient.bonus||=0)+(f.recipient.housing||=0)+(f.recipient.transport||=0)+(f.		recipient.retention_bonus||=0) %></td>
+				  <td><%= f.recipient.expect_package %></td>
+				  <td >
+				      
+				  <button  class='comment' data-toggle="modal" data-target="#comment_<%=f.id%>">
+		 服务评价
+		</button>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="comment_<%=f.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">服务评价</h4>
+		      </div>
+		      <div class="modal-body">
+		      	请您对<%= f.sender.user_name %>评价<br>
+			<% if f.service_rate %>
+			  <%= rating_for f.service_rate, "service" %>
+		        <% end %> 
+		      	<%= form_tag job_line_item_path(id:f.id,job_id:@job.id),method: :put do |line_item| %>
+									        
+									        <div class="form-group">
+									            <label for="message-text" class="control-label"></label>
+									            <%= text_area_tag :comment, nil,placeholder: "输入评语",class: "form-control"  %><!--		第一个参数是输入params的id,第二个是输入的内容，因为我们从params[:comment]		输入，所以这个为nil,注意如果漏掉，则后面的参数会变成输入的内容而发生错误-->
+									        </div>
+		
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
+		        <%= submit_tag "确认", class: "btn btn-primary" %>
+		        <% end %>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+				  
+				  
+				  </td>
+			        </tr>
+			        <% end %>	
+			<% end %>
+		</tbody>
+		</table>
+	  </div>
+    </div>
+    </div>
+</div>
+

@@ -1,0 +1,72 @@
+<div class='col-lg-8 col-xs-12'>
+  <div class='row' >
+    <% if comment.user_id != nil %>
+    <div class='col-lg-8 col-xs-8'>
+    	<table width='100%'>
+        <tr style='background-color:#f6f6f1'>
+                       <% @author=User.find(comment.user_id) %>
+    	   <% unless mobile_device? %>
+    	   <td width='60px'>
+    
+                         <%= image_tag(@author.avatar.url(:small),size:'30x30') unless comment.user_id == nil%>
+    
+    	    </td>
+         <% end %>
+               	  <td><!--tr如果不加td的话下一个tr不会重启一行-->
+                         <%= @author.user_name %>
+                         <%= @author.works.last.title.present? ? " #{@author.works.last.title} |" : '找工作中 |' %>
+                       </td>
+                       <td>
+    	   <% if @author.jobrates.find_by("rateable_id = ? and dimension = ?",@job.job_rate.id,"job_general") %>
+    	 	  <!--find_by可以取到，where娶不到需要加each-->
+    	 	  <% @author.jobrates.find_by("rateable_id = ? and dimension = ?",@job.job_rate.id,"job_general").stars.to_i.times do %>
+    	 	    <span style='color:#ff632f;margin:0px'class="glyphicon glyphicon-star"></span>
+    	     <% end %>
+    	          <% end %>
+                       </td>
+                       <td class='text-right'>
+                         <small>
+                 发表于<%= comment.created_at.strftime("%m-%d") %>&nbsp;&nbsp;
+               </small>
+             </td>
+        </tr>
+        <tr>
+          <td>
+          &nbsp;
+        </td>
+        </tr>
+        <tr>
+          <td>
+              <div>
+              <%= link_to like_path(id:comment.id),remote:true do %>
+                  <i style='font-size:20px;'class='glyphicon glyphicon-hand-up'></i>
+                      <% end %>
+                    </div>
+                    <div id="comment_<%=comment.id%>">
+                      <div style='margin:10px 0px 0px 0px'>
+                        <span style='font-size:20px;'><%= judge=comment.get_likes.size-comment.get_dislikes.size %></span>
+                      </div>
+                      <div style='margin-bottom:10px'><%= judge>0 ? "有用" : "没用" %></div>
+                    </div>
+                    <div><%= link_to dislike_path(id:comment.id),remote:true do %>
+                  <i style='font-size:20px;'class='glyphicon glyphicon-thumbs-down'></i>
+              <% end %>
+              </div>
+    
+          </td>
+          <td style='vertical-align:top'>
+                          
+            <%= comment.body %>
+                    
+          </td>
+        </tr>
+      </table>
+    </div>     
+    <% end %>
+  </div>
+  <div class='row'>
+    <div class='col-lg-8'>
+	    <hr>
+    </div>
+  </div>
+</div>

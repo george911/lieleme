@@ -1,0 +1,1 @@
+		  ttttttttttttttt		  <% @author=User.find(10002) %><%= rating_for_user @job.job_rate, @author, "job_general"%>		  <% if @job.job_rate %>			  <%= rating_for @job,  "job_general"%>		  <% else %>		    no job_rate	     <% end %>

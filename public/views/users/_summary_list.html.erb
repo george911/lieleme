@@ -1,0 +1,11 @@
+<div class='row'>
+<table>
+<% @user.summaries.each do |summary| %>
+	<tr ><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><!--第一行-->
+	  <td><%= summary.content %></td>
+        </tr>
+<% end %>
+    </table>
+</div>
+<hr>

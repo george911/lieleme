@@ -1,0 +1,48 @@
+	<%= form_for [@user,@interview] do |f| %><!--带上user_id的原因是为了记录@user,即正在浏览的候选人ID,这也是没有办法的办法 这个不同于form_for([@user,@interview]),后者是associated -->
+          <div style='margin:20px'>
+		<div class='row' >
+		  <div class='form-group col-lg-3' >
+			  <%= f.label :面试原因 %>
+			  <%= f.select :content,["建立初步了解","有职位推荐"],selected:"建立初步了解",class: 'form-control',prompt:true %>
+		  </div>
+		</div>
+		<div class='row'>
+		  <div id='job_select' class='form-group col-lg-12 hidden'>
+			  <%= f.collection_select :job_id,@my_jobs,"job_id","job_title",prompt:true %>&nbsp;
+			  <a data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="这里只显示我的任务中的职位哦:)">
+				为什么没有我要的职位?
+			    </a>
+
+		  </div>
+	        </div>
+		<div class='row' >
+		  <div class='form-group col-lg-4'>
+			  <%= f.label :输入面试地点 %>
+			  <%= f.text_field :address,class: 'form-control' %>
+		  </div>
+		</div>
+		<div class='row'>
+		  <div class='col-lg-6'>
+			    <%= f.label :输入面试时间 %>
+		    <div class='input-group date' id='datetimepicker1'>
+			    <%= f.text_field :datetime, class: "form-control" %>
+                      <span class="input-group-addon">
+                      <span id = 'calendar' class="glyphicon glyphicon-calendar"></span>
+                      </span>
+	            </div>
+    		  </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+				    $('#datetimepicker1').datetimepicker({
+});
+                    });
+                </script>
+		<div class='row' style='padding-top:20px'>
+		  <div class='form-group col-lg-2'>
+			  <%= f.submit "保存",class: "btn btn-success" %>
+		  </div>
+		</div>
+	      </div>
+	<% end %>
+

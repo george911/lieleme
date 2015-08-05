@@ -1,0 +1,102 @@
+<div class= 'container'>
+  <div class='well col-lg-7' style='margin-top:80px'>
+
+  		<div class='basic'>
+
+		  <div class='col-lg-10'>
+
+		  	<div class='row'>
+			<h4>汇报对象&nbsp;<%= link_to "修改",edit_bosses_path(id:@job), class: "btn-orange", remote:true %></h4>
+			  <div class='col-lg-10' style='padding-left:20px' id="boss_fields">
+			    <%= render "boss_fields" %>
+			  </div>
+			</div>
+			
+			<div class='row'>
+			<h4>下属&nbsp;<%= link_to "修改",edit_sub_path(id:@job), class: "btn-orange", remote:true %></h4>
+			  <div class='col-lg-10' style='padding-left:20px' id="sub_fields">
+			    <%= render "sub_fields" %>
+			  </div>
+			</div>
+
+
+		    <%= form_for(@job) do |f| %>
+		      <% if @job.errors.any? %>
+		        <div id="error_explanation">
+		          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+		
+		          <ul>
+		          <% @user.errors.full_messages.each do |message| %>
+		            <li><%= message %></li>
+		          <% end %>
+		          </ul>
+		        </div>
+		      <% end %>
+		
+			<div class='row'>
+			<h4>基本信息</h4>
+                  <div class="col-lg-5" style='margin-top:10px'>
+                    <%= f.text_field :title,class: 'form-control',placeholder:"职位" %>
+                  </div>
+                  <div class="col-lg-5" style='margin-top:10px'>
+                    <%= f.text_field :employer,class: 'form-control',placeholder:"雇主简称" %>
+                  </div>
+                  <div class="col-lg-5" style='margin-top:10px'>
+                    <%= f.text_field :industry,class: 'form-control',placeholder:"行业" %>
+                  </div>
+                  <div class="col-lg-5" style='margin-top:10px'>
+                    <%= f.text_field :city,class: 'form-control',placeholder:"城市" %>
+                  </div>
+                  <div class="col-lg-10" style='margin-top:10px'>
+                    <%= f.text_field :addr,class: 'form-control',placeholder:"地址" %>
+                  </div>
+                  <div class="col-lg-4" style='margin-top:10px'>
+                    <%= f.number_field :commission,class: 'form-control',placeholder:"佣金" %>
+                  </div>
+                  <div class="col-lg-8" style='margin-top:10px'>
+		    <%= f.check_box :interview %>
+		    只接受面试过的候选人
+                  </div>
+                  <div class="col-lg-12 select" style='margin-top:10px'>
+                    <%= f.date_select :concall_date,class: 'form-control',placeholder:"Con-call时间" %>
+                  </div>
+                  <div class="col-lg-12" style='margin-top:10px'>
+                    <%= f.text_area :memo,rows:3,class: 'form-control', placeholder:"备注" %>
+                  </div>
+                 
+		  	</div>  
+
+
+		<div class='row'>
+		    <h4>雇主信息&nbsp;</h4>
+ 			<div class="col-lg-12" style='margin-top:10px'>
+                <%= f.text_area :company_info,rows: 6,class: 'form-control' %>
+            </div>
+		</div>
+		<div class='row'>
+		<h4>工作内容&nbsp;</h4>
+			<div class="col-lg-12" style='margin-top:10px'>
+                <%= f.text_area :role,rows:6,class: 'form-control' %>
+            </div>
+		</div>
+		
+		<div class='row'>
+		<h4>工作要求&nbsp;</h4>
+			<div class="col-lg-12" style='margin-top:10px'>
+                <%= f.text_area :requirement,rows:8,class: 'form-control' %>
+            </div>
+		</div>
+                    
+        <div class='row' align='right'>
+        	<br>
+            <%= f.submit "更改",class: "btn btn-success" %>
+        </div>
+
+		  <% end %>
+		
+
+
+  </div>
+</div>
+</div>
+</div>

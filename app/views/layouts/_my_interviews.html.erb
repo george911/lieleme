@@ -1,0 +1,5 @@
+<%= link_to my_interviews_path, style:'color:white' do %>我的面试
+		            <%= hidden_span_if current_user.received_interviews.where(accept:nil).count.zero? do %>
+		              <span class='badge'><%= current_user.received_interviews.where(accept:nil).count.zero? ? nil : current_user.received_interviews.where(accept:nil).count %></span>
+    		          <% end %>
+	              <% end %>

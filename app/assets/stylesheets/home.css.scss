@@ -1,0 +1,59 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.home {
+.table-inbox {
+  border: 1px solid #d3d3d3;
+  margin-bottom: 0;
+  }
+.red{
+  color: red
+  }
+
+.avatar {
+  border: 1px solid #eeeeee;
+  }
+
+.hidden {
+    display:none
+    }
+.show {
+    display:inline
+    }
+.well {
+	    box-sizing: border-box;
+    }
+.hover {
+  button {
+	  visibility:hidden 
+  }
+  }
+.td {
+  font-size:11px;}
+
+.btn-float {
+  font-size:12px;
+  background-color: white;
+  border: 1px solid #62b1ee;
+  border-radius: 3px;
+  color:#62b1ee;
+  }
+.refer {
+  background-color: white;
+  border: 1px solid #62b1ee;
+  border-radius: 3px;
+  color:#62b1ee;
+}
+
+.container {
+  padding-left:100px;
+  }
+.table td{
+height: 45px;}
+.img-circle{
+	border-radius:50%;
+	border: 2px solid white;}
+.img-circle:hover {
+  transition: ease-out 0.3s;
+  }
+}

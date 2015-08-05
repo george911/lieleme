@@ -1,0 +1,110 @@
+<section style="background:#18bc9c;">
+        <div class="container">
+            <div class="row">
+                <div class="board">
+                    <!-- <h2>Welcome to IGHALO!<sup>™</sup></h2>-->
+                    
+                     <div class="tab-content" style='margin-bottom:0px'>
+                      <div class="tab-pane fade in active" id="home">
+
+                          <h5 class="head" style='color:white;font-size:60px;font-family:"Microsoft Yahei",微软雅黑'>推荐应聘,赢得奖金 <span style="color:#f48260;">♥</span></h5>
+                          <p class="narrow" style='color:white;font-size:25px'>
+                              分享职位,引爆您的朋友圈！
+                          </p>
+                          <p >
+                            <%= link_to "即可体验", jobs_path, class: 'btn btn-success btn-outline-rounded green',target: "_blank" %>
+                                
+                            </p>
+                      </div>
+                      <div class="tab-pane fade" id="messages">
+                          <h5 class="head"style='color:white;font-size:60px;font-family:"Microsoft Yahei",微软雅黑'>寻找猎头,精准招聘</h5>
+                          <p class="narrow"style='color:white;font-size:25px'>
+                             挑选中意的猎头，开启招聘众包的大航海时代！
+                          </p>
+                          
+                          <p>
+                            <%= link_to "即可体验", search_path, class: 'btn btn-success btn-outline-rounded green',target: "_blank" %>
+                            
+                        </p>
+                      </div>
+                      <div class="tab-pane fade" id="profile">
+                          <h5 class="head"style='color:white;font-size:60px;font-family:"Microsoft Yahei",微软雅黑'>人才银行,永远增值</h5>
+                          <p class="narrow"style='color:white;font-size:25px'>
+			                       上传简历,坐收佣金,因为平台猎头会帮你快速匹配! 
+                          </p>
+                            <%= link_to "详细", share_policy_path, class: 'btn btn-success btn-outline-rounded green',target: "_blank" %>
+                          </p>
+                          
+                      </div>
+                     
+                      
+                      
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="board-inner" style='padding-top:0px;'>
+                      <ul class="nav nav-tabs" id="myTab">
+                        <div class="liner"></div>
+                          <li class="active">
+                              <a href="#home" data-toggle="tab">
+                                <span class="round-tabs one">
+                                        <i class="glyphicon glyphicon-share-alt"></i>
+                                </span> 
+                              </a>
+                          </li>
+                          <li><a href="#messages" data-toggle="tab">
+                             <span class="round-tabs three">
+                                  <i class="glyphicon glyphicon-user"></i>
+                             </span> </a>
+                          </li>
+                          <li><a href="#profile" data-toggle="tab">
+                             <span class="round-tabs two">
+                                 <i class="glyphicon glyphicon-usd"></i>
+                             </span> 
+                            </a>
+                         </li> 
+                      </ul>
+                    </div>
+
+</div><!--board-->
+</div>
+</div>
+</section>
+<section >
+    <div>
+	    <h1 align='center'style='color:#f48260'>这里的世界很精彩</h1>
+    </div>
+    <% if @offers != nil %>
+     <div id ='offer' style='float:right;margin:0 auto;'>
+      <table>
+        <tr>
+		<% cache(action:'show',action_suffix:'offers') do %>
+		<% @offers.order('created_at asc').first(7).each_with_index do |f,index| %>
+       	 
+          <td class=<%= cycle("td_odd","td_even") %> style='padding-top:15px' >
+        	  
+        	      <% if f.recipient != nil %>
+        	        <%= link_to image_tag(f.recipient.avatar.url(:medium),size:"100x100", class: " img-circle"), user_path(f.recipient),target: :_blank %>
+        	        <h4 align='center' style='font-family:"Microsoft Yahei",微软雅黑,arival;color:#6f6f6f'>
+                    <%= f.recipient.user_name %></h4>
+        	        <h4 align='center' style='color:#6f6f6f'>
+				            <span style='font-size:10px'>成功猎取</span>
+                    <%= f.job.title %>&nbsp;&middot;&nbsp;<%= f.job.commission %></h4>
+                <% end %>            
+          </td>
+        <% end %>
+        <% end %>
+        </tr>
+      </table>
+     </div>
+    <% end %>
+
+    <div class='col-lg-12'>
+      <h1 align='center' style='color:#f48260'>你的精彩在哪里</h1>
+    </div>
+
+</section>
+
+                   
+
+    

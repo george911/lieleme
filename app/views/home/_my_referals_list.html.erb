@@ -1,0 +1,33 @@
+	  <table class='table table-hover'>
+	    <thead style='color:#aaaaaa;font-size:12px;weight:bold'>
+		    <th></th>
+		    <th>用户名</th>
+		    <th>状态</th>
+		    <th>推荐日期</th>
+		    <th>反馈</th>
+	  </thead>
+	  <% @my_referals.order('updated_at desc').each do |f| %>
+	    <% if f.recipient.present? %>
+	      <% job = Job.find_by id: f.job_id %>
+	    <% end %>
+	    <tr>
+	      <td width="30px">
+		    <% if f.recipient.present? %>
+		      <%= link_to image_tag(f.recipient.avatar.url, size:'30x30',class: 'img-circle'),user_path(f.recipient),target:"_blank" %>
+	        <% end %>
+	      </td>
+	      <td>
+		      <%= f.recipient.present? ? (link_to "#{f.recipient.user_name}",user_path(f.recipient),method: :get,target: :_blank) : f.name %></td>
+	      <td>
+		      <%= f.recipient.present? ? f.status : "等待应聘" %>
+	      </td>
+	      <td>
+		      <%= f.created_at.strftime("%y-%m-%d") %>
+	      </td>
+	      <td>
+		      <%= f.comment %>
+	      </td>
+	    </tr>
+      <% end %>
+    </table>
+

@@ -1,0 +1,58 @@
+<div class = 'container' style='margin-top:80px'>
+  <div class='well col-lg-6'>
+  	<div class='row'>
+	    <div class='col-lg-9'>
+	      <h3>热招职位</h3>
+	      显示&nbsp:<%= @jobs.size %> 位候选人
+	    </div>
+	    <div class='col-lg-3'>
+	      <p><%= paginate @jobs %></p>
+	    </div>
+	</div>
+
+	<% @jobs.each do |job| %>
+	<div class='row'>
+	  <div class='col-lg-12' style='padding-top:16px'><!--照片距离分割线的padding-->
+	    <table>
+	      <tr style='border-bottom: 1px solid #eeeeee;'>
+				<td style = "vertical-align: top"> <!-- vertical-align用在table的td里可以顶部对齐，html经典书286页-->
+				  <%= link_to image_tag(job.user.avatar.url, size: '70x70',class: 'avatar-index'),job_path(job), target: "_blank" %>
+				</td>
+				<td style = 'padding-left:15px'>
+					  <p>
+					  <b><%= link_to "#{job.title}",job_path(job),style:'font-family:Arial,"Microsoft YaHei", "微软雅黑"', target:"_blank" %></b>
+					  </p>
+					  <p>
+					    <%= hidden_span_if job.base_pay == nil do %>
+					      <%= job.base_pay %>/<span style='font-size:10px'>月</span>&nbsp;|&nbsp;
+					    <% end %>
+					    <%= job.city %>&nbsp;|&nbsp;<%= job.industry %>
+					  </p>
+					  <p>
+					    <table>
+					      <td style='color:green'><i style='font-size:9px' class='glyphicon glyphicon-user'></i><i style='font-size:11px' class='glyphicon glyphicon-user'></i>&nbsp;<b><%= job.line_items.where.not(talent_id: nil).size %></b>
+						      <b>&middot;</b>&nbsp;发布于<%= time_ago_in_words(job.created_at) %>
+						      &nbsp;<b>&middot;</b>&nbsp;
+						      <% if job.line_items.find_by(status:"offer")%>
+						         Filled&nbsp;
+						      <% elsif job.line_items.find_by(status:"初面") or job.line_items.find_by(status:"最后面试")%>
+							 面试中&nbsp; 
+						      <% else %>
+							 等待简历&nbsp;
+						      <% end %>
+					      </td>
+					      <td><%= rating_for job, "job_rating" %></td>
+					    </table>
+					  </p>
+					  <p>
+					    <%= truncate(job.role,length:150) %>&nbsp;
+					    <%= link_to "详细内容",job_path(job),class: "xiangxi",style: 'color:#3b5893',target:"_blank" %>
+					  </p>
+				</td>
+	      </tr>
+	    </table>
+	  </div>
+  	</div><!-- end row -->
+      <% end %>
+  </div><!-- end col-lg-6-->
+</div><!-- end container -->

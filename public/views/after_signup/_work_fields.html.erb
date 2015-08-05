@@ -1,0 +1,48 @@
+<!--注意：所有的内容必须在一个div里，否则增加按钮失效-->
+<div>
+<br>
+<hr>
+	<%= f.label :employer, "公司名字" %>
+	<%= f.text_field :employer,class: "form-control" %>
+	
+
+	
+	<%= f.label :industry, "行业" %>
+	<%= f.text_field :industry,class: "form-control" %>
+	
+
+	<br>
+
+
+
+	
+	<%= f.label :join_date, "加入时间" %>
+	<%= f.date_select :join_date,discard_day:true,start_year:1980,class: "form-control", end_year:Date.today.year %>
+	<br><br>
+
+	
+	<%= f.label :leave_date, "离开时间" %>
+	<%= f.date_select :leave_date,discard_day:true,start_year:1980,class: "form-control",end_year:Date.today.year %>
+	
+	<br>
+	
+	<%= f.label :"在职" %>
+	<%= f.check_box :uptonow %>
+	
+	<br>
+	<%= f.label :title, "职位头衔" %>
+	<%= f.text_field :title,class: "form-control" %>
+	
+
+	
+
+	
+	<%= f.label :job_scope, "工作内容" %>
+	<%= f.text_area :job_scope,class: "form-control",rows:"3" %>
+	
+
+	
+	<%= f.hidden_field :_destroy %>
+	<%= link_to "删除工作经验", '#', class: "remove_fields pull-right" %>
+	
+</div>

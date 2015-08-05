@@ -1,0 +1,27 @@
+                    	  <div class='col-lg-6'>
+                          <%= f1.text_field :title,class: "form-control", placeholder: "当前职位" %>
+                        </div>
+
+                        <div class='col-lg-6'>
+                        </div>
+
+                        <div class='col-lg-12'>
+                          <% if @user.summaries.present? %>
+                            <h3>已经添加的个人经验</h3>
+                            <% @user.summaries.each do |summary| %>
+                              
+                              <%= summary.content %>
+                              <br />
+                            <% end %>
+                          <% end %>
+                        </div>
+
+                        <div class='col-lg-12'>
+                      	  <%= f1.fields_for :summaries,@user.summaries.build do |summary| %>
+                    	    <%= render 'summary_fields',f:summary %>
+                      	  <% end %>
+                          <%= link_to_add_fields "增加", f1, :summaries %>
+                        </div>
+
+                        <div class='col-lg-3'>
+                        </div>

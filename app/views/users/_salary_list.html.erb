@@ -1,0 +1,71 @@
+<div class='row'>
+  <div class='col-lg-8'>
+    <table>
+      <tr>
+            <td width='100px'>
+              基本月薪
+            </td>
+            <td>
+              <%= @user.base_salary.present? ? @user.base_salary : "待定" %>
+            </td>
+            <td width='20px' align='center'>
+              &times;
+            </td>
+            <td>
+              <%= @user.month_num.present? ? @user.month_num : 12 %>
+            </td>
+      </tr>
+      <tr>
+            <td>
+              住房津贴
+            </td>
+            <td>
+              <%= @user.housing.present? ? @user.housing : 12 %>
+            </td>
+      </tr>
+      <tr>
+            <td>
+              交通补助
+            </td>
+            <td>
+              <%= @user.transport.present? ? @user.transport : "待定" %>
+            </td>
+      </tr>
+      <tr>
+            <td>
+              <%= @user.stock.present? ? @user.stock : "待定" %>
+            </td>
+            <td>
+              <%= @user.stock_num.present? ? "#{@user.stock_num}股" : '0股' %>
+            </td>
+      </tr>
+      <tr>
+            <td>
+              续约奖
+            </td>
+            <td>
+              <%= @user.retention_bonus.present? ? @user.retention_bonus : 0 %>
+            </td>
+      </tr>
+      <tr>
+            <td>
+              期望年薪
+            </td>
+            <td>
+              <%= @user.expect_package.present? ? @user.expect_package : "待定" %>
+            <td>
+      </tr>
+      <tr>
+            <td>
+              期望月薪
+            </td>
+            <td>
+              <%= @user.expect_month_salary.present? ? @user.expect_month_salary : "待定" %>
+            </td>
+      </tr>
+    </table>
+    <hr>
+  </div>
+</div>
+
+      

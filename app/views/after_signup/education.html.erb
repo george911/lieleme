@@ -1,0 +1,93 @@
+<div class=""><!--Use .container-fluid for a full width container, spanning the entire width of your viewport.-->
+  <table style='width:100%'>
+    <tr style='height:44px;border-bottom:1px solid #cccccc'>
+      <td class='text-center' style='border-bottom:1px solid #cccccc;height:44px;'>
+        1 注册基本信息
+      </td>
+      <td style='border-bottom:1px solid #cccccc;'>
+        <%= image_tag("triangel-line.png")%>
+      </td>
+      <td class='text-center' style='border-bottom:1px solid #cccccc;height:44px;'>
+	2 邮件确认
+      </td>
+      <td style='border-bottom:1px solid #cccccc;'>
+        <%= image_tag("triangel-line.png")%>
+      </td>
+      <td class='text-center' style='border-bottom:1px solid #cccccc;'>
+        3 填写个人评价
+      </td>
+      <td style='border-bottom:1px solid #cccccc;width:14px'>
+        <%= image_tag("triangel-tail.png")%>
+      </td>
+      <td class='process-highlight text-center' style='border-bottom:1px solid #cccccc;'>
+        4 完善教育背景	
+      </td>
+      <td style='border-bottom:1px solid #cccccc;width:14px'>
+        <%= image_tag("triangel-green.png")%>
+      </td>
+      <td class='text-center' style='border-bottom:1px solid #cccccc;'>
+        5 输入工作履历
+      </td>
+      <td style='border-bottom:1px solid #cccccc;'>
+        <%= image_tag("triangel-line.png")%>
+      </td>
+      <td class='text-center' style='border-bottom:1px solid #cccccc;'>
+        6 撰写薪资要求	
+      </td>
+    </tr>
+  </table>
+    <section class="container"><!--Use .container for a responsive fixed width container.-->
+        <div class="container-page"> 
+            <div class="col-md-4" style='margin-top:50px'><!--col-md对应的Container width：970px -->
+                <div class='row'>
+                  <%= form_for @user,url: wizard_path,method: :put do |f| %>
+                    <% if @user.errors.any? %>
+                      <div id="error_explanation">
+                        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+                        <ul>
+                        <% @user.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+                    
+                    <div class="col-lg-12">
+                  	  <% if @user.educations.present? %>
+                  	    <h3>已经添加的教育背景:</h3>
+                          <% @user.educations.each do |education| %>
+                            <%= education.enter_school %>
+                            <%= education.leave_school %>
+                            <%= education.school %>
+                            <%= education.major %>
+                            <%= education.degree %>
+                          <% end %>
+                      <% end %>
+                    </div>
+
+                    <div class="col-lg-12 select">
+			    <!--<h3>添加学历背景</h3>-->
+                      <%= f.fields_for :educations,@user.educations.build do |education| %>
+                        <%= render 'education_fields', f:education %>
+                        
+                      <% end %>
+
+                      <%= link_to_add_fields "添加学历背景", f, :educations %>
+                    </div>
+
+                      
+                    <div class='col-lg-4'>
+                    </div>
+
+                    <div class='col-lg-4' style='padding-bottom:50px'>
+                    <%= f.submit "下一步",class: "btn btn-success btn-block" %>
+                    </div>
+                    
+                    <% end %>
+                  </div><!--end row-->
+                </div><!--end col-md-4-->
+
+            </div>
+        </section>
+    </div>

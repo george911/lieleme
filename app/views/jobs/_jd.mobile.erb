@@ -1,0 +1,27 @@
+    <div class='row'>
+      <div class='col-xs-12 faint'>
+      
+        <h4>职位描述</h4>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-12'>
+        <p ><%= @job.role.gsub(/\n/,'</p><p>').html_safe unless @job.role.blank? %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-12'>
+    	<hr>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-12 faint'>
+      
+        <h4>职位要求</h4>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-xs-12'>
+        <p ><%= @job.requirement.gsub(/\n/,'</p><p>').html_safe unless @job.requirement.blank? %>
+      </div>
+    </div>

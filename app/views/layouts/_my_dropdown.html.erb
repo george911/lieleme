@@ -1,0 +1,8 @@
+	             <a data-toggle="dropdown"><span style='color:white'><%= current_user.user_name unless current_user==nil %></span><span class="caret"></span></a>
+                     <ul class="dropdown-menu" role="menu">
+                       <li><a href="#">我的佣金</a></li>
+                       <li><a href="#">个人设置</a></li>
+                       <li class="divider"></li>
+                       <li class="dropdown-header">帮助中心</li>
+                       <li><a href="#"><%= link_to '退出',sign_out_path %></a></li>
+		     </ul>

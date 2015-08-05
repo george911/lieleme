@@ -1,0 +1,9 @@
+<table>
+	<tr>
+		<td ><%= link_to image_tag(current_user.avatar.url(:small),size: "80x80",class: "circle"), current_user %></td>
+		<td style='padding-left:10px'>
+		  <p style='margin-bottom:0px;font-size:16px'><%= current_user.user_name %></p>
+		  <p ><%= link_to "我的简历", current_user %></p>
+		</td>
+	</tr>
+</table>

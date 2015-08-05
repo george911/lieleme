@@ -1,0 +1,55 @@
+<% @educations.each do |education| %>
+  <%= form_for([@user,education],remote: true) do |f| %>
+	  <div class='row' style='margin-bottom:5px;'>
+		  	<div class='col-lg-3'>		  
+				<table>
+				  <tr >
+				    <td style='padding:5px'>
+				    		  <%= f.date_select :enter_school,discard_day:true,start_year:1980, end_year:Date.today.year %>
+					</td>
+				  </tr>
+				  <tr>
+				  	<td>
+						  ~&nbsp;<%= f.date_select :leave_school,discard_day:true,start_year:1980,class: "form-control small",end_year:Date.today.year %>
+					</td>
+				  </tr>
+				  <tr>
+				  	<td>
+						 <%= f.check_box :uptonow %>
+					</td>
+				  </tr>
+				</table>
+			</div>
+			<div class='col-lg-4'>
+				<table>
+				  <tr >
+				    <td style='padding:5px'>
+				    	<%= f.text_field :school,class: "form-control small" %>
+					</td>
+				  </tr>
+				  <tr>
+				  	<td style='padding:5px'>
+				  	  <%= f.text_field :degree, class: "form-control small" %>
+					</td>
+				  </tr>
+				  <tr>
+				  	<td style='padding:5px' colspan="2">
+				  	  <%= f.text_area :major, class: "form-control",rows: 2, cols: 30 %>
+					</td>
+				  </tr>
+				  <tr>
+				  	<td style='padding:5px'>
+				  	  <%= submit_tag "保存", class: "btn" %>
+					</td>
+				  </tr>
+				</table>
+
+						  
+			</div>
+
+	  </div>
+	  <hr>	  
+
+    <% end %>
+<% end %>
+

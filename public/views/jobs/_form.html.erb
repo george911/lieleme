@@ -1,0 +1,64 @@
+<div class="container-fluid"><!--Use .container-fluid for a full width container, spanning the entire width of your viewport.-->
+    <section class="container"><!--Use .container for a responsive fixed width container.-->
+        <div class="container-page"> 
+            <div class="col-md-4"><!--col-md对应的Container width：970px -->
+
+                <%= form_for @job do |f| %>
+                  <% if @job.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+                      <ul>
+                      <% @job.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+                  <div class="col-lg-6">
+                    <%= f.label :title %><br>
+                    <%= f.text_field :title,class: 'form-control' %>
+                  </div>
+                   <div class="col-lg-6">
+                    <%= f.label :city %><br>
+                    <%= f.text_field :city,class: 'form-control' %>
+                  </div>
+                  <div class="col-lg-12">
+                    <%= f.label :addr %><br>
+                    <%= f.text_field :addr,class: 'form-control' %>
+                  </div>
+                 
+                  <div class="col-lg-6">
+                    <%= f.label :industry %><br>
+                    <%= f.text_field :industry,class: 'form-control' %>
+                  </div>
+                  <div class="col-lg-6">
+                    <%= f.label :commission %><br>
+                    <%= f.number_field :commission,class: 'form-control' %>
+                  </div>
+                  <div class="col-lg-12 select">
+                    <%= f.label :concall_date %><br>
+                    <%= f.date_select :concall_date,class: 'form-control' %>
+                  </div>
+                  <div class="col-lg-12">
+                    <%= f.label :备注 %><br>
+                    <%= f.text_area :memo,class: 'form-control' %>
+                  </div>
+                  <div class="col-lg-12">
+                    <%= f.label :公司卖点和职位亮点 %><br>
+                    <%= f.text_area :company_info,class: 'form-control' %>
+                  </div>
+
+                  <!--为了留出和下面按钮的空隔-->
+                  <div class="form-group col-lg-3 " >
+                  </div>
+
+                  <div class="col-lg-12 ">
+                    <%= f.submit "继续",class: "btn btn-success" %>
+                  </div>
+                <% end %>
+            </div>
+          </div>
+      </section>
+</div>

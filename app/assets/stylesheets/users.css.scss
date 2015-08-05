@@ -1,0 +1,83 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.users {
+// 猎头的方形头像
+.img-square {
+  border-radius:3px;
+  border:1px solid #aaaaaa;
+  }
+.focus-job {
+  display:inline;
+  margin-right:5px;
+  float:left;
+  background-color: #f2f8f2;
+  font-color: #4f947e;
+  height: 20px;
+  border:1px solid #d0b6a4;
+  text-decoration: none;
+  font-size: 10px;
+  text-align:center;
+  margin-bottom:5px;
+  border-radius:3px;}
+
+  background: linear-gradient(#fefefe,#d5dae9);
+//background: #e9eaed;
+
+// 设置_job_list
+// 橘色的按钮
+.btn-orange {
+  border-radius:2px;
+  background-color: #ffeada;
+  border:1px solid #d0b6a4;
+  font-size:10px;
+  padding:3px 3px 3px 3px;}
+// 设置绿色的小按钮
+.green_button a:link{
+  border:1px solid #d0b6a4;
+  float:left;
+  background-color: #f2f8f2;
+  font-color: #4f947e;
+  height: 20px;
+  width: 40px;
+  border:1px solid #d0b6a4;
+  text-decoration: none;
+  font-size: 10px;
+  text-align:center;
+  margin-bottom:5px;
+  border-radius:3px;}
+
+p.green_title {
+  color: #007722;
+  font-size: 14px;}
+
+// 先找到类再找tag而不是相反
+.review select{
+  height: 30px;}
+.salary .form-control {
+  width: 150px;
+  height: 30px;}
+.basic .form-control {
+  width: 150px;
+  height: 30px;}
+
+// 薪资和基本信息现实的表格不显示bullet
+li {
+  list-style-type: none;}
+
+.form-control .small {
+  height: 30px;}
+
+
+// 头像
+.avatar-refer-talent {
+  border-radius:5px;
+  border: 1px solid #eeeeee;}
+.avatar-refer-poster {
+  border-radius:3px;}
+.avatar-index {
+  border-radius:6px;
+  border:1px solid #eeeeee;
+  }
+
+}

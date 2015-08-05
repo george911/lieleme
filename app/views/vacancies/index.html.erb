@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<!--========================================================= -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <!--/Users/George/site2.0/app/views/devise/registrations/new.html.erb 要用到勾的图像-->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class='col-lg-3' id='top' style='padding-left:60px;padding-right: 60px'>
+      <div class='row text-center'>
+        <h2 >George</h2>
+        <h4>将生命浪费在美好的事物上</h4>
+      </div>
+      <br>
+      <div class='row'>
+        <h4>职位</h4>
+        <table class='table table-hover' width='70%'>
+          <tr>
+            <td><a href='#CTO'>RubyOnRails开发总监</a></td>
+          </tr>
+          <tr>
+            <td><a href='#ruby_engineer'>RubyOnRails高级攻城狮</a></td>
+          </tr>   
+          <tr>
+            <td><a href='#how_to_apply'>如何应聘</a></td>
+          </tr>
+        </table>
+        <a href='#top' style='position: fixed; padding-left:150px;bottom: 20px;'>回到顶部</a>
+      </div>
+    </div>
+    <div class='col-lg-9' style='background-color:#eeeeee'>
+      <div style='background-color:#ffffff;margin-right:150px'>
+        <h2 class='text-center' style='margin-top:0px;padding-top:30px'>和George一起工作</h2><!--margin-top只有加在这里顶部才没有空隙-->
+        <div class='row' style='margin:70px;line-height:170%;font-size:20px;'>
+            关于猎友会
+            <br>
+            <br>
+            故事从一个因为猎头而抓狂的Ruby工程师说起:
+            自从他在网站上贴出自己的简历后, 每天有10多个猎头给他推荐PHP岗位,而且薪资也相去甚远。“难道专业的猎头就这么少么?”
+            <br>
+            <br>
+            没错，这就是我们做猎友会的初心。中国首家猎头O2O平台,一个基于数据挖掘的猎头推荐平台,向HR和求职者推荐靠谱的猎头帮助他们完成招聘和求职。
+            <br>
+            <br>
+            我们关心的是你的才华而不是公司的要求<br>
+            我们不等职位空缺而是倡导向line manager进行Key skill selling<br>
+            我们提供的不仅仅是猎头,我们提供的是帮助你一步步提升自己身价的经纪人<br>
+
+        
+        </div>
+        <div class='row' style='margin:70px;line-height:170%;font-size:20px;'>
+         你将获得的福利
+            <br><br>
+          <div class='col-lg-8'>
+            <ul style='padding-left:0px'>
+            <li style='font-size:15px;'><span style='font-size:20px'>分享会—Rails大牛，我们将请他们来做技术交流</sapn></li>
+            <li style='font-size:15px'><span style='font-size:20px'>每年春季,额外增加1小时/天的运动假</sapn></li>
+            <li style='font-size:15px'><span style='font-size:20px'>免费健身房</sapn></li>
+            <li style='font-size:15px'><span style='font-size:20px'>乒羽俱乐部</sapn></li>
+            <li style='font-size:15px'><span style='font-size:20px'>日本冲绳潜水5日培训 or 泰国7日瑜伽培训，都将获得相应执照</sapn></li>
+            <li style='font-size:15px'><span style='font-size:20px'>人才中介师培训, 让你体验当兼职猎头的感觉(以及额外收入)</sapn></li>
+            <li style='font-size:15px'><span style='font-size:20px'>买书基金</sapn></li>
+            <li style='font-size:15px'><span style='font-size:20px'>免费公寓</sapn></li>
+            </ul>
+          </div>
+          <div class='col-lg-4'>
+            <p align='center'>
+              <%= image_tag("vacancies/分享会.png",size: "240x160") %></p>
+            <p align='center'>
+              <%= image_tag("vacancies/outing.png",size: "240x160") %></p>
+          </div>
+        </div>
+        <div class='row' style='margin:70px;line-height:170%;font-size:20px;'>
+          一个Mentor
+          <br><br>
+          <div class='col-lg-8'>
+            <ul style='padding-left:0px'>
+              <li style='font-size:15px'><span style='font-size:20px'><span>帮你融入团队</span></li>
+              <li style='font-size:15px'><span style='font-size:20px'><span>教你工作流程</span></li>
+              <li style='font-size:15px'><span style='font-size:20px'><span>传授独门秘籍</span></li>
+              <li style='font-size:15px'><span style='font-size:20px'><span>请你吃顿大餐</span></li>
+            </ul>
+          </div>
+          <div class='col-lg-4'>
+            <p align='center'>
+              <%= image_tag("vacancies/mentor.png",size: "240x160") %></p>
+          </div>
+        </div>
+
+        <div class='row' style='margin:70px;line-height:170%;font-size:20px;'>
+          一些挑战
+          <br><br>
+          <div class='col-lg-12'>
+            <ul style='padding-left:0px'>
+              <li style='font-size:15px'><span style='font-size:20px'>Hackthon: 每年一次, 35小时,小组协作, 高效完成一款产品</span></li>
+              <li style='font-size:15px'><span style='font-size:20px'>Outing: 草原负重徒步30公里或者骑行爬上垂直500米的山坡</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class='row' style='margin:70px;line-height:170%;font-size:20px;'>
+          工作环境
+          <br><br>
+          <div class='col-lg-12'>
+            <ul style='padding-left:0px'>
+	            <li style='font-size:15px'><span style='font-size:20px'>自由的工作时间</span></li>
+              <li style='font-size:15px'><span style='font-size:20px'>13寸Retina Macbook Pro</span></li>
+              <li style='font-size:15px'><span style='font-size:20px'>Dell 23寸显示屏</span></li>
+              <li style='font-size:15px'><span style='font-size:20px'>人体工学座椅</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class='row'id='how_to_apply' style='margin:70px;line-height:170%;font-size:20px;'>
+          如何应聘
+          <br><br>
+          <div class='col-lg-12'>
+            如果你觉得就是我要找的人, 那么马上发邮件给我: george.qiao[AT]lieyohui[DOT]com
+            <br><br>
+            至于email里写什么，完全由你自行决定。你要做的只有一件事，就是想办法打动我。
+            <br><br>
+            跟我一起工作有什么好处呢？我觉得最大的好处是，你可以一直从我身上看到一个不知疲惫的学习者的影子。你、我、每个人都是如此的微不足道，而我们存在的意义，就是在自己微不足道的空间里，学习并创造一些有价值的东西。
+            <br><br>
+            跟我一起工作有什么坏处呢？最大的坏处是，我看中的事情都是长期投资，至少需要耗费3~5年的全心投入才会有所回报。虽然追随某些潮流可以短时间成功，但那不是我的兴趣，我只关注和投资那些真正有价值的事情，并且愿意耐心等待结果。如果你是个没有耐心的人，或者你误以为跟着我就能很快发达，那么你一定会失望的。
+            <br><br>
+            如果你确定你的email已被我收到，但是我3天都没有回复你，那么抱歉，这说明你的email没有足够打动我，而我又不好意思打击你的自尊心。
+
+          </div>
+        </div>
+
+        <div class='row' style='margin-left:70px;margin-right:70px;font-size:20px;'>
+          <hr>
+        </div>
+
+        <div class='row' id='CTO' style='margin-left:70px;margin-right:70px;line-height:170%;font-size:20px;'>
+          <h3>RubyOnRails开发总监</h3>
+          <br>
+          <div style='margin-left:0px'>
+            关键字: ROR+JQuery/AnglarJS+创业热情+上海
+            <br>
+            <br>
+            薪资: 面议
+            <br>
+            <br>
+            从技术上来说这个项目有点像一个"变异"的LinkedIn, 现在已经有了简历和职位浏览,推荐和应聘以及其他一些功能,后续还有社交等功能等着你和你的团队去开发。前端用的是Bootstrap, 但是也有很多需要自己写的Javascript, 而且我们希望能够替换成自己的CSS库，所以你必须精通JQuery或者AnglarJS其中的一种。
+            你会参与到数据库集成，搜索引擎, 支付模块, 网络安全，网站发布的全套开发流程, 这也正是之所以我们要全栈工程师的原因。
+            <br>
+            <br>
+            岗位要求: Rails开发经验我们不做限定, 但是如果可能,请提供stackoverflow和github的账号让我们看看你的项目。Javascript经验是必须的，项目方面我们希望你做过1-2个完整的实际大中型项目, 如果涵盖了前面的若干方面那就更好了。
+            <br>
+            <%= image_tag("vacancies/CTO.png",size:'450x281') %>
+          </div>
+        </div>
+
+        <div class='row' style='margin-left:70px;margin-right:70px;font-size:20px;'>
+          <hr>
+        </div>
+
+        <div class='row' id='ruby_engineer' style='margin-left:70px;margin-right:70px;line-height:170%;font-size:20px;'>
+          <h3>RubyOnRails高级工程师</h3>
+          <br>
+          <div style='margin-left:0px'>
+            关键字: ROR+JQuery/AnglarJS+创业热情+上海
+            <br>
+            <br>
+            薪资: 面议
+            <br>
+            <br>
+            岗位要求: 至少2年RubyOnRails开发经验。你要知道的是这个职位的工作内容是开发总监的子集(参看<a href='#CTO'>ROR开发总监</a>),所以相关的诸如JQery等工作经验都是我们喜欢的。我们是一家创业型的公司,所以希望你也有足够的创业热情。
+            <br><br>
+
+          </div>
+        </div>
+
+
+      </div>
+      
+    </div>
+</body>
