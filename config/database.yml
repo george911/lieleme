@@ -9,7 +9,6 @@ development:
   pool: 5 
   prepared_statements: false
   host: localhost
-  username: mac
   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
@@ -22,7 +21,6 @@ test: &test
   prepared_statements: false
   host: localhost
   username: mac
-  timeout: 5000
 
 production:
   adapter: postgresql
@@ -30,7 +28,6 @@ production:
   database: site2
   username: mac
   pool: 5
-  timeout: 5000
 
 cucumber:
   <<: *test
