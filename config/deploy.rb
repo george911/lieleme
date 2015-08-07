@@ -2,8 +2,8 @@ require 'net/ssh/proxy/command'
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-server "deploy@45.56.76.179", roles: [:app, :web, :db], :primary => true  
-set :application, 'lieyohui'
+server "deploy@123.57.191.137", roles: [:app, :web, :db], :primary => true  
+set :application, 'lieleme'
 set :repo_url, 'git@github.com:george911/lieyohui.git'
 set :rbenv_ruby, '2.0.0-p481'
 set :user, "deploy"

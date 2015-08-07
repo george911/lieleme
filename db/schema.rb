@@ -17,12 +17,12 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
-    t.string   "namespace",     limit: 255
+    t.string   "namespace"
     t.text     "body"
-    t.string   "resource_id",   limit: 255, null: false
-    t.string   "resource_type", limit: 255, null: false
+    t.string   "resource_id",   null: false
+    t.string   "resource_type", null: false
     t.integer  "author_id"
-    t.string   "author_type",   limit: 255
+    t.string   "author_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,12 +32,12 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -52,14 +52,14 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
     t.integer  "rateable_id"
-    t.string   "rateable_type", limit: 255
-    t.float    "avg",                       null: false
+    t.string   "rateable_type"
+    t.float    "avg",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "bosses", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title"
     t.integer  "job_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20150728115410) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
-    t.string   "author",     limit: 255
+    t.string   "author"
     t.boolean  "top"
     t.integer  "job_id"
     t.integer  "user_id"
@@ -81,11 +81,11 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "educations", force: :cascade do |t|
-    t.string   "school",       limit: 255
+    t.string   "school"
     t.date     "enter_school"
     t.date     "leave_school"
-    t.string   "major",        limit: 255
-    t.string   "degree",       limit: 255
+    t.string   "major"
+    t.string   "degree"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   add_index "educations", ["user_id"], name: "index_educations_on_user_id", using: :btree
 
   create_table "experiences", force: :cascade do |t|
-    t.string   "skill",      limit: 255
+    t.string   "skill"
     t.integer  "year"
     t.integer  "job_id"
     t.datetime "created_at"
@@ -105,15 +105,15 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   add_index "experiences", ["job_id"], name: "index_experiences_on_job_id", using: :btree
 
   create_table "inquiries", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.string   "employer",     limit: 255
-    t.string   "title",        limit: 255
-    t.string   "mobile",       limit: 255
-    t.string   "email",        limit: 255
+    t.string   "name"
+    t.string   "employer"
+    t.string   "title"
+    t.string   "mobile"
+    t.string   "email"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "inquiry_type", limit: 255
+    t.string   "inquiry_type"
   end
 
   create_table "interviews", force: :cascade do |t|
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20150728115410) do
     t.integer  "sender_id"
     t.integer  "job_id"
     t.boolean  "accept"
-    t.string   "address",      limit: 255
+    t.string   "address"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -136,9 +136,9 @@ ActiveRecord::Schema.define(version: 20150728115410) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "accept"
-    t.string   "job_title",    limit: 255
-    t.string   "job_employer", limit: 255
-    t.string   "status",       limit: 255, default: "active"
+    t.string   "job_title"
+    t.string   "job_employer"
+    t.string   "status",       default: "active"
   end
 
   create_table "job_rates", force: :cascade do |t|
@@ -150,51 +150,42 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   add_index "job_rates", ["job_id"], name: "index_job_rates_on_job_id", using: :btree
 
   create_table "jobs", force: :cascade do |t|
-    t.string   "title",        limit: 255
-    t.string   "addr",         limit: 255
-    t.string   "city",         limit: 255
-    t.string   "industry",     limit: 255
+    t.string   "title"
+    t.string   "addr"
+    t.string   "city"
+    t.string   "industry"
     t.integer  "commission"
     t.text     "role"
     t.text     "requirement"
     t.integer  "base_pay"
     t.integer  "month"
-    t.string   "bonus",        limit: 255
+    t.string   "bonus"
     t.integer  "allowance"
-    t.string   "stock",        limit: 255
+    t.string   "stock"
     t.integer  "stock_num"
     t.date     "concall_date"
-    t.string   "peer",         limit: 255
+    t.string   "peer"
     t.text     "memo"
     t.text     "company_info"
     t.integer  "work_year"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "employer",     limit: 255
-    t.string   "status",       limit: 255, default: "active"
+    t.string   "employer"
+    t.string   "status",       default: "active"
     t.integer  "poster_id"
     t.boolean  "interview"
   end
 
   create_table "line_items", force: :cascade do |t|
-    t.string   "mobile",                 limit: 255
-    t.string   "email",                  limit: 255
-    t.string   "name",                   limit: 255
-    t.string   "status",                 limit: 255
+    t.string   "mobile"
+    t.string   "email"
+    t.string   "name"
+    t.string   "status"
     t.integer  "user_id"
     t.integer  "job_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "comment"
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
     t.text     "feedback"
     t.integer  "sender_id"
     t.integer  "recipient_id"
@@ -202,7 +193,6 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   end
 
   add_index "line_items", ["job_id"], name: "index_line_items_on_job_id", using: :btree
-  add_index "line_items", ["reset_password_token"], name: "index_line_items_on_reset_password_token", unique: true, using: :btree
   add_index "line_items", ["user_id"], name: "index_line_items_on_user_id", using: :btree
 
   create_table "microposts", force: :cascade do |t|
@@ -218,8 +208,8 @@ ActiveRecord::Schema.define(version: 20150728115410) do
 
   create_table "overall_averages", force: :cascade do |t|
     t.integer  "rateable_id"
-    t.string   "rateable_type", limit: 255
-    t.float    "overall_avg",               null: false
+    t.string   "rateable_type"
+    t.float    "overall_avg",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -227,9 +217,9 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   create_table "rates", force: :cascade do |t|
     t.integer  "rater_id"
     t.integer  "rateable_id"
-    t.string   "rateable_type", limit: 255
-    t.float    "stars",                     null: false
-    t.string   "dimension",     limit: 255
+    t.string   "rateable_type"
+    t.float    "stars",         null: false
+    t.string   "dimension"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -239,10 +229,10 @@ ActiveRecord::Schema.define(version: 20150728115410) do
 
   create_table "rating_caches", force: :cascade do |t|
     t.integer  "cacheable_id"
-    t.string   "cacheable_type", limit: 255
-    t.float    "avg",                        null: false
-    t.integer  "qty",                        null: false
-    t.string   "dimension",      limit: 255
+    t.string   "cacheable_type"
+    t.float    "avg",            null: false
+    t.integer  "qty",            null: false
+    t.string   "dimension"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -251,8 +241,8 @@ ActiveRecord::Schema.define(version: 20150728115410) do
 
   create_table "read_marks", force: :cascade do |t|
     t.integer  "readable_id"
-    t.string   "readable_type", limit: 255, null: false
-    t.integer  "user_id",                   null: false
+    t.string   "readable_type", null: false
+    t.integer  "user_id",       null: false
     t.datetime "timestamp"
   end
 
@@ -270,7 +260,7 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
-    t.string   "author",     limit: 255
+    t.string   "author"
     t.integer  "author_id"
     t.boolean  "top"
     t.text     "body"
@@ -278,8 +268,8 @@ ActiveRecord::Schema.define(version: 20150728115410) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "employer",   limit: 255
-    t.string   "title",      limit: 255
+    t.string   "employer"
+    t.string   "title"
   end
 
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
@@ -307,7 +297,7 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   add_index "service_rates", ["line_item_id"], name: "index_service_rates_on_line_item_id", using: :btree
 
   create_table "subordinates", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title"
     t.integer  "num"
     t.integer  "job_id"
     t.datetime "created_at"
@@ -337,49 +327,49 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   add_index "talent_pools", ["talent_id"], name: "index_talent_pools_on_talent_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "mobile",                 limit: 255
-    t.string   "user_name",              limit: 255
-    t.string   "true_name",              limit: 255
-    t.string   "user_type",              limit: 255
+    t.string   "mobile"
+    t.string   "user_name"
+    t.string   "true_name"
+    t.string   "user_type"
     t.integer  "base_salary"
     t.integer  "month_num"
     t.integer  "bonus"
     t.integer  "housing"
     t.integer  "transport"
-    t.string   "stock",                  limit: 255
+    t.string   "stock"
     t.integer  "stock_num"
     t.integer  "retention_bonus"
     t.integer  "expect_package"
     t.integer  "expect_month_salary"
     t.date     "birthday"
-    t.string   "city",                   limit: 255
-    t.string   "title",                  limit: 255
+    t.string   "city"
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.string   "confirmation_token",     limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email",      limit: 255
-    t.string   "avatar_file_name",       limit: 255
-    t.string   "avatar_content_type",    limit: 255
+    t.string   "unconfirmed_email"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.string   "industry",               limit: 255
-    t.string   "focus_job1",             limit: 255
-    t.string   "focus_job2",             limit: 255
-    t.string   "focus_job3",             limit: 255
+    t.string   "industry"
+    t.string   "focus_job1"
+    t.string   "focus_job2"
+    t.string   "focus_job3"
     t.integer  "bank_id"
-    t.string   "verify",                 limit: 255
+    t.string   "verify"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -401,9 +391,9 @@ ActiveRecord::Schema.define(version: 20150728115410) do
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
   create_table "works", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "employer",   limit: 255
-    t.string   "industry",   limit: 255
+    t.string   "title"
+    t.string   "employer"
+    t.string   "industry"
     t.date     "join_date"
     t.date     "leave_date"
     t.text     "job_scope"
@@ -415,4 +405,5 @@ ActiveRecord::Schema.define(version: 20150728115410) do
 
   add_index "works", ["user_id"], name: "index_works_on_user_id", using: :btree
 
+  add_foreign_key "microposts", "users"
 end

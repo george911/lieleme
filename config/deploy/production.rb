@@ -3,10 +3,10 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
- server '45.56.76.179', user: 'deploy', roles: %w{app db web}
+ server '123.57.191.137', user: 'deploy', roles: %w{app db web}
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
-set :nginx_server_name, '45.56.76.179'
+set :nginx_server_name, '123.57.191.137'
 
 
 # role-based syntax
@@ -17,9 +17,9 @@ set :nginx_server_name, '45.56.76.179'
 # property set. Specify the username and a domain or IP for the server.
 # Don't use `:all`, it's a meta role.
 
-role :app, %w{deploy@45.56.76.179}
-role :web, %w{deploy@45.56.76.179}
-role :db,  %w{deploy@45.56.76.179}
+role :app, %w{deploy@123.57.191.137}
+role :web, %w{deploy@123.57.191.137}
+role :db,  %w{deploy@123.57.191.137}
 
 
 

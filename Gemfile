@@ -1,6 +1,6 @@
 # Ruby通过brew install ruby安装,rails通过gem 'rails','xxx'安装
-# source 'http://ruby.taobao.org'
-source 'http://rubygems.org'
+source 'http://ruby.taobao.org'
+# source 'http://rubygems.org'
 
 gem 'acts_as_votable', '~> 0.10.0'
 
