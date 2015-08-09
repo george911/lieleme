@@ -20,7 +20,7 @@ test: &test
   pool: 5 
   prepared_statements: false
   host: localhost
-  username: mac
+#  username: mac
 
 production:
   adapter: postgresql

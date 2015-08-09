@@ -70,38 +70,59 @@
 </div>
 </div>
 </section>
-<section >
-    <div>
-	    <h1 align='center'style='color:#f48260'>这里的世界很精彩</h1>
-    </div>
-    <% if @offers != nil %>
-     <div id ='offer' style='float:right;margin:0 auto;'>
-      <table>
-        <tr>
-		<% cache(action:'show',action_suffix:'offers') do %>
-		<% @offers.order('created_at asc').first(7).each_with_index do |f,index| %>
-       	 
-          <td class=<%= cycle("td_odd","td_even") %> style='padding-top:15px' >
-        	  
-        	      <% if f.recipient != nil %>
-        	        <%= link_to image_tag(f.recipient.avatar.url(:medium),size:"100x100", class: " img-circle"), user_path(f.recipient),target: :_blank %>
-        	        <h4 align='center' style='font-family:"Microsoft Yahei",微软雅黑,arival;color:#6f6f6f'>
-                    <%= f.recipient.user_name %></h4>
-        	        <h4 align='center' style='color:#6f6f6f'>
-				            <span style='font-size:10px'>成功猎取</span>
-                    <%= f.job.title %>&nbsp;&middot;&nbsp;<%= f.job.commission %></h4>
-                <% end %>            
-          </td>
-        <% end %>
-        <% end %>
-        </tr>
-      </table>
-     </div>
-    <% end %>
+<section style='background:#f0f3f6'>
+      <div class="row"><!--加了row才能让section之间没有gap-->
+          <div class="board">
 
-    <div class='col-lg-12'>
-      <h1 align='center' style='color:#f48260'>你的精彩在哪里</h1>
-    </div>
+              <div>
+                <h1 align='center'style='color:#f48260'>这里的世界很精彩</h1>
+              </div>
+              <% if @offers != nil and @first_offer != nil %>
+              <div>
+                <div class='col-md-5' style='padding-left:80px'>
+	                 
+	                   <% @offers.order('created_at asc').first(15).each_with_index do |f,index| %>
+                      <div class='col-md-4'>  
+                 	      <% if f.recipient != nil %>
+                 	        <%= link_to image_tag(f.sender.avatar.url(:small),size:"60x60", class: " img-circle"), root_path(offer_id:f.id),remote:true %>
+                        <% end %>            
+               	      </div> 
+                 	  <% end %>
+                </div>
+                <div id='popover' class='col-md-6 well arrow_box' style=''>
+                    <div style=''>
+                      <div class='row'>
+                        <div class='col-md-3' style='padding:0px'>
+			                    
+				                    <%= link_to image_tag(@first_offer.sender.avatar.url(:small),size:"60x60", class: " img-circle"), user_path(@first_offer.sender),target:"_blank",style:                 "padding-left:0px" %>
+			                 
+                        </div>
+                        <div class='col-md-9' style='padding:0px'>
+                            <li style='padding-top:10px;list-style:none;font-size:15px;color:#7b91a8'><%= @first_offer.sender.user_name %>&nbsp;<%= @first_offer.sender.title %></li>
+                            <li style='padding-top:5px;list-style:none;font-size:15px;color:#7b91a8'>在猎了么完成了<%= @first_offer.sender.offers.size %>个offer,&nbsp;最近成了<%= @first_offer.sender.offers.where("created_at >= :half_year_before",{half_year_before:6.months.ago}).size %>单</li>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class='row'>
+                        <div class='col-md-12'>
+                          <% @first_offer.sender.offers.order("created_at asc").first(3).each do |offer| %>
+                            <li style='padding-top:15px;list-style:none;font-size:15px;color:#7b91a8'>
+                              <%= link_to "#{offer.job.title}",job_path(offer.job), target:"_blank" %>职位于<%=offer.updated_at.strftime("%m-%d") %>获得offer</li>
+                          <% end %>
+                        </div>
+                      </div>  
+                    </div>
+                </div>
+              
+              </div>
+              <% end %>
+
+              <div class='col-lg-12'>
+                <h1 align='center' style='color:#f48260'>你的精彩在哪里</h1>
+              </div>
+</div>
+</div>
+   
 
 </section>
 

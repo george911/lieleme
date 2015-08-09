@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     get 'my_referals',to:'home#my_referals'
     get 'my_talents',to:'home#my_talents'
     get 'my_jobs',to:'home#my_jobs'
-    patch 'email_multiple', to:'home#email_multiple'
+    post 'email_multiple', to:'home#email_multiple'
     post 'send_email', to:'home#send_email'
 
 

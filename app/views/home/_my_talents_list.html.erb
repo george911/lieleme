@@ -1,5 +1,5 @@
 <%= form_tag email_multiple_path,id: "email" do %>
-    <%= submit_tag "envelope.png",style:"padding: 10px;background-color:transparent;border:0px" %>
+    <%= submit_tag "群发",style:"padding-top:5px;margin-left:650px;background-color:transparent;border:0px" %>
 <br><br>
 <div class='panel panel-primary'>
   <div style='height:50px' class='panel-heading'>
@@ -27,7 +27,7 @@
 		      <%= link_to image_tag(f.avatar.url, size:'30x30',class: 'img-circle'),user_path(id:f.id),target:"_blank",id:"talent_#{f.user_name}" %>
 	      </td>
 	      <td id='user_<%=f.id %>'>
-		<a type="button" id="popup_<%=f.id%>" tabindex="0" data-trigger="hover" data-container="body" title="联系方式" data-toggle="popover" data-placement="top" data-content="<%= "#{f.email} #{f.mobile}"%>">
+		<a type="button" id="popup_<%=f.id%>" tabindex="0" data-trigger="hover" data-container="body" title="" data-toggle="popover" data-placement="top" data-content="<%= "#{f.email} #{f.mobile}"%>">
 	          <%= f.user_name %></a>
 	          <% if f.bank_id == current_user.id %>
 		    <i style='color:red' class='glyphicon glyphicon-star'></i>

@@ -1,0 +1,20 @@
+                   <div style=''>
+                      <div class='row'>
+                        <div class='col-md-3' style='padding:0px'>
+                            <%= link_to image_tag(@offer.sender.avatar.url(:small),size:"60x60", class: " img-circle"), user_path(@offer.sender),target:"_blank",style:"padding-left:0px" %>
+                        </div>
+                        <div class='col-md-9' style='padding:0px'>
+                            <li style='padding-top:10px;list-style:none;font-size:15px;color:#7b91a8'><%= @offer.sender.user_name %>&nbsp;<%= @offer.sender.title %></li>
+                            <li style='padding-top:5px;list-style:none;font-size:15px;color:#7b91a8'>在猎了么完成了<%= @offer.sender.offers.size %>个offer,&nbsp;最近成了<%= @offer.sender.offers.where("created_at >= :half_year_before",{half_year_before:6.months.ago}).size %>单</li>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class='row'>
+                        <div class='col-md-12'>
+                          <% @offer.sender.offers.order("created_at asc").first(3).each do |offer| %>
+                            <li style='padding-top:15px;list-style:none;font-size:15px;color:#7b91a8'>
+                              <%= link_to "#{offer.job.title}",job_path(offer.job), target:"_blank" %>职位于<%=offer.updated_at.strftime("%m-%d") %>获得offer</li>
+                          <% end %>
+                        </div>
+                      </div>  
+                    </div>
