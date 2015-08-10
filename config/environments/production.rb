@@ -10,7 +10,7 @@ config.action_mailer.delivery_method = :smtp
 	}
   # Settings specified here will take precedence over those in config/application.rb.
   # Settings specified here will take precedence over those in config/application.rb.
-  # heroku css setting
+  I18n.enforce_available_locales = false
   config.cache_classes = true
   config.serve_static_assets = true
 
