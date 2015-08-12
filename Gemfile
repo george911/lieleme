@@ -82,7 +82,8 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'cancan'
 
 # 用来使用SCSS等
-gem 'sprockets' 
+# gem 'sprockets' 
+gem 'sprockets', '~> 2.8'
 
 # 用来做rating
 gem 'ratyrate' # 这个是主力
