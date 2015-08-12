@@ -33,7 +33,7 @@
   <%= render 'layouts/search_tips' %>
 
   <!--navbar-inverse设置bar的颜色是黑色-->
-  <nav class="navbar navbar-color navbar-fixed-top" style="<%= "background:transparent" unless controller.controller_name != "front" %>">
+  <nav class="navbar navbar-color navbar-fixed-top" style="<%= (controller.controller_name == "front" and not user_signed_in?) ? "background: transparent" : "background: #3b5893" %>">
   <%= render 'layouts/logo.html.erb' %> 
       <div class="container">
         <div class="navbar-header">       

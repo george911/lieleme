@@ -3,16 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .front {
-.nav_bar-color {
-  background: solid transparent;
-    
-}
 header {
     position: relative;
     width: 100%;
     min-height: auto;
     text-align: center;
     color: #fff;
+// css用到的图片原件要放到public/assets下面
     background-image: url(header.jpg);
     background-position: center;
     -webkit-background-size: cover;
