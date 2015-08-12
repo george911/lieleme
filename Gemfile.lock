@@ -473,7 +473,7 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq
   spring
-  sprockets
+  sprockets (~> 2.8)
   therubyracer
   turbolinks
   twitter-bootstrap-rails!
