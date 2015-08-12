@@ -48,7 +48,8 @@ html,body {
   }
 // 设置顶端颜色条
 .navbar-color {
-  background: #3b5893;}
+// background要用#6个16进制数表示颜色才能成功
+background: #3b5893 }
 
 // 职位列表前面的红旗
 .well {

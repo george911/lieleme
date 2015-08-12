@@ -14,20 +14,17 @@
 //= require jquery.turbolinks
 //= require jquery-ui
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require_tree .
 //  删除 require bootstrap-sprockets
 //= require turbolinks
 //= require jquery.raty
 //= require ratyrate
 // //= require letsrate
-//= require twitter/bootstrap
 
 //一定要放在底部
 //= require moment
 //= require bootstrap-datetimepicker
 
-// back
 $(function(){
   $('#selectAll').click(function() {
   if (this.checked) {
@@ -58,7 +55,6 @@ $(window).load(function() {
    // });
 // });
 
-// bootstrap dropdown
 $(function () {
 	  $('[data-toggle="popover"]').popover()
 })

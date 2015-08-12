@@ -3,6 +3,78 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .front {
+.nav_bar-color {
+  background: solid transparent;
+    
+}
+header {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    text-align: center;
+    color: #fff;
+    background-image: url(header.jpg);
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+.modal-content {
+  text-align: left;
+  color: #000000;
+}
+.modal-header {
+    background-color:#f05f40;
+}
+header .header-content {
+    position: relative;
+    width: 100%;
+    padding: 150px 15px;
+    text-align: center;
+}
+
+header .header-content .header-content-inner h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 700;
+    color: rgba(255,255,255,.7);
+}
+
+header .header-content .header-content-inner p {
+    margin-bottom: 50px;
+    font-size: 16px;
+    font-weight: 300;
+    padding-top: 10px;
+    color: rgba(255,255,255,.7);
+}
+
+
+.btn-primary {
+    border-color: #f05f40;
+    color: #fff;
+    background-color: #f05f40;
+
+}
+
+
+
+
+.btn-primary .badge {
+    color: #f05f40;
+    background-color: #fff;
+}
+
+
+
+.btn-xl {
+    padding: 15px 30px;
+        border-color: #f05f40;
+    color: #fff;
+    background-color: #f05f40;
+
+}
+
 font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 .arrow_box {
     position: relative;
