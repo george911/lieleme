@@ -17,22 +17,30 @@
   <div class='row'>
     <div class='col-lg-3'>
       <table>
-        <tr><td><strong>坐标:</strong></td><td><%= @job.city %> | <%= @job.addr %></td></tr>
+        <% if @job.city.present? or @job.addr.present? %>
+	      <tr><td><strong>坐标:</strong></td><td><%= @job.city %>&nbsp;<%= @job.addr %></td></tr>
+        <% end %>
         <tr><td><strong>行业:</strong></td><td><%= @job.industry.present? ? @job.industry : '面议' %></td></tr>
 	<% if @job.base_pay != 0 %>
 	  <tr><td><strong>年薪:</strong></td><td><%= @job.base_pay.present? ? "#{@job.base_pay}人民币 x  #{@job.month}" : '面议' %></td></tr>
         <% end %>
         <tr><td><strong>奖金:</strong></td><td><%= @job.bonus.present? ? "#{@job.bonus} 人民币" : '面议' %></td></tr>
         <tr><td width='60px'><strong>发布时间:</strong></td><td><%= @job.created_at.strftime("%Y-%m-%d") %></td></tr>
-        <tr><td><strong>最后回复:</strong></td><td>2014-10-20</td></tr>
-        <tr><td><strong>备忘:</strong></td><td><%= @job.memo %></td></tr>
+	<tr><td><strong>最后更新:</strong></td><td><%= @job.line_items.order("updated_at asc").first.updated_at.strftime("%Y-%m-%d") %></td></tr>
+	<% if @job.memo.present? %>
+		<tr><td><strong>备忘:</strong></td><td><%= @job.memo %></td></tr>
+	<% end %>
       </table>
     </div><!--cl-lg-3-->
  
     <div class='col-lg-4'>
-      <p><span style='font-size:35px;font-family:Georgia;color:#fa6464'><%= @job.commission %></span><span style='font-size:10px;'>现金推荐奖</span></p>
-      <p>经验要求:<%= @job.work_year %>年</p>
-      <table>
+      <%= hidden_div_if @job.commission.blank? do %>
+	      <p><span style='font-size:35px;font-family:Georgia;color:#fa6464'><%= @job.commission %></span><span style='font-size:10px;'>现金推荐奖</span></p>
+      <% end %>
+      <%= hidden_div_if @job.work_year.blank? do %>
+        <p>经验要求:<%= @job.work_year %>年</p>
+      <% end %>
+     <table>
        <% @job.experiences.each do |f| %>
       	 <tr>
         	   <td style='font-size:12px'><%= f.skill %></td>
