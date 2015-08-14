@@ -29,7 +29,7 @@
 $(document).ready(function(){
   $('#calendar').fullCalendar({
     //姑且理解为把front view下面相应action.json.jbuilder文件产生的jason数据发送到events
-      events: '/front.json',
+    events: '/front.json',
       header: { 
       left: 'prev',
       center: 'agendaWeek,month',

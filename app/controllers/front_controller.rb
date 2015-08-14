@@ -9,7 +9,6 @@ class FrontController < ApplicationController
     format.html {
       if user_signed_in?
         @micropost = current_user.microposts.build
-        @interviews = current_user.sent_interviews 
         @feed_items = current_user.feed.page(params[:page]).per(10)
         @my_invites = current_user.received_invitations
         render 'home'
@@ -17,7 +16,8 @@ class FrontController < ApplicationController
         render 'before_signin'
       end }
     format.js
-    format.json
+    format.json {
+        @interviews = current_user.sent_interviews }
     end
   end
 end
