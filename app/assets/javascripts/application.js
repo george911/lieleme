@@ -19,12 +19,27 @@
 //= require turbolinks
 //= require jquery.raty
 //= require ratyrate
+//= require fullcalendar
 // //= require letsrate
 
 //一定要放在底部
 //= require moment
 //= require bootstrap-datetimepicker
 
+$(document).ready(function(){
+  $('#calendar').fullCalendar({
+    //姑且理解为把front view下面相应action.json.jbuilder文件产生的jason数据发送到events
+      events: '/front.json',
+      header: { 
+      left: 'prev',
+      center: 'agendaWeek,month',
+      right: 'next'}, // buttons for switching between views
+    views: {
+      month: { // name of view
+        titleFormat: ' '}
+		     }
+ });
+});
 $(function(){
   $('#selectAll').click(function() {
   if (this.checked) {

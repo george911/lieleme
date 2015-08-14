@@ -13,6 +13,7 @@
  *(导入stylesheets下面所有的scss文件)
  *= require_tree .
  *= require_self
+ *= require fullcalendar
  */
 html,body {
 // import bootstrap-sprockets before bootstrap if using bootstrap >= 3.2

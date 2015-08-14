@@ -125,8 +125,8 @@ ActiveRecord::Schema.define(version: 20150728115410) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "datetime"
     t.text     "feedback"
+    t.text     "datetime"
   end
 
   create_table "invitations", force: :cascade do |t|

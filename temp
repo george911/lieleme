@@ -119,7 +119,7 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                      my_referals GET        (/:locale)/my_referals(.:format)                                    home#my_referals
                       my_talents GET        (/:locale)/my_talents(.:format)                                     home#my_talents
                          my_jobs GET        (/:locale)/my_jobs(.:format)                                        home#my_jobs
-                  email_multiple PATCH      (/:locale)/email_multiple(.:format)                                 home#email_multiple
+                  email_multiple POST       (/:locale)/email_multiple(.:format)                                 home#email_multiple
                       send_email POST       (/:locale)/send_email(.:format)                                     home#send_email
                       user_refer GET        (/:locale)/users/:id/refer(.:format)                                users#refer
                         sign_out GET        (/:locale)/sign_out(.:format)                                       devise/sessions#destroy
@@ -181,7 +181,8 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                  user_interviews POST       (/:locale)/users/:user_id/interviews(.:format)                      interviews#create
               new_user_interview GET        (/:locale)/users/:user_id/interviews/new(.:format)                  interviews#new
              edit_user_interview GET        (/:locale)/users/:user_id/interviews/:id/edit(.:format)             interviews#edit
-                  user_interview PATCH      (/:locale)/users/:user_id/interviews/:id(.:format)                  interviews#update
+                  user_interview GET        (/:locale)/users/:user_id/interviews/:id(.:format)                  interviews#show
+                                 PATCH      (/:locale)/users/:user_id/interviews/:id(.:format)                  interviews#update
                                  PUT        (/:locale)/users/:user_id/interviews/:id(.:format)                  interviews#update
                 send_resume_user POST       (/:locale)/users/:id/send_resume(.:format)                          users#send_resume
                   following_user GET        (/:locale)/users/:id/following(.:format)                            users#following

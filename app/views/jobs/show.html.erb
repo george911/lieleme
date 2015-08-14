@@ -26,7 +26,7 @@
         <% end %>
         <tr><td><strong>奖金:</strong></td><td><%= @job.bonus.present? ? "#{@job.bonus} 人民币" : '面议' %></td></tr>
         <tr><td width='60px'><strong>发布时间:</strong></td><td><%= @job.created_at.strftime("%Y-%m-%d") %></td></tr>
-	<tr><td><strong>最后更新:</strong></td><td><%= @job.line_items.order("updated_at asc").first.updated_at.strftime("%Y-%m-%d") %></td></tr>
+	<tr><td><strong>最后更新:</strong></td><td><%= @job.line_items.order("updated_at asc").first.updated_at.strftime("%Y-%m-%d") unless @job.line_items.empty? %></td></tr>
 	<% if @job.memo.present? %>
 		<tr><td><strong>备忘:</strong></td><td><%= @job.memo %></td></tr>
 	<% end %>

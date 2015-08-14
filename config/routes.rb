@@ -80,7 +80,7 @@ Rails.application.routes.draw do
     resources :after_signup
     
     resources :users do
-      resources :interviews,only:[:new,:create,:update,:edit]
+      resources :interviews,only:[:new,:show,:create,:update,:edit]
       member do
 	 post :send_resume
          get :following, :followers
