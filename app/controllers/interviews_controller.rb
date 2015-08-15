@@ -28,7 +28,10 @@ class InterviewsController < ApplicationController
     format.js
     end
   end
-  
+ 
+  def show
+  end
+
   def create
     recipient = User.find(params[:user_id])
     @interview = Interview.new(interview_params)

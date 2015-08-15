@@ -17,7 +17,7 @@ Bundler.require(*Rails.groups(assets: %w(development test production)))
 
     # fall back to the default language if translation not found
     config.i18n.fallbacks = [:en]
-    # config.serve_static_assets = true
+    config.serve_static_files = true
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
 	      html_tag
     }

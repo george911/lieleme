@@ -1,7 +1,7 @@
 # Ruby通过brew install ruby安装,rails通过gem 'rails','xxx'安装
 source 'http://ruby.taobao.org'
 # source 'http://rubygems.org'
-
+gem 'fullcalendar-rails'
 gem 'acts_as_votable', '~> 0.10.0'
 
 # user resque to handle background job
@@ -82,7 +82,8 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'cancan'
 
 # 用来使用SCSS等
-gem 'sprockets' 
+# gem 'sprockets' 
+gem 'sprockets', '~> 2.8'
 
 # 用来做rating
 gem 'ratyrate' # 这个是主力

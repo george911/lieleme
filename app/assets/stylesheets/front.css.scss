@@ -3,6 +3,106 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .front {
+header {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    text-align: center;
+    color: #fff;
+// css用到的图片原件要放到public/assets下面
+    background-image: url(header.jpg);
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+.modal-content {
+  text-align: left;
+  color: #000000;
+}
+.modal-header {
+    background-color:#f05f40;
+}
+header .header-content {
+    position: relative;
+    width: 100%;
+    padding: 150px 15px;
+    text-align: center;
+}
+
+header .header-content .header-content-inner h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 700;
+    color: rgba(255,255,255,.7);
+}
+
+header .header-content .header-content-inner p {
+    margin-bottom: 50px;
+    font-size: 16px;
+    font-weight: 300;
+    padding-top: 10px;
+    color: rgba(255,255,255,.7);
+}
+
+
+.btn-primary {
+    border-color: #f05f40;
+    color: #fff;
+    background-color: #f05f40;
+
+}
+
+
+
+
+.btn-primary .badge {
+    color: #f05f40;
+    background-color: #fff;
+}
+
+
+
+.btn-xl {
+    padding: 15px 30px;
+        border-color: #f05f40;
+    color: #fff;
+    background-color: #f05f40;
+
+}
+
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+.arrow_box {
+    position: relative;
+    height: 300px;
+    background: #ffffff;
+    border: 0px solid #c2e1f5;
+}
+.arrow_box:after, .arrow_box:before {
+    right: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.arrow_box:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-right-color: #ffffff;
+    border-width: 15px;
+    margin-top: -15px;
+}
+.arrow_box:before {
+    border-color: rgba(194, 225, 245, 0);
+    border-right-color: #ffffff;
+    border-width: 5px;//箭头大小控制
+    margin-top: -5px;
+}
+
 
 .circle {
   border-radius:50%
@@ -16,14 +116,14 @@
   border-radius:3px;
   }
 .img-circle {
-  border: 10px solid white ;
+  border: 5px solid white ;
   display:block;
   margin:  0px  auto} // margin-auto的模式只对block element(<p>etc)管用,img-circle是inline(类似于<span>),所以要转换成block
 /* written by riliwan balogun http://www.facebook.com/riliwan.rabo*/
 .board{ 
-    width: 50%;
+    width: 60%;
 margin: 60px auto; // 中间 
-height: 350px; // board的高度设定
+//height: 350px; // board的高度设定
 
 // 中间一块白的背景
 //background: #fff;

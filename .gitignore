@@ -13,7 +13,7 @@
 /tmp
 
 # Ignore bin files
-/bin
+# /bin
 
 # Igore swp files
 /\*.swp

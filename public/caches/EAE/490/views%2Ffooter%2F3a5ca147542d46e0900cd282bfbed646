@@ -1,0 +1,39 @@
+o: ActiveSupport::Cache::Entry:@valueI"N	<footer style='padding-bottom: 220px;background:#545454;color:#ffffff;'>
+    <div align='center'  style='padding-top: 50px'>
+      <div class='col-lg-2'>
+      </div>
+        <div class='col-lg-2'>
+	         <ul align='left'style='list-style-type:none'>
+	           <li><a style="color:white" href="/about_us?locale=cn">公司介绍</a></li>
+	           <li>最新资讯</li>
+		   <li><a style="color:white" href="/share_policy?locale=cn">共享条款</a></li>
+	           <li>隐私条款</li>
+	           <li>联系我们</li>
+	           <li>薪资报告</li>
+	         </ul>
+        </div>
+	      <div class='col-lg-2'>
+	        <ul align='left' style='list-style-type:none'>
+	          <li><a style="color:white" href="/inquiries/new?locale=cn">联系我们</a></li>
+	          <li><a style="color:white" href="/vacancies?locale=cn">加入我们</a></li>
+	          <li><a style="color:white" href="/invest?locale=cn">投资我们</a></li>
+	          <li>投诉与建议</li>
+	          <li>在线帮助</li>
+	        </ul>
+        </div>
+      <div class='col-lg-4'>
+	      <ul align='left' style='list-style-type:none'>
+	        <li>我们的社区</li>
+	        <li style='display:inline'><a href="/cn"><img style="border-radius:2px" src="/assets/wechat.jpeg" alt="Wechat" width="30" height="30" /></a></li>
+	        <li style='display:inline'><a href="/cn"><img style="border-radius:2px" src="/assets/weibo.jpeg" alt="Weibo" width="30" height="30" /></a></li>
+	        <li style='display:inline'><a href="/cn"><img style="border-radius:2px" src="/assets/linkedin.png" alt="Linkedin" width="35" height="35" /></a></li>     
+	      </ul>
+      </div>
+    </div>
+    <div align='center'class='col-lg-12'>
+	    <img src="/assets/logo.png" alt="Logo" /><br>
+	    <span style='font-size:12px'>© 2014-2015 猎乐网络科技有限公司</span>
+    </div>
+</footer>
+
+:ET:@created_atf1439349687.985253:@expires_in0

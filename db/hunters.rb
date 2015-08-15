@@ -200,7 +200,7 @@ f=User.new(
   mobile:		'13916320006',
   user_name:		'Ramond',
   true_name:		'Ramond',
-  :avatar => File.open(File.join(Rails.root, 'app', 'assets','images','ramond.png')),
+  :avatar => File.open(File.join(Rails.root, 'app', 'assets','images','Ramond.png')),
   email:		'r@test.com',
   password:		'11111111',
   password_confirmation:'11111111',

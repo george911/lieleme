@@ -1,1 +1,216 @@
-change
+                          Prefix Verb       URI Pattern                                                         Controller#Action
+                         profile GET        /profile(.:format)                                                  users#show
+                            like GET        /like(.:format)                                                     comments#like
+                         dislike GET        /dislike(.:format)                                                  comments#dislike
+                         confirm GET        /confirm(.:format)                                                  after_signup#confirm
+                       vacancies GET        /vacancies(.:format)                                                vacancies#index
+                    share_policy GET        /share_policy(.:format)                                             company#share_policy
+                        about_us GET        /about_us(.:format)                                                 company#about_us
+                       inquiries GET        /inquiries(.:format)                                                inquiries#index
+                                 POST       /inquiries(.:format)                                                inquiries#create
+                     new_inquiry GET        /inquiries/new(.:format)                                            inquiries#new
+                    edit_inquiry GET        /inquiries/:id/edit(.:format)                                       inquiries#edit
+                         inquiry GET        /inquiries/:id(.:format)                                            inquiries#show
+                                 PATCH      /inquiries/:id(.:format)                                            inquiries#update
+                                 PUT        /inquiries/:id(.:format)                                            inquiries#update
+                                 DELETE     /inquiries/:id(.:format)                                            inquiries#destroy
+                          invest GET        /invest(.:format)                                                   inquiries#invest
+                         ourjobs GET        /ourjobs(.:format)                                                  inquiries#ourjobs
+          new_admin_user_session GET        /admin/login(.:format)                                              active_admin/devise/sessions#new
+              admin_user_session POST       /admin/login(.:format)                                              active_admin/devise/sessions#create
+      destroy_admin_user_session DELETE|GET /admin/logout(.:format)                                             active_admin/devise/sessions#destroy
+             admin_user_password POST       /admin/password(.:format)                                           active_admin/devise/passwords#create
+         new_admin_user_password GET        /admin/password/new(.:format)                                       active_admin/devise/passwords#new
+        edit_admin_user_password GET        /admin/password/edit(.:format)                                      active_admin/devise/passwords#edit
+                                 PATCH      /admin/password(.:format)                                           active_admin/devise/passwords#update
+                                 PUT        /admin/password(.:format)                                           active_admin/devise/passwords#update
+                      admin_root GET        /admin(.:format)                                                    admin/dashboard#index
+  batch_action_admin_admin_users POST       /admin/admin_users/batch_action(.:format)                           admin/admin_users#batch_action
+               admin_admin_users GET        /admin/admin_users(.:format)                                        admin/admin_users#index
+                                 POST       /admin/admin_users(.:format)                                        admin/admin_users#create
+            new_admin_admin_user GET        /admin/admin_users/new(.:format)                                    admin/admin_users#new
+           edit_admin_admin_user GET        /admin/admin_users/:id/edit(.:format)                               admin/admin_users#edit
+                admin_admin_user GET        /admin/admin_users/:id(.:format)                                    admin/admin_users#show
+                                 PATCH      /admin/admin_users/:id(.:format)                                    admin/admin_users#update
+                                 PUT        /admin/admin_users/:id(.:format)                                    admin/admin_users#update
+                                 DELETE     /admin/admin_users/:id(.:format)                                    admin/admin_users#destroy
+batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:format)                         admin/post_comments#batch_action
+             admin_post_comments GET        /admin/post_comments(.:format)                                      admin/post_comments#index
+                                 POST       /admin/post_comments(.:format)                                      admin/post_comments#create
+          new_admin_post_comment GET        /admin/post_comments/new(.:format)                                  admin/post_comments#new
+         edit_admin_post_comment GET        /admin/post_comments/:id/edit(.:format)                             admin/post_comments#edit
+              admin_post_comment GET        /admin/post_comments/:id(.:format)                                  admin/post_comments#show
+                                 PATCH      /admin/post_comments/:id(.:format)                                  admin/post_comments#update
+                                 PUT        /admin/post_comments/:id(.:format)                                  admin/post_comments#update
+                                 DELETE     /admin/post_comments/:id(.:format)                                  admin/post_comments#destroy
+                 admin_dashboard GET        /admin/dashboard(.:format)                                          admin/dashboard#index
+         batch_action_admin_jobs POST       /admin/jobs/batch_action(.:format)                                  admin/jobs#batch_action
+                      admin_jobs GET        /admin/jobs(.:format)                                               admin/jobs#index
+                                 POST       /admin/jobs(.:format)                                               admin/jobs#create
+                   new_admin_job GET        /admin/jobs/new(.:format)                                           admin/jobs#new
+                  edit_admin_job GET        /admin/jobs/:id/edit(.:format)                                      admin/jobs#edit
+                       admin_job GET        /admin/jobs/:id(.:format)                                           admin/jobs#show
+                                 PATCH      /admin/jobs/:id(.:format)                                           admin/jobs#update
+                                 PUT        /admin/jobs/:id(.:format)                                           admin/jobs#update
+                                 DELETE     /admin/jobs/:id(.:format)                                           admin/jobs#destroy
+   batch_action_admin_line_items POST       /admin/line_items/batch_action(.:format)                            admin/line_items#batch_action
+                admin_line_items GET        /admin/line_items(.:format)                                         admin/line_items#index
+                                 POST       /admin/line_items(.:format)                                         admin/line_items#create
+             new_admin_line_item GET        /admin/line_items/new(.:format)                                     admin/line_items#new
+            edit_admin_line_item GET        /admin/line_items/:id/edit(.:format)                                admin/line_items#edit
+                 admin_line_item GET        /admin/line_items/:id(.:format)                                     admin/line_items#show
+                                 PATCH      /admin/line_items/:id(.:format)                                     admin/line_items#update
+                                 PUT        /admin/line_items/:id(.:format)                                     admin/line_items#update
+                                 DELETE     /admin/line_items/:id(.:format)                                     admin/line_items#destroy
+        batch_action_admin_users POST       /admin/users/batch_action(.:format)                                 admin/users#batch_action
+                     admin_users GET        /admin/users(.:format)                                              admin/users#index
+                                 POST       /admin/users(.:format)                                              admin/users#create
+                  new_admin_user GET        /admin/users/new(.:format)                                          admin/users#new
+                 edit_admin_user GET        /admin/users/:id/edit(.:format)                                     admin/users#edit
+                      admin_user GET        /admin/users/:id(.:format)                                          admin/users#show
+                                 PATCH      /admin/users/:id(.:format)                                          admin/users#update
+                                 PUT        /admin/users/:id(.:format)                                          admin/users#update
+                                 DELETE     /admin/users/:id(.:format)                                          admin/users#destroy
+                  admin_comments GET        /admin/comments(.:format)                                           admin/comments#index
+                                 POST       /admin/comments(.:format)                                           admin/comments#create
+                   admin_comment GET        /admin/comments/:id(.:format)                                       admin/comments#show
+                      job_search GET        /job_search(.:format)                                               search#job_search
+                          search GET        /search/search(.:format)                                            search#search
+                            rate POST       /rate(.:format)                                                     rater#create
+                new_user_session GET        /users/sign_in(.:format)                                            users/sessions#new
+                    user_session POST       /users/sign_in(.:format)                                            users/sessions#create
+            destroy_user_session DELETE     /users/sign_out(.:format)                                           users/sessions#destroy
+                   user_password POST       /users/password(.:format)                                           devise/passwords#create
+               new_user_password GET        /users/password/new(.:format)                                       devise/passwords#new
+              edit_user_password GET        /users/password/edit(.:format)                                      devise/passwords#edit
+                                 PATCH      /users/password(.:format)                                           devise/passwords#update
+                                 PUT        /users/password(.:format)                                           devise/passwords#update
+        cancel_user_registration GET        /users/cancel(.:format)                                             registrations#cancel
+               user_registration POST       /users(.:format)                                                    registrations#create
+           new_user_registration GET        /users/sign_up(.:format)                                            registrations#new
+          edit_user_registration GET        /users/edit(.:format)                                               registrations#edit
+                                 PATCH      /users(.:format)                                                    registrations#update
+                                 PUT        /users(.:format)                                                    registrations#update
+                                 DELETE     /users(.:format)                                                    registrations#destroy
+               user_confirmation POST       /users/confirmation(.:format)                                       users/confirmations#create
+           new_user_confirmation GET        /users/confirmation/new(.:format)                                   users/confirmations#new
+                                 GET        /users/confirmation(.:format)                                       users/confirmations#show
+                 mobile_show_job GET        (/:locale)/mobile_show_job(.:format)                                jobs#show_job_on_mobile
+             mobile_show_company GET        (/:locale)/mobile_show_company(.:format)                            jobs#show_company_on_mobile
+                      my_savings GET        (/:locale)/my_savings(.:format)                                     home#my_savings
+                        my_apply GET        (/:locale)/my_apply(.:format)                                       home#my_apply
+                     job_invites GET        (/:locale)/job_invites(.:format)                                    home#job_invites
+                        edit_sub GET        (/:locale)/edit_sub(.:format)                                       jobs#edit_sub
+                     edit_bosses GET        (/:locale)/edit_bosses(.:format)                                    jobs#edit_bosses
+                 my_pending_jobs GET        (/:locale)/my_pending_jobs(.:format)                                home#my_pending_jobs
+                  my_closed_jobs GET        (/:locale)/my_closed_jobs(.:format)                                 home#my_closed_jobs
+                       job_close PATCH      (/:locale)/job_close(.:format)                                      home#close_job
+                     job_pending PATCH      (/:locale)/job_pending(.:format)                                    home#pending_job
+                          invite POST       (/:locale)/invite(.:format)                                         invitations#create
+                   reject_invite PATCH      (/:locale)/reject_invite(.:format)                                  invitations#reject
+                   accept_invite PATCH      (/:locale)/accept_invite(.:format)                                  invitations#accept
+                accept_interview PATCH      (/:locale)/accept_interview(.:format)                               interviews#accept
+                reject_interview PATCH      (/:locale)/reject_interview(.:format)                               interviews#reject
+                   my_interviews GET        (/:locale)/my_interviews(.:format)                                  home#my_interviews
+                      my_invites GET        (/:locale)/my_invites(.:format)                                     home#my_invites
+                 pending_invites GET        (/:locale)/pending_invites(.:format)                                home#pending_invites
+                  closed_invites GET        (/:locale)/closed_invites(.:format)                                 home#closed_invites
+                   my_line_items GET        (/:locale)/my_line_items(.:format)                                  home#my_line_items
+                     my_referals GET        (/:locale)/my_referals(.:format)                                    home#my_referals
+                      my_talents GET        (/:locale)/my_talents(.:format)                                     home#my_talents
+                         my_jobs GET        (/:locale)/my_jobs(.:format)                                        home#my_jobs
+                  email_multiple POST       (/:locale)/email_multiple(.:format)                                 home#email_multiple
+                      send_email POST       (/:locale)/send_email(.:format)                                     home#send_email
+                      user_refer GET        (/:locale)/users/:id/refer(.:format)                                users#refer
+                        sign_out GET        (/:locale)/sign_out(.:format)                                       devise/sessions#destroy
+                         sign_in GET        (/:locale)/sign_in(.:format)                                        devise/sessions#new
+                         sign_up GET        (/:locale)/sign_up(.:format)                                        registrations#new
+                            root GET        /(:locale)(.:format)                                                front#show
+                      microposts POST       (/:locale)/microposts(.:format)                                     microposts#create
+                       micropost DELETE     (/:locale)/microposts/:id(.:format)                                 microposts#destroy
+                   relationships POST       (/:locale)/relationships(.:format)                                  relationships#create
+                    relationship DELETE     (/:locale)/relationships/:id(.:format)                              relationships#destroy
+                      job_reject PATCH      (/:locale)/reject(.:format)                                         line_items#reject
+                        save_job POST       (/:locale)/jobs/:id/save(.:format)                                  jobs#save
+                       job_refer POST       (/:locale)/jobs/:job_id/refer(.:format)                             line_items#refer
+                        job_boss PATCH      (/:locale)/jobs/:job_id/bosses/:id(.:format)                        bosses#update
+                                 PUT        (/:locale)/jobs/:job_id/bosses/:id(.:format)                        bosses#update
+                 job_subordinate PATCH      (/:locale)/jobs/:job_id/subordinates/:id(.:format)                  subordinates#update
+                                 PUT        (/:locale)/jobs/:job_id/subordinates/:id(.:format)                  subordinates#update
+                       job_apply GET        (/:locale)/jobs/:job_id/apply(.:format)                             jobs#apply
+                      job_accept PATCH      (/:locale)/jobs/:job_id/accept(.:format)                            line_items#accept
+                    job_comments GET        (/:locale)/jobs/:job_id/comments(.:format)                          comments#index
+                                 POST       (/:locale)/jobs/:job_id/comments(.:format)                          comments#create
+                 new_job_comment GET        (/:locale)/jobs/:job_id/comments/new(.:format)                      comments#new
+                     job_comment PATCH      (/:locale)/jobs/:job_id/comments/:id(.:format)                      comments#update
+                                 PUT        (/:locale)/jobs/:job_id/comments/:id(.:format)                      comments#update
+                                 DELETE     (/:locale)/jobs/:job_id/comments/:id(.:format)                      comments#destroy
+             job_line_item_refer POST       (/:locale)/jobs/:job_id/line_items/:line_item_id/refer(.:format)    line_items#refer
+                  job_line_items GET        (/:locale)/jobs/:job_id/line_items(.:format)                        line_items#index
+                                 POST       (/:locale)/jobs/:job_id/line_items(.:format)                        line_items#create
+               new_job_line_item GET        (/:locale)/jobs/:job_id/line_items/new(.:format)                    line_items#new
+              edit_job_line_item GET        (/:locale)/jobs/:job_id/line_items/:id/edit(.:format)               line_items#edit
+                   job_line_item GET        (/:locale)/jobs/:job_id/line_items/:id(.:format)                    line_items#show
+                                 PATCH      (/:locale)/jobs/:job_id/line_items/:id(.:format)                    line_items#update
+                                 PUT        (/:locale)/jobs/:job_id/line_items/:id(.:format)                    line_items#update
+                                 DELETE     (/:locale)/jobs/:job_id/line_items/:id(.:format)                    line_items#destroy
+                 job_build_index GET        (/:locale)/jobs/:job_id/build(.:format)                             jobs/build#index
+                                 POST       (/:locale)/jobs/:job_id/build(.:format)                             jobs/build#create
+                   new_job_build GET        (/:locale)/jobs/:job_id/build/new(.:format)                         jobs/build#new
+                  edit_job_build GET        (/:locale)/jobs/:job_id/build/:id/edit(.:format)                    jobs/build#edit
+                       job_build GET        (/:locale)/jobs/:job_id/build/:id(.:format)                         jobs/build#show
+                                 PATCH      (/:locale)/jobs/:job_id/build/:id(.:format)                         jobs/build#update
+                                 PUT        (/:locale)/jobs/:job_id/build/:id(.:format)                         jobs/build#update
+                                 DELETE     (/:locale)/jobs/:job_id/build/:id(.:format)                         jobs/build#destroy
+                            jobs GET        (/:locale)/jobs(.:format)                                           jobs#index
+                                 POST       (/:locale)/jobs(.:format)                                           jobs#create
+                         new_job GET        (/:locale)/jobs/new(.:format)                                       jobs#new
+                        edit_job GET        (/:locale)/jobs/:id/edit(.:format)                                  jobs#edit
+                             job GET        (/:locale)/jobs/:id(.:format)                                       jobs#show
+                                 PATCH      (/:locale)/jobs/:id(.:format)                                       jobs#update
+                                 PUT        (/:locale)/jobs/:id(.:format)                                       jobs#update
+                                 DELETE     (/:locale)/jobs/:id(.:format)                                       jobs#destroy
+              after_signup_index GET        (/:locale)/after_signup(.:format)                                   after_signup#index
+                                 POST       (/:locale)/after_signup(.:format)                                   after_signup#create
+                new_after_signup GET        (/:locale)/after_signup/new(.:format)                               after_signup#new
+               edit_after_signup GET        (/:locale)/after_signup/:id/edit(.:format)                          after_signup#edit
+                    after_signup GET        (/:locale)/after_signup/:id(.:format)                               after_signup#show
+                                 PATCH      (/:locale)/after_signup/:id(.:format)                               after_signup#update
+                                 PUT        (/:locale)/after_signup/:id(.:format)                               after_signup#update
+                                 DELETE     (/:locale)/after_signup/:id(.:format)                               after_signup#destroy
+                 user_interviews POST       (/:locale)/users/:user_id/interviews(.:format)                      interviews#create
+              new_user_interview GET        (/:locale)/users/:user_id/interviews/new(.:format)                  interviews#new
+             edit_user_interview GET        (/:locale)/users/:user_id/interviews/:id/edit(.:format)             interviews#edit
+                  user_interview GET        (/:locale)/users/:user_id/interviews/:id(.:format)                  interviews#show
+                                 PATCH      (/:locale)/users/:user_id/interviews/:id(.:format)                  interviews#update
+                                 PUT        (/:locale)/users/:user_id/interviews/:id(.:format)                  interviews#update
+                send_resume_user POST       (/:locale)/users/:id/send_resume(.:format)                          users#send_resume
+                  following_user GET        (/:locale)/users/:id/following(.:format)                            users#following
+                  followers_user GET        (/:locale)/users/:id/followers(.:format)                            users#followers
+                 user_editsalary GET        (/:locale)/users/:user_id/editsalary(.:format)                      users#editsalary
+               edit_user_summary GET        (/:locale)/users/:user_id/summaries/:id/edit(.:format)              summaries#edit
+                    user_summary PATCH      (/:locale)/users/:user_id/summaries/:id(.:format)                   summaries#update
+                                 PUT        (/:locale)/users/:user_id/summaries/:id(.:format)                   summaries#update
+             edit_user_education GET        (/:locale)/users/:user_id/educations/:id/edit(.:format)             educations#edit
+                  user_education PATCH      (/:locale)/users/:user_id/educations/:id(.:format)                  educations#update
+                                 PUT        (/:locale)/users/:user_id/educations/:id(.:format)                  educations#update
+                  edit_user_work GET        (/:locale)/users/:user_id/works/:id/edit(.:format)                  works#edit
+                       user_work PATCH      (/:locale)/users/:user_id/works/:id(.:format)                       works#update
+                                 PUT        (/:locale)/users/:user_id/works/:id(.:format)                       works#update
+              rating_user_review POST       (/:locale)/users/:user_id/reviews/:id/rating(.:format)              reviews#rating
+        user_review_reviews_edit GET        (/:locale)/users/:user_id/reviews/:review_id/reviews/edit(.:format) reviews#edit
+                    user_reviews GET        (/:locale)/users/:user_id/reviews(.:format)                         reviews#index
+                                 POST       (/:locale)/users/:user_id/reviews(.:format)                         reviews#create
+                 new_user_review GET        (/:locale)/users/:user_id/reviews/new(.:format)                     reviews#new
+                edit_user_review GET        (/:locale)/users/:user_id/reviews/:id/edit(.:format)                reviews#edit
+                     user_review PATCH      (/:locale)/users/:user_id/reviews/:id(.:format)                     reviews#update
+                                 PUT        (/:locale)/users/:user_id/reviews/:id(.:format)                     reviews#update
+                                 DELETE     (/:locale)/users/:user_id/reviews/:id(.:format)                     reviews#destroy
+                           users GET        (/:locale)/users(.:format)                                          users#index
+                                 POST       (/:locale)/users(.:format)                                          users#create
+                        new_user GET        (/:locale)/users/new(.:format)                                      users#new
+                       edit_user GET        (/:locale)/users/:id/edit(.:format)                                 users#edit
+                            user GET        (/:locale)/users/:id(.:format)                                      users#show
+                                 PATCH      (/:locale)/users/:id(.:format)                                      users#update
+                                 PUT        (/:locale)/users/:id(.:format)                                      users#update
+                                 DELETE     (/:locale)/users/:id(.:format)                                      users#destroy

@@ -75,7 +75,7 @@ require 'spec_helper'
 	  expect(page).to have_content("面试原因")
           expect(page).to have_content("输入面试地点")
           expect(page).to have_content("输入面试时间")
-          find('#calendar').click
+          find('#cal').click
           page.execute_script %Q{ $('#auction_event_date').trigger("focus") }
           expect{click_on("保存")}.to change{Interview.count}.by(1) 
 	  
