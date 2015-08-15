@@ -138,6 +138,7 @@ group :development do
   gem 'capistrano-faster-assets', '~> 1.0'
   gem 'capistrano-unicorn-nginx', '~> 3.1.0'
   gem 'capistrano-secrets-yml', '~> 1.0.0'
+  gem 'capistrano-passenger'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
