@@ -69,10 +69,10 @@ gem 'nokogiri'
 gem 'unicorn'
 #
 # 为了css能在heroku上运行
-group :production do
-  gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
-  gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
-end
+# group :production do
+# gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
+# gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
+# end
 
 
 # Active-admin

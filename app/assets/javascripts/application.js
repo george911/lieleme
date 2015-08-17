@@ -41,7 +41,7 @@ $(document).ready(function(){
       month: { // name of view
         titleFormat: ' '}
 		     },
-    firstDay: 1,
+    firstDay: 0,
     allDayDefault: false,
     allDaySlot: false,
     firstHour: 9, //v1版本使用firstHour,v2版本使用scrollTime
