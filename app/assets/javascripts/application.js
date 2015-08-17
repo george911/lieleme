@@ -29,7 +29,7 @@
 $(document).ready(function(){
   $('#calendar').fullCalendar({
     dayNamesShort: ['日','一','二','三','四','五','  六'],
-    monthNames: ['一月', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', '八月', 'Sep', 'Oct', 'Nov', 'Dec'],
+    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月','七月', '八月', '九月', '十月', '十一月', '十二月'],
     //render front/show.json.jbuilder,通过json把数据传递给fullcalendar
     events: '/front.json',
     header: { 
