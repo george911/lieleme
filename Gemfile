@@ -42,7 +42,7 @@ gem 'actionpack-action_caching'
 
 gem 'unread'
 gem 'ffaker'
-gem 'rails_12factor', group: :production
+# gem 'rails_12factor', group: :production
 # datetime picker
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
