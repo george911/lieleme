@@ -17,8 +17,8 @@ require "spec_helper"
       visit job_path(id:job.id)
       click_on "推荐"
       fill_in "line_item_email", with: talent.email
+      sleep 1
       fill_in "line_item_name", with: talent.user_name
-      sleep 5
       click_on "发送"
       expect(page).to have_content("恭喜您成功推荐以下候选人到软件工程师职位")
       expect(page).to have_content("Mary")
@@ -26,17 +26,17 @@ require "spec_helper"
       visit job_path(id:job.id)
       click_on "推荐"
       fill_in "line_item_email", with:"csxd@test.com"
-      sleep 5
+      sleep 1
       fill_in "line_item_name", with:"测试小弟"
       click_on "发送"
-      sleep 5
+      sleep 1 
       expect(page).to have_content("您已经成功推荐以下候选人")
       expect(page).to have_content("csxd@test.com")
       visit job_path(id:job.id)
       click_on "推荐"
       fill_in "line_item_email", with:"csed@test.com"
+      sleep 1
       fill_in "line_item_name", with:"测试二弟"
-      sleep 5
       click_on "发送"
       expect(page).to have_content("您已经成功推荐以下候选人")
       expect(page).to have_content("csed@test.com")
@@ -71,8 +71,9 @@ require "spec_helper"
       visit job_path(id:job.id)
       click_on "推荐"
       fill_in "line_item_email", with:"cssd@test.com"
+      sleep 1
       fill_in "line_item_name", with:"捉妖记"
-      sleep 5
+      sleep 1 
       click_on "发送"
       expect(page).to have_content("您已经成功推荐以下候选人")
       expect(page).to have_content("cssd@test.com")

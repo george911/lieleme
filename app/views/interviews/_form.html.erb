@@ -25,7 +25,7 @@
 		  <div class='col-lg-6'>
 			    <%= f.label :输入面试时间 %>
 		    <div class='input-group date' id='datetimepicker1'>
-			    <%= f.text_field :datetime, class: "form-control" %>
+			    <%= f.datetime_field :datetime, class: "form-control" %>
                       <span class="input-group-addon">
                       <span id = 'cal' class="glyphicon glyphicon-calendar"></span>
                       </span>
@@ -34,7 +34,8 @@
                 </div>
                 <script type="text/javascript">
                     $(function () {
-		      $('#datetimepicker1').datetimepicker({
+				    $('#datetimepicker1').datetimepicker({
+					     format: 'YYYY-MM-DD HH:mm'
 });
                     });
                 </script>

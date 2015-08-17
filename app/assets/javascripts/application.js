@@ -28,16 +28,45 @@
 
 $(document).ready(function(){
   $('#calendar').fullCalendar({
-    //姑且理解为把front view下面相应action.json.jbuilder文件产生的jason数据发送到events
+    dayNamesShort: ['日','一','二','三','四','五','  六'],
+    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月','七月', '八月', '九月', '十月', '十一月', '十二月'],
+    //render front/show.json.jbuilder,通过json把数据传递给fullcalendar
     events: '/front.json',
-      header: { 
-      left: 'prev',
-      center: 'agendaWeek,month',
-      right: 'next'}, // buttons for switching between views
+    header: { 
+    left: 'prev title',
+    title: 'MM',
+    center: 'agendaWeek,month',
+    right: 'next'}, // buttons for switching between views
     views: {
       month: { // name of view
         titleFormat: ' '}
-		     }
+		     },
+    firstDay: 0,
+    allDayDefault: false,
+    allDaySlot: false,
+    firstHour: 9, //v1版本使用firstHour,v2版本使用scrollTime
+    ignoreTimezone: false,
+    eventColor: '#AB6D86',
+    eventRender: function (event, element) {
+	        var dataToFind = moment(event.start).format('YYYY-MM-DD');
+		    $("td[data-date='"+dataToFind+"']").addClass('dayWithEvent');
+    },
+    eventClick: function(calEvent, jsEvent, view) {
+      function addZero(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+        }
+
+      var your_date = calEvent.start;
+      var t = Date.parse(your_date); // date in milliseconds since January 1, 1970
+      var d = new Date(t);
+      var h=addZero(d.getHours());
+      var m=addZero(d.getMinutes());
+
+        alert(h+":"+m+"与" + calEvent.title+"面试");
+    }
  });
 });
 $(function(){

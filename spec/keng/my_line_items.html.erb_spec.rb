@@ -37,6 +37,7 @@ require 'spec_helper'
       find("table tr.hover").hover
       click_button "#{job.id}"
       fill_in "line_item_email", with: "nyn@example.com"
+      sleep 2
       fill_in "line_item_name", with: "聂隐娘"
       click_on "分享"
 
