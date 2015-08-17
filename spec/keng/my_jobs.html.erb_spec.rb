@@ -26,8 +26,8 @@ require 'spec_helper'
       visit job_path(id:job3.id)
       click_on "推荐"
       fill_in "line_item_email", with: 'somebody@example.com'
+      sleep 2
       fill_in "line_item_name", with: 'somebody'
-      sleep 5
       expect{click_on "发送"}.to change{LineItem.count}.by(1)
       expect(page).to have_content("您已经成功推荐以下候选人")
       expect(page).to have_content("somebody@example.com")

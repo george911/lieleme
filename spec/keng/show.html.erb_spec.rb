@@ -66,8 +66,8 @@ require 'spec_helper'
       visit job_path(id:job1.id)
       click_button '推荐'
       fill_in "line_item_email", with: 'somebody@example.com'
+      sleep 2
       fill_in "line_item_name", with: 'somebody'
-      sleep 3
       expect{click_on "发送"}.to change{LineItem.count}.by(1)
       expect(page).to have_content("您已经成功推荐以下候选人")
       expect(page).to have_content("somebody@example.com")
@@ -75,7 +75,7 @@ require 'spec_helper'
       visit job_path(id:job1.id)
       click_button '推荐'
       fill_in "line_item_email", with: talent1.email # 系统会把候选人的name添上
-      sleep 3
+      sleep 2
       expect{click_on "发送"}.to change{LineItem.count}.by(1)
       expect(page).to have_content("恭喜您成功推荐以下候选人到软件工程师职位")
       expect(page).to have_content("Mary")
@@ -83,8 +83,8 @@ require 'spec_helper'
       visit job_path(id:job1.id)
       click_button '推荐'
       fill_in "line_item_email", with: "1@1.com" 
+      sleep 2
       fill_in "line_item_name", with: "测试小弟" 
-      sleep 5
       expect{click_on "发送"}.to change{LineItem.count}.by(1)
       expect(page).to have_content("您已经成功推荐以下候选人")
       expect(page).to have_content("1@1.com")
@@ -92,15 +92,15 @@ require 'spec_helper'
       visit job_path(id:job1.id)
       click_button '推荐'
       fill_in "line_item_mobile", with: "13916382071" 
+      sleep 2
       fill_in "line_item_name", with: "测试小弟" 
-      sleep 3
       expect{click_on "发送"}.not_to change{LineItem.count}
       expect(page).to have_content("请输入正确格式的邮箱地址")
 
       visit job_path(id:job1.id)
       click_button '推荐'
       fill_in "line_item_mobile", with: talent2.mobile
-      sleep 3
+      sleep 2
       expect{click_on "发送"}.to change{LineItem.count}.by(1)
       expect(page).to have_content("恭喜您成功推荐以下候选人到软件工程师职位")
       expect(page).to have_content("John")
@@ -108,14 +108,14 @@ require 'spec_helper'
       visit job_path(id:job1.id)
       click_button '推荐'
       fill_in "line_item_mobile", with: talent1.mobile
-      sleep 3
+      sleep 2
       expect{click_on "发送"}.not_to change {LineItem.count}
       expect(page).to have_content("不好意思,已经有人推荐他了")
 
       visit job_path(id:job1.id)
       click_button '推荐'
       fill_in "line_item_email", with: "#{talent2.email}"
-      sleep 3
+      sleep 1
       expect{click_on "发送"}.not_to change {LineItem.count}
       expect(page).to have_content("不好意思,已经有人推荐他了")
 

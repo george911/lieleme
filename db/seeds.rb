@@ -6,9 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # ruby encoding: utf-8
-puts "没有导入面试"
 puts "没有导入Micropost"
-puts "deploy时需要在environments/development.rb下更改config.action_controller.perform_caching"
 require File.expand_path('../clear_all', __FILE__)
 require File.expand_path('../hr',__FILE__)
 require File.expand_path('../users',__FILE__)

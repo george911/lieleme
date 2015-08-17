@@ -3,6 +3,27 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .front {
+.dayWithEvent { background: #AB6D86; cursor: pointer;}
+.fc-event-time {display: none;}
+//寻找fc-header-title下面的h2标题,h2不是类，不能用.h2
+.fc-header-title h2{
+  font-size:13px;
+  padding-top:8px;
+  padding-right:10px;}
+td {
+  padding-left:0px;
+  border: 0px }
+.fc-day-number {
+  width: 42px;//设置了fit width才能够text-align:center
+  text-align:center;}
+.fc-grid th{
+  text-align: center}
+th {
+  border: 0px;
+  border-bottom:1px solid #cccccc}
+
+//.fc-event-container {display: none;}
+
 header {
     position: relative;
     width: 100%;

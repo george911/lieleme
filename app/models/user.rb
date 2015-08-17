@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   has_many :talent_pools,foreign_key:"hunter_id"
 
   # 发送给的猎头
-  has_many :sent_hunters, through: :sent_resumes, source: :hunter
+  # has_many :sent_hunters, through: :sent_resumes, source: :hunter
   # 自荐的人选
   has_many :received_users, through: :talent_pools, source: :talent
    

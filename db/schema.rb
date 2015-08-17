@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728115410) do
+ActiveRecord::Schema.define(version: 20150817062824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20150728115410) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "feedback"
-    t.text     "datetime"
+    t.datetime "datetime"
   end
 
   create_table "invitations", force: :cascade do |t|
