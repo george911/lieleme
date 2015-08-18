@@ -12,14 +12,10 @@ config.action_mailer.delivery_method = :smtp
   # Settings specified here will take precedence over those in config/application.rb.
   I18n.enforce_available_locales = false
   config.cache_classes = true
-  config.serve_static_assets = true
 
-  # 据说会降低效率it has to compile dinamically css-js files on the fly if there's no a static version of those files 
-   config.assets.compile = true
-  config.assets.digest = true
 
   #devise setting
-  config.action_mailer.default_url_options = { :host => 'qinmin.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'www.lieleme.com' }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -40,17 +36,17 @@ config.action_mailer.delivery_method = :smtp
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_files = false
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
-
+  config.assets.debug = true
+  config.assets.compile = true
   # Generate digests for assets URLs.
-  config.assets.digest = true
+  config.assets.digest = false
 
   # `config.assets.precompile` has moved to config/initializers/assets.rb
 

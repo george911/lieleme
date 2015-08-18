@@ -42,7 +42,7 @@ gem 'actionpack-action_caching'
 
 gem 'unread'
 gem 'ffaker'
-gem 'rails_12factor', group: :production
+#gem 'rails_12factor', group: :production
 # datetime picker
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
@@ -71,7 +71,7 @@ gem 'unicorn'
 # 为了css能在heroku上运行
 # group :production do
 # gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
-gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
+  gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
 # end
 
 
