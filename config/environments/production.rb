@@ -42,6 +42,7 @@ config.action_mailer.delivery_method = :smtp
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
+  #config.assets.debug = true
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.debug = true
   config.assets.compile = true
