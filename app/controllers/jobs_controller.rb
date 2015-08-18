@@ -34,7 +34,7 @@ class JobsController < ApplicationController
        @comment = Comment.new 
      end
      if current_user
-	@qr = RQRCode::QRCode.new( "http://qinmin.herokuapp.com/cn/jobs/#{@job.id}?utf8=✓&forwarder=#{current_user.id}", :size => 8, :level => :h )
+	@qr = RQRCode::QRCode.new( "http://www.lieleme.com/cn/jobs/#{@job.id}?utf8=✓&forwarder=#{current_user.id}", :size => 8, :level => :h )
      end
      if mobile_device? and params[:forwarder].present?
 	@forwarder = User.find(params[:forwarder]) 
