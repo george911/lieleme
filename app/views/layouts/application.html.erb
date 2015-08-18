@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>猎了么-在线有偿职位分享</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   
+  <!-- ie8 和ie9s support-->
+  <script src="/respondjs/html5shiv.js"></script>
+  <script src="/respondjs/respond.min.js"></script>
+      
   <!-- Bootstrap core JavaScript 一定要在head和底部都放，否则下拉菜单实现不了========================================================= -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  
   <!-- Optional theme -->
