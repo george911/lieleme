@@ -4,10 +4,14 @@ lock '3.4.0'
 
 server "deploy@123.57.191.137", roles: [:app, :web, :db], :primary => true  
 set :application, 'lieleme'
-set :repo_url, 'git@github.com:george911/lieyohui.git'
-set :rbenv_ruby, '2.0.0-p481'
+set :repo_url, 'https://github.com/george911/lieleme'
+set :linked_files, %w{config/database.yml}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :rbenv_ruby, '2.2.2'
 set :user, "deploy"
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :keep_releases, 5
+
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -37,7 +41,6 @@ set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
 
 namespace :deploy do
 
