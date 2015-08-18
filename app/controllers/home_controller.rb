@@ -11,7 +11,7 @@ class HomeController < ApplicationController
   def send_email
     @my_talents = User.find(params[:my_talent_ids])
     @my_talents.each do |f|
-      MyTalentMailer.talent_mail(params[:subject],params[:content],f.email).deliver_later(wait:10.seconds)
+      MyTalentMailer.talent_mail(params[:subject],params[:content],f.email).deliver_later(wait:1.minute)
       #MyTalentMailer.talent_mail(params[:subject],params[:content],f.email).deliver_now
     end
     redirect_to my_talents_path 
