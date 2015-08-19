@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
   require 'rqrcode'
+  before_action :prepare_for_mobile, only: :show
   before_action :set_job, except: [:index,:new,:create,:apply]
   layout 'home',except:[:index,:show,:apply] # 因为moadal不能放在layout:home下面
 #  load_and_authorize_resource

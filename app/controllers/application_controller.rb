@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  before_action :prepare_for_mobile
+  # before_action :prepare_for_mobile
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user! #devise认证user
   # layout :determine_layout # 如果controller内部有determine_layout会覆盖这个
