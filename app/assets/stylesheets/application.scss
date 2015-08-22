@@ -23,6 +23,12 @@ html,body {
 @import 'bootstrap';
 @import 'bootstrap-datetimepicker';
 
+footer {
+  background-image: url(footer-background-mobile.png);
+  a {
+	color:white;
+	}
+  }
 // 注册页面的css,因为要跨registration和after_signup两个controller,所以写在这里方便
 .process-highlight {
   background-color: #44b549;
@@ -50,7 +56,8 @@ html,body {
 // 设置顶端颜色条
 .navbar-color {
 // background要用#6个16进制数表示颜色才能成功
-background: #3b5893 }
+//background: #3b5893
+	}
 
 // 职位列表前面的红旗
 .well {

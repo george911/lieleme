@@ -23,8 +23,12 @@
   border: 0px;
   border-bottom:1px solid #cccccc}
 
-//.fc-event-container {display: none;}
-
+footer {
+  background-image: url(footer-background-mobile.png);
+  a {
+	color:white;
+	}
+  }
 header {
     position: relative;
     width: 100%;
@@ -85,10 +89,13 @@ header .header-content .header-content-inner p {
 }
 
 
-
+.btn-ss {
+    border-color: #f05f40;
+    background-color: #f05f40;
+  }
 .btn-xl {
     padding: 15px 30px;
-        border-color: #f05f40;
+    border-color: #f05f40;
     color: #fff;
     background-color: #f05f40;
 

@@ -11,7 +11,7 @@ class InquiryNotifier < ActionMailer::Base
     @inquiry = inquiry
     @greeting = "咨询"
 
-    mail to: "support@lieyohui.com", subject:"有人咨询", temlate_path: 'refer_notifier',template_name: 'inquiry'
+    mail to: "george.qiao@lieleme.com", subject:"有人咨询", temlate_path: 'refer_notifier',template_name: 'inquiry'
   end
 end
 

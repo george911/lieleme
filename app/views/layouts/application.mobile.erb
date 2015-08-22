@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>猎了么-在线有偿职位分享</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+</head>
+<body class="<%=controller.controller_name%>">
+  <nav class="navbar navbar-color navbar-fixed-top">
+   <div>
+    <span class='glyphicon glyphicon-th' style='font-size:20px;padding:5px 0px 5px 15px;color:#ff5a5f;float:left'></span>
+   </div>
+   <div class='text-center'>
+     <%= image_tag "logo-red.png" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   </div>
+ </nav>
+
+<div id="content"><%= content_for?(:content) ? yield(:content) : yield %></div>
+</body>
+<footer style='color:white'>
+  	<div style='padding:10px'>
+	  <strong>
+	    <p>客服电话</p>
+	    <p>上海: 021-50175594</p>
+	  </strong>
+  	</div>
+  	<div class='text-center' style='font-size:15px;padding:0px 10px 10px 10px'>
+  	  <strong><%= link_to "关于",about_us_path %>&nbsp;&nbsp;
+  	  <%= link_to "工作机会" %></strong>
+
+  	</div>
+	</div>
+	  <%= image_tag("logo.png") %>
+	  <span>© 2014-2015 猎乐网络科技有限公司</span>
+	</div>
+</footer>
+</html>

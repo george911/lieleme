@@ -73,6 +73,7 @@ require "spec_helper"
       click_on "登录"
   
       click_on "我的面试"
+      sleep 1
       expect(page).to have_content("已接受 :时间能否改到明天下午5点半")
 
       # 测试邀请理由选择
@@ -86,9 +87,10 @@ require "spec_helper"
 
       # 修改面试时间
       expect(page).to have_field("interview_datetime")
-      fill_in "interview_datetime", with:"04/30/2015 2:30 PM"
+      fill_in "interview_datetime", with:"2015-08-18 22:55"
       click_on "保存"
-      expect(page).to have_content("04/30/2015 2:30 PM")
+      sleep 5
+      expect(page).to have_content("2015-08-18 22:55")
       expect(page).to have_content("上海徐家汇")
       expect(page).to have_content("架构师")
       expect(page).to have_content("已接受 :时间能否改到明天下午5点半")

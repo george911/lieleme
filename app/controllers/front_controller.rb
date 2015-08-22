@@ -1,5 +1,6 @@
 class FrontController < ApplicationController
   skip_before_action :authenticate_user! #devise认证user
+  before_action :prepare_for_mobile
 
   def show
     @offers=LineItem.where("status = ?","offer")#where能够取出然后使用.each函数,find_by不能
@@ -16,6 +17,7 @@ class FrontController < ApplicationController
         render 'before_signin'
       end }
     format.js
+    format.mobile
     format.json {
         @interviews = current_user.sent_interviews }
     end

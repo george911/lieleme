@@ -11,7 +11,7 @@
     	  <% end %>
             </td>
     	<td width='50px'>
-    	  <%= link_to image_tag(line_item.recipient.avatar.url,size:'30x30'), id: "#{line_item.recipient_id}", action: 'show', controller: 'users', host:'localhost:3000'  %>
+    	  <%= link_to image_tag(line_item.recipient.avatar.url,size:'30x30'), id: "#{line_item.recipient_id}", action: 'show', controller: 'users', host:'lieleme.com'  %>
     	</td>
     	<td>
      	  <%= remove_unwanted_words distance_of_time_in_words(Date.today,line_item.recipient.birthday) unless line_item.recipient.birthday == nil%> | <%= line_item.recipient.educations.first.school unless line_item.recipient.educations.first == nil %> | <% line_item.recipient.works.each do |f| %>

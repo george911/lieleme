@@ -19,12 +19,13 @@
 //= require turbolinks
 //= require jquery.raty
 //= require ratyrate
-//= require fullcalendar
 // //= require letsrate
 
 //一定要放在底部
 //= require moment
 //= require bootstrap-datetimepicker
+// fullcalendar放到datetimepicker后面
+//= require fullcalendar
 
 $(document).ready(function(){
   $('#calendar').fullCalendar({

@@ -11,10 +11,11 @@ class HomeController < ApplicationController
   def send_email
     @my_talents = User.find(params[:my_talent_ids])
     @my_talents.each do |f|
-      # 调用app/jobs下面MassEmailJob类, 参数对应传递
-       10.times do 
-	 MassEmailJob.new(params[:subject],params[:content],f.email).enqueue(wait: 1.minute)
-       end
+      # 调用app/jobs下面MassEmailJob类, 参数对应传递,启动background job的步骤
+      # RAILS_ENV=production rake environment resque:work QUEUE=*&		建立queue
+      # RAILS_ENV=production rake environment resque:scheduler&		启动scheduler
+      # redis-server							启动redis server
+       MassEmailJob.new(params[:subject],params[:content],f.email).enqueue(wait: 1.minute)
       # MyTalentMailer.talent_mail(params[:subject],params[:content],f.email).deliver_later(wait:1.minutes)
     end
     redirect_to my_talents_path 
