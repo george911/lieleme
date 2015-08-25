@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "git commit"
+git add .
+git commit -m "auto"
+git push -u origin master
+
+echo "deploy"
+bundle exec cap production deploy
+
