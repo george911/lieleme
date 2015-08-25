@@ -90,4 +90,6 @@ cn:
     sessions:
       user:
         signed_in:      "登录成功"
-
+    confirmations:
+      user:
+        confirmed:      "注册成功"

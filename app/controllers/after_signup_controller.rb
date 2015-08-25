@@ -15,7 +15,7 @@ class AfterSignupController < ApplicationController
     when :summary
     when :education
     when :work 
-    when :invite
+    when :invite # 应聘推荐的岗位
       if current_user.mobile.present? and current_user.email.present?
 	@line_items = LineItem.where("mobile = ? or email = ?",current_user.mobile,current_user.email)
       elsif current_user.mobile.present?
