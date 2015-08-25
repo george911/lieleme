@@ -41,8 +41,12 @@
                   <div class="col-lg-6" style='margin-top:10px'>
                     <%= f.number_field :commission,class: 'form-control',placeholder:"佣金" %>
                   </div>
-                  <div class="col-lg-12" style='margin-top:10px'>
-		    <%= f.file_field :avatar %>
+		  <div class="col-lg-12" style='margin-top:10px'>
+		    职位logo
+		    <%= f.file_field :avatar,  
+			           :'data-classButton' => 'btn btn-primary',
+				          :'data-input' => 'false', classIcon:  'icon-plus', 
+					         :'data-buttonText' => 'Your label here'  %> 
 		  </div>
 		  <!--<div class="col-lg-12 select" style='margin-top:10px'>
                      f.date_select :concall_date,class: 'form-control',placeholder:"Con-call时间" %>
