@@ -41,9 +41,12 @@
                   <div class="col-lg-6" style='margin-top:10px'>
                     <%= f.number_field :commission,class: 'form-control',placeholder:"佣金" %>
                   </div>
-                  <div class="col-lg-12 select" style='margin-top:10px'>
-                    <%= f.date_select :concall_date,class: 'form-control',placeholder:"Con-call时间" %>
-                  </div>
+                  <div class="col-lg-12" style='margin-top:10px'>
+		    <%= f.file_field :avatar %>
+		  </div>
+		  <!--<div class="col-lg-12 select" style='margin-top:10px'>
+                     f.date_select :concall_date,class: 'form-control',placeholder:"Con-call时间" %>
+	     	  </div>-->
                   <div class="col-lg-12" style='margin-top:10px'>
                     <%= f.text_area :memo,class: 'form-control', placeholder:"备注" %>
                   </div>
