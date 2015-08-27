@@ -1,6 +1,8 @@
 #root/spec/factories.rb
 #
 FactoryGirl.define do
+  factory :job do
+      end
   factory :user do
      email { "#{user_name}@example.com".downcase }
      password "11111111"
@@ -8,9 +10,6 @@ FactoryGirl.define do
   end
   factory :interview do
   end
- 
-  factory :job do
-      end
 
   factory :invitation do
     end

@@ -5,9 +5,12 @@ require 'spec_helper'
       hunter1 = create(:user,id:101,user_name:"David",user_type:"猎头") 
       hunter2 = create(:user,id:102,user_name:"Rose",user_type:"猎头") 
       talent = create(:user,id:103,user_name:"Mary",user_type:"求职者")
-      job1 = create(:job,id:1,poster_id:100,employer: "微软",title:"软件工程师")
-      job2 = create(:job,id:2,poster_id:100,employer:"谷歌",title:"测试主管")
-      job3 = create(:job,id:3,poster_id:100,employer:"苹果",title:"架构师")
+      job1 = build(:job,id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job1.save(:validate => false)
+      job2 = build(:job,id:2,poster_id:100,employer:"谷歌",title:"测试主管")
+      job2.save(:validate => false)
+      job3 = build(:job,id:3,poster_id:100,employer:"苹果",title:"架构师")
+      job3.save(:validate => false)
       line_item1 = create(:line_item,email: talent.email,name: talent.user_name,sender_id: hunter1.id,recipient_id:talent.id,job_id:job3.id)
       invite_job1 = create(:invitation,job_id: job1.id,sender_id:hr.id,recipient_id:hunter1.id,accept:true,job_title:"软件工程师",job_employer:"微软")
       invite_job2 = create(:invitation,job_id: job2.id,sender_id:hr.id,recipient_id:hunter1.id,accept:true,job_title:"测试主管",job_employer:"谷歌")
@@ -26,8 +29,9 @@ require 'spec_helper'
       visit job_path(id:job3.id)
       click_on "推荐"
       fill_in "line_item_email", with: 'somebody@example.com'
-      sleep 2
+      sleep 5
       fill_in "line_item_name", with: 'somebody'
+      sleep 2
       expect{click_on "发送"}.to change{LineItem.count}.by(1)
       expect(page).to have_content("您已经成功推荐以下候选人")
       expect(page).to have_content("somebody@example.com")

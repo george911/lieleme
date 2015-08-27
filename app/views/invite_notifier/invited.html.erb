@@ -1,3 +1,8 @@
 你好&nbsp;<%= @recipient.user_name%>,
-<%= @sender.user_name %>邀请您参与<%= @job.employer %>公司的<%= link_to "#{@job.title}", id: @job,action:'show',controller: 'jobs',host:'lieleme.com' %>职位的招聘,佣金<%=@job.commission %>。
+<%= @sender.user_name %>邀请您参与<%= @job.employer %>公司的
+<% if Rails.env.production? %>
+	<%= link_to "#{@job.title}", id: @job,action:'show',controller: 'jobs',host:'lieleme.com' %>职位的招聘,佣金<%=@job.commission %>。
+<% else %>
+	<%= link_to "#{@job.title}", id: @job,action:'show',controller: 'jobs',host:'127.0.0.1:8200' %>职位的招聘,佣金<%=@job.commission %>。
+<% end %>
 猎友会敬上

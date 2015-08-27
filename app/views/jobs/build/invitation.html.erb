@@ -14,7 +14,7 @@
 				<p><hr></p>
 			      </div>
 			      <div class='col-lg-4'>
-			        <div id = '<%= user.id %>'>
+				<div id='<%= user.id %>'>
 					<%= button_to( "邀请做单",invite_path(user_id:user.id,job_id:@job.id),class:"invite-btn",remote: true, id: user.id) %> 
 			        </div>
 	    	      </div>

@@ -3,10 +3,11 @@ require 'spec_helper'
     scenario "猎头推荐新人->与候选人面试->HR查看" do
       hr = create(:user,user_name:"Zach", user_type:"人事")
       hunter = create(:user,user_name:"David",user_type:"猎头")
-      job1 = create(:job, poster_id:hr.id,interview:true,title:"软件工程师")
-  	User.all.each do |f|
-		  f.confirm
-	end
+      User.all.each do |f|
+        f.confirm
+      end
+      job1 = build(:job, poster_id:hr.id,interview:true,title:"软件工程师")
+      job1.save(:validate => false)
 
       visit root_path
       fill_in "user_email", with: "David@example.com"
@@ -106,7 +107,8 @@ require 'spec_helper'
     scenario "猎头从简历库推荐候选人应聘需要面试的职位,遭到否定" do
       hunter = create(:user,user_name:"David",user_type:"猎头")
       hr = create(:user,user_name:"Zach", user_type:"人事")
-      job1 = create(:job,poster_id:hr.id,interview:true,title:"软件工程师")
+      job1 = build(:job,poster_id:hr.id,interview:true,title:"软件工程师")
+      job1.save(:validate => false)
       talent = create(:user,user_name:"Mary",user_type:"求职者")
 	User.all.each do |f|
 		  f.confirm

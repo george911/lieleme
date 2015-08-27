@@ -2,7 +2,8 @@ require "spec_helper"
 
   feature "我的任务中的推荐" do
     scenario "See my referals on each task" do
-      job1 = create(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job1 = build(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job1.save(:validate => false)
       user1 = create(:user,id:100,user_name:"Zach",user_type:"人事")
       user2 = create(:user,id:101,user_name:"David",user_type:"猎头") 
       user3 = create(:user,id:102,user_name:"Mary",user_type:"求职者") 

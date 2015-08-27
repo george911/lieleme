@@ -2,6 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .jobs {
+#target {
+}
+#target img {
+	max-height:100%;
+	max-width:100%;
+}
+.btn-file {
+	  position: relative;
+	  overflow: hidden;
+	  opacity:0;
+	  z-index:1;
+	}
+.btn-file input[type=file] {
+	  position: absolute;
+	  top: 0;
+	  right: 0;
+	  min-width: 100%;
+	  min-height: 100%;
+	  font-size: 100px;
+	  text-align: right;
+	  filter: alpha(opacity=0);
+	  outline: none;
+	  background: white;
+	  cursor: inherit;
+	  display: block;
+	   }
 .transparent-btn {
   color: white;
   background-color: transparent;

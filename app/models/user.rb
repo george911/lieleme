@@ -53,7 +53,6 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :works, allow_destroy:true,reject_if: proc { |attributes| attributes['employer'].blank? }# proc的用法http://ruby-doc.org/core-2.1.1/Proc.html accepts_nested_attributes_for :line_items
   accepts_nested_attributes_for :reviews
   accepts_nested_attributes_for :jobs
-  accepts_nested_attributes_for :jobs
   
   # avatar设置
   has_attached_file :avatar, :styles => {:medium => "100x100#", :small => "50x50#"}, :default_url => "missing.png"#路径直接对应/app/assets/images/*,不能加其他

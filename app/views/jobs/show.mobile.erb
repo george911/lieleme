@@ -23,6 +23,7 @@
 <body  class='<%= controller.controller_name %>'>
   <nav class= 'navbar-fixed-top' style='background-color:#f27a31'>
       <div class='col-xs-1' style='margin-left:-20px'><!--确保logo靠左边-->
+  <div style="display:none"><%= image_tag(@job.avatar.url) %></div>
         <%= image_tag("logo.png",style:'padding-top:2px;') %>
       </div>
        <div class='col-xs-3'>

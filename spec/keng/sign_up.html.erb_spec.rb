@@ -7,7 +7,8 @@ require "spec_helper"
       hr.confirm
       talent = create(:user,id:102,user_name:"Mary",user_type:"求职者")
       talent.confirm
-      job =create(:job,id:1,poster_id:hr.id,employer:"微软",title:"软件工程师")
+      job = build(:job,id:1,poster_id:hr.id,employer:"微软",title:"软件工程师")
+      job.save(:validate => false)
       line_item = create(:line_item, email:"test@test.com",name:"测试小弟",job_id:job.id,sender_id:hunter.id)
 
       visit root_path
@@ -34,6 +35,7 @@ require "spec_helper"
       expect(page).to have_content("csxd@test.com")
       visit job_path(id:job.id)
       click_on "推荐"
+      sleep 1
       fill_in "line_item_email", with:"csed@test.com"
       sleep 1
       fill_in "line_item_name", with:"测试二弟"

@@ -4,7 +4,8 @@ require 'spec_helper'
     scenario "推荐候选人并查看是否都有显示",js:true do
       hr = create(:user,id:100,user_name:"Zach",user_type:"人事")
       hunter = create(:user,id:101,user_name:"David",user_type:"猎头") 
-      job = create(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job = build(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job.save(:validate => false)
       talent = create(:user, id:102,user_name:"Monica",user_type:"求职者")
       invite = create(:invitation,job_id: job.id,sender_id:hr.id,recipient_id:hunter.id)
       User.all.each do |f|

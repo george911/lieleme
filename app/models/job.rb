@@ -7,7 +7,8 @@ class Job < ActiveRecord::Base
 
   # avatar设置
   has_attached_file :avatar, :styles => {:medium => "100x100#", :small => "50x50#"}
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/ unless Rails.env.test?
+  validate :file_dimensions, :unless => "errors.any?"
 
   has_many :appliers, class_name:"User",through: :line_items,source: :recipient
   has_many :senders,-> {distinct},through: :line_items # job show页面显示的推送候选人的头像,同一猎头多次推荐算一个(distinct)
@@ -38,7 +39,16 @@ class Job < ActiveRecord::Base
 	    ['制造业',MANUFACTURE],
   	    ['贸易',TRADE]
   	    ]
- 
+
+  def file_dimensions
+    if avatar.queued_for_write[:original].present?
+      dimensions = Paperclip::Geometry.from_file(avatar.queued_for_write[:original].path)
+        if dimensions.width < 300 or dimensions.height < 300
+          errors.add(:avatar,'图片大小不能小于300x300')
+        end
+    end
+  end
+
   def offered?
     self.line_items.each do |f|
       if f.status == "offer"

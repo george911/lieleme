@@ -2,7 +2,8 @@ require "spec_helper"
   feature '推荐候选人' do
     scenario "给数据库内候选人推荐职位" do
 # 产生数据只能用双引号，否则rake spec命令会出错
-      job1 = create(:job, id:300,poster_id:100,employer: "微软",title:"软件工程师")
+      job1 = build(:job, id:300,poster_id:100,employer: "微软",title:"软件工程师")
+      job1.save(:validate => false)
       user1 = create(:user,id:100,user_name:"Zach",user_type:"人事")
       user2 = create(:user,id:101,user_name:"David",user_type:"猎头") 
       talent1 = create(:user,id:102,user_name:"Mary",user_type:"求职者", mobile:"123") 

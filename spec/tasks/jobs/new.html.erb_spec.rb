@@ -2,9 +2,12 @@ require 'spec_helper'
 
   feature "Invitation" do
     scenario "Create new invitation", :js => true do
-      job1 = create(:job, poster_id:100,employer: "微软",title:"软件工程师")
-      job2 = create(:job, poster_id:100,employer:"谷歌",title:"测试主管")
-      job3 = create(:job, poster_id:100,employer:"微软",title:"采购经理",city:"上海",industry:"计算机")
+      job1 = build(:job, poster_id:100,employer: "微软",title:"软件工程师")
+      job1.save(:validate => false)
+      job2 = build(:job, poster_id:100,employer:"谷歌",title:"测试主管")
+      job2.save(:validate => false)
+      job3 = build(:job, poster_id:100,employer:"微软",title:"采购经理",city:"上海",industry:"计算机")
+      job3.save(:validate => false)
       talent = create(:user,user_name:"Mary",user_type:"求职者") 
       hr = create(:user,id:100,user_name:"Zach",user_type:"人事")
       hunter1 = create(:user,id:101,user_name:"David",user_type:"猎头") 
@@ -37,7 +40,7 @@ require 'spec_helper'
       expect(page).to have_button('已发送邀请', disabled:true)
       
       click_on "完成"
-      sleep 5
+      sleep 2
       expect(page).to have_content('采购经理')
       # check email
       open_email("david@example.com")
@@ -54,8 +57,10 @@ require 'spec_helper'
     end
 
     scenario "Accept invitation in drop-down menu" ,js:true do
-      job1 = create(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
-      job2 = create(:job,id:2,poster_id:100,employer:"谷歌",title:"测试主管")
+      job1 = build(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job1.save(:validate => false)
+      job2 = build(:job,id:2,poster_id:100,employer:"谷歌",title:"测试主管")
+      job2.save(:validate => false)
       hr = create(:user,id:100,user_name:"Zach",user_type:"人事")
       hunter1 = create(:user,id:101,user_name:"David",user_type:"猎头") 
       invitation1 = create(:invitation,job_id: job1.id,sender_id:hr.id,recipient_id:hunter1.id)

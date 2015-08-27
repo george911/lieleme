@@ -4,15 +4,20 @@ require "spec_helper"
       puts "\n注意点1: app/views/interview_notifier/updated.html.erb设置了host为:127.0.0.1:8200,deploy要改掉"
       puts "注意点2: 屏幕宽窄会影响到hover的测试,没有拉的去拉到最宽!"
       puts "注意点3: rspec不支持join table search"
+
       hr = create(:user,id:100,user_name:"Zach",user_type:"人事")
       hunter = create(:user,id:101,user_name:"David",user_type:"猎头") 
       talent = create(:user,id:103,user_name:"Mary",user_type:"求职者")
       User.all.each do |f|
 	f.confirm
       end
-      job1 = create(:job,id:1,poster_id:100,employer: "微软",title:"软件工程师")
-      job2 = create(:job,id:2,poster_id:100,employer:"谷歌",title:"测试主管")
-      job3 = create(:job,id:3,poster_id:100,employer:"苹果",title:"架构师")
+      job1 = build(:job,id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job1.save(:validate => false)
+      job2 = build(:job,id:2,poster_id:100,employer:"谷歌",title:"测试主管")
+      job2.save(:validate => false)
+      job3 = build(:job,id:3,poster_id:100,employer:"苹果",title:"架构师")
+      job3.save(:validate => false)
+
       invite_job1 = create(:invitation,job_id: job1.id,sender_id:hr.id,recipient_id:hunter.id,accept:true,job_title:"软件工程师",job_employer:"微软")
       invite_job2 = create(:invitation,job_id: job2.id,sender_id:hr.id,recipient_id:hunter.id,accept:true,job_title:"测试主管",job_employer:"谷歌")
       invite_job3 = create(:invitation,job_id: job3.id,sender_id:hr.id,recipient_id:hunter.id,accept:true,job_title:"架构师",job_employer:"苹果")
@@ -39,6 +44,7 @@ require "spec_helper"
       clear_email
 
       # Mary accept interview1
+      sleep 3
       expect(page).to have_content("软件工程师")
       expect(page).to have_css "i.glyphicon-ok"
       expect(page).to have_css "i.glyphicon-remove"

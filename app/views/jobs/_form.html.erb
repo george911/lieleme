@@ -13,11 +13,9 @@
 
                 <%= form_for @job do |f| %>
                   <% if @job.errors.any? %>
-                    <div id="error_explanation">
-                      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
-
+                    <div class='col-lg-12' style='color:red'>
                       <ul>
-                      <% @job.errors.full_messages.each do |message| %>
+                      <% @job.errors[:avatar].each do |message| %>
                         <li><%= message %></li>
                       <% end %>
                       </ul>
@@ -38,20 +36,27 @@
                   <div class="col-lg-12" style='margin-top:10px'>
                     <%= f.text_field :addr,class: 'form-control',placeholder:"地址" %>
                   </div>
-                  <div class="col-lg-6" style='margin-top:10px'>
+                  <div class="col-lg-6" style='margin-right:200px;margin-top:10px'>
                     <%= f.number_field :commission,class: 'form-control',placeholder:"佣金" %>
-                  </div>
-		  <div class="col-lg-12" style='margin-top:10px'>
-		    职位logo
-		    <%= f.file_field :avatar,  
-			           :'data-classButton' => 'btn btn-primary',
-				          :'data-input' => 'false', classIcon:  'icon-plus', 
-					         :'data-buttonText' => 'Your label here'  %> 
 		  </div>
-		  <!--<div class="col-lg-12 select" style='margin-top:10px'>
-                     f.date_select :concall_date,class: 'form-control',placeholder:"Con-call时间" %>
-	     	  </div>-->
-                  <div class="col-lg-12" style='margin-top:10px'>
+		  <div class="" style='width:0px;margin-top:10px;margin-right:0px'>
+		    <div class='well form-control' style='border:0px;padding-top:3px;padding-bottom:3px;'>
+		    <%= f.file_field :avatar, class: "btn btn-default btn-file" %>
+		    </div>
+		  </div>
+		  <div class='col-lg-6' style='margin-right:200px;margin-top:10px;'>
+		    <div class='well form-control' style='margin-bottom:0px;padding-top:3px;padding-bottom:3px'>
+		      <span style='font-size:15px'>设置logo图片&nbsp;&nbsp;</span>
+		    </div>
+		  </div>
+		  <div class='col-lg-12' style='marginp-top:0px;'>
+		    <a tabindex="0" class="" role="button" data-trigger="click" title="logo图案将作为微信共享的链接图片">
+			<i style='margin:5px 0px 0px 0px' class='glyphicon glyphicon-question-sign'></i>
+		    </a>
+		  </div>
+		  <div class='col-lg-3' id='target' style='margin-top:10px'>
+		  </div>
+                  <div class="col-lg-12" style='margin-top:10'>
                     <%= f.text_area :memo,class: 'form-control', placeholder:"备注" %>
                   </div>
                   <div class="col-lg-12" style='margin-top:10px'>

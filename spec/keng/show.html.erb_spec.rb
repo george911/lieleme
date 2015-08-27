@@ -48,8 +48,10 @@ require 'spec_helper'
     end
 
     scenario "推荐各种人才",js:true do
-      job1 = create(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
-      job2 = create(:job, id:2,poster_id:100,employer: "谷歌",title:"社区经理")
+      job1 = build(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job1.save(:validate => false)
+      job2 = build(:job, id:2,poster_id:100,employer: "谷歌",title:"社区经理")
+      job2.save(:validate => false)
       user1 = create(:user,id:100,user_name:"Zach",user_type:"人事")
       user2 = create(:user,id:101,user_name:"David",user_type:"猎头") 
       talent1 = create(:user,id:102,user_name:"Mary",user_type:"求职者", mobile:'123') 
@@ -85,6 +87,7 @@ require 'spec_helper'
       fill_in "line_item_email", with: "1@1.com" 
       sleep 2
       fill_in "line_item_name", with: "测试小弟" 
+      sleep 2
       expect{click_on "发送"}.to change{LineItem.count}.by(1)
       expect(page).to have_content("您已经成功推荐以下候选人")
       expect(page).to have_content("1@1.com")

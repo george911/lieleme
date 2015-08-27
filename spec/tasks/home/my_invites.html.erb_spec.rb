@@ -1,8 +1,10 @@
 require "spec_helper"
   feature "My invites" do
     scenario "Accept invitation in my_invites action" ,js:true do
-      job1 = create(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
-      job2 = create(:job,id:2,poster_id:100,employer:"谷歌",title:"测试主管")
+      job1 = build(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job1.save(:validate => false)
+      job2 = build(:job,id:2,poster_id:100,employer:"谷歌",title:"测试主管")
+      job2.save(:validate => false)
       user1 = create(:user,id:100,user_name:"Zach",user_type:"人事")
       user1.confirm
       user2 = create(:user,id:101,user_name:"David",user_type:"猎头") 
@@ -33,7 +35,8 @@ require "spec_helper"
     end
 
     scenario "推荐候选人", js:true do
-      job1 = create(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job1 = build(:job, id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job1.save(:validate => false)
       user1 = create(:user,id:100,user_name:"Zach",user_type:"人事")
       user1.confirm
       user2 = create(:user,id:101,user_name:"David",user_type:"猎头") 
@@ -116,8 +119,10 @@ require "spec_helper"
       hunter2.confirm
       talent1 = create(:user,id:103,user_name:"Mary",user_type:"求职者")
       talent1.confirm
-      job1 = create(:job,id:1,poster_id:100,employer: "微软",title:"软件工程师")
-      job2 = create(:job,id:2,poster_id:100,employer: "谷歌",title:"架构师")
+      job1 = build(:job,id:1,poster_id:100,employer: "微软",title:"软件工程师")
+      job1.save(:validate => false)
+      job2 = build(:job,id:2,poster_id:100,employer: "谷歌",title:"架构师")
+      job2.save(:validate => false)
       invite_job1 = create(:invitation,job_id: job1.id,sender_id:hr.id,recipient_id:hunter1.id,job_title:"软件工程师",job_employer:"微软")
       invite_job2 = create(:invitation,job_id: job2.id,sender_id:hr.id,recipient_id:hunter1.id,job_title:"架构师",job_employer:"谷歌")
       # 由hunter2推荐job1候选人talent1
