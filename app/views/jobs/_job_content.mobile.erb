@@ -23,7 +23,7 @@
      			  </table> 
  				</td>
  			</tr>
- 			<tr><td class='faint interval'style='width:20%;vertical-align: top;'>备注:</td><td class='interval'><%= @job.memo %></td></tr>
+			<tr><td class='faint interval'style='width:20%;vertical-align: top;'>备注:</td><td class='interval'><p><%= @job.memo.gsub(/\n/,'</p>').html_safe unless @job.memo.blank? %></td></tr>
       	</table>
   	  </div>
     </div>
