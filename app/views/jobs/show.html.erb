@@ -153,6 +153,7 @@
     <br />  <br />
   </div>
 
+  <%= hidden_div_if @job.senders.empty? do %>
   <div class='row'>
     <div class='col-lg-6'>
       <p class='green_title'>参与的猎头· · · · · ·</p>
@@ -163,6 +164,8 @@
 	</p>
     </div>
   </div>
+  <% end %>
+
   <div class='row'>
     <div class='col-lg-6'>
       <!--把/n换成回车并且插入段落标记和首行缩进-->
@@ -194,6 +197,7 @@
   </div>
 
   <div class='row'>
+    <%= hidden_div_if @job.bosses.empty? do %>
     <div class='col-lg-2'>
       <p class='green_title'>汇报对象:</p>
           <% if @job.bosses != nil %>
@@ -202,6 +206,8 @@
           <% end %> 
       <% end %>
     </div>
+    <% end %>
+    <%= hidden_div_if @job.subordinates.empty? do %>
     <div class='col-lg-2'>
       <p class='green_title'>下属:</p>
         <% if @job.subordinates.present? %>
@@ -216,6 +222,7 @@
 	   </table>
             <% end %>
     </div>
+    <% end %>
   </div><!--row-->
 
   <div><!--divide-->
