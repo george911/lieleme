@@ -1,5 +1,14 @@
 ActiveAdmin.register Job do
-
+  index do
+    selectable_column
+    id_column # 这样写才能变成link to job的链接
+    column :title
+    column :employer
+    column :status
+    column :city
+    column :industry
+    column :interview
+  end
   filter :title_or_employer_or_status_or_city_or_industry, as: :string
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

@@ -1,9 +1,8 @@
 require "spec_helper"
   feature "My interviews" do
     scenario "accept interview",js:true do
-      puts "\n注意点1: app/views/interview_notifier/updated.html.erb设置了host为:127.0.0.1:8200,deploy要改掉"
-      puts "注意点2: 屏幕宽窄会影响到hover的测试,没有拉的去拉到最宽!"
-      puts "注意点3: rspec不支持join table search"
+      puts "注意点1: 屏幕宽窄会影响到hover的测试,没有拉的去拉到最宽!"
+      puts "注意点2: rspec不支持join table search"
 
       hr = create(:user,id:100,user_name:"Zach",user_type:"人事")
       hunter = create(:user,id:101,user_name:"David",user_type:"猎头") 
