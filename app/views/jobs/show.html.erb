@@ -197,7 +197,7 @@
   </div>
 
   <div class='row'>
-    <%= hidden_div_if @job.bosses.present? do %>
+    <%= hidden_div_if @job.bosses.first.blank? do %>
     <div class='col-lg-2'>
       <p class='green_title'>汇报对象:</p>
           <% if @job.bosses != nil %>
@@ -207,7 +207,7 @@
       <% end %>
     </div>
     <% end %>
-    <%= hidden_div_if @job.subordinates.present? do %>
+    <%= hidden_div_if @job.subordinates.first.blank? do %>
     <div class='col-lg-2'>
       <p class='green_title'>下属:</p>
         <% if @job.subordinates.present? %>
