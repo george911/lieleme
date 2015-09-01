@@ -19,7 +19,7 @@ class JobsController < ApplicationController
   end
  
   def index
-    @jobs = Job.all.page(params[:page]).per(10) # params[:page]不用设置
+    @jobs = Job.all.order("created_at desc").page(params[:page]).per(10) # params[:page]不用设置
   end
 
   # GET /jobs/1
@@ -154,7 +154,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:avatar,:title, :interview,:employer,:addr, :city, :industry, :commission, :role, :requirement, :base_pay, :month, :bonus, :allowance, :stock, :stock_num, :concall_date, :user_id, :peer, :memo, :company_info, :work_year,
+      params.require(:job).permit(:status,:avatar,:title, :interview,:employer,:addr, :city, :industry, :commission, :role, :requirement, :base_pay, :month, :bonus, :allowance, :stock, :stock_num, :concall_date, :user_id, :peer, :memo, :company_info, :work_year,
 	bosses_attributes: [:title]
 				 )
     end

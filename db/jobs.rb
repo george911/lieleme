@@ -41,7 +41,7 @@ job1 = Job.create(
   subordinates_attributes: {first:{
 			title:'',
 			num:''}},
-  status:		'active'
+  status:		'pending'
 			)
 
 job2=Job.create(
@@ -91,7 +91,7 @@ job2=Job.create(
   subordinates_attributes: {first:{
 			title:'',
 			num:''}},
-  status:		'active'
+  status:		'finished'
 			)
 Job.create(
   id:			10003,

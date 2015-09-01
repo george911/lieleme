@@ -11,12 +11,12 @@ module ClearAll
   Review.delete_all
   Subordinate.delete_all
   Summary.delete_all
+  Micropost.delete_all # Micropost放在User前面才不会出现update or delete on table "users" violates foreign key constraint的错误
   User.delete_all
   Work.delete_all
   Comment.delete_all
   Invitation.delete_all
   Interview.delete_all
-  Micropost.delete_all
   SavingList.delete_all
   TalentPool.delete_all
   JobRate.delete_all

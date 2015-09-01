@@ -14,7 +14,7 @@ class Job < ActiveRecord::Base
   has_many :senders,-> {distinct},through: :line_items # job show页面显示的推送候选人的头像,同一猎头多次推荐算一个(distinct)
   has_many :recipients, through: :invitations
    
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
   has_many :bosses, :dependent => :destroy
   has_many :subordinates, :dependent => :destroy
   has_many :experiences, :dependent => :destroy

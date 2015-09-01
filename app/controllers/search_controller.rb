@@ -8,7 +8,12 @@ class SearchController < ApplicationController
       render "users/index"
     when "职位"
       @jobs = general_search(params[:query],params[:q])
-      render "jobs/index"
+      @active_jobs = @jobs
+      @pending_jobs = @jobs.where.not(status:"pending")
+      respond_to do |format|
+        format.html { render "jobs/index" }
+	format.js 
+      end
     else
       @users = general_search(nil,"猎头")
       render "users/index"
@@ -53,7 +58,7 @@ class SearchController < ApplicationController
 	  jobs=jobs.where('title like ? or role like ? or requirement like ?',"%#{f}%","%#{f}%","%#{f}%") # 搜索职衔、职责和要求
 	end
       end
-      return jobs.page(params[:page]).per(10)
+      return jobs.order("created_at desc").page(params[:page]).per(10)
 
     elsif keywords.present? and category == "人才"
       users=User.where(user_type: "求职者")
@@ -84,7 +89,7 @@ class SearchController < ApplicationController
     elsif category == "人才"
       return User.where(user_type: "求职者").page(params[:page]).per(10)
     else 
-      return Job.all.page(params[:page]).per(10)
+      return Job.all.order("created_at desc").page(params[:page]).per(5)
     end
   end
 end

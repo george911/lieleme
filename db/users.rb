@@ -1,6 +1,6 @@
 a=User.new(
   verify:		'hr',
-  title:		'CEO',
+  title:		'高级顾问',
   city:			'上海',
   id:			'10000',
   mobile:		'13916382071',
