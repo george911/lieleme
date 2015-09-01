@@ -1,5 +1,8 @@
 ActiveAdmin.register Job do
-  index do
+      permit_params :status,:avatar,:title, :interview,:employer,:addr, :city, :industry, :commission, :role, :requirement, :base_pay, :month, :bonus, :allowance, :stock, :stock_num, :concall_date, :user_id, :peer, :memo, :company_info, :work_year,
+	bosses_attributes: [:title]
+				 
+ index do
     selectable_column
     id_column # 这样写才能变成link to job的链接
     column :title
