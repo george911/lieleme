@@ -134,7 +134,11 @@
                </div>
 
                <div class="modal-body">
-		 <%= raw @qr.as_html unless current_user == nil %>
+		       <% if user_signed_in? %>
+			       <%= raw @qr.as_html unless current_user == nil %>
+		       <% else %>
+			       您还没有登陆
+		       <% end %>
                </div><!--modal body end -->
                          
                    <div class="modal-footer">
