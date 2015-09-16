@@ -14,7 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery-ui
 //= require jquery_ujs
-////= require ckeditor-jquery
+// require ckeditor-jquery
 //= require_tree .
 //  删除 require bootstrap-sprockets
 //= require turbolinks
