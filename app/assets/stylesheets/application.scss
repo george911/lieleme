@@ -22,7 +22,9 @@ html,body {
 @import "bootstrap-sprockets";
 @import 'bootstrap';
 @import 'bootstrap-datetimepicker';
-a img { border: none; }
+img
+{  border-style: none;
+}
 height: 100%;
 .img-circle {
   border: 0px transparent;
