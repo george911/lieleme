@@ -1,5 +1,8 @@
 # Ruby通过brew install ruby安装,rails通过gem 'rails','xxx'安装
 source 'http://ruby.taobao.org'
+# add blog editor
+gem 'ckeditor_rails'
+
 # source 'http://rubygems.org'
 gem 'fullcalendar-rails'
 gem 'acts_as_votable', '~> 0.10.0'

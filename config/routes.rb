@@ -46,7 +46,9 @@ Rails.application.routes.draw do
     get 'my_referals',to:'home#my_referals'
     get 'my_talents',to:'home#my_talents'
     get 'my_jobs',to:'home#my_jobs'
-    post 'email_multiple', to:'home#email_multiple'
+    
+    # 一个奇怪的问题, post的话会找不到路径,而且会和添加备注的submit冲突
+    patch 'email_multiple', to:'home#email_multiple'
     post 'send_email', to:'home#send_email'
 
 
@@ -59,7 +61,8 @@ Rails.application.routes.draw do
       end
     root 'front#show'
       
-    resources :microposts,only: [:create, :destroy]
+    get 'users/:id/blog_home',to:'microposts#home', as: :blog_home
+    resources :microposts
     resources :relationships, only: [:create, :destroy]
 
     patch 'reject' => 'line_items#reject', as: :job_reject

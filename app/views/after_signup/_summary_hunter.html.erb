@@ -1,26 +1,32 @@
-<%= controller.controller_name %> 
-                          <div class='col-lg-6'>
+                          <div class='col-lg-12'>
                             <%= f1.text_field :title,class: "form-control", placeholder: "职位头衔" %>
                             <br>
                           </div>
 			  
-			  <div class='col-lg-6'>
+                          <div class='col-lg-12'>
+			    <%= f1.fields_for :summaries,@user.summaries.build do |summary| %>
+			      <%= summary.text_field :content, class: "form-control", placeholder: "一句话介绍自己" %>
+		      	    <% end %>
+                            <br>
+                          </div>
+			  
+			  <div class='col-lg-12'>
                             <%= f1.text_field :industry,class: "form-control", placeholder: "专注行业" %>
                             <br>
                           </div>
 
-                          <div class='col-lg-6'>
-                            <%= f1.text_field :focus_job1,class: "form-control", placeholder: "专注职位" %>
+                          <div class='col-lg-4'>
+                            <%= f1.text_field :focus_job1,class: "form-control", placeholder: "擅长职位" %>
                             <br>
                           </div>
                           
-                          <div class='col-lg-6'>
-                            <%= f1.text_field :focus_job2,class: "form-control", placeholder: "专注职位" %>
+                          <div class='col-lg-4'>
+                            <%= f1.text_field :focus_job2,class: "form-control", placeholder: "擅长职位" %>
                             <br>
                           </div>
                           
-                          <div class='col-lg-6'>
-                            <%= f1.text_field :focus_job3,class: "form-control", placeholder: "专注职位" %>
+                          <div class='col-lg-4'>
+                            <%= f1.text_field :focus_job3,class: "form-control", placeholder: "擅长职位" %>
                             <br>
                           </div>
                         

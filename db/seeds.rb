@@ -18,7 +18,7 @@ require File.expand_path('../line_items',__FILE__)
 require File.expand_path('../reviews',__FILE__)
 require File.expand_path('../invitations',__FILE__)
 require File.expand_path('../interviews',__FILE__)
-require File.expand_path('../microposts',__FILE__)
+#require File.expand_path('../microposts',__FILE__)
 require File.expand_path('../saving_lists',__FILE__)
 require File.expand_path('../talent_pools',__FILE__)
 

@@ -1,0 +1,74 @@
+<div style=''>
+	<div class='col-md-3 scroll' align='center'>
+	  <div class='row' style='padding-top:70px'>
+	    <%= link_to image_tag(@user.avatar.url,size:'80x80',class: 'img-circle'), user_path(@user), target: "_blank" %>
+	  </div>
+	  <div class='row' style='padding-top:20px'>
+		   <span style='font-size:20px'><b><%= @user.user_name %></b></span>
+	           <button style='border-radius:3px;background-color:white;border:1px solid #e57866;padding:0px 5px 0px 5px;font-size:10px;color:#e57866'>
+	           	<%= @user.user_type %>
+	           </button>
+	  </div>
+	  <div class='row'>
+	  	<p><%= render "users/follow_form" %></p>
+	  </div>
+	  <div class='row'>
+	  	<p style='padding-left:40px;padding-right:40px'><%= @user.summaries.first.content %></p>
+	  </div>
+	  <div class='row'>
+            <%= render "shared/stats" %>
+	  </div>
+	  <div class='row'>
+	    我的文集
+	  </div>
+	  <div class='row'>
+	    <%= link_to "长博客" %>
+	  </div>
+	  <div class='row'>
+	    <%= link_to "短博客" %>
+	  </div>
+	  <br>
+	  <br>
+	  <% if @user.user_type == "人事" %>
+	  <div class='row' align='left' style='padding-left:40px'>
+	    我的热招职位
+          </div>
+	  <% @user.jobs.each do |job| %>
+	    <div class='row' align='left' style='padding-top:1px;padding-left:40px'>
+		    <%= link_to job_path(job), target:"_blank" do %>
+			    <i class='fa fa-book'>&nbsp;<%= job.title %></i>
+		<% end %>
+	    </div>
+	    <% end %>
+	  <% else %>
+	    <br>
+	    <br>
+	    <br>
+	    <br>
+	    <br>
+	    <br>
+	    <br>
+	    <br>
+	   <% end %>
+	  <div style='height:100px'>
+	  </div>
+        </div>
+	<div class='col-md-6' style='padding-left:50px;padding-top:38px'>
+	  <div class='row'>
+	    <h4>最新文章</h4>
+            <hr style='border:none;border-top:2px solid #cccccc' >
+	  </div>
+	  <% @user.microposts.order("created_at desc").each do |f| %>
+	    <div class='row'>
+		<p>发表于<%= f.created_at.strftime("%m-%d-%y") %></p>
+		<h4><%= link_to "#{f.title}",micropost_path(f),target:"_blank" %> </h4>
+		<hr style='border:none;border-top: 1px dashed #cccccc'> 
+	    </div>
+	  <% end %>
+  </div>
+  <div class='fixed-btn'>
+    <%= link_to new_micropost_path,target:"_blank" do %>
+	    <i class='glyphicon glyphicon-pencil' style='font-size:30px;color:white;background-color:#49be38'></i>
+    <% end %>
+  </div>
+</div>

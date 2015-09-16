@@ -5,7 +5,7 @@
       <td style='padding-right:10px'>
 	<a href="<%= following_user_path(@user) %>">
           <strong id="following" class="stat">
-            <%= @user.followings.count %>
+		  <i><%= @user.followings.count %></i>
           </strong>
     	  <p>关注</p>
   	</a>
@@ -13,7 +13,7 @@
       <td>
         <a href="<%= followers_user_path(@user) %>">
     	  <strong id="followers" class="stat">
-            <%= @user.followers.count %>
+		  <i><%= @user.followers.count %></i>
           </strong>
     	  <p>粉丝</p>
   	</a>

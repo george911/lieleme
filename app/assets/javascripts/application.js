@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery-ui
 //= require jquery_ujs
+//= require ckeditor-jquery
 //= require_tree .
 //  删除 require bootstrap-sprockets
 //= require turbolinks
@@ -27,7 +28,7 @@
 // fullcalendar放到datetimepicker后面
 //= require fullcalendar
 $(function() {
-  $('#job_avatar').on('change', function(event) {
+  $('#job_avatar, #micropost_avatar').on('change', function(event) {
     var files = event.target.files;
     var image = files[0]
     var reader = new FileReader();

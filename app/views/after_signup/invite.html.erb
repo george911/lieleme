@@ -1,7 +1,9 @@
 <div class="container" style='margin-top:80px'>
+  <% if @invites.empty? %>
+    <span style='color:#fa6464'><%= notice %></span>
+  <% else %>
   <div class="well col-lg-6">
     <span style='color:#fa6464'><%= notice %></span>
-    <%= hidden_div_if @invites.empty? do %>
     <h3 style='color:#fa6464'>已经为您推荐以下职位</h3>
 	<table class='table'>
 	    <thead>
@@ -38,6 +40,6 @@
 		</tr> 
        <% end %>
      </table>
-     <% end %>
   </div>
+  <% end %>
 </div>

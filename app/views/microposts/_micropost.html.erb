@@ -1,7 +1,12 @@
-<li id="micropost-<%= micropost.id %>">
+<li class='micropost' id="micropost-<%= micropost.id %>">
   <%= link_to image_tag(micropost.user.avatar.url(:small), class: 'img-squre',size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.user_name, micropost.user %></span>
-  <span class="content"><%= micropost.content %>
+  <span class="content">
+  <% if micropost.title.present? %>
+	  <%=  link_to "#{micropost.title}", micropost %>
+  <% else %>
+	  <%= micropost.content.html_safe %>
+  <% end %>
   <% if micropost.job_id %>
 	  <%= link_to "查看详细", micropost.job,method: :get, target: "_blank" %>
   <% end %></span>

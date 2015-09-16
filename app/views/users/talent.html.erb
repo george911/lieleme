@@ -4,27 +4,44 @@
   <div class='well col-lg-7'>
     <p id="notice"><%= notice %></p><!--注册好返回这里有一条提示-->
     <div class = 'row'>
-        <div class='col-lg-12'>
-          			<%= @user.user_name.present? ? "#{@user.user_name} | " : "佚名 | " %>
-          			<%= @user.city.present? ? "#{@user.city} | ": "全国 | " %>
-          			<%= @user.title.present? ? " #{@user.title} | " : '找工作中 | ' %>
-				        <%= remove_unwanted_words distance_of_time_in_words(Date.today,@user.birthday) unless @user.birthday == nil %>&nbsp;<!--注意I18n翻译的过程会出错，需要在cn.yml里设置-->
-          		<!--avatar的size设置必须要这样，用@user.avatar.url(:small)不管用--> 
-          		<%= image_tag(@user.avatar.url,size: '50x50', class: "img-circle") %>
+      <div class='col-lg-12'>
+      <table width='100%'>
+        <tr>
+          <td rowspan="2" width='40px'style='padding-right:0px'>
+		  <%= link_to image_tag(@user.avatar.url,size: "40x40",class: "img-circle"),blog_home_path(@user) %>
+                 </td>
+                 <td style='padding-left:10px'>
+	           <button style='border-radius:3px;background-color:white;border:1px solid #e57866;padding:0px 5px 0px 5px;font-size:10px;color:#e57866'>
+	           	<%= @user.title %>
+	           </button>
+	           <span style='color:#639fca'><%= @user.user_name %></span>
+	           <span style='font-size:12px;color:#999999'><%= @user.city %></span>
+          </td>
+          <td width='' rowspan='2' class='text-right'>
+          </td>
+        </tr>
+        <tr>
+          <td style='font-size:12px;color:#999999;padding-left:12px'>
           	    <% if @user.educations.first != nil %>
-          	      <%= @user.educations.first.school %><%= @user.educations.first.degree %>&nbsp;|
-              	<% end %>
+			<%= "毕业于#{@user.educations.first.school}" %><%= @user.educations.first.degree %>,
+	      <% end %>
 		<% if @user.works.size >=1 %>                  
           	      <!--随机产生全部工作单位，index并不是works的id,是一个iteration的计数器,注意do里面要加index的对应-u -->
 		      <% @user.works.shuffle.each_with_index do |f,u| %>
-            	      <%= f.employer %><!--自动加一个空格-->
-                    <%= "|" unless u == @user.works.size-1 %> <!--最后一次不加|-->                 
+			<%= "曾经在" if u = 0 %><%= f.employer %><!--自动加一个空格--><%= "工作" if u == @user.works.size-1 %>
+                    <%= "," unless u == @user.works.size-1 %> <!--最后一次不加|-->                 
                   <% end %>
-                <% else %>
-                  工作单位保密&nbsp;
-                <% end %>
-        </div><!--col-lg-6-->
+	  <% end %>
+      </td>
+        </tr>    
+      </table>
+      </div>
     </div><!--end row-->
+    <div class='row'>
+	    <div class='col-md-12'>
+		    <hr style='padding:0px'>
+	    </div>
+    </div>
 
   <div style='margin-top:20px' class='row'>
     <div class='col-lg-12'>
@@ -34,6 +51,7 @@
 			  <td style='padding-right:5px'><%= button_to '推荐',user_refer_path, method: :get,class: 'btn-orange',id:"refer_job" %></td>
 	    		  <td style='padding-right:5px'><%= button_to '面试',new_user_interview_path(@user), method: :get, class: 'btn-orange',target:"_blank" %></td>
 			  <td style='padding-right:5px'><%= render 'follow_form' %></td>
+	    		  <td style='padding-right:5px'><%= button_to '博客',blog_home_path(@user), method: :get, class: 'btn-orange',target:"_blank" %></td>
 		<tr>
        </table>
      <% else %>
@@ -157,23 +175,6 @@
 
 </div><!--end well-->
 
-<div class='well col-lg-7'>
-  <aside class="col-md-4">
-    <section class="stats">
-      <%= render 'shared/stats' %>
-    </section>
-  </aside>
-
-  <div class="col-md-8">
-    <% if @user.microposts.any? %>
-      <h3>最新动态</h3>
-      <ol class="microposts">
-        <%= render @microposts %>
-      </ol>
-      <%= paginate @microposts %>
-    <% end %>
-  </div>
-</div>
 
 </div><!--end container-->
 

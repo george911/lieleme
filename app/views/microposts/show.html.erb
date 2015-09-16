@@ -1,0 +1,59 @@
+<div class="micropost" style='padding-top:25px'>
+<div class='row'>
+  <div class='col-md-10'>
+  </div>
+  <div class='col-md-2'>
+    <% if current_user == @micropost.user %>
+      <%= link_to @micropost, method: :delete, data: { confirm: "确定删除吗?" } do %>
+	  <i class='fa fa-trash-o' style ='padding-bottom:0px;font-size:20px'></i>
+      <% end %>
+    <% end %>
+  </div>
+  </div>
+  <hr style='margin-top:10px'>
+  <div class='container'>
+    <div class='row'>
+      <table width='100%'>
+        <tr>
+          <td rowspan="2" width='40px'style='padding-right:0px'>
+		  <%= link_to image_tag(@user.avatar.url,size: "40x40",class: "img-circle"),blog_home_path(@user) %>
+                 </td>
+                 <td style='padding-left:10px'>
+	           <button style='border-radius:3px;background-color:white;border:1px solid #e57866;padding:0px 5px 0px 5px;font-size:10px;color:#e57866'>
+	           	<%= @user.user_type %>
+	           </button>
+	           <span style='color:#639fca'><%= @user.user_name %></span>
+          </td>
+          <td width='' rowspan='2' class='text-right'>
+            <%= render "users/follow_form" %>
+          </td>
+        </tr>
+        <tr>
+          <td style='padding-left:12px'>
+            被<%= @user.followers.count %>个人关注	
+          </td>
+        </tr>    
+      </table>
+
+    </div>
+    <div class='row'>
+      <hr style='padding:0px'>
+    </div>
+    <div class='row'>
+      <h2>
+        <%= @micropost.title %>
+      </h2>
+    </div>
+    <div class='row post'>
+      <%= @micropost.content.html_safe %>
+    </div>
+    <div class='row'>
+      <%= image_tag @micropost.avatar.url,size:"400x300" unless @micropost.avatar_file_name == nil %> 
+    </div>
+  </div>
+  <div class='fixed-btn'>
+	  <button tabindex="0" class="" role="button" data-toggle="popover" data-trigger="click" data-placement="left" data-html="true" data-title="分享职位到微信" data-content="<%= @qr.as_html %>"><i class="fa fa-qrcode" style='font-size:30px'></i></button>
+  </div>
+</div>
+
+</div>

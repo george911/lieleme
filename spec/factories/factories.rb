@@ -26,5 +26,7 @@ FactoryGirl.define do
   factory :saving_list do
   end
 
+  factory :micropost do
+  end
 end
 

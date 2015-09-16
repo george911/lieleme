@@ -1,6 +1,6 @@
 <% if @feed_items.any? %>
   <ol class="microposts">
-	  <%= render @feed_items %><!--因为feed_items是microposts,rails会自动找到microposts下面的_micropost.html.erb渲染-->
+	  <%= render @feed_items %><!--因为feed_items返回microposts,rails会自动找到microposts下面的_micropost.html.erb渲染-->
   </ol>
   <%= paginate @feed_items %>
 <% end %>

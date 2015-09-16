@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title><%= @micropost.title %></title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  
+  <!-- ie8 和ie9s support-->
+  <script src="/respondjs/html5shiv.js"></script>
+  <script src="/respondjs/respond.min.js"></script>
+      
+  <!-- Bootstrap core JavaScript 一定要在head和底部都放，否则下拉菜单实现不了========================================================= -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <!--/Users/George/site2.0/app/views/devise/registrations/new.html.erb 要用到勾的图像-->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body  class='<%= controller.controller_name %>'>
+ <div class='row' style='display:none'>
+      <%= image_tag @micropost.avatar.url unless @micropost.avatar_file_name == nil %> 
+    </div>
+<div class="col-xs-12" style='padding-top:'>
+  <div style='padding-left:20px;padding-right:20px'>
+
+    <div class='row'>
+      <table width='100%'>
+        <tr>
+          <td rowspan="2" width='40px'style='padding-right:0px'>
+	           <%= link_to image_tag(@user.avatar.url,size: "40x40",class: "img-circle"),user_path(@user), target: "_blank" %>
+                 </td>
+                 <td style='padding-left:10px'>
+	           <button style='border-radius:3px;background-color:white;border:1px solid #e57866;padding:0px 5px 0px 5px;font-size:10px;color:#e57866'>
+	           	<%= @user.user_type %>
+	           </button>
+	           <span style='color:#639fca'><%= @user.user_name %></span>
+          </td>
+          <td width='' rowspan='2' class='text-right'>
+            <%= render "users/follow_form" %>
+          </td>
+        </tr>
+        <tr>
+          <td style='padding-left:12px'>
+            被<%= @user.followers.count %>个人关注	
+          </td>
+        </tr>    
+      </table>
+
+    </div>
+    <div class='row'>
+      <hr style='padding:0px'>
+    </div>
+    <div class='row'>
+      <h2>
+        <%= @micropost.title %>
+      </h2>
+    </div>
+    <div class='row post'>
+      <%= @micropost.content.html_safe %>
+    </div>
+   
+    <div class='row' align='center'>
+        <%= image_tag @micropost.avatar.url,size:"300x225" unless @micropost.avatar_file_name == nil %> 
+    </div>
+  </div>
+  <div class='fixed-btn'>
+	  <button tabindex="0" class="" role="button" data-toggle="popover" data-trigger="click" data-placement="left" data-html="true" data-title="分享职位到微信" data-content="<%= @qr.as_html %>"><i class="fa fa-qrcode" style='font-size:30px'></i></button>
+  </div>
+</div>
+
+
+</body>

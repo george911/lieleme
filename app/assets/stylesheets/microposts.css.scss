@@ -1,10 +1,84 @@
 .microposts {
+.popover-content {
+table {
+	  border-width: 0;
+	  border-style: none;
+	  border-color: #0000ff;
+	  border-collapse: collapse;
+	}
+	
+	td {
+	  border-left: solid 5px #000;
+	  padding: 0; 
+	  margin: 0; 
+	  width: 0px; 
+	  height: 5px; 
+		  }
+		  
+		  td.black { border-color: #000; }
+		  td.white { border-color: #fff; }
+	}
+    .fixed-btn {
+    button {
+	padding:10px;
+	background-color:#fff;
+	border:1px solid #ddd;}
+    	position: fixed;
+    	right:15%;
+    	bottom:15%;
+    	border: 1px transparent #fff;
+    	background-color: #fff;
+    	z-index:1040;
+    }
+//修饰添加照片按钮
+#target img {
+	max-height:100%;
+	max-width:100%;
+}
+  .btn-file {
+	  position: relative;
+	  overflow: hidden;
+	  opacity:0;
+	  z-index:1;
+	}
+  h4{
+    a{
+	color:#000000;
+}}
+  .scroll{
+    max-height:650px;
+    overflow-y:scroll; 
+	  }
+  .post{
+    p{
+      font-size:16px;
+      color: #2f2f2f;
+      line-height:2.0;
+      font-weight:normal;
+      }
+    }
+  //绿色按钮
+  .btn-orange{
+    height: 30px;
+    width: 100px;
+    border-radius:7px;
+    background-color: #49be38; 
+    border: solid;
+    color: #ffffff;
+    }
+  .micropost{ 
+    .container {
+    	width: 600px;
+    	margin-left: auto;
+    	margin-right: auto;
+      }
+    }
   list-style: none;
   padding: 0;
-  li {
+  .micropost{
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
-  }
+    }
   .user {
     font-size:16px;
     margin-top: 5em;

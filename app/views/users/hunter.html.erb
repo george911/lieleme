@@ -38,6 +38,7 @@
   
 		  <div class='row'>
 			  <%= link_to "发送简历",send_resume_user_path,method: :post,id: "hunter_#{@user.id}",class: 'btn-orange' %>
+			  <%= link_to "我的博客",blog_home_path(@user),class: 'btn-orange' %>
 		  </div>
 		
 		  <div class='row'>

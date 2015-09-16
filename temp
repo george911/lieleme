@@ -1,4 +1,5 @@
                           Prefix Verb       URI Pattern                                                         Controller#Action
+                                            /resque                                                             #<Resque::Server app_file="/usr/local/lib/ruby/gems/2.2.0/gems/resque-1.25.2/lib/resque/server.rb">
                          profile GET        /profile(.:format)                                                  users#show
                             like GET        /like(.:format)                                                     comments#like
                          dislike GET        /dislike(.:format)                                                  comments#dislike
@@ -74,6 +75,7 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                   admin_comments GET        /admin/comments(.:format)                                           admin/comments#index
                                  POST       /admin/comments(.:format)                                           admin/comments#create
                    admin_comment GET        /admin/comments/:id(.:format)                                       admin/comments#show
+                                 DELETE     /admin/comments/:id(.:format)                                       admin/comments#destroy
                       job_search GET        /job_search(.:format)                                               search#job_search
                           search GET        /search/search(.:format)                                            search#search
                             rate POST       /rate(.:format)                                                     rater#create
@@ -119,15 +121,21 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                      my_referals GET        (/:locale)/my_referals(.:format)                                    home#my_referals
                       my_talents GET        (/:locale)/my_talents(.:format)                                     home#my_talents
                          my_jobs GET        (/:locale)/my_jobs(.:format)                                        home#my_jobs
-                  email_multiple POST       (/:locale)/email_multiple(.:format)                                 home#email_multiple
+                  email_multiple PATCH      (/:locale)/email_multiple(.:format)                                 home#email_multiple
                       send_email POST       (/:locale)/send_email(.:format)                                     home#send_email
                       user_refer GET        (/:locale)/users/:id/refer(.:format)                                users#refer
                         sign_out GET        (/:locale)/sign_out(.:format)                                       devise/sessions#destroy
                          sign_in GET        (/:locale)/sign_in(.:format)                                        devise/sessions#new
                          sign_up GET        (/:locale)/sign_up(.:format)                                        registrations#new
                             root GET        /(:locale)(.:format)                                                front#show
-                      microposts POST       (/:locale)/microposts(.:format)                                     microposts#create
-                       micropost DELETE     (/:locale)/microposts/:id(.:format)                                 microposts#destroy
+                      microposts GET        (/:locale)/microposts(.:format)                                     microposts#index
+                                 POST       (/:locale)/microposts(.:format)                                     microposts#create
+                   new_micropost GET        (/:locale)/microposts/new(.:format)                                 microposts#new
+                  edit_micropost GET        (/:locale)/microposts/:id/edit(.:format)                            microposts#edit
+                       micropost GET        (/:locale)/microposts/:id(.:format)                                 microposts#show
+                                 PATCH      (/:locale)/microposts/:id(.:format)                                 microposts#update
+                                 PUT        (/:locale)/microposts/:id(.:format)                                 microposts#update
+                                 DELETE     (/:locale)/microposts/:id(.:format)                                 microposts#destroy
                    relationships POST       (/:locale)/relationships(.:format)                                  relationships#create
                     relationship DELETE     (/:locale)/relationships/:id(.:format)                              relationships#destroy
                       job_reject PATCH      (/:locale)/reject(.:format)                                         line_items#reject

@@ -124,8 +124,6 @@ class HomeController < ApplicationController
   def close_job
     @job = Job.find(params[:job_id])
     @job.update(status:"closed")
-    :q
-    :q
     current_user.microposts.create(content:"我关闭了#{@job.title}职位",job_id:@job.id)
     @job.recipients.each do |f|
       JobNotifier.closed(f,@job).deliver_now

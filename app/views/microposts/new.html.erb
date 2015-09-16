@@ -1,0 +1,37 @@
+<div style="padding:100px">
+  <%= form_for @micropost do |f| %>
+	  <div class='row'>
+	    <div class='col-md-7' >
+		  <%= f.text_field :title,style:"font-size:20px;border: 0px",placeholder: "输入标题",required: true %>
+		  <hr style='margin-top:10px'>
+	    </div>
+  	</div>
+	<div class='row'>
+	  <div class='col-md-7'>
+		  <%= f.text_area :content,class: "ckeditor",placeholder:" 输入内容" %>
+	  </div>
+  	</div>
+	<div class="" style='width:0px;margin-top:10px;margin-right:0px'>
+          <div class='well form-control' style='border:0px;padding-top:3px;padding-bottom:3px;'>
+	    <%= f.file_field :avatar, class: "btn btn-default btn-file" %>
+	  </div>
+	</div>
+	<div class='col-md-2' style='padding-left:0px;margin-top:-50px;'>
+	  <div class='well form-control' style='margin-bottom:0px;padding-top:3px;padding-bottom:3px'>
+	      <span style='font-size:15px'>设置logo图片&nbsp;&nbsp;</span>
+		    </div>
+		  </div>
+	<br>
+	<div class='row'>
+	  <div class='col-lg-3' id='target' style='margin-top:10px'>
+	  </div>
+	</div>
+	<br>
+	<div class='row'>
+	  <div class='col-md-12'>
+		  <%= f.submit "发布",class: "btn btn-success" %>
+	  </div>
+  	</div>
+  <% end %>
+</div>
+

@@ -48,7 +48,7 @@ require 'spec_helper'
       expect(page).to have_content('架构师')
       click_link("job_#{job3.id}_num") # Mary应聘job3
       expect(page).to have_content('Mary')
-     
+      
       click_on "职位"
       click_on "招聘中"
       find("#job_#{job1.id}").hover
@@ -57,14 +57,13 @@ require 'spec_helper'
       open_email(hunter1.email)
       expect(current_email).to have_content("您好 David, 软件工程师职位暂时停止招聘, 希望您继续关注,谢谢!")
       clear_email
-
+	
       find("#job_#{job2.id}").hover
       click_on "操作"
       click_on "关闭"
       open_email(hunter1.email)
       expect(current_email).to have_content('您好 David, 测试主管职位已经关闭了, 希望您关注其他职位, 谢谢!')
       clear_email
- 
       click_on "job_#{job3.id}_num"
       click_on "status_#{line_item1.id}"
       page.select 'offer',from:"status" 
@@ -80,7 +79,6 @@ require 'spec_helper'
       click_on "职位"
       click_on "招聘中"
       expect(page).to_not have_content("架构师")
-
       visit sign_out_path
       fill_in 'user_email', with:hunter1.email
       fill_in 'user_password', with:'11111111'

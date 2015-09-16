@@ -14,8 +14,13 @@ class AfterSignupController < ApplicationController
     when :confirm
     when :summary
     when :education
+      skip_step if @user.user_type == "人事"
     when :work 
+      skip_step if @user.user_type == "人事"
+    when :salary
+      skip_step unless @user.user_type == "求职者"
     when :invite # 应聘推荐的岗位
+      skip_step unless @user.user_type == "求职者"
       if current_user.mobile.present? and current_user.email.present?
 	@line_items = LineItem.where("mobile = ? or email = ?",current_user.mobile,current_user.email)
       elsif current_user.mobile.present?
@@ -46,6 +51,7 @@ class AfterSignupController < ApplicationController
      when :summary
      when :education
      when :work
+     when :invite
      end
      @user.update_attributes(user_params)
       sign_in(@user, bypass: true) # needed for devise

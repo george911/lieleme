@@ -20,7 +20,7 @@
                       	  <%= f1.fields_for :summaries,@user.summaries.build do |summary| %>
                     	    <%= render 'summary_fields',f:summary %>
                       	  <% end %>
-                          <%= link_to_add_fields "增加", f1, :summaries %>
+                          <%= link_to_add_fields "加一句话", f1, :summaries %>
                         </div>
 
                         <div class='col-lg-3'>
