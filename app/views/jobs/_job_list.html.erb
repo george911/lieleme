@@ -4,7 +4,7 @@
 	    <table>
 	      <tr style='border-bottom: 1px solid #eeeeee;'>
 				<td style = "vertical-align: top"> <!-- vertical-align用在table的td里可以顶部对齐，html经典书286页-->
-				  <%= link_to image_tag(job.poster.avatar.url, size: '70x70',class: ''),user_path(job.poster), target: "_blank" unless job.poster == nil %>
+				  <%= link_to image_tag(job.poster.avatar.url, size: '70x70',style:'border:0',class: 'img-circle'),user_path(job.poster), target: "_blank" unless job.poster == nil %>
 				</td>
 				<td style = 'padding-left:15px'>
 					  <p>
