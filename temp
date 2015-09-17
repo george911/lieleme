@@ -1,4 +1,12 @@
                           Prefix Verb       URI Pattern                                                         Controller#Action
+                         clients GET        /clients(.:format)                                                  clients#index
+                                 POST       /clients(.:format)                                                  clients#create
+                      new_client GET        /clients/new(.:format)                                              clients#new
+                     edit_client GET        /clients/:id/edit(.:format)                                         clients#edit
+                          client GET        /clients/:id(.:format)                                              clients#show
+                                 PATCH      /clients/:id(.:format)                                              clients#update
+                                 PUT        /clients/:id(.:format)                                              clients#update
+                                 DELETE     /clients/:id(.:format)                                              clients#destroy
                                             /resque                                                             #<Resque::Server app_file="/usr/local/lib/ruby/gems/2.2.0/gems/resque-1.25.2/lib/resque/server.rb">
                          profile GET        /profile(.:format)                                                  users#show
                             like GET        /like(.:format)                                                     comments#like
@@ -63,6 +71,15 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                                  PATCH      /admin/line_items/:id(.:format)                                     admin/line_items#update
                                  PUT        /admin/line_items/:id(.:format)                                     admin/line_items#update
                                  DELETE     /admin/line_items/:id(.:format)                                     admin/line_items#destroy
+    batch_action_admin_summaries POST       /admin/summaries/batch_action(.:format)                             admin/summaries#batch_action
+                 admin_summaries GET        /admin/summaries(.:format)                                          admin/summaries#index
+                                 POST       /admin/summaries(.:format)                                          admin/summaries#create
+               new_admin_summary GET        /admin/summaries/new(.:format)                                      admin/summaries#new
+              edit_admin_summary GET        /admin/summaries/:id/edit(.:format)                                 admin/summaries#edit
+                   admin_summary GET        /admin/summaries/:id(.:format)                                      admin/summaries#show
+                                 PATCH      /admin/summaries/:id(.:format)                                      admin/summaries#update
+                                 PUT        /admin/summaries/:id(.:format)                                      admin/summaries#update
+                                 DELETE     /admin/summaries/:id(.:format)                                      admin/summaries#destroy
         batch_action_admin_users POST       /admin/users/batch_action(.:format)                                 admin/users#batch_action
                      admin_users GET        /admin/users(.:format)                                              admin/users#index
                                  POST       /admin/users(.:format)                                              admin/users#create
@@ -128,6 +145,7 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                          sign_in GET        (/:locale)/sign_in(.:format)                                        devise/sessions#new
                          sign_up GET        (/:locale)/sign_up(.:format)                                        registrations#new
                             root GET        /(:locale)(.:format)                                                front#show
+                       blog_home GET        (/:locale)/users/:id/blog_home(.:format)                            microposts#home
                       microposts GET        (/:locale)/microposts(.:format)                                     microposts#index
                                  POST       (/:locale)/microposts(.:format)                                     microposts#create
                    new_micropost GET        (/:locale)/microposts/new(.:format)                                 microposts#new

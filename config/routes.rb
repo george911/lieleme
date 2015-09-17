@@ -51,7 +51,6 @@ Rails.application.routes.draw do
     patch 'email_multiple', to:'home#email_multiple'
     post 'send_email', to:'home#send_email'
 
-
     get 'users/:id/refer', to:'users#refer', as: :user_refer # 简历上点击推荐按钮
     
     devise_scope :user do
@@ -61,6 +60,10 @@ Rails.application.routes.draw do
       end
     root 'front#show'
       
+    resources :clients
+    # link的话没有render的必要
+    get 'bd_email',to:'clients#send_email'
+
     get 'users/:id/blog_home',to:'microposts#home', as: :blog_home
     resources :microposts
     resources :relationships, only: [:create, :destroy]

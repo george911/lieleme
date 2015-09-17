@@ -1,5 +1,7 @@
 module ClearAll
   puts 'in clear_all'
+  ClientEmail.delete_all
+  Client.delete_all
   Email.delete_all
   Relationship.delete_all
   Boss.delete_all
