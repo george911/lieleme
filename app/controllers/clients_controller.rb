@@ -1,6 +1,7 @@
 class ClientsController < InheritedResources::Base
   def send_email
     #@clients = Client.where(industry:params[:industry])
+    attachments.inline['logo.png'] = File.read('logo.png')
     Client.all.each do |client|
       client.client_emails.each do |f|
 	#sleep 20.seconds
