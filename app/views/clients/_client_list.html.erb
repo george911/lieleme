@@ -1,28 +1,53 @@
-<table width="100%">
-  <thead>
-    <tr>
-      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Company</th>
-      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Industry</th>
-      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Email</th>
-      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Phone</th>
-      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @clients.order("updated_at desc").each do |client| %>
-      <tr>
-        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top"><%= client.name %></td>
-        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top"><%= client.industry %></td>
-	<td style="padding:5px;border:1px solid #d9d9d9;color:#919191">
-	  <% client.client_emails.order("created_at desc").each do |f| %>
-		  <%= f.email %><br>
-		<% end %>
-	</td>
-        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= client.phone %></td>
-        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= link_to 'Edit', edit_client_path(client) %> <%= link_to 'Destroy', client, style:"float:right",method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <%= hidden_div_if notice == nil do %>
+    <p><%= notice %></p>
+  <% end %>
+  <div class='row'>
+    <div class='col-md-8'>
+    <%= form_tag clients_path,method: :post, remote:true do %>
+      <table style:''>
+        <tr>
+          <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :name,nil,placeholder:"公司全称",size: 15,style:'border:0px' %></td>
+          <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :industry,nil,placeholder:"行业",size: 15,style:'border:0px' %></td>
+          <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :email,nil,placeholder:"邮箱地址",size: 15,style:'border:0px' %></td>
+          <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :phone,nil,placeholder:"电话号码",size: 15,style:'border:0px' %></td>
+          <td style='border:0px;padding-left:3px'><%= submit_tag "提交",class: "form-control",size: 15 %></td>
+        </tr>
+        </table>
     <% end %>
-  </tbody>
-</table>
+    <hr style='margin-bottom:0px;border-top: 1px solid #d9d9d9'>
+    </div>
+  </div>
 <br>
+<div class='row'>
+  <div class='col-md-8' >
+    <table width="100%">
+      <thead>
+        <tr>
+          <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Company</th>
+          <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Industry</th>
+          <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Email</th>
+          <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Phone</th>
+          <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'></th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @clients.order("updated_at desc").each do |client| %>
+          <tr>
+            <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top"><%= client.name %></td>
+            <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top"><%= client.industry %></td>
+      <td style="padding:5px;border:1px solid #d9d9d9;color:#919191">
+        <% client.client_emails.order("created_at desc").each do |f| %>
+          <%= f.email %><br>
+        <% end %>
+      </td>
+            <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= client.phone %></td>
+            <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= link_to 'Edit', edit_client_path(client) %> <%= link_to 'Destroy', client, style:"   float:right",method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+  </div>
+  <br>
+</div>
