@@ -1,28 +1,28 @@
-<div id='client_list'>
-<table>
+<table width="100%">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Phone</th>
-      <th colspan="3"></th>
+      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Company</th>
+      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Industry</th>
+      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Email</th>
+      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Phone</th>
+      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'></th>
     </tr>
   </thead>
 
   <tbody>
     <% @clients.order("updated_at desc").each do |client| %>
       <tr>
-	<td style="vertical-align:top"><%= client.name %></td>
-	<td>
+        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top"><%= client.name %></td>
+        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top"><%= client.industry %></td>
+	<td style="padding:5px;border:1px solid #d9d9d9;color:#919191">
 	  <% client.client_emails.order("created_at desc").each do |f| %>
 		  <%= f.email %><br>
 		<% end %>
 	</td>
-        <td><%= client.phone %></td>
-        <td><%= link_to 'Show', client %></td>
-        <td><%= link_to 'Edit', edit_client_path(client) %></td>
-        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= client.phone %></td>
+        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= link_to 'Edit', edit_client_path(client) %> <%= link_to 'Destroy', client, style:"float:right",method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<div>
+<br>

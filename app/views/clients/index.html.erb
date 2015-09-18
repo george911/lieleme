@@ -1,44 +1,65 @@
-<div class='container' style='padding-top:100px'>
-<p id="notice"><%= notice %></p>
-
-<%= form_tag clients_path,method: :post, remote:true do %>
-  <%= text_field_tag :name,nil,placeholder:"公司全称" %>
-  <%= text_field_tag :email,nil,placeholder:"邮箱地址" %>
-  <%= text_field_tag :phone,nil,placeholder:"电话号码" %>
-  <%= submit_tag "提交" %>
+<div class='col-md-2' style='padding-top:100px'>
+	<%= form_tag bd_email_path,method: :get do %>
+		<%= select_tag :industry,options_for_select([['ruby'],['半导体']]),style: "width:150px",class: 'form-control' %>
+		<br>
+		<%= submit_tag "群发邮件",class: 'btn-success btn' %>
+		<% end %>
+	</div>
+</div>
+<div class='col-md-10' style='padding-top:100px'>
+<%= hidden_div_if notice == nil do %>
+	<p><%= notice %></p>
 <% end %>
-
-<div id='client_list'>
-<table>
+<div class='row'>
+<div class='col-md-8'>
+<%= form_tag clients_path,method: :post, remote:true do %>
+	<table style:''>
+	  <tr>
+		  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :name,nil,placeholder:"公司全称",size: 15,style:'border:0px' %></td>
+		  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :industry,nil,placeholder:"行业",size: 15,style:'border:0px' %></td>
+		  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :email,nil,placeholder:"邮箱地址",size: 15,style:'border:0px' %></td>
+		  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :phone,nil,placeholder:"电话号码",size: 15,style:'border:0px' %></td>
+		  <td style='border:0px;padding-left:3px'><%= submit_tag "提交",class: "form-control",size: 15 %></td>
+	  </tr>
+  	</table>
+<% end %>
+<hr style='margin-bottom:0px;border-top: 1px solid #d9d9d9'>
+</div>
+</div>
+<br>
+<div class='row'>
+<div class='col-md-8' id='client_list'>
+<table width="100%">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Phone</th>
-      <th colspan="3">
-        <%= link_to "发送邮件",bd_email_path,remote:true %></th>
+      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Company</th>
+      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Industry</th>
+      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Email</th>
+      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Phone</th>
+      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'></th>
     </tr>
   </thead>
 
   <tbody>
     <% @clients.order("updated_at desc").each do |client| %>
       <tr>
-        <td style="vertical-align:top"><%= client.name %></td>
-	<td>
+        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top"><%= client.name %></td>
+        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top"><%= client.industry %></td>
+	<td style="padding:5px;border:1px solid #d9d9d9;color:#919191">
 	  <% client.client_emails.order("created_at desc").each do |f| %>
 		  <%= f.email %><br>
 		<% end %>
 	</td>
-        <td><%= client.phone %></td>
-        <td><%= link_to 'Show', client %></td>
-        <td><%= link_to 'Edit', edit_client_path(client) %></td>
-        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= client.phone %></td>
+        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= link_to 'Edit', edit_client_path(client) %> <%= link_to 'Destroy', client, style:"float:right",method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<br>
 <div>
 <br>
 
-<%= link_to 'New Client', new_client_path %>
+</div>
 </div>
 </div>

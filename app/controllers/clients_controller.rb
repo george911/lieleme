@@ -1,14 +1,14 @@
 class ClientsController < InheritedResources::Base
   def send_email
-    #@clients = Client.where(industry:params[:industry])
-    Client.all.each do |client|
+    @clients = Client.where(industry:params[:industry])
+    @clients.each do |client|
       client.client_emails.each do |f|
-	#sleep 20.seconds
+	sleep 20
 	BdEmail.ruby(f.email).deliver_now
       end
     end
     respond_to do |format|
-      format.js
+      format.html { redirect_to clients_path,notice:"邮件群发成功" }
     end
   end
 
@@ -18,7 +18,7 @@ class ClientsController < InheritedResources::Base
   end
 
   def create
-    @client = Client.new(name:params[:name],phone:params[:phone])
+    @client = Client.new(name:params[:name],industry:params[:industry],phone:params[:phone])
     respond_to do |format|
       if Client.find_by(name:params[:name])
         @client = Client.find_by(name:params[:name])
