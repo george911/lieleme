@@ -63,7 +63,7 @@ Rails.application.routes.draw do
     resources :clients
     # link的话没有render的必要
     get 'bd_email',to:'clients#send_email'
-
+    get 'bd_test',to:'clients#bd_test'
     get 'users/:id/blog_home',to:'microposts#home', as: :blog_home
     resources :microposts
     resources :relationships, only: [:create, :destroy]

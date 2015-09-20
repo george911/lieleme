@@ -7,8 +7,17 @@ class ClientsController < InheritedResources::Base
 	BdEmail.ruby(f.email).deliver_now
       end
     end
+    # 测试
+    BdEmail.ruby("13916382071@139.com").deliver_now
     respond_to do |format|
       format.html { redirect_to clients_path,notice:"邮件群发成功" }
+    end
+  end
+
+  def bd_test
+    BdEmail.ruby("13916382071@139.com").deliver_now
+    respond_to do |format|
+      format.html { redirect_to clients_path,notice:"测试邮件已经发出" }
     end
   end
 

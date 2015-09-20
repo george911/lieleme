@@ -1,9 +1,15 @@
 <div class='col-md-2' style='padding-top:100px'>
-	<%= form_tag bd_email_path,method: :get do %>
+  <div class='row'>
+    <%= form_tag bd_email_path,method: :get do %>
 		<%= select_tag :industry,options_for_select([['ruby'],['半导体']]),style: "width:150px",class: 'form-control' %>
 		<br>
-		<%= submit_tag "群发邮件",class: 'btn-success btn' %>
-		<% end %>
+		<%= submit_tag "群发邮件",class: 'btn-success btn',confirm: "你真的要给HR群发邮件吗?" %>
+	<% end %>
+</div>
+<br>
+  <div class='row'>
+	  <%= link_to "测试",bd_test_path, class: 'btn-warning btn', confirm: "真的发送测试邮件?" %>
+  </div>
 </div>
 <div class='col-md-10' id='client_list' style='padding-top:100px'>
 	<%= hidden_div_if notice == nil do %>
