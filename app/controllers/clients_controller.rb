@@ -17,7 +17,7 @@ class ClientsController < InheritedResources::Base
   def bd_test
     BdEmail.ruby("743278938@139.com").deliver_now
     respond_to do |format|
-      format.html { redirect_to clients_path,notice:"测试邮件已经发出" }
+      format.html { redirect_to clients_path,notice:"#{Time.now}测试邮件已经发出" }
     end
   end
 
