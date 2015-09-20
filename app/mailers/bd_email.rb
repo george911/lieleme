@@ -1,5 +1,5 @@
 class BdEmail < ApplicationMailer
   def ruby(receiver)
-    mail to: receiver,subject: "国内最权威的Ruby猎头公司"
+    mail to: receiver,subject: "换个标题" 
   end
 end
