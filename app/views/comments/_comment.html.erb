@@ -6,13 +6,8 @@
         <tr >
           <% @author=User.find(comment.user_id) %>
     	   <% unless mobile_device? %>
-    	   <td >
-    
-                         <%= image_tag(@author.avatar.url(:small),class: 'img-circle',size:'30x30') unless comment.user_id == nil%>
-    
-    	    </td>
-         <% end %>
-               	  <td width=""><!--tr如果不加td的话下一个tr不会重启一行-->
+    	   <td colspan='2'>
+             <%= image_tag(@author.avatar.url(:small),class: 'img-circle',size:'30x30') unless comment.user_id == nil%>
                          <%= @author.user_name %>
                          <%= @author.works.last.title.present? ? " #{@author.works.last.title} |" : '找工作中 |' %>
     	   <% if @author.jobrates.find_by("rateable_id = ? and dimension = ?",@job.job_rate.id,"job_general") %>
@@ -26,7 +21,8 @@
                          <small>
                  发表于<%= comment.created_at.strftime("%m-%d") %>&nbsp;&nbsp;
                </small>
-             </td>
+    	    </td>
+         <% end %>
         </tr>
         <tr>
           <td>
