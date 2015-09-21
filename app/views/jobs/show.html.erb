@@ -1,6 +1,6 @@
-<div style='padding-top:80px' class='container' >
+<div style='padding-top:80px;margin:10px auto;width:50%' class='' >
   <div class='row'>
-    <div class='col-lg-6'>
+    <div class='col-lg-12'>
     <p id='title'>
       <table>
 	<tr><td id = 'notice'><%= notice %></td></tr>
@@ -15,7 +15,7 @@
   </div>
 
   <div class='row'>
-    <div class='col-lg-3'>
+    <div class='col-lg-6'>
       <table>
         <% if @job.city.present? or @job.addr.present? %>
 	      <tr><td><strong>坐标:</strong></td><td><%= @job.city %>&nbsp;<%= @job.addr %></td></tr>
@@ -35,7 +35,7 @@
       </table>
     </div><!--cl-lg-3-->
  
-    <div class='col-lg-4'>
+    <div class='col-lg-6'>
       <%= hidden_div_if @job.commission.blank? do %>
 	      <p><span style='font-size:35px;font-family:Georgia;color:#fa6464'><%= @job.commission %></span><span style='font-size:10px;'>现金推荐奖</span></p>
       <% end %>
@@ -61,7 +61,7 @@
 
   <div><br /></div>
   <div class='row'>
-    <div class='col-lg-4' id='orange'>
+    <div class='col-lg-6' id='orange'>
       <%= button_to "收藏", save_job_path,method: :post, class: 'btn-orange' %>
       <%= button_to '应聘',job_accept_path(@job),method: :patch, class: 'btn-orange' %>
       <button type='button' class='btn-orange' data-toggle="modal" data-target="#myModal">
@@ -159,7 +159,7 @@
 
   <%= hidden_div_if @job.senders.empty? do %>
   <div class='row'>
-    <div class='col-lg-6'>
+    <div class='col-lg-12'>
       <p class='green_title'>参与的猎头· · · · · ·</p>
       <p class='text'>
         <% @job.senders.first(10).each do |f| %>
@@ -171,7 +171,7 @@
   <% end %>
 
   <div class='row'>
-    <div class='col-lg-6'>
+    <div class='col-lg-12'>
       <!--把/n换成回车并且插入段落标记和首行缩进-->
       <p class='green_title'>公司介绍· · · · · ·</p>
       <p class='text'><%= @job.company_info.gsub(/\n/,'</p><p class="text">').html_safe unless @job.company_info.blank? %></p>
@@ -179,7 +179,7 @@
  </div> 
 
   <div class='row'>
-    <div class='col-lg-6'>
+    <div class='col-lg-12'>
       <p class='green_title'>工作职责· · · · · ·</p>
       <p class='text'><%= @job.role.gsub(/\n/,'</p><p class="text">').html_safe unless @job.role.blank? %></p>
     </div>
@@ -190,7 +190,7 @@
   </div>
 
   <div class='row'>
-    <div class='col-lg-6'>
+    <div class='col-lg-12'>
       <p class='green_title'>职位要求· · · · · ·</p>
       <p class='text'><%= @job.requirement.gsub(/\n/,'</p><p class="text">').html_safe unless @job.requirement.blank? %></p>
     </div>
@@ -203,7 +203,7 @@
   <div class='row'>
     <% if @job.bosses.present? %>
     <%= hidden_div_if @job.bosses.first.title.empty? do %>
-    <div class='col-lg-2'>
+    <div class='col-lg-4'>
       <p class='green_title'>汇报对象:</p>
           <% if @job.bosses != nil %>
 	  <% @job.bosses.each do |f| %>
@@ -215,7 +215,7 @@
     <% end %>
     <% if @job.subordinates.present? %>
     <%= hidden_div_if @job.subordinates.first.title.blank? do %>
-    <div class='col-lg-2'>
+    <div class='col-lg-4'>
       <p class='green_title'>下属:</p>
         <% if @job.subordinates.present? %>
 	  <table>
@@ -244,7 +244,7 @@
   
 
   <div class='row'>
-    <div class='col-lg-6'>
+    <div class='col-lg-12'>
     <div role="tabpanel">
 
       <!-- Nav tabs -->
@@ -260,12 +260,12 @@
         <div role="tabpanel" class="tab-pane active" id="home">
             <div id="accordion" role="tablist" aria-multiselectable="true">
               <div class='row'>
-                  <div class='col-lg-3 list'>
+                  <div class='col-lg-6 list'>
                       <%= link_to "#{@job.comments.count}条评论", job_comments_path(@job),remote:true %>
 
                   </div>
 
-                  <div class='col-lg-5 list no_underline'>
+                  <div class='col-lg-6 list no_underline'>
                      <!--collapse-->
                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                    
@@ -280,14 +280,14 @@
 
               <div class='row'>
                   <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" style="margin:0px;">
-                    <div class='col-lg-4'>
+                    <div class='col-lg-8'>
                       <div class="panel-body">
 
                             <%= form_for([@job,@comment]) do |f| %>
                             <%= f.text_area :body, placeholder:'请输入评论',class: "form-control" %>
                       </div>
                     </div> 
-                    <div class='col-lg-3'>
+                    <div class='col-lg-6'>
                       <table>
                         <tr>
 				<td>总体评价</td><td><% if @job.job_rate %>

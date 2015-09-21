@@ -3,12 +3,12 @@
     <% if comment.user_id != nil %>
     <div class='col-md-12'>
     	<table width='100%'>
-        <tr style='background-color:#f6f6f1'>
-                       <% @author=User.find(comment.user_id) %>
+        <tr >
+          <% @author=User.find(comment.user_id) %>
     	   <% unless mobile_device? %>
-    	   <td width='60px'>
+    	   <td >
     
-                         <%= image_tag(@author.avatar.url(:small),size:'30x30') unless comment.user_id == nil%>
+                         <%= image_tag(@author.avatar.url(:small),class: 'img-circle',size:'30x30') unless comment.user_id == nil%>
     
     	    </td>
          <% end %>
