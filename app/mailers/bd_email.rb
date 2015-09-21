@@ -1,5 +1,5 @@
 class BdEmail < ApplicationMailer
   def ruby(receiver)
-    mail to: receiver,subject: "放在掌心" 
+    mail to: receiver,subject: "马夏尔"
   end
 end
