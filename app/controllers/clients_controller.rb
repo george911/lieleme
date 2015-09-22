@@ -7,7 +7,7 @@ class ClientsController < InheritedResources::Base
     #BdEmail.ruby("cvsend@139.com").deliver_now
     respond_to do |format|
       format.html { redirect_to clients_path,notice:"#{params[:email]}邮件发送成功" }
-      format.js { notice:"#{params[:email]}邮件发送成功" }
+      format.js { flash[:notice]="#{params[:email]}邮件发送成功" }
     end
   end
 

@@ -1,6 +1,6 @@
 <div class='notice col-md-2' style='padding-top:100px'>
-	<%= hidden_div_if notice == nil do %>
-		<p><%= notice %></p>
+	<% if flash.present? %>
+		<p><%= flash[:notice] %></p>
 	<% end %>
 </div>
 <div class='col-md-10' id='client_list' style='padding-top:100px'>
