@@ -50,7 +50,7 @@ Rails.application.routes.draw do
     # 一个奇怪的问题, post的话会找不到路径,而且会和添加备注的submit冲突
     patch 'email_multiple', to:'home#email_multiple'
     post 'send_email', to:'home#send_email'
-
+    
     get 'users/:id/refer', to:'users#refer', as: :user_refer # 简历上点击推荐按钮
     
     devise_scope :user do
@@ -64,6 +64,8 @@ Rails.application.routes.draw do
     # link的话没有render的必要
     get 'bd_email',to:'clients#send_email'
     get 'bd_test',to:'clients#bd_test'
+    delete 'delete_email', to:'clients#delete_email'
+
     get 'users/:id/blog_home',to:'microposts#home', as: :blog_home
     resources :microposts
     resources :relationships, only: [:create, :destroy]

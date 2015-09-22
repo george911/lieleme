@@ -2,15 +2,23 @@ class ClientsController < InheritedResources::Base
   def send_email
     #@clients = Client.where(industry:params[:industry])
     #@clients.each do |client|
-      @client = Client.find(params[:id])
-      @client.client_emails.each do |f|
-	BdEmail.ruby(f.email).deliver_now
-      end
+    BdEmail.ruby(params[:email]).deliver_now
     # 测试
     #BdEmail.ruby("cvsend@139.com").deliver_now
     respond_to do |format|
-      format.html { redirect_to clients_path,notice:"#{@client.name}邮件发送成功" }
-      format.js { notice:"#{@client.name}邮件发送成功" }
+      format.html { redirect_to clients_path,notice:"#{params[:email]}邮件发送成功" }
+      format.js { notice:"#{params[:email]}邮件发送成功" }
+    end
+  end
+
+  def delete_email
+    @email = ClientEmail.find(params[:id])
+    @email.destroy
+    Client.find_by(name:"我自己").touch unless Client.find_by(name:"我自己") == nil
+    @clients=Client.all
+    respond_to do |format|
+      format.html { redirect_to clients_path, notice:"删除成功"}
+      format.js 
     end
   end
 
@@ -27,7 +35,6 @@ class ClientsController < InheritedResources::Base
   end
 
   def create
-    @test_email = Client.find_by(name:"我自己")
     @client = Client.new(name:params[:name],industry:params[:industry],phone:params[:phone])
     respond_to do |format|
       if Client.find_by(name:params[:name])
@@ -39,8 +46,8 @@ class ClientsController < InheritedResources::Base
         format.js
       else
 	if @client.save
-          @test_email.touch
 	  @email = @client.client_emails.create(email:params[:email])
+    	  Client.find_by(name:"我自己").touch unless Client.find_by(name:"我自己") == nil
           @clients = Client.all
           format.html { redirect_to @client }
           format.js

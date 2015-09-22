@@ -35,17 +35,37 @@
   	  </thead>
   	
   	  <tbody>
-  	    <% @clients.order("updated_at desc").each do |client| %>
-  	      <tr>
-  	        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top"><%= client.name %></td>
-  	        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top"><%= client.industry %></td>
-  		<td style="padding:5px;border:1px solid #d9d9d9;color:#919191">
-  		  <% client.client_emails.order("created_at desc").each do |f| %>
-  			  <%= f.email %><br>
-  			<% end %>
-  		</td>
-  	        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= client.phone %></td>
-		<td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= link_to '发送邮件', bd_email_path(id:client.id) %> <%= link_to 'Edit', edit_client_path(client),style:"float:right" %> <%= link_to 'Destroy', client, style:"  	float:right",method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	    <% @clients.order("updated_at desc").each do |client| %>
+	      <tr>
+		      <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top">
+			  <%= client.name %>
+		      </td>
+		      <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top">
+			  <%= client.industry %>
+		      </td>
+		      <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top">
+			<% if client.client_emails.present? %>
+			      <% client.client_emails.each_with_index do |f,index| %>
+				      <% if index !=0 %>
+				     	<br>
+				      <% end %>
+				<%= f.email %>
+			      <% end %>
+			<% end %>
+		      </td>
+		      <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top">
+		        <%= client.phone %>
+		      </td>
+		      <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top">
+			      <% client.client_emails.each_with_index do |f,index| %>
+				      <% if index != 0 %>
+					      <br>
+				      <% end %>
+				      <%= link_to '发送邮件', bd_email_path(email:f.email),remote: true %>
+				      <%= link_to 'Destroy', delete_email_path(id:f.id), style:"padding-left:10px;float:right",method: :delete, remote: true %>
+				      <%= link_to 'Edit', edit_client_path(client),style:"float:right" %>
+			      <% end %>
+		      </td>
   	      </tr>
   	    <% end %>
   	  </tbody>
