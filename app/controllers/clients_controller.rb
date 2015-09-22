@@ -27,6 +27,7 @@ class ClientsController < InheritedResources::Base
   end
 
   def create
+    @test_email = Client.find_by(name:"我自己")
     @client = Client.new(name:params[:name],industry:params[:industry],phone:params[:phone])
     respond_to do |format|
       if Client.find_by(name:params[:name])
@@ -38,7 +39,8 @@ class ClientsController < InheritedResources::Base
         format.js
       else
 	if @client.save
-          @email = @client.client_emails.create(email:params[:email])
+          @test_email.touch
+	  @email = @client.client_emails.create(email:params[:email])
           @clients = Client.all
           format.html { redirect_to @client }
           format.js
