@@ -5,8 +5,8 @@ Rails.application.configure do
 		port: 25,
 		domain: "exmail.qq.com",
 		authentication: :login,
-		user_name: "george.qiao@lieyohui.com",
-		password: "sy15906112"
+		user_name: "support@lieyohui.com",
+		password: "lieleme1"
 	}
   
   # Settings specified here will take precedence over those in config/application.rb.

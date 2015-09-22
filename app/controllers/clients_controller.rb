@@ -1,16 +1,16 @@
 class ClientsController < InheritedResources::Base
   def send_email
-    @clients = Client.where(industry:params[:industry])
-    @clients.each do |client|
-      client.client_emails.each do |f|
-	sleep 20
+    #@clients = Client.where(industry:params[:industry])
+    #@clients.each do |client|
+      @client = Client.find(params[:id])
+      @client.client_emails.each do |f|
 	BdEmail.ruby(f.email).deliver_now
       end
-    end
     # 测试
-    BdEmail.ruby("cvsend@139.com").deliver_now
+    #BdEmail.ruby("cvsend@139.com").deliver_now
     respond_to do |format|
-      format.html { redirect_to clients_path,notice:"邮件群发成功" }
+      format.html { redirect_to clients_path,notice:"#{@client.name}邮件发送成功" }
+      format.js { notice:"#{@client.name}邮件发送成功" }
     end
   end
 

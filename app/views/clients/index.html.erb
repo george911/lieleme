@@ -1,29 +1,18 @@
-<div class='col-md-2' style='padding-top:100px'>
-  <div class='row'>
-    <%= form_tag bd_email_path,method: :get do %>
-		<%= select_tag :industry,options_for_select([['ruby'],['半导体']]),style: "width:150px",class: 'form-control' %>
-		<br>
-		<%= submit_tag "群发邮件",class: 'btn-success btn',data: { confirm: "你真的要给HR群发邮件吗?"} %>
-	<% end %>
-</div>
-<br>
-  <div class='row'>
-	  <%= link_to "测试",bd_test_path, class: 'btn-warning btn', data: { confirm: "真的发送测试邮件?"} %>
-  </div>
-</div>
-<div class='col-md-10' id='client_list' style='padding-top:100px'>
+<div class='notice col-md-2' style='padding-top:100px'>
 	<%= hidden_div_if notice == nil do %>
 		<p><%= notice %></p>
 	<% end %>
+</div>
+<div class='col-md-10' id='client_list' style='padding-top:100px'>
 	<div class='row'>
 		<div class='col-md-8'>
 		<%= form_tag clients_path,method: :post, remote:true do %>
 			<table style:''>
 			  <tr>
 				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :name,nil,placeholder:"公司全称",size: 15,style:'border:0px' %></td>
-				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :industry,nil,placeholder:"行业",size: 15,style:'border:0px' %></td>
+				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :industry,nil,placeholder:"行业",size: 10,style:'border:0px' %></td>
 				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :email,nil,placeholder:"邮箱地址",size: 15,style:'border:0px' %></td>
-				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :phone,nil,placeholder:"电话号码",size: 15,style:'border:0px' %></td>
+				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :phone,nil,placeholder:"电话号码",size: 10,style:'border:0px' %></td>
 				  <td style='border:0px;padding-left:3px'><%= submit_tag "提交",class: "form-control",size: 15 %></td>
 			  </tr>
 		  	</table>
@@ -38,10 +27,10 @@
   	  <thead>
   	    <tr>
   	      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Company</th>
-  	      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Industry</th>
-  	      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Email</th>
-  	      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Phone</th>
-  	      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'></th>
+  	      <th width="10%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Industry</th>
+  	      <th width="30%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Email</th>
+  	      <th width="10%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Phone</th>
+  	      <th width="30%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'></th>
   	    </tr>
   	  </thead>
   	
@@ -56,7 +45,7 @@
   			<% end %>
   		</td>
   	        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= client.phone %></td>
-  	        <td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= link_to 'Edit', edit_client_path(client) %> <%= link_to 'Destroy', client, style:"  	float:right",method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td style="padding:5px;border:1px solid #d9d9d9;color:#919191"><%= link_to '发送邮件', bd_email_path(id:client.id) %> <%= link_to 'Edit', edit_client_path(client),style:"float:right" %> <%= link_to 'Destroy', client, style:"  	float:right",method: :delete, data: { confirm: 'Are you sure?' } %></td>
   	      </tr>
   	    <% end %>
   	  </tbody>
