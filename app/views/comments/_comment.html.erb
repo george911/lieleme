@@ -5,50 +5,25 @@
     	<table width='100%'>
         <tr >
           <% @author=User.find(comment.user_id) %>
-    	   <% unless mobile_device? %>
-    	   <td colspan='2'>
-             <%= image_tag(@author.avatar.url(:small),class: 'img-circle',size:'30x30') unless comment.user_id == nil%>
-                         <%= @author.user_name %>
-                         <%= @author.works.last.title.present? ? " #{@author.works.last.title} |" : '找工作中 |' %>
-    	   <% if @author.jobrates.find_by("rateable_id = ? and dimension = ?",@job.job_rate.id,"job_general") %>
-    	 	  <!--find_by可以取到，where娶不到需要加each-->
-    	 	  <% @author.jobrates.find_by("rateable_id = ? and dimension = ?",@job.job_rate.id,"job_general").stars.to_i.times do %>
-    	 	    <span style='color:#ff632f;margin:0px'class="glyphicon glyphicon-star"></span>
-    	     <% end %>
-    	          <% end %>
-                       </td>
-                       <td width='80px'class='text-right'>
-                         <small>
-                 发表于<%= comment.created_at.strftime("%m-%d") %>&nbsp;&nbsp;
-               </small>
-    	    </td>
-         <% end %>
+    	     <% unless mobile_device? %>
+    	        <td rowspan="2" width='40px'style='padding-right:0px'>
+                 <%= link_to image_tag(@author.avatar.url,size: "40x40",class: "img-circle"),user_path(@author) %>
+              </td>
+              <td style='padding-left:10px'>
+                <button style='border-radius:3px;background-color:white;border:1px solid #e57866;padding:0px 5px 0px 5px;font-size:10px;color:#e57866'>
+                 <%= @author.user_type %>
+                </button>
+                <span style='color:#639fca'><%= @author.user_name %></span>
+              </td>
+            <% end %>
         </tr>
         <tr>
-          <td>
-          &nbsp;
-        </td>
+              <td style='padding-left:10px;color:#999;font-size:10px'>
+                <%= comment.created_at.strftime("%y.%m.%d %H.%M") %>
+              </td>
         </tr>
         <tr>
-          <td>
-              <div>
-              <%= link_to like_path(id:comment.id),remote:true do %>
-                  <i style='font-size:20px;'class='glyphicon glyphicon-hand-up'></i>
-                      <% end %>
-                    </div>
-                    <div id="comment_<%=comment.id%>">
-                      <div style='margin:10px 0px 0px 0px'>
-                        <span style='font-size:20px;'><%= judge=comment.get_likes.size-comment.get_dislikes.size %></span>
-                      </div>
-                      <div style='margin-bottom:10px'><%= judge>0 ? "有用" : "没用" %></div>
-                    </div>
-                    <div><%= link_to dislike_path(id:comment.id),remote:true do %>
-                  <i style='font-size:20px;'class='glyphicon glyphicon-thumbs-down'></i>
-              <% end %>
-              </div>
-    
-          </td>
-          <td style='vertical-align:top' colspan='2'>
+          <td style='vertical-align:top;padding-top:10px;font-size:16px;font-family:Hiragino Sans GB;line-height:1.5' colspan='2'>
                           
             <%= comment.body %>
                     
