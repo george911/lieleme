@@ -71,7 +71,7 @@ class HomeController < ApplicationController
       @my_talents = current_user.received_users.page(params[:page]).per(10)
       #@review = Review.new
       if params[:my_query].present?
-      params[:my_query].split(/ /).each do |f|
+      params[:my_query].split.each do |f|
         if f=~/大学/
 	  @my_talents = @my_talents.joins(:educations).uniq.where('educations.school LIKE ?',"%#{f}%")
 	elsif f=~/北京|上海|天津|深圳|重庆|哈尔滨|长春|沈阳|呼和浩特|石家庄|乌鲁木齐|兰州|西宁|西安|银川|郑州|济南|太原|合肥|武汉|长沙|南京|成都|贵阳|昆明|南宁|拉萨|杭州|南昌|广州|福州|台北|海口|香港|澳门|无锡|苏州/
@@ -89,7 +89,7 @@ class HomeController < ApplicationController
   # 我推荐的候选人
   def my_line_items
     if params[:my_query].present?
-      params[:my_query].split(/ /).each do |f|
+      params[:my_query].split.each do |f|
 	@my_line_items = current_user.sent_line_items.joins(:job,:recipient).uniq.where('users.user_name LIKE ? OR line_items.status LIKE ? OR jobs.employer LIKE ? OR jobs.title LIKE ?',"%#{f}%","%#{f}%","%#{f}%","%#{f}%").page(params[:page]).per(10)
       end
     else

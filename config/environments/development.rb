@@ -2,11 +2,15 @@ Rails.application.configure do
 	config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
 		address: "smtp.exmail.qq.com",
+#		address: "smtp.mxhichina.com",
 		port: 25,
 		domain: "exmail.qq.com",
+		#domain: "qiye.aliyun.com",
 		authentication: :login,
 		user_name: "support@lieyohui.com",
+		#user_name: "george.qiao@lieleme.com",
 		password: "lieleme1"
+		#password: "Qwer1234"
 	}
   
   # Settings specified here will take precedence over those in config/application.rb.

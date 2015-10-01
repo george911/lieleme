@@ -31,7 +31,7 @@ class SearchController < ApplicationController
     end
 
     if params[:query].present?
-      params[:query].split(/ /).each do |f|
+      params[:query].split.each do |f|
         if f=~/北京|上海|天津|深圳|重庆|哈尔滨|长春|沈阳|呼和浩特|石家庄|乌鲁木齐|兰州|西宁|西安|银川|郑州|济南|太原|合肥|武汉|长沙|南京|成都|贵阳|昆明|南宁|拉萨|杭州|南昌|广州|福州|台北|海口|香港|澳门|无锡|苏州/
 	  jobs=jobs.where("city like ?",$&)
 	elsif f=~/[0-9][0-9]/ or f=~/[0-9]/ # 搜索年龄
@@ -49,7 +49,7 @@ class SearchController < ApplicationController
   def general_search(keywords,category)
     if keywords.present? and category == "职位"
       jobs = Job.all # 这个jobs要在循环外定义,否则会不认
-      keywords.split(/ /).each do |f|
+      keywords.split.each do |f|
         if f=~/北京|上海|天津|深圳|重庆|哈尔滨|长春|沈阳|呼和浩特|石家庄|乌鲁木齐|兰州|西宁|西安|银川|郑州|济南|太原|合肥|武汉|长沙|南京|成都|贵阳|昆明|南宁|拉萨|杭州|南昌|广州|福州|台北|海口|香港|澳门|无锡|苏州/
 	  jobs=jobs.where("city like ?",$&)
 	elsif f=~/[0-9][0-9]/ or f=~/[0-9]/ # 搜索年龄
@@ -62,7 +62,7 @@ class SearchController < ApplicationController
 
     elsif keywords.present? and category == "人才"
       users=User.where(user_type: "求职者")
-      keywords.split(/ /).each do |f|
+      keywords.split.each do |f|
 	    if f=~/大学/
 	      users = users.joins(:educations).uniq.where('educations.school LIKE ?', "%#{f}%")
             elsif f=~/北京|上海|天津|深圳|重庆|哈尔滨|长春|沈阳|呼和浩特|石家庄|乌鲁木齐|兰州|西宁|西安|银川|郑州|济南|太原|合肥|武汉|长沙|南京|成都|贵阳|昆明|南宁|拉萨|杭州|南昌|广州|福州|台北|海口|香港|澳门|无锡|苏州/
@@ -77,7 +77,7 @@ class SearchController < ApplicationController
        
     elsif keywords.present? and category == "猎头"
       users = User.where(user_type: "猎头")
-      keywords.split(/ /).each do |f|
+      keywords.split.each do |f|
         # 搜索猎头专注的行业和专注的职位
 	users=users.where('industry LIKE ? OR focus_job1 LIKE ? OR focus_job2 LIKE ? OR focus_job3 LIKE ?',"%#{f}%","%#{f}%","%#{f}%","%#{f}%")
       end
