@@ -150,6 +150,7 @@
                         <div class='col-md-12'>
                           <% @first_offer.sender.offers.order("created_at asc").first(3).each do |offer| %>
                             <li style='padding-top:15px;list-style:none;font-size:15px;color:#7b91a8'>
+                              <%= link_to "#{offer.job.title}",job_path(offer.job), target:"_blank" unless offer.job.nil? %>职位于<%=offer.updated_at.strftime("%m-%d") %>获得offer</li>
                           <% end %>
                         </div>
                       </div>  
