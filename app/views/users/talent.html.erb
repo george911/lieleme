@@ -65,8 +65,8 @@
       <h4 style="color:#007722">自我介绍· · · · · ·</h4>
       <% if @user.summaries != nil %>
       <% @user.summaries.each do |f| %>
-      	<div class='col-lg-12'>
-      		<%= f.content %>
+      	<div class='col-lg-12' >
+		<p style='font-size:16px;line-height:1.5'><%= f.content %></p>
       	</div>
       <% end %>
       <% end %>

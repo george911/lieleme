@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151001061123) do
+ActiveRecord::Schema.define(version: 20151002021004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20151001061123) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "industry"
+    t.text     "note"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -141,6 +142,18 @@ ActiveRecord::Schema.define(version: 20151001061123) do
   end
 
   add_index "experiences", ["job_id"], name: "index_experiences_on_job_id", using: :btree
+
+  create_table "hrs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "email"
+    t.string   "phone"
+    t.integer  "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "hrs", ["client_id"], name: "index_hrs_on_client_id", using: :btree
 
   create_table "inquiries", force: :cascade do |t|
     t.string   "name"
@@ -453,5 +466,6 @@ ActiveRecord::Schema.define(version: 20151001061123) do
   add_index "works", ["user_id"], name: "index_works_on_user_id", using: :btree
 
   add_foreign_key "client_emails", "clients"
+  add_foreign_key "hrs", "clients"
   add_foreign_key "microposts", "users"
 end

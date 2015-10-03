@@ -56,6 +56,14 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  def admin?
+    if current_user.verify == "admin" or current_user.email == "cvsend@139.com"
+      return true
+    else
+      return false
+    end
+  end
+
   def mobile_device?
     request.user_agent =~ /Mobile|Windows Phone/
   end

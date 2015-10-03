@@ -1,13 +1,14 @@
 module ClearAll
   puts 'in clear_all'
   ClientEmail.delete_all
+  Hr.delete_all
   Client.delete_all
   Email.delete_all
   Relationship.delete_all
   Boss.delete_all
   Education.delete_all
   Experience.delete_all
-  Job.delete_all
+  #Job.delete_all
   LineItem.delete_all
   Rate.delete_all
   Review.delete_all

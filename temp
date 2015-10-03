@@ -1,12 +1,4 @@
                           Prefix Verb       URI Pattern                                                         Controller#Action
-                         clients GET        /clients(.:format)                                                  clients#index
-                                 POST       /clients(.:format)                                                  clients#create
-                      new_client GET        /clients/new(.:format)                                              clients#new
-                     edit_client GET        /clients/:id/edit(.:format)                                         clients#edit
-                          client GET        /clients/:id(.:format)                                              clients#show
-                                 PATCH      /clients/:id(.:format)                                              clients#update
-                                 PUT        /clients/:id(.:format)                                              clients#update
-                                 DELETE     /clients/:id(.:format)                                              clients#destroy
                                             /resque                                                             #<Resque::Server app_file="/usr/local/lib/ruby/gems/2.2.0/gems/resque-1.25.2/lib/resque/server.rb">
                          profile GET        /profile(.:format)                                                  users#show
                             like GET        /like(.:format)                                                     comments#like
@@ -145,6 +137,25 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                          sign_in GET        (/:locale)/sign_in(.:format)                                        devise/sessions#new
                          sign_up GET        (/:locale)/sign_up(.:format)                                        registrations#new
                             root GET        /(:locale)(.:format)                                                front#show
+                      client_hrs GET        (/:locale)/clients/:client_id/hrs(.:format)                         hrs#index
+                                 POST       (/:locale)/clients/:client_id/hrs(.:format)                         hrs#create
+                   new_client_hr GET        (/:locale)/clients/:client_id/hrs/new(.:format)                     hrs#new
+                  edit_client_hr GET        (/:locale)/clients/:client_id/hrs/:id/edit(.:format)                hrs#edit
+                       client_hr GET        (/:locale)/clients/:client_id/hrs/:id(.:format)                     hrs#show
+                                 PATCH      (/:locale)/clients/:client_id/hrs/:id(.:format)                     hrs#update
+                                 PUT        (/:locale)/clients/:client_id/hrs/:id(.:format)                     hrs#update
+                                 DELETE     (/:locale)/clients/:client_id/hrs/:id(.:format)                     hrs#destroy
+                         clients GET        (/:locale)/clients(.:format)                                        clients#index
+                                 POST       (/:locale)/clients(.:format)                                        clients#create
+                      new_client GET        (/:locale)/clients/new(.:format)                                    clients#new
+                     edit_client GET        (/:locale)/clients/:id/edit(.:format)                               clients#edit
+                          client GET        (/:locale)/clients/:id(.:format)                                    clients#show
+                                 PATCH      (/:locale)/clients/:id(.:format)                                    clients#update
+                                 PUT        (/:locale)/clients/:id(.:format)                                    clients#update
+                                 DELETE     (/:locale)/clients/:id(.:format)                                    clients#destroy
+                        bd_email GET        (/:locale)/bd_email(.:format)                                       clients#send_email
+                         bd_test GET        (/:locale)/bd_test(.:format)                                        clients#bd_test
+                       delete_hr DELETE     (/:locale)/delete_hr(.:format)                                      clients#delete_hr
                        blog_home GET        (/:locale)/users/:id/blog_home(.:format)                            microposts#home
                       microposts GET        (/:locale)/microposts(.:format)                                     microposts#index
                                  POST       (/:locale)/microposts(.:format)                                     microposts#create

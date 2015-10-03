@@ -5,14 +5,16 @@
 </div>
 <div class='col-md-10' id='client_list' style='padding-top:100px'>
 	<div class='row'>
-		<div class='col-md-8'>
+		<div class='col-md-10'>
 		<%= form_tag clients_path,method: :post, remote:true do %>
 			<table style:''>
 			  <tr>
 				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :name,nil,placeholder:"公司全称",size: 15,style:'border:0px' %></td>
 				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :industry,nil,placeholder:"行业",size: 10,style:'border:0px' %></td>
-				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :email,nil,placeholder:"邮箱地址",size: 15,style:'border:0px' %></td>
-				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :phone,nil,placeholder:"电话号码",size: 10,style:'border:0px' %></td>
+				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :hr_name,nil,placeholder:"HR名字",size: 15,style:'border:0px' %></td>
+				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :hr_title,nil,placeholder:"Title",size: 15,style:'border:0px' %></td>
+				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :hr_email,nil,placeholder:"Email",size: 15,style:'border:0px' %></td>
+				  <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :hr_phone,nil,placeholder:"电话",size: 15,style:'border:0px' %></td>
 				  <td style='border:0px;padding-left:3px'><%= submit_tag "提交",class: "form-control",size: 15 %></td>
 			  </tr>
 		  	</table>
@@ -22,15 +24,14 @@
 	</div>
 <br>
 <div class='row'>
-  <div class='col-md-8' >
+  <div class='col-md-10' >
   	<table width="100%">
   	  <thead>
   	    <tr>
-  	      <th width="20%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Company</th>
+  	      <th width="10%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Company</th>
   	      <th width="10%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Industry</th>
-  	      <th width="30%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Email</th>
-  	      <th width="10%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>Phone</th>
-  	      <th width="30%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'></th>
+  	      <th width="70%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>HR</th>
+  	      <th width="10%" style='padding-left:5px;color:#919191;border:1px solid #d9d9d9'>备注</th>
   	    </tr>
   	  </thead>
   	
@@ -44,27 +45,64 @@
 			  <%= client.industry %>
 		      </td>
 		      <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top">
-			<% if client.client_emails.present? %>
-			      <% client.client_emails.each_with_index do |f,index| %>
-				      <% if index !=0 %>
-				     	<br>
-				      <% end %>
-				<%= f.email %>
+			<% if client.hrs.present? %>
+				<table width='100%'>
+			      	  <% client.hrs.each_with_index do |f,index| %>
+					  <tr style=<%= f != client.hrs.last ? "'border-bottom: 1px solid #eee'" : ""%>>
+						  <td width='10%'><%= f.name %></td>
+						  <td width='15%'><%= f.title %></td>
+						  <td width='15%'><%= f.phone %></td>
+						  <td width='35%'><%= f.email %></td>
+						  <td width='25'>
+						    <%= link_to delete_hr_path(id:f.id), style:"float:right",method: :delete, remote: true do %>
+						      <i class='glyphicon glyphicon-remove'></i>
+						    <% end %>
+						  <!-- Small modal -->
+						  <a style='float:right' data-toggle="modal" data-target="#hr_<%= f.id %>"><i class='glyphicon glyphicon-pencil'>&nbsp;</i></a>
+						    <%= link_to bd_email_path(email:f.email),remote: true, style:"float:right" do %>
+						      <i class='glyphicon glyphicon-envelope'>&nbsp;&nbsp;</i>
+						    <% end %>
+
+						  <div class="modal fade" id="hr_<%=f.id%>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+						    <div class="modal-dialog modal-sm">
+							<div class="modal-content">
+							  <div class="modal-header">
+							    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							    <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+							  </div>
+							   <div class="modal-body">
+							     <%= form_for([client,f]) do |hr| %>
+							       <%= hr.text_field :name,placeholder:'Name' %>
+							       <%= hr.text_field :title, placeholder:'Title' %>
+							       <%= hr.text_field :phone, placeholder:'Phone' %>
+							       <%= hr.text_field :email, placeholder:'Email' %>
+							       <%= hr.submit "修改" %>
+						       	     <% end %>
+							   </div>
+						        </div>
+						   </div>
+						 </div>
+				  <% end %>
+				</table>
 			      <% end %>
-			<% end %>
 		      </td>
 		      <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top">
-		        <%= client.phone %>
-		      </td>
-		      <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top">
-			      <% client.client_emails.each_with_index do |f,index| %>
-				      <% if index != 0 %>
-					      <br>
-				      <% end %>
-				      <%= link_to '发送邮件', bd_email_path(email:f.email),remote: true %>
-				      <%= link_to 'Destroy', delete_email_path(id:f.id), style:"padding-left:10px;float:right",method: :delete, remote: true %>
-				      <%= link_to 'Edit', edit_client_path(client),style:"float:right" %>
+			      <!-- Small modal -->
+			      <% if client.note.present? %>
+				<a data-toggle="modal" data-target="#client_<%= client.id %>"><%= client.note %></a>
+			      <% else %>
+				<a data-toggle="modal" data-target="#client_<%= client.id %>"><i class='glyphicon glyphicon-pencil'></i></a>
 			      <% end %>
+			      <div class="modal" id='client_<%= client.id%>'tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+				        <div class="modal-dialog modal-sm">
+						    <div class="modal-content" style='padding:30px'>
+							    <%= form_for(client) do |f| %>
+							      <%= f.text_area :note %>
+							      <%= f.submit "修改" %>
+						            <% end %>
+						    </div>
+					</div>
+				</div>
 		      </td>
   	      </tr>
   	    <% end %>

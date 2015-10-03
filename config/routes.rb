@@ -59,12 +59,14 @@ Rails.application.routes.draw do
       get "sign_up", to: "registrations#new"
       end
     root 'front#show'
-      
-    resources :clients
+
+    resources :clients do 
+      resources :hrs
+    end
     # link的话没有render的必要
     get 'bd_email',to:'clients#send_email'
     get 'bd_test',to:'clients#bd_test'
-    delete 'delete_email', to:'clients#delete_email'
+    delete 'delete_hr', to:'clients#delete_hr'
 
     get 'users/:id/blog_home',to:'microposts#home', as: :blog_home
     resources :microposts

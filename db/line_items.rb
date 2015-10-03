@@ -6,7 +6,7 @@ LineItem.create(
   email:		'aaronqin@test.com',
   recipient_id:		10001,
   sender_id:		20002,
-  job_id:		10001,
+  job_id:		50,
   status:		'等待面试',
   mobile:		'13916310001',
   comment:		'duke干得不错'

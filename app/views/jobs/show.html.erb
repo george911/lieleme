@@ -30,13 +30,13 @@
 	  <tr><td><strong>最后更新:</strong></td><td><%= @job.line_items.order("updated_at asc").first.updated_at.strftime("%Y-%m-%d") %></td></tr>
 	<% end %>
 	<% if @job.memo.present? %>
-	<tr><td style="vertical-align:top"><strong>备忘:</strong></td><td><%= @job.memo %></td></tr>
+		<tr><td style="vertical-align:top"><strong>特别提醒:</strong></td><td><div class='well' style='padding:10px;border:0px;color:#876d4a;background-color:#fcf7e1'><%= @job.memo %></div></td></tr>
 	<% end %>
       </table>
     </div><!--cl-lg-3-->
  
     <div class='col-lg-6'>
-      <%= hidden_div_if @job.commission.blank? do %>
+      <%= hidden_div_if (@job.commission.blank? or !(user_signed_in?) or current_user.user_type != "猎头") do %>
 	      <p><span style='font-size:35px;font-family:Georgia;color:#fa6464'><%= @job.commission %></span><span style='font-size:10px;'>现金推荐奖</span></p>
       <% end %>
       <%= hidden_div_if @job.work_year.blank? do %>
@@ -173,15 +173,15 @@
   <div class='row'>
     <div class='col-lg-12'>
       <!--把/n换成回车并且插入段落标记和首行缩进-->
-      <p class='green_title'>公司介绍· · · · · ·</p>
-      <p class='text'><%= @job.company_info.gsub(/\n/,'</p><p class="text">').html_safe unless @job.company_info.blank? %></p>
+      <p class='green_title' style='font-size:16px'>公司介绍· · · · · ·</p>
+      <p class='text' style='font-size:16px'><%= @job.company_info.gsub(/\n/,'</p><p class="text"style="font-size:16px">').html_safe unless @job.company_info.blank? %></p>
     </div>
  </div> 
 
   <div class='row'>
     <div class='col-lg-12'>
-      <p class='green_title'>工作职责· · · · · ·</p>
-      <p class='text'><%= @job.role.gsub(/\n/,'</p><p class="text">').html_safe unless @job.role.blank? %></p>
+      <p class='green_title'style='font-size:16px'>工作职责· · · · · ·</p>
+      <p class='text'style='font-size:16px'><%= @job.role.gsub(/\n/,'</p><p class="text"style="font-size:16px">').html_safe unless @job.role.blank? %></p>
     </div>
   </div>
 
@@ -191,8 +191,8 @@
 
   <div class='row'>
     <div class='col-lg-12'>
-      <p class='green_title'>职位要求· · · · · ·</p>
-      <p class='text'><%= @job.requirement.gsub(/\n/,'</p><p class="text">').html_safe unless @job.requirement.blank? %></p>
+      <p class='green_title'style='font-size:16px'>职位要求· · · · · ·</p>
+      <p class='text'style='font-size:16px'><%= @job.requirement.gsub(/\n/,'</p><p class="text"style="font-size:16px">').html_safe unless @job.requirement.blank? %></p>
     </div>
   </div>
 
