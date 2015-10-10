@@ -47,7 +47,6 @@ class ClientsController < InheritedResources::Base
         format.js
       else
 	if @client.save
-	  #@email = @client.client_emails.create(email:params[:email])
 	  @client.hrs.create(name:params[:hr_name],title:params[:hr_title],email:params[:hr_email],phone:params[:hr_phone])
     	  Client.find_by(name:"我自己").touch unless Client.find_by(name:"我自己") == nil
           @clients = Client.all

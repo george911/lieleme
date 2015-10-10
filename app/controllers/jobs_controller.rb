@@ -77,6 +77,14 @@ class JobsController < ApplicationController
       end
   end
 
+  def edit_targets
+    @targets = @job.targets.all
+    respond_to do |format|
+      format.html { }
+      format.js
+    end
+  end
+
   def edit_sub
     @subordinates = @job.subordinates.all
     respond_to do |format|

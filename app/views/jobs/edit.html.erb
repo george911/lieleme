@@ -6,6 +6,13 @@
 		  <div class='col-lg-10'>
 
 		  	<div class='row'>
+			<h4>目标公司&nbsp;<%= link_to "修改",edit_targets_path(id:@job), class: "btn-orange", remote:true %></h4>
+			  <div class='col-lg-10' style='padding-left:20px' id="target_fields">
+			    <%= render "target_fields" %>
+			  </div>
+			</div>
+			
+		  	<div class='row'>
 			<h4>汇报对象&nbsp;<%= link_to "修改",edit_bosses_path(id:@job), class: "btn-orange", remote:true %></h4>
 			  <div class='col-lg-10' style='padding-left:20px' id="boss_fields">
 			    <%= render "boss_fields" %>

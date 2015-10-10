@@ -1,4 +1,12 @@
                           Prefix Verb       URI Pattern                                                         Controller#Action
+                      candidates GET        /candidates(.:format)                                               candidates#index
+                                 POST       /candidates(.:format)                                               candidates#create
+                   new_candidate GET        /candidates/new(.:format)                                           candidates#new
+                  edit_candidate GET        /candidates/:id/edit(.:format)                                      candidates#edit
+                       candidate GET        /candidates/:id(.:format)                                           candidates#show
+                                 PATCH      /candidates/:id(.:format)                                           candidates#update
+                                 PUT        /candidates/:id(.:format)                                           candidates#update
+                                 DELETE     /candidates/:id(.:format)                                           candidates#destroy
                                             /resque                                                             #<Resque::Server app_file="/usr/local/lib/ruby/gems/2.2.0/gems/resque-1.25.2/lib/resque/server.rb">
                          profile GET        /profile(.:format)                                                  users#show
                             like GET        /like(.:format)                                                     comments#like
@@ -35,6 +43,15 @@
                                  PATCH      /admin/admin_users/:id(.:format)                                    admin/admin_users#update
                                  PUT        /admin/admin_users/:id(.:format)                                    admin/admin_users#update
                                  DELETE     /admin/admin_users/:id(.:format)                                    admin/admin_users#destroy
+      batch_action_admin_clients POST       /admin/clients/batch_action(.:format)                               admin/clients#batch_action
+                   admin_clients GET        /admin/clients(.:format)                                            admin/clients#index
+                                 POST       /admin/clients(.:format)                                            admin/clients#create
+                new_admin_client GET        /admin/clients/new(.:format)                                        admin/clients#new
+               edit_admin_client GET        /admin/clients/:id/edit(.:format)                                   admin/clients#edit
+                    admin_client GET        /admin/clients/:id(.:format)                                        admin/clients#show
+                                 PATCH      /admin/clients/:id(.:format)                                        admin/clients#update
+                                 PUT        /admin/clients/:id(.:format)                                        admin/clients#update
+                                 DELETE     /admin/clients/:id(.:format)                                        admin/clients#destroy
 batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:format)                         admin/post_comments#batch_action
              admin_post_comments GET        /admin/post_comments(.:format)                                      admin/post_comments#index
                                  POST       /admin/post_comments(.:format)                                      admin/post_comments#create
@@ -112,6 +129,7 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                         my_apply GET        (/:locale)/my_apply(.:format)                                       home#my_apply
                      job_invites GET        (/:locale)/job_invites(.:format)                                    home#job_invites
                         edit_sub GET        (/:locale)/edit_sub(.:format)                                       jobs#edit_sub
+                    edit_targets GET        (/:locale)/edit_targets(.:format)                                   jobs#edit_targets
                      edit_bosses GET        (/:locale)/edit_bosses(.:format)                                    jobs#edit_bosses
                  my_pending_jobs GET        (/:locale)/my_pending_jobs(.:format)                                home#my_pending_jobs
                   my_closed_jobs GET        (/:locale)/my_closed_jobs(.:format)                                 home#my_closed_jobs
@@ -172,6 +190,8 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                        job_refer POST       (/:locale)/jobs/:job_id/refer(.:format)                             line_items#refer
                         job_boss PATCH      (/:locale)/jobs/:job_id/bosses/:id(.:format)                        bosses#update
                                  PUT        (/:locale)/jobs/:job_id/bosses/:id(.:format)                        bosses#update
+                      job_target PATCH      (/:locale)/jobs/:job_id/targets/:id(.:format)                       targets#update
+                                 PUT        (/:locale)/jobs/:job_id/targets/:id(.:format)                       targets#update
                  job_subordinate PATCH      (/:locale)/jobs/:job_id/subordinates/:id(.:format)                  subordinates#update
                                  PUT        (/:locale)/jobs/:job_id/subordinates/:id(.:format)                  subordinates#update
                        job_apply GET        (/:locale)/jobs/:job_id/apply(.:format)                             jobs#apply

@@ -1,0 +1,50 @@
+
+	<div class="col-md-4"><!--col-md对应的Container width：970px -->
+    <br><br>
+      <div class='panel panel-info'>
+        <div class='panel-heading'>
+           <div class='col-md-12'>
+            <h4>输入寻访提示</h4>
+           </div>
+           <div class='row'>
+           </div>
+        </div>
+      
+
+        <div class='panel-body'>
+
+                  <%= form_for @job, url: wizard_path, method: :put do |f| %>
+                    <% if @job.errors.any? %>
+                      <div id="error_explanation">
+                        <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+                        <ul>
+                        <% @job.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+
+                   <div class="col-lg-12" style='margin-top:10'>
+                    <%= f.text_area :memo,class: 'form-control', placeholder:"福利/公司规模/职位特别要求等" %>
+                  </div>
+
+                  <div class="field col-lg-8">
+                    <%= f.fields_for :targets, @job.targets.build(nil) do |builder| %>
+                    <%= render 'target_fields',f:builder %>
+
+                  <% end %>
+                  <%= link_to_add_fields "增加",f,:targets %>
+                </div>
+
+                    <div class='col-lg-6' style='padding-top:20px'>
+                  	<%= link_to "上一步",previous_wizard_path, class: 'btn btn-success' %>
+                    </div>
+		    
+		    <div class="col-lg-6 text-right" style='padding-top:15px'>
+                      <%= f.submit "继续",class: 'btn btn-success' %>
+                    </div>
+                  <% end %>
+          </div><!--panel body end -->
+</div>

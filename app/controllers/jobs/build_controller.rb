@@ -2,7 +2,7 @@ class Jobs::BuildController < ApplicationController
   include Wicked::Wizard
   before_action :set_job
   layout 'home'
-  steps :job_scope, :team, :package, :invitation
+  steps :job_scope, :team, :target, :invitation
   def show
     case step
     when :invitation
@@ -32,7 +32,8 @@ class Jobs::BuildController < ApplicationController
         :title, :interview,:addr, :city, :industry, :commission, 
 	:role, :requirement, :work_year,
 	:base_pay, :month, :bonus, :allowance, :stock, :stock_num, :concall_date,
-   	experiences_attributes:[:skill,:year,:_destroy],
+   	targets_attributes:[:name,:city,:department,:_destroy],
+	experiences_attributes:[:skill,:year,:_destroy],
    	bosses_attributes: [:title, :job_id,:_destroy],
 	subordinates_attributes: [:job_id,:title,:num, :_destroy],
 	experiences_attributes: [:skill,:year,:_destroy]

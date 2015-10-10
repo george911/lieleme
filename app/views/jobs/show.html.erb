@@ -29,8 +29,23 @@
 	<% if @job.line_items.present? %>
 	  <tr><td><strong>最后更新:</strong></td><td><%= @job.line_items.order("updated_at asc").first.updated_at.strftime("%Y-%m-%d") %></td></tr>
 	<% end %>
-	<% if @job.memo.present? %>
-		<tr><td style="vertical-align:top"><strong>特别提醒:</strong></td><td><div class='well' style='padding:10px;border:0px;color:#876d4a;background-color:#fcf7e1'><%= @job.memo %></div></td></tr>
+	<% if @job.memo.present? or @job.targets.present? %>
+		<tr><td style="vertical-align:top"><strong>特别提醒:</strong></td><td>
+				<div class='well' style='padding:10px;border:0px;color:#876d4a;background-color:#fcf7e1'>
+					<%= hidden_div_if @job.targets.blank? do %>
+					  <h5 style='margin:0px 0px 5px 0px'>目标公司</h5>
+					 	<% @job.targets.each do |f| %>
+							<p style='padding:0px;margin:0px'><%= f.name %> &nbsp;<%= f.city %>&nbsp;<%= f.department %></p>
+					  		<hr style='margin:0px;border-color:#ccc'>
+						<% end %>
+					<% end %>
+					<%= hidden_div_if @job.memo.blank? do %>
+					    <% if @job.targets.present? %>
+						    <h5 style='margin-top:0px'>其他</h5>
+					    <% end %>
+					  <%= @job.memo %>
+		  			<% end %>
+				</div></td></tr>
 	<% end %>
       </table>
     </div><!--cl-lg-3-->

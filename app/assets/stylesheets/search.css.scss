@@ -2,7 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .search {
-  background: linear-gradient(#fefefe,#d5dae9);// 设置背景颜色
+  //background: linear-gradient(#fefefe,#d5dae9);// 设置背景颜色
+background-image:url(background-road.jpg);
+background-position:0% 150%;
 .star img {
   width:10px;height:10px;}
 //background: #e9eaed;

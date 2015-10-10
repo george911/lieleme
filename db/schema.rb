@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151002021004) do
+ActiveRecord::Schema.define(version: 20151010014812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,13 +70,18 @@ ActiveRecord::Schema.define(version: 20151002021004) do
   create_table "candidates", force: :cascade do |t|
     t.string   "name"
     t.string   "title"
-    t.string   "email"
+    t.string   "employer"
     t.string   "mobile"
-    t.text     "note"
+    t.string   "email"
     t.string   "city"
+    t.string   "note"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "age"
   end
+
+  add_index "candidates", ["user_id"], name: "index_candidates_on_user_id", using: :btree
 
   create_table "client_emails", force: :cascade do |t|
     t.string   "email"
@@ -386,6 +391,17 @@ ActiveRecord::Schema.define(version: 20151002021004) do
   add_index "talent_pools", ["talent_id", "hunter_id"], name: "index_talent_pools_on_talent_id_and_hunter_id", unique: true, using: :btree
   add_index "talent_pools", ["talent_id"], name: "index_talent_pools_on_talent_id", using: :btree
 
+  create_table "targets", force: :cascade do |t|
+    t.string   "name"
+    t.string   "city"
+    t.string   "department"
+    t.integer  "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "targets", ["job_id"], name: "index_targets_on_job_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "mobile"
     t.string   "user_name"
@@ -465,7 +481,9 @@ ActiveRecord::Schema.define(version: 20151002021004) do
 
   add_index "works", ["user_id"], name: "index_works_on_user_id", using: :btree
 
+  add_foreign_key "candidates", "users"
   add_foreign_key "client_emails", "clients"
   add_foreign_key "hrs", "clients"
   add_foreign_key "microposts", "users"
+  add_foreign_key "targets", "jobs"
 end

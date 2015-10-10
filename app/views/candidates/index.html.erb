@@ -1,0 +1,65 @@
+<div class='notice col-md-2' id = 'edit_area' style='padding-top:100px'>
+	<% if flash.present? %>
+		<p><%= flash[:notice] %></p>
+	<% end %>
+		
+</div>
+<div class='col-md-10' id='candidate_list' style='padding-top:100px'>
+	<div class='row'>
+		<div class='col-md-10'>
+        <%= form_tag candidates_path,method: :post,remote:true do %>
+              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :name,nil,placeholder:"姓名",size: 10, style:'border:0px' %></td>
+              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :title,nil,placeholder:"职位",size: 10,style:'border:0px' %></td>
+              <td style='border:1px solid #d9d9d9;padding:3px'><%= number_field_tag :age,nil,placeholder:"年龄",size: 10,style:'border:0px' %></td>
+              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :city,nil,placeholder:"城市",size: 10,style:'border:0px' %></td>
+              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :employer,nil,placeholder:"雇主",size: 10,style:'border:0px' %></td>
+              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :mobile,nil,placeholder:"电话",size: 10,style:'border:0px' %></td>
+              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :email,nil,placeholder:"邮箱",size: 10,style:'border:0px' %></td>
+              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :note,nil,placeholder:"备注",size: 10,style:'border:0px' %></td>
+              <div class='col-md-1' style='padding-left:0px;padding-top:10px'>
+              <%= submit_tag "提交",class: "form-control",size: 10 %>
+            </div>
+          <% end %>
+		</div>
+	</div>
+<br>
+
+
+  <div class='row'>
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th>年龄</th>
+            <th>Employer</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>City</th>
+            <th>Note</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @candidates.order('updated_at desc').each do |candidate| %>
+            <tr>
+      	<td><%= candidate.name %></td>
+              <td><%= candidate.title %></td>
+              <td><%= candidate.age %></td>
+              <td><%= candidate.employer %></td>
+              <td><%= candidate.mobile %></td>
+              <td><%= candidate.email %></td>
+              <td><%= candidate.city %></td>
+              <td><%= candidate.note %></td>
+              <td><%= link_to 'Edit', edit_candidate_path(candidate), remote:true %></td>
+              <td><%= link_to 'Destroy', candidate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+<br>
+
+<%= link_to 'New Candidate', new_candidate_path %>
+</div>

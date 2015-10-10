@@ -1,0 +1,10 @@
+<% @targets.each do |target| %>
+  <div class='col-lg-10' style='padding-left:20px' >
+    <%= form_for([@job,target],remote: true ) do |t|  %>
+	<%= t.text_field :name %>
+	<%= t.text_field :city %>
+	<%= t.text_field :department %>
+	<%= t.submit "更新" %><!--job_target_path-->
+    <% end %>
+  </div>
+<% end %>

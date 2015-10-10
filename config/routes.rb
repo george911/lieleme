@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get 'my_apply', to:'home#my_apply'
     get 'job_invites', to:'home#job_invites'
     get 'edit_sub', to:'jobs#edit_sub'
+    get 'edit_targets', to:'jobs#edit_targets'
     get 'edit_bosses', to:'jobs#edit_bosses'
     get 'my_pending_jobs',to:'home#my_pending_jobs'
     get 'my_closed_jobs',to:'home#my_closed_jobs'
@@ -60,6 +61,7 @@ Rails.application.routes.draw do
       end
     root 'front#show'
 
+    resources :candidates
     resources :clients do 
       resources :hrs
     end
@@ -79,6 +81,7 @@ Rails.application.routes.draw do
 	end
       post 'refer',to: 'line_items#refer'
       resources :bosses,only:[:update]
+      resources :targets,only:[:update] # _target_edit里面form_for([@job,target],remote: true )用到这个路径
       resources :subordinates,only:[:update]
       get 'apply' => :apply
       patch 'accept' => 'line_items#accept', as: :accept
