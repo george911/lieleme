@@ -29,14 +29,14 @@
       <table class='table table-hover'>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Title</th>
+            <th>姓名</th>
+            <th>职位</th>
             <th>年龄</th>
-            <th>Employer</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>City</th>
-            <th>Note</th>
+            <th>城市</th>
+            <th>雇主</th>
+            <th>手机</th>
+            <th>邮箱</th>
+            <th>备注</th>
             <th colspan="2"></th>
           </tr>
         </thead>
@@ -47,10 +47,10 @@
       	<td><%= candidate.name %></td>
               <td><%= candidate.title %></td>
               <td><%= candidate.age %></td>
+              <td><%= candidate.city %></td>
               <td><%= candidate.employer %></td>
               <td><%= candidate.mobile %></td>
               <td><%= candidate.email %></td>
-              <td><%= candidate.city %></td>
               <td><%= candidate.note %></td>
               <td><%= link_to 'Edit', edit_candidate_path(candidate), remote:true %></td>
               <td><%= link_to 'Destroy', candidate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
