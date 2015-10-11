@@ -39,7 +39,7 @@
 					  		<hr style='margin:0px;border-color:#ccc'>
 						<% end %>
 					<% end %>
-					<%= hidden_div_if @job.memo.blank? do %>
+					<%= hidden_div_if @job.memo == nil do %>
 					    <% if @job.targets == nil %>
 						    <h5 style='margin-top:0px'>其他</h5>
 					    <% end %>

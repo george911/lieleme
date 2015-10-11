@@ -27,7 +27,7 @@ class Job < ActiveRecord::Base
   has_many :invitations
   has_many :interviews
 
-  accepts_nested_attributes_for :targets,:bosses,:subordinates,:line_items, :comments, allow_destroy: true
+  accepts_nested_attributes_for :targets,:bosses,:subordinates,:line_items, :comments, allow_destroy: true,reject_if: proc { |attributes| attributes[:skill].blank? }
   accepts_nested_attributes_for :experiences,allow_destroy: true,reject_if: proc { |attributes| attributes[:skill].blank? }
   ICT = ['传统软件','互联网','通信','网游','半导体','硬件']
   FINANCE = ['会计','金融','银行','保险','信托/担保/拍卖/典当']
