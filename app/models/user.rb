@@ -104,15 +104,25 @@ class User < ActiveRecord::Base
       else
 	return 1
       end
+    else
+      return 0 
     end
   end
 
   def hit_industry(offer,job)
-    return offer.job.industry == job.industry ? 2 : 1 
+    if offer.job.present?
+      return offer.job.industry == job.industry ? 2 : 1 
+    else
+      return 0
+    end
   end
 
   def hit_city(offer,job)
-    return offer.job.city == job.city ? 2 : 1
+    if offer.job.present?
+      return offer.job.city == job.city ? 2 : 1
+    else
+      return 0
+    end
   end
 	  
   def match_point(job)
