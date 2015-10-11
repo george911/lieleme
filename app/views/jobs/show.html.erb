@@ -32,7 +32,7 @@
 	<% if @job.memo.present? or @job.targets.present? %>
 		<tr><td style="vertical-align:top"><strong>特别提醒:</strong></td><td>
 				<div class='well' style='padding:10px;border:0px;color:#876d4a;background-color:#fcf7e1'>
-					<%= hidden_div_if @job.targets == nil do %>
+					<%= hidden_div_if @job.targets.empty? do %>
 					  <h5 style='margin:0px 0px 5px 0px'>目标公司</h5>
 					 	<% @job.targets.each do |f| %>
 							<p style='padding:0px;margin:0px'><%= f.name %> &nbsp;<%= f.city %>&nbsp;<%= f.department %></p>
