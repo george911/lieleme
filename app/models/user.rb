@@ -93,14 +93,18 @@ class User < ActiveRecord::Base
     sent_resumes.create(hunter_id:hunter.id)
   end
  
+  # offer传递我成功的case,job指发布的职位
   def hit_title(offer,job)
-    if offer.job.title == job.title 
+    if offer.job.present?
+      case offer.job.title
+      when job.title
 	return 4
-    elsif offer.job.title =~/#{job.title}/
+      when ~/#{job.title}/
 	return 2
-    else
+      else
 	return 1
-  end
+      end
+    end
   end
 
   def hit_industry(offer,job)
