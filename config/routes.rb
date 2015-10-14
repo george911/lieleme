@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       end
     root 'front#show'
 
+    get 'candidate_search',to:'candidates#search'
     resources :candidates
     resources :clients do 
       resources :hrs

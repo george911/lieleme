@@ -1,2 +1,1 @@
-
-$('#edit_area').html("<%= escape_javascript(render "form") %>");
+$('#candidate_<%=params[:candidate_id]%>').html("<%= escape_javascript(render "tr_edit_form") %>");

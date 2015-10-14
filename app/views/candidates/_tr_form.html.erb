@@ -1,0 +1,14 @@
+	<table width="100%">
+	  <tr>
+	      <td width="5%" style='padding-right:5px'><%= @candidate.name %></td>
+	      <td width="5%" style='padding-right:5px'><%= @candidate.title %></td>
+              <td width="5%" style='padding-right:5px'><%= @candidate.age %></td>
+              <td width="5%" style='padding-right:5px'><%= @candidate.city %></td>
+              <td width="5%" style='padding-right:5px'><%= @candidate.employer %></td>
+              <td width="5%" style='padding-right:5px'><%= @candidate.mobile %></td>
+              <td width="5%" style='padding-right:5px'><%= @candidate.email %></td>
+              <td width="5%" style='padding-right:5px'><%= @candidate.note %></td>
+              <td width="10%" style='padding-right:5px'><%= link_to 'Edit', edit_candidate_path(id:@candidate.id,candidate_id:@candidate.id), remote:true %>&nbsp;&nbsp;
+              <%= link_to 'Destroy', @candidate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  </tr>
+  	</table>

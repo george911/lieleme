@@ -94,6 +94,27 @@
             </div>
 		</div>
                     
+		<div class='row'>
+		<h4>薪资待遇&nbsp;</h4>
+                  <div class="col-lg-5" style='margin-top:10px'>
+                    <%= f.text_field :base_pay,class: 'form-control',placeholder:"基本月薪" %>
+                  </div>
+                  <div class="col-lg-5" style='margin-top:10px'>
+                    <%= f.text_field :month,class: 'form-control',placeholder:"发放月数" %>
+                  </div>
+                  <div class="col-lg-5" style='margin-top:10px'>
+                    <%= f.text_field :bonus,class: 'form-control',placeholder:"奖金" %>
+                  </div>
+                  <div class="col-lg-5" style='margin-top:10px'>
+                    <%= f.text_field :allowance,class: 'form-control',placeholder:"津贴" %>
+                  </div>
+                  <div class="col-lg-5" style='margin-top:10px'>
+                    <%= f.text_field :stock,class: 'form-control',placeholder:"股票" %>
+                  </div>
+                  <div class="col-lg-5" style='margin-top:10px'>
+                    <%= f.text_field :stock_num,class: 'form-control',placeholder:"股数" %>
+                  </div>
+		</div>
         <div class='row' align='right'>
         	<br>
             <%= f.submit "更改",class: "btn btn-success" %>

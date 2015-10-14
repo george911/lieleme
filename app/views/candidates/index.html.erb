@@ -1,63 +1,67 @@
 <div class='notice col-md-2' id = 'edit_area' style='padding-top:100px'>
+    <div class='row'>
 	<% if flash.present? %>
 		<p><%= flash[:notice] %></p>
 	<% end %>
-		
+	<%= form_tag candidate_search_path,method:'get' do %>
+	  <%= text_field_tag :name %>
+	  <%= text_field_tag :title %>
+	  <%= number_field_tag :min_age %>
+	  <%= number_field_tag :max_age %>
+	  <%= text_field_tag :city %>
+	  <%= text_field_tag :employer %>
+	  <%= submit_tag "搜索" %>
+  	<% end %>
+    </div>	
 </div>
 <div class='col-md-10' id='candidate_list' style='padding-top:100px'>
 	<div class='row'>
-		<div class='col-md-10'>
-        <%= form_tag candidates_path,method: :post,remote:true do %>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :name,nil,placeholder:"姓名",size: 10, style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :title,nil,placeholder:"职位",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= number_field_tag :age,nil,placeholder:"年龄",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :city,nil,placeholder:"城市",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :employer,nil,placeholder:"雇主",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :mobile,nil,placeholder:"电话",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :email,nil,placeholder:"邮箱",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :note,nil,placeholder:"备注",size: 10,style:'border:0px' %></td>
-              <div class='col-md-1' style='padding-left:0px;padding-top:10px'>
-              <%= submit_tag "提交",class: "form-control",size: 10 %>
-            </div>
+	  <div class='col-md-10'>
+		  <table>
+			  <tr>
+				  <%= form_tag candidates_path,method: :post,remote:true do %>
+              <td width="5%" style='padding:2px 5px 2px 0px;border:1px solid #d9d9d9;'><%= text_field_tag :name,nil,placeholder:"姓名",size: 10, style:'border:0px' %></td>
+              <td width="5%" style='padding:2px 5px 2px 0px;border:1px solid #d9d9d9;'><%= text_field_tag :title,nil,placeholder:"职位",size: 10,style:'border:0px' %></td>
+              <td width="5%" style='padding:2px 5px 2px 0px;border:1px solid #d9d9d9;'><%= number_field_tag :age,nil,placeholder:"年龄",size: 10,style:'border:0px' %></td>
+              <td width="5%" style='padding:2px 5px 2px 0px;border:1px solid #d9d9d9;'><%= text_field_tag :city,nil,placeholder:"城市",size: 10,style:'border:0px' %></td>
+              <td width="5%" style='padding:2px 5px 2px 0px;border:1px solid #d9d9d9;'><%= text_field_tag :employer,nil,placeholder:"雇主",size: 10,style:'border:0px' %></td>
+              <td width="5%" style='padding:2px 5px 2px 0px;border:1px solid #d9d9d9;'><%= text_field_tag :mobile,nil,placeholder:"电话",size: 10,style:'border:0px' %></td>
+              <td width="5%" style='padding:2px 5px 2px 0px;border:1px solid #d9d9d9;'><%= text_field_tag :email,nil,placeholder:"邮箱",size: 10,style:'border:0px' %></td>
+	      <td width="5%" style='padding:2px 5px 2px 0px;border:1px solid #d9d9d9;'><%= text_field_tag :note,nil,placeholder:"备注",size: 10,style:'border:0px' %></td>
+	      <td width="10%" style='padding: 2px 20px 2px 20px'><%= submit_tag "提交"%></td>
           <% end %>
-		</div>
+      </tr></table>
+            </div>
 	</div>
 <br>
 
 
-  <div class='row'>
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            <th>姓名</th>
-            <th>职位</th>
-            <th>年龄</th>
-            <th>城市</th>
-            <th>雇主</th>
-            <th>手机</th>
-            <th>邮箱</th>
-            <th>备注</th>
-            <th colspan="2"></th>
-          </tr>
-        </thead>
+  	<div class='row'>
+	  <div class='col-md-10'>
+          <table class='table table-hover'>
       
         <tbody>
           <% @candidates.order('updated_at desc').each do |candidate| %>
-            <tr>
-      	<td><%= candidate.name %></td>
-              <td><%= candidate.title %></td>
-              <td><%= candidate.age %></td>
-              <td><%= candidate.city %></td>
-              <td><%= candidate.employer %></td>
-              <td><%= candidate.mobile %></td>
-              <td><%= candidate.email %></td>
-              <td><%= candidate.note %></td>
-              <td><%= link_to 'Edit', edit_candidate_path(candidate), remote:true %></td>
-              <td><%= link_to 'Destroy', candidate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
+		  <tr><td width="100%"><div id="candidate_<%=candidate.id%>">
+	<table width="100%">
+	  <tr>
+	      <td width="5%" style='padding-right:5px'><%= candidate.name %></td>
+	      <td width="5%" style='padding-right:5px'><%= candidate.title %></td>
+              <td width="5%" style='padding-right:5px'><%= candidate.age %></td>
+              <td width="5%" style='padding-right:5px'><%= candidate.city %></td>
+              <td width="5%" style='padding-right:5px'><%= candidate.employer %></td>
+              <td width="5%" style='padding-right:5px'><%= candidate.mobile %></td>
+              <td width="5%" style='padding-right:5px'><%= candidate.email %></td>
+              <td width="5%" style='padding-right:5px'><%= candidate.note %></td>
+              <td width="10%" style='padding-right:5px'><%= link_to 'Edit', edit_candidate_path(id:candidate.id,candidate_id:candidate.id), remote:true %>
+              &nbsp;&nbsp;<%= link_to 'Destroy', candidate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  </tr>
+  	</table>
+		</div></td></tr>
           <% end %>
         </tbody>
       </table>
+  </div>
   </div>
 <br>
 

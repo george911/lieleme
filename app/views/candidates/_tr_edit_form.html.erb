@@ -1,0 +1,13 @@
+<%= form_for(@candidate,remote:true) do |f| %>
+		<table><tr>
+	  <td width="5%" style='padding-left:0px;padding-right:5px'><%= f.text_field :name,class: "form-control" %></td>
+	  <td width="5%" style='padding-left:0px;padding-right:5px'><%= f.text_field :title,class: "form-control" %></td>
+	  <td width="5%" style='padding-left:0px;padding-right:5px'><%= f.text_field :age,class: "form-control" %></td>
+	  <td width="5%" style='padding-left:0px;padding-right:5px'><%= f.text_field :city,class: "form-control" %></td>
+	  <td width="5%" style='padding-left:0px;padding-right:5px'><%= f.text_field :employer,class: "form-control" %></td>
+	  <td width="5%" style='padding-left:0px;padding-right:5px'><%= f.text_field :mobile,class: "form-control" %></td>
+	  <td width="5%" style='padding-left:0px;padding-right:5px'><%= f.text_field :email,class: "form-control" %></td>
+	  <td width="5%" style='padding-left:0px;padding-right:5px'><%= f.text_field :note,class: "form-control" %></td>
+	  <td width="10%" style='padding-left:20px;padding-right:20px'><%= f.submit "更新",class: "btn btn-success"%></td>
+  </tr></table>
+<% end %>
