@@ -1,56 +1,43 @@
 <div class='row'>
-    <div class='col-md-10'>
+	<div class='col-md-12'>
 
-          <%= form_tag candidates_path,method: :post,remote:true do %>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :name,nil,placeholder:"姓名",size: 10, style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :title,nil,placeholder:"职位",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= number_field_tag :age,nil,placeholder:"年龄",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :city,nil,placeholder:"城市",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :employer,nil,placeholder:"雇主",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :mobile,nil,placeholder:"电话",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :email,nil,placeholder:"邮箱",size: 10,style:'border:0px' %></td>
-              <td style='border:1px solid #d9d9d9;padding:3px'><%= text_field_tag :note,nil,placeholder:"备注",size: 10,style:'border:0px' %></td>
-              <div class='col-md-1' style='padding-left:0px;padding-top:10px'>
-              <%= submit_tag "提交",class: "form-control",size: 10 %>
-            </div>
+		  <%= form_tag candidates_path,method: :post,remote:true do %>
+              <div style='padding:7px' class='col-md-1'><%= text_field_tag :name,nil,placeholder:"姓名",    style:'border:0px' %>      </div>
+              <div style='padding:7px' class='col-md-1'><%= text_field_tag :title,nil,placeholder:"职位",   style:'border:0px' %>            </div>
+              <div style='padding:7px' class='col-md-1'><%= number_field_tag :age,nil,placeholder:"年龄",   style:'border:0px' %></div>
+              <div style='padding:7px' class='col-md-1'><%= text_field_tag :city,nil,placeholder:"城市",    style:'border:0px' %></div>
+              <div style='padding:7px' class='col-md-1'><%= text_field_tag :employer,nil,placeholder:"雇主",style:'border:0px' %></div>
+              <div style='padding:7px' class='col-md-1'><%= text_field_tag :mobile,nil,placeholder:"电话",  style:'border:0px' %></div>
+              <div style='padding:7px' class='col-md-2'><%= text_field_tag :email,nil,placeholder:"邮箱",   style:'border:0px' %></div>
+	            <div style='padding:7px' class='col-md-1'><%= text_field_tag :note,nil,placeholder:"备注",    style:'border:0px' %></div>
+              <div style='padding:7px' class='col-md-2'><%= submit_tag "提交",class:'btn btn-success' %></div>
           <% end %>
-    </div>
-  </div>
-<br>
+ </div>
+	</div>
 
-
-  <div class='row'>
-      <table class='table table-hover'>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Title</th>
-            <th>年龄</th>
-            <th>Employer</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>City</th>
-            <th>Note</th>
-            <th colspan="2"></th>
-          </tr>
-        </thead>
+  	<div class='row'>
+	  <div class='col-md-12'>
+          <table class='table table-hover'>
       
         <tbody>
           <% @candidates.order('updated_at desc').each do |candidate| %>
-            <tr>
-        <td><%= candidate.name %></td>
-              <td><%= candidate.title %></td>
-              <td><%= candidate.age %></td>
-              <td><%= candidate.employer %></td>
-              <td><%= candidate.mobile %></td>
-              <td><%= candidate.email %></td>
-              <td><%= candidate.city %></td>
-              <td><%= candidate.note %></td>
-              <td><%= link_to 'Edit', edit_candidate_path(candidate), remote:true %></td>
-              <td><%= link_to 'Destroy', candidate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
+	  <tr ><td style= "padding:0px" width="100%"><div style='padding:0px' id="candidate_<%=candidate.id%>">
+
+	      <div class='col-md-1' style='padding:7px'><%= candidate.name %></div>
+	      <div class='col-md-1' style='padding:7px'><%= candidate.title %></div>
+        <div class='col-md-1' style='padding:7px'><%= candidate.age %></div>
+        <div class='col-md-1' style='padding:7px'><%= candidate.city %></div>
+        <div class='col-md-1' style='padding:7px'><%= candidate.employer %></div>
+        <div class='col-md-1' style='padding:7px'><%= candidate.mobile %></div>
+        <div class='col-md-2' style='padding:7px'><%= candidate.email %></div>
+        <div class='col-md-1' style='padding:7px'><%= candidate.note %></div>
+        <div class='col-md-2' style='padding:7px'><%= link_to 'Edit', edit_candidate_path(id:candidate.id,candidate_id:candidate.id), remote:true %>
+              &nbsp;&nbsp;<%= link_to 'Destroy', candidate, method: :delete, remote:true %></td>
+
+		</div></td></tr></div>
           <% end %>
         </tbody>
       </table>
+  </div>
   </div>
 <br>

@@ -62,6 +62,7 @@ Rails.application.routes.draw do
     root 'front#show'
 
     get 'candidate_search',to:'candidates#search'
+    get 'group_email',to:'candidates#group_email'
     resources :candidates
     resources :clients do 
       resources :hrs

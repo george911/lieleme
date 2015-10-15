@@ -1,0 +1,29 @@
+<div style='padding:30px'>
+  <p>你好<%=@candidate.name%>,</p>
+  <p><%= @content %></p>
+  <table width='100%' style='border-collapse:collapse'>
+		<thead style='background-color:#eeeeee;'>
+			<th width='10%' align='center' style='border:1px solid #aaa'>城市</th>
+			<th width='30%' align='center' style='border:1px solid #aaa'>公司名字</th>
+			<th width='40%' align='center' style='border:1px solid #aaa'>职位名字</th>
+			<th width='20%' align='center' style='border:1px solid #aaa'>基本月薪</th>
+		</thead>
+		<tbody>
+			<tr>
+			<td align='center' style='border:1px solid #aaa'><%= @job.city %></td>
+			<td align='center' style='border:1px solid #aaa'><%= @job.employer %></td>
+			<td align='center' style='border:1px solid #aaa'><%= link_to "#{@job.title}","http://www.lieleme.com/cn/jobs/#{@job.id}" %></td>
+			<td align='center' style='border:1px solid #aaa'><%= @job.base_pay %></td>
+			</tr>
+		</tbody>
+</table>
+<div style='border-radius:3px;margin:10px 20px 10px 20px;padding:10px;border:0px;color:#876d4a;background-color:#fcf7e1'>
+	<h4 style='margin:0px'>公司简介</h5>
+      	<%= @job.company_info.gsub(/\n/,'</p><p>').html_safe unless @job.company_info.blank? %>
+</div>
+
+如果您需要了解职位背景,请联系我.<br>
+<p style='margin-bottom:0px'>George</p>
+<p style='margin:0px'>13916382071</p>
+<p style='margin:0px'>qq:13916382071</p>
+</div>

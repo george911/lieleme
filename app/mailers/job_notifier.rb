@@ -1,6 +1,13 @@
 class JobNotifier < ActionMailer::Base
   default from: "support@lieyohui.com"
 
+  def job_list(candidate,job_id,content)
+    @candidate = candidate
+    @content = content
+    @job = Job.find(job_id) 
+    mail to: candidate.email, subect: "你好#{candidate.name}, 有一个机会推荐给您"
+  end
+
   def closed(recipient,job)
     @recipient=recipient
     @job = job

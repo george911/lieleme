@@ -1,4 +1,23 @@
 class CandidatesController < InheritedResources::Base
+  def group_email
+    candidates = current_user.candidates.all
+    candidates = current_user.candidates.where(name:params[:name]) unless params[:name].blank?
+    candidates = candidates.where(title:params[:title]) unless params[:title].blank?
+    candidates = candidates.where("age >= ?",params[:min_age]) unless params[:min_age].blank?
+    candidates = candidates.where("age <= ?",params[:max_age]) unless params[:max_age].blank?
+    candidates = candidates.where(city:params[:city]) unless params[:city].blank?
+    candidates = candidates.where(employer:params[:employer]) unless params[:employer].blank?
+    candidates.each do |f|
+      sleep 20
+      JobNotifier.job_list(f,params[:job_id],params[:content]).deliver_now
+    end
+    @candidates= current_user.candidates.all
+    respond_to do |format|
+      	  format.html { render :index }
+      	  format.js { flash[:notice] = "群发邮件发送成功" }
+    	end
+  end
+
   def index
     @candidate = Candidate.new
     @candidates= current_user.candidates.all
@@ -59,6 +78,16 @@ class CandidatesController < InheritedResources::Base
       end
     end
   end
+
+  def destroy
+    @candidate = Candidate.find(params[:id])
+    @candidate.destroy
+    respond_to do |format|
+	format.html { redirect_to candidates_url,notice: "记录已经删除" }
+	format.js
+    end
+  end
+
 
   private
 
