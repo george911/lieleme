@@ -26,7 +26,7 @@
 如果您需要了解职位背景,请联系我.<br>
 <div style='border-radius:3px;width:300px;padding:15px;background-image:url("http://www.lieleme.com/assets/Ruby_poster.jpg")'>
   <table><tr>
-    <td><%= link_to "tt",user_path(id:@sender.id),target:"_blank" %></td>
+    <td><%= image_tag(@sender.avatar.url) %></td>
     <td><p style='margin-bottom:0px;font-color:white'><%= @sender.user_name %></p>
 	    <p style='margin:0px;font-color:white'><%= @sender.mobile %></p>
     </td>
