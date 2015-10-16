@@ -3,13 +3,12 @@ class CandidatesController < InheritedResources::Base
     candidates = current_user.candidates.all
     candidates = current_user.candidates.where(name:params[:name]) unless params[:name].blank?
     candidates = candidates.where(title:params[:title]) unless params[:title].blank?
-    candidates = candidates.where("age >= ?",params[:min_age]) unless params[:min_age].blank?
-    candidates = candidates.where("age <= ?",params[:max_age]) unless params[:max_age].blank?
+    candidates = candidates.where("year >= ?",params[:year]) unless params[:year].blank?
     candidates = candidates.where(city:params[:city]) unless params[:city].blank?
     candidates = candidates.where(employer:params[:employer]) unless params[:employer].blank?
     candidates.each do |f|
       sleep 20
-      JobNotifier.job_list(f,params[:job_id],params[:content]).deliver_now
+      JobNotifier.job_list(f,params[:job_id],params[:content],current_user).deliver_now
     end
     @candidates= current_user.candidates.all
     respond_to do |format|

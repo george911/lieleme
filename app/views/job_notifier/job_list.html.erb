@@ -1,6 +1,7 @@
 <div style='padding:30px'>
   <p>你好<%=@candidate.name%>,</p>
   <p><%= @content %></p>
+  <p style='font-size:12px'>如果这种岗位不是您的菜, 麻烦告诉一声哪个技术方向是您的茶,以后推荐更加精准。<p>
   <table width='100%' style='border-collapse:collapse'>
 		<thead style='background-color:#eeeeee;'>
 			<th width='10%' align='center' style='border:1px solid #aaa'>城市</th>
@@ -23,7 +24,13 @@
 </div>
 
 如果您需要了解职位背景,请联系我.<br>
-<p style='margin-bottom:0px'>George</p>
-<p style='margin:0px'>13916382071</p>
-<p style='margin:0px'>qq:13916382071</p>
+<div style='border-radius:3px;width:300px;padding:15px;background-image:url("http://www.lieleme.com/assets/Ruby_poster.jpg")'>
+  <table><tr>
+    <td><%= link_to "tt",user_path(id:@sender.id),target:"_blank" %></td>
+    <td><p style='margin-bottom:0px;font-color:white'><%= @sender.user_name %></p>
+	    <p style='margin:0px;font-color:white'><%= @sender.mobile %></p>
+    </td>
+    </tr>
+    </table>
+</div>
 </div>
