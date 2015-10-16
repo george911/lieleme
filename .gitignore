@@ -21,3 +21,7 @@
 
 # Igore data.yml to pretect password
 /config/data.yml
+
+# Ignore seed file
+/db/seeds.rb
+

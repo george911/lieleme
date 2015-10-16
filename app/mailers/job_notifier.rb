@@ -1,5 +1,5 @@
 class JobNotifier < ActionMailer::Base
-  default from: "support@lieyohui.com"
+  default from: "george.qiao@lieyohui.com"
 
   def job_list(candidate,job_id,content,sender)
     @candidate = candidate
