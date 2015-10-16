@@ -73,7 +73,10 @@
     <tr ><td style= "padding:0px" width="100%"><div style='padding:0px' id="candidate_<%=candidate.id%>">
 
         <div class='col-md-1' style='padding:7px'><%= candidate.name %></div>
-        <div class='col-md-1' style='padding:7px'><%= candidate.title %></div>
+	<div class='col-md-1' style='padding:7px'><%= candidate.title %>
+		<%= hidden_div_if candidate.year.blank? do %>
+		  <span style='float:right'><%=candidate.year%>年&nbsp;&nbsp;</span>
+	  <% end %></div>
         <div class='col-md-1' style='padding:7px'><%= candidate.age %></div>
         <div class='col-md-1' style='padding:7px'><%= candidate.city %></div>
         <div class='col-md-1' style='padding:7px'><%= candidate.employer %></div>
