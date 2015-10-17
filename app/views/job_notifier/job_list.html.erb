@@ -18,8 +18,8 @@
         <% end %>
        
 	<% if @job.memo.present? or @job.targets.present? %>
-		<tr><td style="vertical-align:top"><strong>特别提醒:</strong></td><td>
-				<div class='well' style='padding:10px;border:0px;color:#876d4a;background-color:#fcf7e1'>
+		<tr><td style="vertical-align:top"><strong>特别提醒:</strong></td><td style='padding:0px 10px 0px 10px;border:0px;color:#876d4a;background-color:#fcf7e1'>
+				
 					<% if @job.targets.present? %>
 					  <h5 style='margin:0px 0px 5px 0px'>目标公司</h5>
 					 	<% @job.targets.each do |f| %>
@@ -33,7 +33,7 @@
 					    <% end %>
 					  <%= @job.memo %>
 		  			<% end %>
-				</div></td></tr>
+				</td></tr>
 	<% end %>
       </table>
 </div>
