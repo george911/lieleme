@@ -6,7 +6,7 @@ class JobNotifier < ActionMailer::Base
     @content = content
     @job = Job.find(job_id) 
     @sender = sender
-    mail to: candidate.email, subect: "你好#{candidate.name}, 有一个机会推荐给您"
+    mail to: candidate.email, subject: "你好#{candidate.name}, 知道你已经忍受老板很久了"
   end
 
   def closed(recipient,job)

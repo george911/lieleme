@@ -1,12 +1,4 @@
                           Prefix Verb       URI Pattern                                                         Controller#Action
-                      candidates GET        /candidates(.:format)                                               candidates#index
-                                 POST       /candidates(.:format)                                               candidates#create
-                   new_candidate GET        /candidates/new(.:format)                                           candidates#new
-                  edit_candidate GET        /candidates/:id/edit(.:format)                                      candidates#edit
-                       candidate GET        /candidates/:id(.:format)                                           candidates#show
-                                 PATCH      /candidates/:id(.:format)                                           candidates#update
-                                 PUT        /candidates/:id(.:format)                                           candidates#update
-                                 DELETE     /candidates/:id(.:format)                                           candidates#destroy
                                             /resque                                                             #<Resque::Server app_file="/usr/local/lib/ruby/gems/2.2.0/gems/resque-1.25.2/lib/resque/server.rb">
                          profile GET        /profile(.:format)                                                  users#show
                             like GET        /like(.:format)                                                     comments#like
@@ -155,6 +147,17 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                          sign_in GET        (/:locale)/sign_in(.:format)                                        devise/sessions#new
                          sign_up GET        (/:locale)/sign_up(.:format)                                        registrations#new
                             root GET        /(:locale)(.:format)                                                front#show
+                candidate_search GET        (/:locale)/candidate_search(.:format)                               candidates#search
+               mail_history_path GET        (/:locale)/mail_history_path(.:format)                              candidates#mail_history
+                     group_email GET        (/:locale)/group_email(.:format)                                    candidates#group_email
+                      candidates GET        (/:locale)/candidates(.:format)                                     candidates#index
+                                 POST       (/:locale)/candidates(.:format)                                     candidates#create
+                   new_candidate GET        (/:locale)/candidates/new(.:format)                                 candidates#new
+                  edit_candidate GET        (/:locale)/candidates/:id/edit(.:format)                            candidates#edit
+                       candidate GET        (/:locale)/candidates/:id(.:format)                                 candidates#show
+                                 PATCH      (/:locale)/candidates/:id(.:format)                                 candidates#update
+                                 PUT        (/:locale)/candidates/:id(.:format)                                 candidates#update
+                                 DELETE     (/:locale)/candidates/:id(.:format)                                 candidates#destroy
                       client_hrs GET        (/:locale)/clients/:client_id/hrs(.:format)                         hrs#index
                                  POST       (/:locale)/clients/:client_id/hrs(.:format)                         hrs#create
                    new_client_hr GET        (/:locale)/clients/:client_id/hrs/new(.:format)                     hrs#new

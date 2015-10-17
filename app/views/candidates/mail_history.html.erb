@@ -1,0 +1,27 @@
+<div style='padding-top:100px'>
+<table class='table table-hover'>
+  <thead>
+    <th>职位</th>
+    <th>姓名</th>
+    <th>职位</th>
+    <th>经验</th>
+    <th>城市</th>
+    <th>雇主</th>
+    <th>发送时间</th>
+  </thead>
+  <tbody>
+    <% current_user.mail_histories.each do |f| %>
+ 	<% @job = Job.find(f.job_id) %>
+ 	<tr>
+		<td><%= link_to "#{@job.title}",job_path(@job), target:"_blank" %></td>
+		<td><%= f.name %></td>
+		<td><%= f.title %></td>
+		<td><%= f.year %></td>
+		<td><%= f.city %></td>
+		<td><%= f.employer %></td>
+		<td><%= f.created_at.strftime("%m %d") %></td>
+	</tr>	
+  <% end %>
+  </tbody>
+</table>
+</div>

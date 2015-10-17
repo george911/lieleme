@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   acts_as_reader :scope => -> { readers }
   acts_as_voter
 
+  has_many :mail_histories
+
   acts_as_readable :scope => -> { talents },:on => :created_at
   
   ratyrate_rater

@@ -7,10 +7,10 @@ Rails.application.configure do
 		domain: "exmail.qq.com",
 		#domain: "qiye.aliyun.com",
 		authentication: :login,
-		user_name: "support@lieyohui.com",
+		user_name: "george.qiao@lieyohui.com",
 		#user_name: "george.qiao@lieleme.com",
-		password: "lieleme1"
-		#password: "Qwer1234"
+		#password: "lieleme1"
+		password: "Qwer1234"
 	}
   
   # Settings specified here will take precedence over those in config/application.rb.

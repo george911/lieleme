@@ -1,7 +1,7 @@
 <div style='padding:30px'>
   <p>你好<%=@candidate.name%>,</p>
-  <p><%= @content %></p>
-  <p style='font-size:12px'>如果这种岗位不是您的菜, 麻烦告诉一声哪个技术方向是您的茶,以后推荐更加精准。<p>
+  <p><%= @content.gsub(/\n/,'</p><p>').html_safe unless @content.blank? %></p>
+  <p>如果这种岗位不是您的菜, 麻烦告诉一声哪个技术方向是您的茶,以后推荐更加精准。<p>
   <table width='100%' style='border-collapse:collapse'>
 		<thead style='background-color:#eeeeee;'>
 			<th width='10%' align='center' style='border:1px solid #aaa'>城市</th>
@@ -20,7 +20,7 @@
 </table>
 <div style='border-radius:3px;margin:10px 20px 10px 20px;padding:10px;border:0px;color:#876d4a;background-color:#fcf7e1'>
 	<h4 style='margin:0px'>公司简介</h5>
-      	<%= @job.company_info.gsub(/\n/,'</p><p>').html_safe unless @job.company_info.blank? %>
+	<p><%= @job.company_info.gsub(/\n/,'</p><p>').html_safe unless @job.company_info.blank? %></p>
 </div>
 
 如果您需要了解职位背景,请联系我.<br>

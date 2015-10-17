@@ -1,4 +1,7 @@
 class CandidatesController < InheritedResources::Base
+  def mail_history
+  end
+  
   def group_email
     candidates = current_user.candidates.all
     candidates = current_user.candidates.where(name:params[:name]) unless params[:name].blank?
@@ -11,6 +14,7 @@ class CandidatesController < InheritedResources::Base
       JobNotifier.job_list(f,params[:job_id],params[:content],current_user).deliver_now
     end
     @candidates= current_user.candidates.all
+    current_user.mail_histories.create(name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
     respond_to do |format|
       	  format.html { render :index }
       	  format.js { flash[:notice] = "群发邮件发送成功" }
