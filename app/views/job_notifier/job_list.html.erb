@@ -10,7 +10,7 @@
 
       <table>
         <% if @job.city.present? or @job.addr.present? %>
-	      <tr><td width='5%'><strong>坐标:</strong></td><td><%= @job.city %>&nbsp;<%= @job.addr %></td></tr>
+	      <tr><td width='30px'><strong>坐标:</strong></td><td><%= @job.city %>&nbsp;<%= @job.addr %></td></tr>
         <% end %>
         <tr><td><strong>行业:</strong></td><td><%= @job.industry.present? ? @job.industry : '面议' %></td></tr>
 	<% if @job.base_pay != 0 %>
