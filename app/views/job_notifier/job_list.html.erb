@@ -2,26 +2,112 @@
   <p>你好<%=@candidate.name%>,</p>
   <p><%= @content.gsub(/\n/,'</p><p>').html_safe unless @content.blank? %></p>
   <p>如果这种岗位不是您的菜, 麻烦告诉一声哪个技术方向是您的茶,以后推荐更加精准。<p>
-  <table width='100%' style='border-collapse:collapse'>
-		<thead style='background-color:#eeeeee;'>
-			<th width='10%' align='center' style='border:1px solid #aaa'>城市</th>
-			<th width='30%' align='center' style='border:1px solid #aaa'>公司名字</th>
-			<th width='40%' align='center' style='border:1px solid #aaa'>职位名字</th>
-			<th width='20%' align='center' style='border:1px solid #aaa'>基本月薪</th>
-		</thead>
-		<tbody>
-			<tr>
-			<td align='center' style='border:1px solid #aaa'><%= @job.city %></td>
-			<td align='center' style='border:1px solid #aaa'><%= @job.employer %></td>
-			<td align='center' style='border:1px solid #aaa'><%= link_to "#{@job.title}","http://www.lieleme.com/cn/jobs/#{@job.id}" %></td>
-			<td align='center' style='border:1px solid #aaa'><%= @job.base_pay %></td>
-			</tr>
-		</tbody>
-</table>
-<div style='border-radius:3px;margin:10px 20px 10px 20px;padding:10px;border:0px;color:#876d4a;background-color:#fcf7e1'>
-	<h4 style='margin:0px'>公司简介</h5>
-	<p><%= @job.company_info.gsub(/\n/,'</p><p>').html_safe unless @job.company_info.blank? %></p>
+
+<div style='border-radius:5px;border: solid 1px #ccc;padding:10px'>
+<h3><%= @job.title %></h3>
+
+<div>
+
+      <table>
+        <% if @job.city.present? or @job.addr.present? %>
+	      <tr><td><strong>坐标:</strong></td><td><%= @job.city %>&nbsp;<%= @job.addr %></td></tr>
+        <% end %>
+        <tr><td><strong>行业:</strong></td><td><%= @job.industry.present? ? @job.industry : '面议' %></td></tr>
+	<% if @job.base_pay != 0 %>
+	  <tr><td><strong>年薪:</strong></td><td><%= @job.base_pay.present? ? "#{@job.base_pay}人民币 x  #{@job.month}" : '面议' %></td></tr>
+        <% end %>
+       
+	<% if @job.memo.present? or @job.targets.present? %>
+		<tr><td style="vertical-align:top"><strong>特别提醒:</strong></td><td>
+				<div class='well' style='padding:10px;border:0px;color:#876d4a;background-color:#fcf7e1'>
+					<% if @job.targets.present? %>
+					  <h5 style='margin:0px 0px 5px 0px'>目标公司</h5>
+					 	<% @job.targets.each do |f| %>
+							<p style='padding:0px;margin:0px'><%= f.name %> &nbsp;<%= f.city %>&nbsp;<%= f.department %></p>
+					  		<hr style='margin:0px;border-color:#ccc'>
+						<% end %>
+					<% end %>
+					<% if @job.memo.present? %>
+					    <% if @job.targets == nil %>
+						    <h5 style='margin-top:0px'>其他</h5>
+					    <% end %>
+					  <%= @job.memo %>
+		  			<% end %>
+				</div></td></tr>
+	<% end %>
+      </table>
 </div>
+
+  <div><br /></div>
+
+  <div >
+
+      <!--把/n换成回车并且插入段落标记和首行缩进-->
+      <p style='color: #007722;font-size:16px'>公司介绍· · · · · ·</p>
+      <p style='font-size:16px'><%= @job.company_info.gsub(/\n/,'</p><p class="text"style="font-size:16px">').html_safe unless @job.company_info.blank? %></p>
+
+ </div> 
+  <div >
+      <p style='color: #007722;font-size:16px'>工作职责· · · · · ·</p>
+      <p style='font-size:16px'><%= @job.role.gsub(/\n/,'</p><p class="text"style="font-size:16px">').html_safe unless @job.role.blank? %></p>
+  </div>
+
+  <div><!--divide-->
+    <br />
+  </div>
+
+
+    <div >
+      <p style='color: #007722;font-size:16px'>职位要求· · · · · ·</p>
+      <p style='font-size:16px'><%= @job.requirement.gsub(/\n/,'</p><p class="text"style="font-size:16px">').html_safe unless @job.requirement.blank? %></p>
+    </div>
+
+  <div><!--divide-->
+    <br />
+  </div>
+
+  <div >
+    <% if @job.bosses.present? %>
+      <% if @job.bosses.first.title.present? %>
+    	<div >
+    	  <p >汇报对象:</p>
+    	      <% if @job.bosses != nil %>
+		  <% @job.bosses.each do |f| %>
+		  <p ><%= f.title %></p><!--text为了段落缩进-->
+    	      <% end %> 
+    	  <% end %>
+    	</div>
+    <% end %>
+  <% end %>
+    <% if @job.subordinates.present? %>
+      <% if @job.subordinates.first.title.present? %>
+    	<div >
+    	  <p class='green_title'>下属:</p>
+    	    <% if @job.subordinates.present? %>
+		  <table>
+    		    <% @job.subordinates.each do |f| %>
+		      <% if f.title.blank? %>
+		        <tr>
+		          <td><%= f.title %>&nbsp;&nbsp;</td>
+		        </tr>
+    	          <% end %>
+    	        <% end %>
+		   </table>
+    	        <% end %>
+    	</div>
+      <% end %>
+    <% end %>
+  </div><!--row-->
+
+  <div><!--divide-->
+    <br />
+  </div>
+  
+  <div><!--divide-->
+    <br />
+  </div>
+</div>
+
 
 如果您需要了解职位背景,请联系我.<br>
 <div style='border-radius:5px;width:300px;padding:10px 0px 10px 15px;background-image:url("http://www.lieleme.com/assets/Ruby_poster.jpg")'>
