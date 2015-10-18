@@ -189,6 +189,7 @@ batch_action_admin_post_comments POST       /admin/post_comments/batch_action(.:
                    relationships POST       (/:locale)/relationships(.:format)                                  relationships#create
                     relationship DELETE     (/:locale)/relationships/:id(.:format)                              relationships#destroy
                       job_reject PATCH      (/:locale)/reject(.:format)                                         line_items#reject
+                       batch_job GET        (/:locale)/batch_job(.:format)                                      jobs#batch_job
                         save_job POST       (/:locale)/jobs/:id/save(.:format)                                  jobs#save
                        job_refer POST       (/:locale)/jobs/:job_id/refer(.:format)                             line_items#refer
                         job_boss PATCH      (/:locale)/jobs/:job_id/bosses/:id(.:format)                        bosses#update

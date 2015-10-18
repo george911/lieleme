@@ -1,0 +1,47 @@
+<div class='col-md-6'>
+<%= form_for(@job) do |f| %>
+<div class="col-lg-6" style='margin-top:10px'>
+    <%= f.text_field :title,placeholder:"职位名称" %>
+  </div>
+<div class="col-lg-6" style='margin-top:10px'>
+    <%= f.text_field :employer,placeholder:"雇主" %>
+  </div>
+  <div class='col-lg-12'>
+	  <hr>
+  </div>
+<div class="col-lg-6" style='margin-top:10px'>
+    <%= f.text_field :base_pay,placeholder:"基本月薪" %>
+  </div>
+<div class="col-lg-6" style='margin-top:10px'>
+    <%= f.text_field :addr,placeholder:"所在地" %>
+  </div>
+  <div class="col-lg-6" style='margin-top:10px'>
+    <%= f.fields_for :bosses,@job.bosses.build(nil) do |boss_fields| %>
+      <%= boss_fields.text_field :title,placeholder:'汇报对象' %>
+    <% end %>
+  </div>
+  <div class="col-lg-6" style='margin-top:10px'>
+    <%= f.fields_for :subordinates, @job.subordinates.build(nil) do |builder| %>
+      <%= builder.text_field :title,placeholder:'下属' %>
+    <% end %>
+  </div>
+  <div class="col-lg-6" style='margin-top:10px'>
+    <%= f.text_field :commission,placeholder:"佣金" %>
+  </div>
+  <div class="col-lg-12" style='margin-top:10px'>
+    <%= f.text_area :role,cols:60,placeholder:"职位描述" %>
+  </div>
+  <div class="col-lg-12" style='margin-top:10px'>
+    <%= f.text_area :requirement,cols:60,placeholder:"任职要求" %>
+  </div>
+  <div class="col-lg-12" style='margin-top:10px'>
+    <%= f.text_area :company_info,cols:60,placeholder:"公司介绍" %>
+  </div>
+  <div class="col-lg-12" style='margin-top:10px'>
+    <%= f.text_field :work_year,placeholder:"工作年限" %>
+  </div>
+  <div class="col-lg-12" style='margin-top:10px'>
+    <%= f.submit "提交" %>
+  </div>
+<% end %>
+</div>

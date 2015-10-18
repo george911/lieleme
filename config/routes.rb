@@ -78,6 +78,7 @@ Rails.application.routes.draw do
     resources :relationships, only: [:create, :destroy]
 
     patch 'reject' => 'line_items#reject', as: :job_reject
+    get 'batch_job',to:'jobs#batch_job'
     resources :jobs do
       member do
 	post :save

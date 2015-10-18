@@ -1,14 +1,21 @@
 class JobsController < ApplicationController
   require 'rqrcode'
   before_action :prepare_for_mobile, only: :show
-  before_action :set_job, except: [:index,:new,:create,:apply]
+  before_action :clear_session, except: [:create]
+  before_action :set_job, except: [:batch_job,:index,:new,:create,:apply]
   layout 'home',except:[:index,:show,:apply] # 因为moadal不能放在layout:home下面
 #  load_and_authorize_resource
   skip_before_action :authenticate_user!,only: [:show,:show_job_on_mobile,:show_company_on_mobile]
   skip_before_action :prepare_for_mobile, only:[:show_job_on_mobile,:show_company_on_mobile]
   skip_load_resource :only => [:apply]
+
   # GET /jobs
   # GET /jobs.json
+  def batch_job
+    @job = Job.new
+    session[:batch_job] = true
+  end
+  
   def save
     current_user.saving(@job)
     respond_to do |format|
@@ -108,7 +115,12 @@ class JobsController < ApplicationController
     @job.poster_id = current_user.id
     respond_to do |format|
       if @job.save
-	format.html { redirect_to job_build_path(job_id: @job.id, id: :job_scope) }
+	format.html { 
+	  if session[:batch_job] == true
+	    redirect_to batch_job_path
+	  else
+	     redirect_to job_build_path(job_id: @job.id, id: :job_scope)
+	  end }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new }
@@ -155,6 +167,9 @@ class JobsController < ApplicationController
   end
 
   private
+    def clear_session
+      session[:batch_job] = nil
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_job
       @job = Job.find(params[:id])
@@ -163,7 +178,10 @@ class JobsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
       params.require(:job).permit(:status,:avatar,:title, :interview,:employer,:addr, :city, :industry, :commission, :role, :requirement, :base_pay, :month, :bonus, :allowance, :stock, :stock_num, :concall_date, :user_id, :peer, :memo, :company_info, :work_year,
-	bosses_attributes: [:title]
+	experiences_attributes:[:skill,:year,:_destroy],
+   	bosses_attributes: [:title, :job_id,:_destroy],
+	subordinates_attributes: [:job_id,:title,:num, :_destroy],
+	experiences_attributes: [:skill,:year,:_destroy]
 				 )
     end
 end
