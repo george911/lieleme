@@ -45,7 +45,7 @@ require 'open-uri'
 	  end
           if item.css("a").last.text =~/\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
 	    email_text = item.css("a").last.text
-	    Candidate.create(followers:followers,year:year,employer:employer,name:item.text.split.second,
+	    Candidate.create(user_id:10000,followers:followers,year:year,employer:employer,name:item.text.split.second,
 			     title:(language=="C%23" ? "C#" : "#{language}"),email:email_text,city:location)
 	  end
 	  sleep 5
