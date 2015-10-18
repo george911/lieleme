@@ -13,7 +13,13 @@
     <%= f.text_field :base_pay,placeholder:"基本月薪" %>
   </div>
 <div class="col-lg-6" style='margin-top:10px'>
-    <%= f.text_field :addr,placeholder:"所在地" %>
+    <%= f.text_field :month,placeholder:"发放月数" %>
+  </div>
+<div class="col-lg-6" style='margin-top:10px'>
+    <%= f.text_field :city,placeholder:"城市" %>
+  </div>
+<div class="col-lg-6" style='margin-top:10px'>
+    <%= f.text_field :addr,placeholder:"地址" %>
   </div>
   <div class="col-lg-6" style='margin-top:10px'>
     <%= f.fields_for :bosses,@job.bosses.build(nil) do |boss_fields| %>
