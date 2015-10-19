@@ -29,6 +29,7 @@ class CandidatesController < InheritedResources::Base
   def search
     candidates = current_user.candidates.all
     candidates = current_user.candidates.where(name:params[:name]) unless params[:name].blank?
+    candidates = current_user.candidates.where(email:params[:email]) unless params[:email].blank?
     candidates = candidates.where(title:params[:title]) unless params[:title].blank?
     candidates = candidates.where("age >= ?",params[:min_age]) unless params[:min_age].blank?
     candidates = candidates.where("age <= ?",params[:max_age]) unless params[:max_age].blank?
