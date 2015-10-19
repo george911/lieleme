@@ -11,8 +11,8 @@ require 'nokogiri'
 require 'open-uri'
 ["PHP"].each do |language|
   [	  #"Shanghai",
-	  #"Beijing",
-	  "Shenzhen","Guangzhou",
+	  #"Beijing","Guangzhou",
+	  "Shenzhen",
 	  "Hangzhou", "Chengdu",
 	  "Nanjing","Xiamen",
 	  "Wuhan","Dalian","Hefei","Fuzhou","Dongguan",
