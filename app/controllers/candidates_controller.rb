@@ -34,7 +34,7 @@ class CandidatesController < InheritedResources::Base
     candidates = candidates.where("age <= ?",params[:max_age]) unless params[:max_age].blank?
     candidates = candidates.where(city:params[:city]) unless params[:city].blank?
     candidates = candidates.where(employer:params[:employer]) unless params[:employer].blank?
-    @candidates = candidates
+    @candidates = candidates.page(params[:page]).per(100)
     render 'candidates/index'
   end
 
