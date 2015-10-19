@@ -11,7 +11,7 @@ require 'nokogiri'
 require 'open-uri'
 ["Objective-C"].each do |language|
   [	  #"Shanghai",
-	  "Beijing","Guangzhou",
+	  #"Beijing","Guangzhou",
 	  "Shenzhen",
 	  "Hangzhou", "Chengdu",
 	  "Nanjing","Xiamen",

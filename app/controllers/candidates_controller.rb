@@ -15,7 +15,7 @@ class CandidatesController < InheritedResources::Base
       JobNotifier.job_list(f,params[:job_id],params[:content],current_user).deliver_now
     end
     @candidates= current_user.candidates.page(params[:page]).per(100)
-    current_user.mail_histories.create(name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
+    current_user.mail_histories.create(email:params[:email],name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
     respond_to do |format|
       	  format.html { render :index }
       	  format.js { flash[:notice] = "群发邮件发送成功" }

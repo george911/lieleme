@@ -3,6 +3,7 @@
   <thead>
     <th>职位</th>
     <th>姓名</th>
+    <th>邮箱</th>
     <th>职位</th>
     <th>经验</th>
     <th>城市</th>
@@ -15,6 +16,7 @@
  	<tr>
 		<td><%= link_to "#{@job.title}",job_path(@job), target:"_blank" %></td>
 		<td><%= f.name %></td>
+		<td><%= f.email %></td>
 		<td><%= f.title %></td>
 		<td><%= f.year %></td>
 		<td><%= f.city %></td>
