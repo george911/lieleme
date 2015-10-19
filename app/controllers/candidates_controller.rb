@@ -13,7 +13,7 @@ class CandidatesController < InheritedResources::Base
       sleep 20
       JobNotifier.job_list(f,params[:job_id],params[:content],current_user).deliver_now
     end
-    @candidates= current_user.candidates.all
+    @candidates= current_user.candidates.page(params[:page]).per(100)
     current_user.mail_histories.create(name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
     respond_to do |format|
       	  format.html { render :index }
@@ -68,12 +68,12 @@ class CandidatesController < InheritedResources::Base
 	@candidate = current_user.candidates.find_by email: params[:email]
     	@candidate.update(name:params[:name],title:params[:title],city:params[:city],employer:params[:employer],mobile:params[:mobile],email:params[:email],note:params[:note],age:params[:age])
 	@candidate.save
-	@candidates = current_user.candidates 
+	@candidates = current_user.candidates.page(params[:page]).per(100)
 	format.html { redirect_to candidates_path }
 	format.js
       else
 	if @candidate.save
-	  @candidates = current_user.candidates 
+	  @candidates = current_user.candidates.page(params[:page]).per(100) 
 	  format.html { redirect_to candidates_path }
 	  format.js
 	else
