@@ -10,8 +10,9 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 ["PHP"].each do |language|
-  [	  "Shanghai",
-	  "Beijing","Shenzhen","Guangzhou",
+  [	  #"Shanghai",
+	  #"Beijing",
+	  "Shenzhen","Guangzhou",
 	  "Hangzhou", "Chengdu",
 	  "Nanjing","Xiamen",
 	  "Wuhan","Dalian","Hefei","Fuzhou","Dongguan",
