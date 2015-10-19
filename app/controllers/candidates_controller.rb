@@ -23,7 +23,7 @@ class CandidatesController < InheritedResources::Base
 
   def index
     @candidate = Candidate.new
-    @candidates= current_user.candidates.all
+    @candidates= current_user.candidates.all.page(params[:page]).per(100)
   end
 
   def search
