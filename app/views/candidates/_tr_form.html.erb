@@ -1,14 +1,11 @@
-	<table width="100%">
-	  <tr>
-	      <td width="5%" style='padding:8px 0px 8px 0px'><%= @candidate.name %></td>
-	      <td width="5%" style='padding:8px 0px 8px 0px'><%= @candidate.title %></td>
-        <td width="5%" style='padding:8px 0px 8px 0px'><%= @candidate.age %></td>
-        <td width="5%" style='padding:8px 0px 8px 0px'><%= @candidate.city %></td>
-        <td width="5%" style='padding:8px 0px 8px 0px'><%= @candidate.employer %></td>
-        <td width="5%" style='padding:8px 0px 8px 0px'><%= @candidate.mobile %></td>
-        <td width="5%" style='padding:8px 0px 8px 0px'><%= @candidate.email %></td>
-        <td width="5%" style='padding:8px 0px 8px 0px'><%= @candidate.note %></td>
-        <td width="10%" style='padding:8px 0px 8px 0px'><%= link_to 'Edit', edit_candidate_path(id:@candidate.id,candidate_id:@candidate.id), remote:true %>&nbsp;&nbsp;
-              <%= link_to 'Destroy', @candidate, method: :delete, data: { confirm: 'Are you sure?' },remote:true %></td>
-	  </tr>
-  	</table>
+<div class='col-md-1' style='padding:7px'><%= @candidate.name %></div>
+  <div class='col-md-1' style='padding:7px'><%= @candidate.title %>
+    <span style='float:right'><%= "#{@candidate.year}年" unless @candidate.year.blank? %>&nbsp;&nbsp;</span></div>
+        <div class='col-md-1' style='padding:7px'><%= @candidate.age %></div>
+        <div class='col-md-1' style='padding:7px'><%= @candidate.city %></div>
+        <div class='col-md-1' style='padding:7px'><%= @candidate.employer %></div>
+        <div class='col-md-1' style='padding:7px'><%= @candidate.mobile %></div>
+        <div class='col-md-2' style='padding:7px'><%= @candidate.email %></div>
+        <div class='col-md-1' style='padding:7px'><%= @candidate.note %></div>
+        <div class='col-md-2' style='padding:7px'><%= link_to 'Edit', edit_candidate_path(id:@candidate.id,candidate_id:@candidate.id), remote:true %>
+              &nbsp;&nbsp;<%= link_to 'Destroy', @candidate, method: :delete, remote:true %></td>
