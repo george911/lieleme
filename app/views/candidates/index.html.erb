@@ -54,7 +54,7 @@
       <%= form_tag candidates_path,method: :post,remote:true do %>
               <div style='padding:7px' class='col-md-1'><%= text_field_tag :name,nil,placeholder:"姓名",    style:'border:0px' %>      </div>
               <div style='padding:7px' class='col-md-1'><%= text_field_tag :title,nil,placeholder:"职位",   style:'border:0px' %>            </div>
-              <div style='padding:7px' class='col-md-1'><%= number_field_tag :age,nil,placeholder:"年龄",   style:'border:0px' %></div>
+              <div style='padding:7px' class='col-md-1'><%= number_field_tag :year,nil,placeholder:"经验",   style:'border:0px' %></div>
               <div style='padding:7px' class='col-md-1'><%= text_field_tag :city,nil,placeholder:"城市",    style:'border:0px' %></div>
               <div style='padding:7px' class='col-md-1'><%= text_field_tag :employer,nil,placeholder:"雇主",style:'border:0px' %></div>
               <div style='padding:7px' class='col-md-1'><%= text_field_tag :mobile,nil,placeholder:"电话",  style:'border:0px' %></div>
@@ -76,8 +76,7 @@
 
         <div class='col-md-1' style='padding:7px'><%= candidate.name %></div>
 	<div class='col-md-1' style='padding:7px'><%= candidate.title %>
-	  <span style='float:right'><%= "#{candidate.year}年" unless candidate.year.blank? %>&nbsp;&nbsp;</span></div>
-        <div class='col-md-1' style='padding:7px'><%= candidate.age %></div>
+        <div class='col-md-1' style='padding:7px'><%= candidate.year %></div>
         <div class='col-md-1' style='padding:7px'><%= candidate.city %></div>
         <div class='col-md-1' style='padding:7px'><%= candidate.employer %></div>
         <div class='col-md-1' style='padding:7px'><%= candidate.mobile %></div>

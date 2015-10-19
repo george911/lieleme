@@ -97,7 +97,7 @@ class CandidatesController < InheritedResources::Base
   private
 
     def candidate_params
-      params.require(:candidate).permit(:age,:name, :title, :employer, :mobile, :email, :city, :note)
+      params.require(:candidate).permit(:year,:age,:name, :title, :employer, :mobile, :email, :city, :note)
     end
 end
 
