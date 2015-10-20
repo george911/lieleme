@@ -1,8 +1,8 @@
 <div style='padding:30px'>
   <p>你好<%=@candidate.name%>,</p>
   <p><%= @content.gsub(/\n/,'</p><p>').html_safe unless @content.blank? %></p>
-  <p>如果这种岗位不是您的菜, 麻烦告诉一声哪个技术方向是您的茶,以后推荐更加精准。<p>
 <% if @job.present? %>
+  <p>如果这种岗位不是您的菜, 麻烦告诉一声哪个技术方向是您的茶,以后推荐更加精准。<p>
 <div style='border-radius:5px;border: solid 1px #ccc;padding:10px'>
 
 <h3><%= @job.title unless @job == nil%></h3>
