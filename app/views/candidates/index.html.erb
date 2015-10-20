@@ -120,7 +120,7 @@
             <th>青岛</th>
             <th>重庆</th>
           </thead>
-          <% ["Java","PHP","Objective-C",'Android','C','C++','C#','Python','Ruby'].each do |f| %>
+          <% ["Java","PHP","iOS",'C','C++','C#','Python','Ruby'].each do |f| %>
             <tr>
               <td><%= f %></td>
               <td><%= Candidate.where("title like ? and city like ?",f,"Beijing").size %></td>
