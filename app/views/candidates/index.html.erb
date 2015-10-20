@@ -52,6 +52,7 @@
   <div class='col-md-12'>
 
       <%= form_tag candidates_path,method: :post,remote:true do %>
+              <div style='padding:7px' class='col-md-1'>  </div>
               <div style='padding:7px' class='col-md-1'><%= text_field_tag :name,nil,placeholder:"姓名",    style:'border:0px' %>      </div>
               <div style='padding:7px' class='col-md-1'><%= text_field_tag :title,nil,placeholder:"职位",   style:'border:0px' %>            </div>
               <div style='padding:7px' class='col-md-1'><%= number_field_tag :year,nil,placeholder:"经验",   style:'border:0px' %></div>
@@ -74,6 +75,7 @@
           <% @candidates.order('updated_at desc').each do |candidate| %>
     <tr ><td style= "padding:0px" width="100%"><div style='padding:0px' id="candidate_<%=candidate.id%>">
 
+        <div class='col-md-1' style='padding:7px'><%= candidate.id %></div>
         <div class='col-md-1' style='padding:7px'><%= candidate.name %></div>
 	<div class='col-md-1' style='padding:7px'><%= candidate.title %></div>
         <div class='col-md-1' style='padding:7px'><%= candidate.year %></div>
@@ -93,4 +95,20 @@
   </div>
 <br>
   <%= paginate @candidates %>
+</div>
+<div class='row'>
+  <table>
+    <th></th>
+    <th>Java</th>
+    <th>PHP</th>
+    <th>Ojective-C</th>
+  <% ["Beijing","Shanghai","Shenzhen"].each do |f| %>
+	  <tr>
+	    <td><%= f %></td>
+	    <td><%= Candidate.where("title like ? and city like ?","Java",f).size %></td>
+	    <td><%= Candidate.where("title like ? and city like ?","PHP",f).size %></td>
+	    <td><%= Candidate.where("title like ? and city like ?","Objective-C",f).size %></td>
+	  </tr>
+  <% end %>
+  </table>
 </div>
