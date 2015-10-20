@@ -9,9 +9,9 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-["Objective-C"].each do |language|
-  [	  #"Shanghai",
-	  #"Beijing","Guangzhou",
+["Swift"].each do |language|
+  [	  "Shanghai",
+	  "Beijing","Guangzhou",
 	  "Shenzhen",
 	  "Hangzhou", "Chengdu",
 	  "Nanjing","Xiamen",
