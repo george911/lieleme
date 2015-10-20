@@ -2,9 +2,10 @@
   <p>你好<%=@candidate.name%>,</p>
   <p><%= @content.gsub(/\n/,'</p><p>').html_safe unless @content.blank? %></p>
   <p>如果这种岗位不是您的菜, 麻烦告诉一声哪个技术方向是您的茶,以后推荐更加精准。<p>
-
+<% if @job.present? %>
 <div style='border-radius:5px;border: solid 1px #ccc;padding:10px'>
-<h3><%= @job.title %></h3>
+
+<h3><%= @job.title unless @job == nil%></h3>
 
 <div>
 
@@ -110,6 +111,7 @@
 
 
 如果您需要了解职位背景,请联系我.<br>
+<% end %>
 <div style='border-radius:5px;width:300px;padding:10px 0px 10px 15px;background-image:url("http://www.lieleme.com/assets/Ruby_poster.jpg")'>
   <table><tr>
     <td style='vertical-align:top'><%= image_tag("http://www.lieleme.com/assets/天使之翼.png",size: '70x70',style: 'border-radius:3px;' ) %></td>
