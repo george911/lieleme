@@ -3,19 +3,19 @@ class CandidatesController < InheritedResources::Base
   end
   
   def group_email
-    candidates = current_user.candidates.all
-    candidates = current_user.candidates.where(name:params[:name]) unless params[:name].blank?
-    candidates = current_user.candidates.where(email:params[:email]) unless params[:email].blank?
-    candidates = candidates.where(title:params[:title]) unless params[:title].blank?
-    candidates = candidates.where("year >= ?",params[:year]) unless params[:year].blank?
-    candidates = candidates.where(city:params[:city]) unless params[:city].blank?
-    candidates = candidates.where(employer:params[:employer]) unless params[:employer].blank?
-    candidates.each do |f|
+    @candidates = current_user.candidates.all
+    @candidates = current_user.candidates.where(name:params[:name]) unless params[:name].blank?
+    @candidates = current_user.candidates.where(email:params[:email]) unless params[:email].blank?
+    @candidates = candidates.where(title:params[:title]) unless params[:title].blank?
+    @candidates = candidates.where("year >= ?",params[:year]) unless params[:year].blank?
+    @candidates = candidates.where(city:params[:city]) unless params[:city].blank?
+    @candidates = candidates.where(employer:params[:employer]) unless params[:employer].blank?
+    @candidates.each do |f|
       sleep 20
       JobNotifier.job_list(f,params[:job_id],params[:content],current_user).deliver_now
     end
-    @candidates= current_user.candidates.page(params[:page]).per(100)
     current_user.mail_histories.create(email:params[:email],name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
+    @candidates = @candidates.page(params[:page]).per(100)
     respond_to do |format|
       	  format.html { render :index }
       	  format.js { flash[:notice] = "群发邮件发送成功" }
