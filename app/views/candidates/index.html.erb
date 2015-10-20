@@ -45,8 +45,11 @@
 
 
   </div>	
-</div>
+</div><!--end col-md-2-->
 <div class='col-md-10' id='candidate_list' style='padding-top:100px'>
+
+
+
 
 <div class='row'>
   <div class='col-md-12'>
@@ -63,51 +66,65 @@
               <div style='padding:7px' class='col-md-1'><%= text_field_tag :note,nil,placeholder:"备注",    style:'border:0px' %></div>
               <div style='padding:7px' class='col-md-2'><%= submit_tag "提交",class:'btn btn-success' %></div>
           <% end %>
- </div>
   </div>
+</div><!--end row -->
 
 
-    <div class='row'>
+<div class='row'>
     <div class='col-md-12'>
-          <table class='table table-hover'>
+      <table class='table table-hover'>
       
         <tbody>
           <% @candidates.order('updated_at desc').each do |candidate| %>
-    <tr ><td style= "padding:0px" width="100%"><div style='padding:0px' id="candidate_<%=candidate.id%>">
+            <tr ><td style= "padding:0px" width="100%"><div style='padding:0px' id="candidate_<%=candidate.id%>">
 
-        <div class='col-md-1' style='padding:7px'><%= candidate.id %></div>
-        <div class='col-md-1' style='padding:7px'><%= candidate.name %></div>
-	<div class='col-md-1' style='padding:7px'><%= candidate.title %></div>
-        <div class='col-md-1' style='padding:7px'><%= candidate.year %></div>
-        <div class='col-md-1' style='padding:7px'><%= candidate.city %></div>
-        <div class='col-md-1' style='padding:7px'><%= candidate.employer %></div>
-        <div class='col-md-1' style='padding:7px'><%= candidate.mobile %></div>
-        <div class='col-md-2' style='padding:7px'><%= candidate.email %></div>
-        <div class='col-md-1' style='padding:7px'><%= candidate.note %></div>
-        <div class='col-md-2' style='padding:7px'><%= link_to 'Edit', edit_candidate_path(id:candidate.id,candidate_id:candidate.id), remote:true %>
-              &nbsp;&nbsp;<%= link_to 'Destroy', candidate, method: :delete, remote:true %></td>
-
-    </div></td></tr></div>
+                <div class='col-md-1' style='padding:7px'><%= candidate.id %></div>
+                <div class='col-md-1' style='padding:7px'><%= candidate.name %></div>
+	             <div class='col-md-1' style='padding:7px'><%= candidate.title %></div>
+                <div class='col-md-1' style='padding:7px'><%= candidate.year %></div>
+                <div class='col-md-1' style='padding:7px'><%= candidate.city %></div>
+                <div class='col-md-1' style='padding:7px'><%= candidate.employer %></div>
+                <div class='col-md-1' style='padding:7px'><%= candidate.mobile %></div>
+                <div class='col-md-2' style='padding:7px'><%= candidate.email %></div>
+                <div class='col-md-1' style='padding:7px'><%= candidate.note %></div>
+                <div class='col-md-2' style='padding:7px'><%= link_to 'Edit', edit_candidate_path(id:candidate.id,candidate_id:candidate.id), remote:true %>
+              &nbsp;&nbsp;<%= link_to 'Destroy', candidate, method: :delete, remote:true %> </div></div></td>
+            </tr>
           <% end %>
         </tbody>
       </table>
   </div>
-  </div>
+</div><!--end row-->
 <br>
   <%= paginate @candidates %>
-</div>
+</div><!--end col-md-10-->
+
+
+
+
 <div class='row'>
   <table class='table table-triple'>
     <th></th>
     <th>Java</th>
     <th>PHP</th>
     <th>Ojective-C</th>
-  <% ["Beijing","Shanghai","Shenzhen"].each do |f| %>
+    <th>Android</th>
+    <th>C</th>
+    <th>C++</th>
+    <th>Python</th>
+    <th>Ruby</th>
+  <% ["Beijing","Shanghai","Shenzhen","Guangzhou","Hangzhou","Chengdu","Nanjing","Xiamen","Wuhan","Dalian","Qingdao","Chongqin"].each do |f| %>
 	  <tr>
 	    <td><%= f %></td>
 	    <td><%= Candidate.where("title like ? and city like ?","Java",f).size %></td>
 	    <td><%= Candidate.where("title like ? and city like ?","PHP",f).size %></td>
 	    <td><%= Candidate.where("title like ? and city like ?","Objective-C",f).size %></td>
+	    <td><%= Candidate.where("title like ? and city like ?","Android",f).size %></td>
+	    <td><%= Candidate.where("title like ? and city like ?","C",f).size %></td>
+	    <td><%= Candidate.where("title like ? and city like ?","C++",f).size %></td>
+	    <td><%= Candidate.where("title like ? and city like ?","C#",f).size %></td>
+	    <td><%= Candidate.where("title like ? and city like ?","Python",f).size %></td>
+	    <td><%= Candidate.where("title like ? and city like ?","Ruby",f).size %></td>
 	  </tr>
   <% end %>
   </table>
