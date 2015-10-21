@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     <% current_user.mail_histories.each do |f| %>
- 	<% @job = Job.find(f.job_id) %>
+ 	<% @job = Job.find(f.job_id) unless f.job_id == nil %>
  	<tr>
 		<td><%= link_to "#{@job.title}",job_path(@job), target:"_blank" %></td>
 		<td><%= f.name %></td>
