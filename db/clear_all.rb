@@ -1,5 +1,8 @@
 module ClearAll
   puts 'in clear_all'
+  Target.delete_all
+  MailHistory.delete_all
+  Candidate.delete_all
   ClientEmail.delete_all
   Hr.delete_all
   Client.delete_all
@@ -8,7 +11,7 @@ module ClearAll
   Boss.delete_all
   Education.delete_all
   Experience.delete_all
-  #Job.delete_all
+  Job.delete_all
   LineItem.delete_all
   Rate.delete_all
   Review.delete_all

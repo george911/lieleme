@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   has_many :jobrates, class_name:"Rate", foreign_key:"rater_id"
   has_many :sent_resumes, class_name:"TalentPool",foreign_key:"talent_id", dependent: :destroy
   has_many :talent_pools,foreign_key:"hunter_id"
-  has_many :candidates
+  has_many :candidates,dependent: :destroy
   # 发送给的猎头
   # has_many :sent_hunters, through: :sent_resumes, source: :hunter
   # 自荐的人选
