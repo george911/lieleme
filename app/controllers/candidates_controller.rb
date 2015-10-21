@@ -10,7 +10,7 @@ class CandidatesController < InheritedResources::Base
     @candidates = @candidates.where("year >= ?",params[:year]) unless params[:year].blank?
     @candidates = @candidates.where(city:params[:city]) unless params[:city].blank?
     @candidates = @candidates.where(employer:params[:employer]) unless params[:employer].blank?
-    @candidates = @candidates.where("id > 2379")
+    @candidates = @candidates.where("id > 2381")
     @candidates.each do |f|
       sleep 40
       JobNotifier.job_list(f,params[:job_id],params[:content],current_user).deliver_now
