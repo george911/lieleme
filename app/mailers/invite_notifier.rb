@@ -1,5 +1,5 @@
 class InviteNotifier < ActionMailer::Base
-  default from: "support@lieyohui.com"
+  default from: "george.qiao@lieyohui.com"
 
   def invited(sender,recipient,job)
     @sender = sender

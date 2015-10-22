@@ -1,5 +1,5 @@
 class ReferNotifier < ActionMailer::Base
-  default from: "support@lieyohui.com"
+  default from: "george.qiao@lieyohui.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
