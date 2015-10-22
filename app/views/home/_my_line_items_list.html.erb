@@ -43,10 +43,13 @@
 		      <%= f.status %>
 	      </td>
 	      <td>
+		      <%= link_to "#{f.job.title}",job_path(f.job),target: :_blank %>
 	      </td>
 	      <td>
+		      <%= f.job.employer %>
 	      </td>
 	      <td>
+		      <%= link_to "#{f.job.poster.user_name}",user_path(f.job.poster), target: :_blank %>
 	      </td>
 	      <td>
 		      <%= f.created_at.strftime("%y-%m-%d") %>
