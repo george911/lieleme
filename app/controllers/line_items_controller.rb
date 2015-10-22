@@ -105,7 +105,9 @@ class LineItemsController < ApplicationController
 	  else
 		   redirect_to job_line_item_path(id:@line_item.id), notice: '您已经成功推荐以下候选人'
 	  end 
-    	  ReferNotifier.refer(@line_item).deliver_now unless @line_item.email==nil
+    	  if @line_item.email.present?
+	    ReferNotifier.refer(@line_item).deliver_now
+	  end
 	}
         format.json { render :show, status: :created, location: @line_item }
       else
