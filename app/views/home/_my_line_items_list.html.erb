@@ -43,7 +43,9 @@
 		      <%= f.status %>
 	      </td>
 	      <td>
-		      <%= link_to "#{f.job.title}",job_path(f.job),target: :_blank %>
+		      <% if f.job.present? %>
+			      <%= link_to "#{f.job.title}",job_path(f.job),target: :_blank %>
+		      <% end %>
 	      </td>
 	      <td>
 		      <%= f.job.employer %>
