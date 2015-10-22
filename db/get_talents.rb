@@ -9,7 +9,7 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-["C++"].each do |language|
+["C%23"].each do |language|
   [	  "Shanghai",
 	  "Beijing","Guangzhou",
 	  "Shenzhen",
