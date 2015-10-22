@@ -48,10 +48,14 @@
 		      <% end %>
 	      </td>
 	      <td>
+		      <% if f.job.present? %>
 		      <%= f.job.employer %>
+		      <% end %>
 	      </td>
 	      <td>
+		      <% if f.job.present? %>
 		      <%= link_to "#{f.job.poster.user_name}",user_path(f.job.poster), target: :_blank %>
+		      <% end %>
 	      </td>
 	      <td>
 		      <%= f.created_at.strftime("%y-%m-%d") %>
