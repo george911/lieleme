@@ -1,14 +1,14 @@
 class JobNotifier < ActionMailer::Base
   default from: "george.qiao@lieyohui.com"
 
-  def job_list(candidate,job_id,content,sender)
+  def job_list(candidate,job_id,content,sender,subject)
     @candidate = candidate
     @content = content
     if job_id.present?
 	@job = Job.find(job_id) unless job_id == nil
     end
     @sender = sender
-    mail to: candidate.email, subject: "你好#{candidate.name},知道您已经忍受老板很久了"
+    mail to: candidate.email, subject: "你好#{candidate.name},#{subject}"
   end
 
   def closed(recipient,job)

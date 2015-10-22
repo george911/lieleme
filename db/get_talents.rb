@@ -9,7 +9,7 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-["Python"].each do |language|
+["Python","Ruby"].each do |language|
   [	  "Shanghai",
 	  "Beijing","Guangzhou",
 	  "Shenzhen",

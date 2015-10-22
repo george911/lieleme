@@ -1,4 +1,5 @@
 class CandidatesController < InheritedResources::Base
+  rescue_from Net::SMTPFatalError, with: :frequency_limited
   def mail_history
   end
   
@@ -13,7 +14,8 @@ class CandidatesController < InheritedResources::Base
     #@candidates = @candidates.where("id > 2381")
     @candidates.each do |f|
       sleep 40
-      JobNotifier.job_list(f,params[:job_id],params[:content],current_user).deliver_now
+      session[:stop_id]= f.id
+      JobNotifier.job_list(f,params[:job_id],params[:content],current_user,params[:subject]).deliver_now
     end
     current_user.mail_histories.create(email:params[:email],name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
     @candidates = @candidates.page(params[:page]).per(100)
@@ -96,6 +98,11 @@ class CandidatesController < InheritedResources::Base
 
 
   private
+    def frequency_limited
+      flash[:notice] = "发送到id#{session[:stop_id]}"
+      @candidates = Candidate.where(id:session[:stop_id]).page(params[:page]).per(100)
+      render :index
+    end
 
     def candidate_params
       params.require(:candidate).permit(:year,:age,:name, :title, :employer, :mobile, :email, :city, :note)
