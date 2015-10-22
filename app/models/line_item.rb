@@ -4,7 +4,7 @@ class LineItem < ActiveRecord::Base
   has_one :service_rate
   
   acts_as_readable :on => :created_at  
-  validates :email #, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+  #validates :email , format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
   validates :name, presence: true, on: :create
   belongs_to :recipient,class_name:"User"
   belongs_to :sender,class_name:"User" # 通过line_item的桥梁使得job.sender成为可能
