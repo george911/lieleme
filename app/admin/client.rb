@@ -1,2 +1,3 @@
 ActiveAdmin.register Client do
-  end
+  permit_params :name,:phone,:industry,:note
+end
