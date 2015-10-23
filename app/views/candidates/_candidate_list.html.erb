@@ -2,6 +2,7 @@
 	<div class='col-md-12'>
 
 		  <%= form_tag candidates_path,method: :post,remote:true do %>
+              <div style='padding:7px' class='col-md-1'></div>
               <div style='padding:7px' class='col-md-1'><%= text_field_tag :name,nil,placeholder:"姓名",    style:'border:0px' %>      </div>
               <div style='padding:7px' class='col-md-1'><%= text_field_tag :title,nil,placeholder:"职位",   style:'border:0px' %>            </div>
 	      <div style='padding:7px' class='col-md-1'><%= number_field_tag :age,nil,placeholder:"经验",   style:'border:0px' %></div>
@@ -22,7 +23,7 @@
         <tbody>
           <% @candidates.order('updated_at desc').each do |candidate| %>
 	  <tr ><td style= "padding:0px" width="100%"><div style='padding:0px' id="candidate_<%=candidate.id%>">
-
+              <div class='col-md-1' style='padding:7px'><%= candidate.id %></div>
 	      <div class='col-md-1' style='padding:7px'><%= candidate.name %></div>
 	      <div class='col-md-1' style='padding:7px'><%= candidate.title %></div>
         <div class='col-md-1' style='padding:7px'><%= candidate.year %></div>
