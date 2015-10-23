@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .candidates {
 table {
+  table-layout:fixed;
   input{
 	width:100%;
   }

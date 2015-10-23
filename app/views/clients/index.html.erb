@@ -46,14 +46,14 @@
 		      </td>
 		      <td style="padding:5px;border:1px solid #d9d9d9;color:#919191;vertical-align:top">
 			<% if client.hrs.present? %>
-				<table width='100%'>
+				<table width='100%' style='table-layout:fixed'>
 			      	  <% client.hrs.each_with_index do |f,index| %>
 					  <tr style=<%= f != client.hrs.last ? "'border-bottom: 1px solid #eee'" : ""%>>
-						  <td width='10%'><%= f.name %></td>
-						  <td width='15%'><%= f.title %></td>
-						  <td width='15%'><%= f.phone %></td>
-						  <td width='35%'><%= f.email %></td>
-						  <td width='25'>
+						  <td style='padding-left:10px' width='20%'><%= f.name %></td>
+						  <td style='padding-left:10px' width='20%'><%= f.title %></td>
+						  <td style='padding-left:10px' width='20%'><%= f.phone %></td>
+						  <td style='padding-left:10px' width='20%'><%= f.email %></td>
+						  <td style='' width='20%'>
 						    <%= link_to delete_hr_path(id:f.id), style:"float:right",method: :delete, remote: true do %>
 						      <i class='glyphicon glyphicon-remove'></i>
 						    <% end %>
