@@ -130,11 +130,8 @@
               <td ><%= f.year %></td>
               <td style='font-size:8px'>
                   <%= f.content %></td>
-              <td ><% if f.status == "finished" %>
-                     <span class='glyphicon glyphicon-ok'></span>
-                  <% else %>
+              <td >
                      <%= f.status %>
-                  <% end %>
                 </td>
               <td ><%= f.created_at.strftime("%m %d") %></td>
             </tr> 

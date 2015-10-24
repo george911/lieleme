@@ -8,7 +8,17 @@ def update
       format.js 
     end
     
-  end
+end
+
+def destroy
+    @subordinate = Subordinate.find(params[:id])
+    @subordinate.destroy
+    respond_to do |format|
+	format.html
+	format.js
+    end
+end
+
   private
   def set_sub
     @sub = Subordinate.find(params[:id])

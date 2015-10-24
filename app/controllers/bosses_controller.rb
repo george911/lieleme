@@ -8,7 +8,17 @@ def update
       format.js 
     end
     
-  end
+end
+
+def destroy
+    @boss = Boss.find(params[:id])
+    @boss.destroy
+    respond_to do |format|
+      format.html 
+      format.js
+    end
+end
+
   private
   def set_boss
     @boss = Boss.find(params[:id])

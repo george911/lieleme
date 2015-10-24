@@ -7,7 +7,15 @@ def update
       respond_to do |format|
       format.js 
     end
-    
+end
+
+def destroy
+    @target = Target.find(params[:id])
+    @target.destroy
+    respond_to do |format|
+	    format.html
+	    format.js
+    end
   end
   private
   def set_target

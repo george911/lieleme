@@ -1,5 +1,12 @@
 <div>
   <% @job.bosses.each do |f| %>
-	  <%= f.title %>
+    <div id='boss_<%= f.id %>'>
+	  <div class='col-md-6'>
+		  <%= f.title %>
+	  </div>
+	  <div class='col-md-6'>
+		  <%= link_to '删除',job_boss_path(job_id:@job.id,id:f.id), method: :delete, remote:true %> 
+	  </div>
+     </div>
   <% end %>
 </div>

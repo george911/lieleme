@@ -84,9 +84,9 @@ Rails.application.routes.draw do
 	post :save
 	end
       post 'refer',to: 'line_items#refer'
-      resources :bosses,only:[:update]
-      resources :targets,only:[:update] # _target_edit里面form_for([@job,target],remote: true )用到这个路径
-      resources :subordinates,only:[:update]
+      resources :bosses
+      resources :targets # _target_edit里面form_for([@job,target],remote: true )用到这个路径
+      resources :subordinates
       get 'apply' => :apply
       patch 'accept' => 'line_items#accept', as: :accept
       

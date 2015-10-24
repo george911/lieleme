@@ -1,7 +1,14 @@
 <div>
   <% @job.targets.each do |f| %>
+    <div id="target_<%= f.id %>">
+      <div class='col-md-6'>
 	  <%= f.name %><br>
 	  <%= f.city %><br>
 	  <%= f.department %><br>
+      </div>
+      <div class='col-md-6'>
+	  <%= link_to '删除',job_target_path(job_id:@job.id,id:f.id), method: :delete, remote:true %> 
+      </div>
+    </div>
   <% end %>
 </div>
