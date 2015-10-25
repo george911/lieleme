@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     @my_talents = User.find(params[:my_talent_ids])
   end
   
+  #在我的主页上给我推荐的人群发邮件
   def send_email
     @my_talents = User.find(params[:my_talent_ids])
     @my_talents.each do |f|

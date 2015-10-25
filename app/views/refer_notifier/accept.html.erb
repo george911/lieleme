@@ -1,0 +1,2 @@
+<%= @greeting %>,
+您推荐的候选人&nbsp;<%= link_to "#{@line_item.recipient.user_name}",id: "#{@line_item.recipient.id}", action: "show",controller: 'users',host:'lieleme.com' %>&nbsp;已经应聘了<%= link_to "#{@line_item.job.title}",id: "#{@line_item.job.id}",action: 'show',controller: 'jobs',host: 'lieleme.com' %>职位:

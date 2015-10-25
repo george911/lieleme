@@ -24,7 +24,9 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if line_item 
-        @micropost = current_user.microposts.build(content:"我应聘了#{@job.title}职位",user_id:current_user.id,job_id:@job.id)
+        ReferNotifier.accept(line_item).deliver_now
+        ReferNotifier.apply(line_item).deliver_now
+	@micropost = current_user.microposts.build(content:"我应聘了#{@job.title}职位",user_id:current_user.id,job_id:@job.id)
         @micropost.save
         format.html { redirect_to my_apply_path, notice: ((line_item.interviewed == false and @job.interview == true) ? "在向HR投递前需要对您进行面试,请联系猎头安排" : "应聘成功") }
         format.js

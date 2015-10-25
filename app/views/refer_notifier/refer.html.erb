@@ -1,4 +1,3 @@
 <%= @greeting %>,
 您的朋友<%= @line_item.sender.user_name %>为您推荐以下职位，您如果有兴趣，可以在线应聘:
 <%= link_to "#{@line_item.job.title}", id: "#{@line_item.job.id}", action: 'show', controller: 'jobs', host:'lieleme.com'  %>
-</p>
