@@ -1,4 +1,4 @@
-  <hr />
+  <hr style='padding:0px'>
   <% @user.reviews.order('top asc, created_at desc').each do |review| %><!--置顶-->
   <% @author=User.find(review.author_id) %>
   
