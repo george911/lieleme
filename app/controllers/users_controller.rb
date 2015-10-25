@@ -52,8 +52,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    if current_user and @user.sent_resume(current_user)
-      @user.sent_resume(current_user).mark_as_read! :for => current_user
+    if current_user 
+      @user.mark_as_read! :for => current_user
     end
     @total_apply_num = @user.received_line_items.size
     @fail_num = @user.received_line_items.where(status: "HR拒绝").size

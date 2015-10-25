@@ -43,7 +43,7 @@
 				
 			    <% unless f.recipient.not_interview_by(f.sender) and @job.interview %><!-- 之所以不用unless f.interviewed == false是因为line_item只在候选人接受面试才会update 		line_item.interviewed, 之前已经面过的人不会更新interviewed-->
 				<tr class='hover'>
-				  <td><%= link_to "#{f.recipient.user_name}",user_path(f.recipient),target:"_blank" %><i style='color:red'><%= f.recipient.unread_by(current_user) ? "new" 		: "" %></i></td>
+				  <td><%= link_to "#{f.recipient.user_name}",user_path(f.recipient),target:"_blank" %><i style='color:red'><%= f.recipient.unread?(current_user) ? "new" 		: "" %></i></td>
 				  <td >
 					<!-- Button trigger modal -->
 					<a id='status_<%= f.id %>' href='' data-toggle="modal" data-target="#lineitem_<%=f.id%>"><!--href如果不加，capybara click_on捕捉不到link-->
