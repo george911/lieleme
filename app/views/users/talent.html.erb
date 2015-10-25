@@ -28,7 +28,7 @@
 		<% if @user.works.size >=1 %>                  
           	      <!--随机产生全部工作单位，index并不是works的id,是一个iteration的计数器,注意do里面要加index的对应-u -->
 		      <% @user.works.shuffle.each_with_index do |f,u| %>
-			<%= "曾经在" if u = 0 %><%= f.employer %><!--自动加一个空格--><%= "工作" if u == @user.works.size-1 %>
+			<%= "曾经在" unless u != 0 %><%= f.employer %><!--自动加一个空格--><%= "工作" if u == @user.works.size-1 %>
                     <%= "," unless u == @user.works.size-1 %> <!--最后一次不加|-->                 
                   <% end %>
 	  <% end %>
