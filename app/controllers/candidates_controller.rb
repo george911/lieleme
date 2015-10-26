@@ -9,18 +9,18 @@ class CandidatesController < InheritedResources::Base
     @candidates = current_user.candidates.all
     @candidates = @current_user.candidates.where(name:params[:name]) unless params[:name].blank?
     @candidates = @current_user.candidates.where(email:params[:email]) unless params[:email].blank?
-    @candidates = @candidates.where(title:params[:title]) unless params[:title].blank?
+    @candidates = @candidates.where(title:"%#{params[:title]}%") unless params[:title].blank?
     @candidates = @candidates.where("year >= ?",params[:year]) unless params[:year].blank?
     @candidates = @candidates.where(city:params[:city]) unless params[:city].blank?
     @candidates = @candidates.where(employer:params[:employer]) unless params[:employer].blank?
-    @candidates = @candidates.where("id > 4929")
+    @candidates = @candidates.where("id > 5227")
     @candidates.each_with_index do |f,u|
       sleep 60
       session[:sent_num]=u+1
       session[:stop_id]= f.id
       JobNotifier.job_list(f,params[:job_id],params[:content],current_user,params[:subject]).deliver_now
     end
-    current_user.mail_histories.create(status:"发送全部#{@candidates.size}封邮件",content:params[:content],email:params[:email],name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
+    current_user.mail_histories.create(total_num:@candidates.size,sent_num:session[:sent_num],status:"发送全部#{@candidates.size}封邮件",content:params[:content],email:params[:email],name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
     flash[:notice]="发送了#{session[:sent_num]}封邮件"
     @candidates = @candidates.page(params[:page]).per(100)
     respond_to do |format|
@@ -103,7 +103,7 @@ class CandidatesController < InheritedResources::Base
 
   private
     def frequency_limited
-      current_user.mail_histories.create(status:"发送到#{session[:stop_id]}终止",content:params[:content],email:params[:email],name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
+      current_user.mail_histories.create(total_num:@candidates.size,sent_num:session[:sent_num],status:"发送到#{session[:stop_id]}终止",content:params[:content],email:params[:email],name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
       flash[:notice] = "发送到id#{session[:stop_id]},总共#{session[:sent_num]}封邮件"
       @candidates = Candidate.where(id:session[:stop_id]).page(params[:page]).per(100)
       render :index

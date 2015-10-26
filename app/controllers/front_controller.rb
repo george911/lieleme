@@ -6,6 +6,7 @@ class FrontController < ApplicationController
     @offers=LineItem.where("status = ?","offer")#where能够取出然后使用.each函数,find_by不能
     @first_offer=LineItem.where("status = ?","offer").order('created_at asc').first
     @offer = LineItem.find(params[:offer_id]) if params[:offer_id].present?
+    @mass_mails = current_user.mail_histories
     respond_to do |format|
     format.html {
       if user_signed_in?
