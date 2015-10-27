@@ -3,5 +3,5 @@
 #Candidate.where("title LIKE ? and city Like ?","Python","Shanghai").each do |f|
 #	f.destroy
 #end
-#require File.expand_path('../clear_all', __FILE__)
-Candidate.dedupe
+require File.expand_path('../clear_all', __FILE__)
+#Candidate.dedupe
