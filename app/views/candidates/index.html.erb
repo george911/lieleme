@@ -30,10 +30,10 @@
     <%= text_field_tag :subject,nil,placeholder:"标题",cols:10,class: 'form-control',style: 'margin-bottom:15px' %>
     <hr>
     <p>你好,</p>
-    <%= text_area_tag :content,nil,placeholder:"邮件内容",rows:5,cols:10,class: 'form-control',style: 'margin-bottom:15px' %>
-    <%= text_field_tag :title,nil,placeholder:"方向",class: 'form-control',style: 'margin-bottom:15px' %>
-    <%= text_field_tag :city,nil,placeholder:"城市",class: 'form-control',style: 'margin-bottom:15px' %>
-    <%= number_field_tag :job_id,nil,placeholder:"职位",class: 'form-control',style: 'margin-bottom:15px' %>
+    <%= text_area_tag :content,nil,placeholder:"邮件内容",rows:5,cols:10,class: 'form-control',style: 'margin-bottom:15px',required:true %>
+    <%= text_field_tag :title,nil,placeholder:"方向",class: 'form-control',style: 'margin-bottom:15px',required:true %>
+    <%= text_field_tag :city,nil,placeholder:"城市",class: 'form-control',style: 'margin-bottom:15px',required:true %>
+    <%= number_field_tag :job_id,nil,placeholder:"职位",class: 'form-control',style: 'margin-bottom:15px',required:true %>
     <%= submit_tag "群发邮件", class: "btn btn-success",style: 'margin-bottom:15px'  %>
     <% end %>
     </div>

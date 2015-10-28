@@ -9,11 +9,13 @@ class CandidatesController < InheritedResources::Base
     @candidates = current_user.candidates.all
     @candidates = @current_user.candidates.where(name:params[:name]) unless params[:name].blank?
     @candidates = @current_user.candidates.where(email:params[:email]) unless params[:email].blank?
-    @candidates = @candidates.where(title:"%#{params[:title]}%") unless params[:title].blank?
+    @candidates = @candidates.where(title:params[:title]) unless params[:title].blank?
     @candidates = @candidates.where("year >= ?",params[:year]) unless params[:year].blank?
     @candidates = @candidates.where(city:params[:city]) unless params[:city].blank?
     @candidates = @candidates.where(employer:params[:employer]) unless params[:employer].blank?
-    @candidates = @candidates.where("id > 5227")
+    @candidates = @candidates.where("id < 744")
+    my_self = current_user.candidates.build(name:"我自己",email:"cvsend@139.com")
+    JobNotifier.job_list(my_self,params[:job_id],params[:content],current_user,params[:subject]).deliver_now
     @candidates.each_with_index do |f,u|
       sleep 60
       session[:sent_num]=u+1
