@@ -62,6 +62,7 @@ class LineItemsController < ApplicationController
   def edit
   end
 
+  # 在候选人页面筛选职位然后推荐
   def refer
     @talent = User.find(params[:user_id])
     @line_item = current_user.sent_line_items.build(job_id:@job.id, recipient_id:@talent.id,mobile:@talent.mobile,email:@talent.email,name:@talent.user_name,status:"等待应聘")
@@ -71,6 +72,7 @@ class LineItemsController < ApplicationController
     elsif @job.interview and @talent.not_interview_by(current_user) # 没面试不让推荐
       redirect_to user_path(@talent), notice:'由于HR只看面试过的候选人,请您在推荐前先面试候选人'
     elsif @line_item.save
+      ReferNotifier.refer(@line_item).deliver_now
       redirect_to job_line_item_path(job_id:@job,id:@line_item), notice:'推荐成功,请督促候选人及早应聘'
     end
   end
