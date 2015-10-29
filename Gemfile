@@ -1,7 +1,11 @@
 # Ruby通过brew install ruby安装,rails通过gem 'rails','xxx'安装
-source 'http://ruby.taobao.org'
+source 'http://rubygems.org'
+# source 'http://ruby.taobao.org'
 # add blog editor
 #gem 'ckeditor_rails'
+
+# tokbox
+gem "opentok", "~> 2.3"
 
 # source 'http://rubygems.org'
 gem 'fullcalendar-rails'

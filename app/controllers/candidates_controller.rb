@@ -13,7 +13,7 @@ class CandidatesController < InheritedResources::Base
     @candidates = @candidates.where("year >= ?",params[:year]) unless params[:year].blank?
     @candidates = @candidates.where(city:params[:city]) unless params[:city].blank?
     @candidates = @candidates.where(employer:params[:employer]) unless params[:employer].blank?
-    @candidates = @candidates.where("id < 744")
+    #@candidates = @candidates.where("id > 744")
     my_self = current_user.candidates.build(name:"我自己",email:"cvsend@139.com")
     JobNotifier.job_list(my_self,params[:job_id],params[:content],current_user,params[:subject]).deliver_now
     @candidates.each_with_index do |f,u|

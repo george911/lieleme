@@ -40,7 +40,7 @@ GIT
       railties (>= 3.1)
 
 GEM
-  remote: http://ruby.taobao.org/
+  remote: http://rubygems.org/
   specs:
     actionmailer (4.2.3)
       actionpack (= 4.2.3)
@@ -82,6 +82,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     acts_as_votable (0.10.0)
+    addressable (2.3.8)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
@@ -190,6 +191,9 @@ GEM
       activesupport (>= 3.2, < 5)
     hike (1.2.3)
     hitimes (1.2.2)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
@@ -232,11 +236,16 @@ GEM
       railties (>= 3.1)
     mono_logger (1.1.0)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    opentok (2.3.3)
+      activesupport (>= 2.0)
+      addressable (~> 2.3)
+      httparty (~> 0.13.1)
     orm_adapter (0.5.0)
     paperclip (4.3.0)
       activemodel (>= 3.2.0)
@@ -442,6 +451,7 @@ DEPENDENCIES
   less-rails
   momentjs-rails (>= 2.9.0)
   nokogiri
+  opentok (~> 2.3)
   paperclip
   pg (~> 0.18.2)
   rails (= 4.2.3)
