@@ -147,7 +147,7 @@
 
     <div role="tabpanel" class="tab-pane" id="summary">
       <div class='row'>
-          <table class='table table-striped'>
+          <table class='table '>
             <thead>
             <th></th>
             <th>北京</th>
@@ -165,10 +165,10 @@
           <% ["Java","PHP","iOS",'Android','C','C++','C#','Python','Ruby'].each do |f| %>
             <tr>
               <td><%= f %></td>
-	      <td style='background-color:<%= MailHistory.where("created_at > ?", Time.now.days_ago(14)).where("title like ? and city like ?",f,"Beijing").present? ? "red" : "" %>'><%= Candidate.where("title like ? and city like ?",f,"Beijing").size %></td>
+	      <td style='background-color:<%= MailHistory.where("created_at > ?", Time.now.days_ago(14)).where("title like ? and city like ?",f,"Beijing").present? ? "#e58c7e" : "" %>'><%= Candidate.where("title like ? and city like ?",f,"Beijing").size %></td>
               <td><%= Candidate.where("title like ? and city like ?",f,'Shanghai').size %></td>
               <td><%= Candidate.where("title like ? and city like ?",f,'Shenzhen').size %></td>
-              <td><%= Candidate.where("title like ? and city like ?",f,'Guangzhou').size %></td>
+	      <td style='background-color:<%= touch_within_14_days(f,"Guangzhou") %>'><%= Candidate.where("title like ? and city like ?",f,'Guangzhou').size %></td>
               <td><%= Candidate.where("title like ? and city like ?",f,'Hangzhou').size %></td>
               <td><%= Candidate.where("title like ? and city like ?",f,'Chengdu').size %></td>
               <td><%= Candidate.where("title like ? and city like ?",f,'Nanjing').size %></td>
