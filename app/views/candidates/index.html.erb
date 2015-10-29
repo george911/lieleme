@@ -164,7 +164,7 @@
           </thead>
           <% ["Java","PHP","iOS",'Android','C','C++','C#','Python','Ruby'].each do |title| %>
             <tr>
-              <td><%= f %></td>
+              <td><%= title %></td>
           	<% ["Beijing","Shanghai","Shenzhen",'Guangzhou','Hangzhou','Chengdu','Nanjing','Xiamen','Wuhan','Dalian','Qingdao'].each do |city| %>
 			<td style='background-color:<%= touch_within_14_days(title,city) %>'><%= Candidate.where("title like ? and city like ?",title,city).size %></td>
 		<% end %>
