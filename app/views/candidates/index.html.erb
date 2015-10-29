@@ -162,20 +162,12 @@
             <th>大连</th>
             <th>青岛</th>
           </thead>
-          <% ["Java","PHP","iOS",'Android','C','C++','C#','Python','Ruby'].each do |f| %>
+          <% ["Java","PHP","iOS",'Android','C','C++','C#','Python','Ruby'].each do |title| %>
             <tr>
               <td><%= f %></td>
-	      <td style='background-color:<%= MailHistory.where("created_at > ?", Time.now.days_ago(14)).where("title like ? and city like ?",f,"Beijing").present? ? "#e58c7e" : "" %>'><%= Candidate.where("title like ? and city like ?",f,"Beijing").size %></td>
-              <td><%= Candidate.where("title like ? and city like ?",f,'Shanghai').size %></td>
-              <td><%= Candidate.where("title like ? and city like ?",f,'Shenzhen').size %></td>
-	      <td style='background-color:<%= touch_within_14_days(f,"Guangzhou") %>'><%= Candidate.where("title like ? and city like ?",f,'Guangzhou').size %></td>
-              <td><%= Candidate.where("title like ? and city like ?",f,'Hangzhou').size %></td>
-              <td><%= Candidate.where("title like ? and city like ?",f,'Chengdu').size %></td>
-              <td><%= Candidate.where("title like ? and city like ?",f,'Nanjing').size %></td>
-              <td><%= Candidate.where("title like ? and city like ?",f,'Xiamen').size %></td>
-              <td><%= Candidate.where("title like ? and city like ?",f,'Wuhan').size %></td>
-              <td><%= Candidate.where("title like ? and city like ?",f,'Dalian').size %></td>
-              <td><%= Candidate.where("title like ? and city like ?",f,'Qingdao').size %></td>
+          	<% ["Beijing","Shanghai","Shenzhen",'Guangzhou','Hangzhou','Chengdu','Nanjing','Xiamen','Wuhan','Dalian','Qingdao'].each do |city| %>
+			<td style='background-color:<%= touch_within_14_days(title,city) %>'><%= Candidate.where("title like ? and city like ?",title,city).size %></td>
+		<% end %>
             </tr>
           <% end %>
           </table>
