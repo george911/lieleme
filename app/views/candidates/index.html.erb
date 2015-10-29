@@ -165,7 +165,7 @@
           <% ["Java","PHP","iOS",'Android','C','C++','C#','Python','Ruby'].each do |f| %>
             <tr>
               <td><%= f %></td>
-	      <td style='background-color:<%= MailHistory.where("created > ", Today.days_ago(14)).where("title like ? and city like ?",f,"Beijing").present? ? "red" : "" %>'><%= Candidate.where("title like ? and city like ?",f,"Beijing").size %></td>
+	      <td style='background-color:<%= MailHistory.where("created > ", Time.now.days_ago(14)).where("title like ? and city like ?",f,"Beijing").present? ? "red" : "" %>'><%= Candidate.where("title like ? and city like ?",f,"Beijing").size %></td>
               <td><%= Candidate.where("title like ? and city like ?",f,'Shanghai').size %></td>
               <td><%= Candidate.where("title like ? and city like ?",f,'Shenzhen').size %></td>
               <td><%= Candidate.where("title like ? and city like ?",f,'Guangzhou').size %></td>
