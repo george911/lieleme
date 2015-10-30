@@ -6,7 +6,7 @@ config.action_mailer.delivery_method = :smtp
 		domain: "exmail.qq.com",
 		authentication: :login,
 		user_name: "mrjobs@lieleme.com",
-		password: "Sy15906112"
+		password: "Lieleme1"
 	}
   # Settings specified here will take precedence over those in config/application.rb.
   # Settings specified here will take precedence over those in config/application.rb.
