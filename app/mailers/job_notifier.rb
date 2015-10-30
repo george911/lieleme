@@ -8,8 +8,8 @@ class JobNotifier < ActionMailer::Base
 	@job = Job.find(job_id) unless job_id == nil
     end
     @sender = sender
-    delivery_options = { user_name: "mrjobs@lieleme.com",
-                         password: "Sy15906112"
+    delivery_options = { user_name: "george@lieleme.com",
+                         password: "Lieleme1"
                         }
 
     mail to: candidate.email, subject: "你好#{candidate.name},#{subject}"
