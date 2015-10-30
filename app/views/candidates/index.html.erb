@@ -25,7 +25,7 @@
     <% end %>
     </div>
     <div role="tabpanel" class="tab-pane" id="profile">
-      <%= form_tag group_email_path,method:'get' do %>
+      <%= form_tag group_email_path,method:'get',remote:true do %>
     <%= text_field_tag :email,nil,placeholder:"收件人",cols:10,class: 'form-control',style: 'margin-bottom:15px' %>
     <%= text_field_tag :subject,nil,placeholder:"标题",cols:10,class: 'form-control',style: 'margin-bottom:15px' %>
     <hr>
