@@ -58,7 +58,14 @@
     <div role="tabpanel" class="tab-pane active" id="candidate">
         <div class='row'>
           <div class='col-md-12'>
-		  <input type="file" accept="video/*;capture=camcorder">
+		  <device type="media" onchange="update(this.data)"></device>
+		  <video autoplay></video>
+		  <script>
+			    function update(stream) {
+			        document.querySelector('video').src = stream.url;
+				  }
+			  </script>
+		<input type="file" accept="video/*;capture=camcorder">
 		  <input type="file" accept="audio/*;capture=microphone">
 		  <%= form_tag candidates_path,method: :post,remote:true do %>
                       <div style='padding:7px' class='col-md-1'>  </div>
