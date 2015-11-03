@@ -58,16 +58,26 @@
     <div role="tabpanel" class="tab-pane active" id="candidate">
         <div class='row'>
           <div class='col-md-12'>
-		  <device type="media" onchange="update(this.data)"></device>
 		  <video autoplay></video>
+		  
 		  <script>
-			    function update(stream) {
-			        document.querySelector('video').src = stream.url;
-				  }
-			  </script>
-		<input type="file" accept="video/*;capture=camcorder">
-		  <input type="file" accept="audio/*;capture=microphone">
-		  <%= form_tag candidates_path,method: :post,remote:true do %>
+			    var errorCallback = function(e) {
+			        console.log('Reeeejected!', e);
+				  };
+				  
+				    // Not showing vendor prefixes.
+				      navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
+				          var video = document.querySelector('video');
+					      video.src = window.URL.createObjectURL(localMediaStream);
+					      
+					          // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
+						      // See crbug.com/110938.
+						          video.onloadedmetadata = function(e) {
+							        // Ready to go. Do some stuff.
+								    };
+								      }, errorCallback);
+							      </script>
+							      <%= form_tag candidates_path,method: :post,remote:true do %>
                       <div style='padding:7px' class='col-md-1'>  </div>
                       <div style='padding:7px' class='col-md-1'><%= text_field_tag :name,nil,placeholder:"姓名",    style:'border:0px' %>      </div>
 		      <div style='padding:7px' class='col-md-1'><%=  autocomplete_field_tag 'title', '', autocomplete_candidate_title_candidates_path, placeholder:"职位",size:10,style:"border:0px" %></div>

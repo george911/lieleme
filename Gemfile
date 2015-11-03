@@ -7,7 +7,8 @@ gem 'rails4-autocomplete'
 #gem 'ckeditor_rails'
 
 # detect language
-gem 'wtf_lang'
+#gem 'whatlanguage'
+#gem 'wtf_lang'
 
 # tokbox
 gem "opentok", "~> 2.3"
