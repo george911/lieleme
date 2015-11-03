@@ -1,9 +1,25 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!
 #  rescue_from "ActiveRecord::RecordNotFound", with: :deny_empty
-  layout "home"
   require 'date'
+  layout 'my_home',except:[:my_setting] # 因为moadal不能放在layout:home下面,home controller自动强制对应home.html.erb layout,所以不能用同一个名字,否则except失效
 
+  def my_setting
+    @user = current_user 
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+ 
+  def edit_email_setting
+    @user = current_user
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+    
   def email_multiple
     @my_talents = User.find(params[:my_talent_ids])
   end

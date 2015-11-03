@@ -1,5 +1,5 @@
 class JobNotifier < ActionMailer::Base
-  default from: "george@lieleme.com"
+  default from: "mrjobs@lieleme.com"
 
   def job_list(candidate,job_id,content,sender,subject)
     @candidate = candidate
@@ -8,11 +8,13 @@ class JobNotifier < ActionMailer::Base
 	@job = Job.find(job_id) unless job_id == nil
     end
     @sender = sender
-    delivery_options = { user_name: "george@lieleme.com",
-                         password: "Lieleme1"
+    delivery_options = { user_name: sender.email_account,
+                         password: sender.email_password,
+			 address: sender.email_address
+			 
                         }
 
-    mail to: candidate.email, subject: "你好#{candidate.name},#{subject}"
+    mail to: candidate.email, from: sender.email_account, subject: "你好#{candidate.name},#{subject}",delivery_method_options: delivery_options
   end
 
   def closed(recipient,job)

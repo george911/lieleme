@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028074530) do
+ActiveRecord::Schema.define(version: 20151101031428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -475,6 +475,9 @@ ActiveRecord::Schema.define(version: 20151028074530) do
     t.string   "focus_job3"
     t.integer  "bank_id"
     t.string   "verify"
+    t.string   "email_account"
+    t.string   "email_password"
+    t.string   "email_address"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

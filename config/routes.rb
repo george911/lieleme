@@ -26,6 +26,8 @@ Rails.application.routes.draw do
        
     get 'mobile_show_job', to:'jobs#show_job_on_mobile'
     get 'mobile_show_company', to: 'jobs#show_company_on_mobile'
+    get 'edit_email_setting', to: 'home#edit_email_setting'
+    get 'my_setting', to:'home#my_setting'
     get 'my_savings', to:'home#my_savings'
     get 'my_apply', to:'home#my_apply'
     get 'job_invites', to:'home#job_invites'
@@ -67,7 +69,9 @@ Rails.application.routes.draw do
     get 'candidate_search',to:'candidates#search'
     get 'mail_history_path',to:'candidates#mail_history'
     get 'group_email',to:'candidates#group_email'
-    resources :candidates
+    resources :candidates do
+	get :autocomplete_candidate_title, :on => :collection
+    end
     resources :clients do 
       resources :hrs
     end

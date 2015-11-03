@@ -1,6 +1,6 @@
 <br><br>
 <div>
-<%= f.text_area :content,class: "form-control",rows:2,placeholder: "一句话介绍自己" %>
+<%= f.text_area :content,class: "form-control",rows:1,placeholder: "一句话介绍自己,最多40个字", maxlength:45 %>
 <%= f.hidden_field :_destroy %>
 <%= link_to "删除", '#', class: "remove_fields pull-right" %>
 </div>

@@ -1,5 +1,12 @@
 <div style='padding:30px'>
-  <p>你好<%=@candidate.name%>,</p>
+  <%  WtfLang::API.key = "58d8340b6f36de501127495dd01a25d2" %>
+  <p>
+    <% if @candidate.name.en? %>
+	你好<%= @candidate.name.capitalize %>,
+    <% else %>
+	你好<%= @candidate.name %>,
+    <% end %>
+  </p>
   <p>
     <% if @candidate.employer.present? %>
 	    请问你还在<%=@candidate.employer%>吗?

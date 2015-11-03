@@ -7,7 +7,7 @@ Rails.application.configure do
 		domain: "exmail.qq.com",
 		#domain: "qiye.aliyun.com",
 		authentication: :login,
-		user_name: "george@lieleme.com",
+		user_name: "mrjobs@lieleme.com",
 		#user_name: "george.qiao@lieleme.com",
 		password: "Lieleme1"
 		#password: "Qwer1234"

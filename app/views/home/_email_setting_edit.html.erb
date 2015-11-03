@@ -1,0 +1,6 @@
+  <%= form_for(@user,remote:true) do |f| %>
+	  <%= f.text_field :email_account %>
+	  <%= f.text_field :email_password %>
+	  <%= f.text_field :email_address %>
+	  <%= f.submit %>
+    <% end %>

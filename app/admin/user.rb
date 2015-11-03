@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-      permit_params :verify,:tag_list,:avatar,:mobile, :user_name, :true_name, :user_type, :email, :birthday,:city,:title,:base_salary, :month_num, :bonus, :housing, :transport, :stock,:stock_num, :retention_bonus, :expect_package, :expect_month_salary,summaries_attributes: [:user_id, :content, :_destroy],educations_attributes: [:user_id, :school, :enter_school, :leave_school,:major, :degree, :_destroy]
+      permit_params :email_account,:email_password,:email_address,:verify,:tag_list,:avatar,:mobile, :user_name, :true_name, :user_type, :email, :birthday,:city,:title,:base_salary, :month_num, :bonus, :housing, :transport, :stock,:stock_num, :retention_bonus, :expect_package, :expect_month_salary,summaries_attributes: [:user_id, :content, :_destroy],educations_attributes: [:user_id, :school, :enter_school, :leave_school,:major, :degree, :_destroy]
 
 
   # See permitted parameters documentation:

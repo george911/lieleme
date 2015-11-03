@@ -1,6 +1,8 @@
 class CandidatesController < InheritedResources::Base
-  rescue_from Net::SMTPFatalError, with: :frequency_limited
-  def mail_history
+rescue_from Net::SMTPFatalError, with: :frequency_limited
+autocomplete :candidate,:title,full:true,limit:10,:scopes=>[:unique_title]
+
+def mail_history
   end
   
   def group_email
@@ -9,11 +11,12 @@ class CandidatesController < InheritedResources::Base
     @candidates = current_user.candidates.all
     @candidates = @current_user.candidates.where(name:params[:name]) unless params[:name].blank?
     @candidates = @current_user.candidates.where(email:params[:email]) unless params[:email].blank?
+    #邮件要精确发送，不带Regex
     @candidates = @candidates.where(title:params[:title]) unless params[:title].blank?
     @candidates = @candidates.where("year >= ?",params[:year]) unless params[:year].blank?
     @candidates = @candidates.where(city:params[:city]) unless params[:city].blank?
     @candidates = @candidates.where(employer:params[:employer]) unless params[:employer].blank?
-    #@candidates = @candidates.where("id > 744")
+    #@candidates = @candidates.where("id > 5529")
     my_self = current_user.candidates.build(name:"我自己",email:"cvsend@139.com")
     JobNotifier.job_list(my_self,params[:job_id],params[:content],current_user,params[:subject]).deliver_now
     @candidates.each_with_index do |f,u|
@@ -40,7 +43,7 @@ class CandidatesController < InheritedResources::Base
     candidates = current_user.candidates.all
     candidates = current_user.candidates.where(name:params[:name]) unless params[:name].blank?
     candidates = current_user.candidates.where(email:params[:email]) unless params[:email].blank?
-    candidates = candidates.where(title:params[:title]) unless params[:title].blank?
+    candidates = candidates.where("title like ?","%#{params[:title]}%") unless params[:title].blank?
     candidates = candidates.where("age >= ?",params[:min_age]) unless params[:min_age].blank?
     candidates = candidates.where("age <= ?",params[:max_age]) unless params[:max_age].blank?
     candidates = candidates.where(city:params[:city]) unless params[:city].blank?

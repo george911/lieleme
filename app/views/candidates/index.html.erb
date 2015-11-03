@@ -14,10 +14,10 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="home">
-      <%= form_tag candidate_search_path,method:'get' do %>
+    <%= form_tag candidate_search_path,method:'get' do %>
     <%= text_field_tag :name,nil,placeholder:"名字",class: 'form-control',style: 'margin-bottom:15px' %>
     <%= text_field_tag :email,nil,placeholder:"邮箱",class: 'form-control',style: 'margin-bottom:15px' %>
-    <%= text_field_tag :title,nil,placeholder:"方向",class: 'form-control',style: 'margin-bottom:15px' %>
+    <%= autocomplete_field_tag 'title', '', autocomplete_candidate_title_candidates_path, placeholder:"职位",size:10,class: 'form-control',style:"margin-bottom:15px" %>
     <%= number_field_tag :year,nil,placeholder:"年经验以上",class: 'form-control',style: 'margin-bottom:15px' %>
     <%= text_field_tag :city,nil,placeholder:"城市",class: 'form-control',style: 'margin-bottom:15px' %>
     <%= text_field_tag :employer,nil,placeholder:"雇主",class: 'form-control',style: 'margin-bottom:15px' %>
@@ -31,7 +31,7 @@
     <hr>
     <p>你好,</p>
     <%= text_area_tag :content,nil,placeholder:"邮件内容",rows:5,cols:10,class: 'form-control',style: 'margin-bottom:15px',required:true %>
-    <%= text_field_tag :title,nil,placeholder:"方向",class: 'form-control',style: 'margin-bottom:15px',required:true %>
+    <%= autocomplete_field_tag 'title', '', autocomplete_candidate_title_candidates_path, placeholder:"职位",size:10,class: 'form-control',style:"margin-bottom:15px",required:true %>
     <%= text_field_tag :city,nil,placeholder:"城市",class: 'form-control',style: 'margin-bottom:15px',required:true %>
     <%= number_field_tag :job_id,nil,placeholder:"职位",class: 'form-control',style: 'margin-bottom:15px',required:true %>
     <%= submit_tag "群发邮件", class: "btn btn-success",style: 'margin-bottom:15px'  %>
@@ -58,10 +58,12 @@
     <div role="tabpanel" class="tab-pane active" id="candidate">
         <div class='row'>
           <div class='col-md-12'>
-              <%= form_tag candidates_path,method: :post,remote:true do %>
+		  <input type="file" accept="video/*;capture=camcorder">
+		  <input type="file" accept="audio/*;capture=microphone">
+		  <%= form_tag candidates_path,method: :post,remote:true do %>
                       <div style='padding:7px' class='col-md-1'>  </div>
                       <div style='padding:7px' class='col-md-1'><%= text_field_tag :name,nil,placeholder:"姓名",    style:'border:0px' %>      </div>
-                      <div style='padding:7px' class='col-md-1'><%= text_field_tag :title,nil,placeholder:"职位",   style:'border:0px' %>            </div>
+		      <div style='padding:7px' class='col-md-1'><%=  autocomplete_field_tag 'title', '', autocomplete_candidate_title_candidates_path, placeholder:"职位",size:10,style:"border:0px" %></div>
                       <div style='padding:7px' class='col-md-1'><%= number_field_tag :year,nil,placeholder:"经验",   style:'border:0px' %></div>
                       <div style='padding:7px' class='col-md-1'><%= text_field_tag :city,nil,placeholder:"城市",    style:'border:0px' %></div>
                       <div style='padding:7px' class='col-md-1'><%= text_field_tag :employer,nil,placeholder:"雇主",style:'border:0px' %></div>
@@ -83,7 +85,7 @@
         
                         <div class='col-md-1' style='padding:7px'><%= candidate.id %></div>
                         <div class='col-md-1' style='padding:7px'><%= candidate.name %></div>
-        	             <div class='col-md-1' style='padding:7px'><%= candidate.title %></div>
+        	        <div class='col-md-1' style='padding:7px'><%= candidate.title %></div>
                         <div class='col-md-1' style='padding:7px'><%= candidate.year %></div>
                         <div class='col-md-1' style='padding:7px'><%= candidate.city %></div>
                         <div class='col-md-1' style='padding:7px'><%= candidate.employer %></div>
@@ -162,7 +164,7 @@
             <th>大连</th>
             <th>青岛</th>
           </thead>
-          <% ["Java","PHP","iOS",'Android','C','C++','C#','Python','Ruby'].each do |title| %>
+          <% ["Java","PHP","iOS",'Android','C','C++','C#','Python','Ruby','HTML'].each do |title| %>
             <tr>
               <td><%= title %></td>
           	<% ["Beijing","Shanghai","Shenzhen",'Guangzhou','Hangzhou','Chengdu','Nanjing','Xiamen','Wuhan','Dalian','Qingdao'].each do |city| %>

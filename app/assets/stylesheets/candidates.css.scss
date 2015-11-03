@@ -2,7 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .candidates {
-table {
+ul.ui-autocomplete {
+    list-style: none;
+    padding-left:0px;
+    color:#876d4a;
+    background-color:#fcf7e1;
+    width:70px;
+    }
+    table {
   table-layout:fixed;
   input{
 	width:100%;
