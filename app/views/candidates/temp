@@ -1,56 +1,3 @@
-<div class='notice col-md-2' id = 'edit_area' style='padding-top:100px'>
-    <div class='row' style='padding:0px 30px 0px 30px'>
-	<% if flash.present? %>
-		<p><%= flash[:notice] %></p>
-	<% end %>
-  <div>
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">搜索</a></li>
-    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">邮件</a></li>
-  </ul>
-  <br>
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="home">
-    <%= form_tag candidate_search_path,method:'get' do %>
-    <%= text_field_tag :name,nil,placeholder:"名字",class: 'form-control',style: 'margin-bottom:15px' %>
-    <%= text_field_tag :email,nil,placeholder:"邮箱",class: 'form-control',style: 'margin-bottom:15px' %>
-    <%= autocomplete_field_tag 'title', '', autocomplete_candidate_title_candidates_path, placeholder:"职位",size:10,class: 'form-control',style:"margin-bottom:15px" %>
-    <%= number_field_tag :year,nil,placeholder:"年经验以上",class: 'form-control',style: 'margin-bottom:15px' %>
-    <%= text_field_tag :city,nil,placeholder:"城市",class: 'form-control',style: 'margin-bottom:15px' %>
-    <%= text_field_tag :employer,nil,placeholder:"雇主",class: 'form-control',style: 'margin-bottom:15px' %>
-    <%= submit_tag "搜索",class: 'btn btn-success',style: 'margin-bottom:15px'%>
-    <% end %>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="profile">
-      <%= form_tag group_email_path,method:'get',remote:true do %>
-    <%= text_field_tag :email,nil,placeholder:"收件人",cols:10,class: 'form-control',style: 'margin-bottom:15px' %>
-    <%= text_field_tag :subject,nil,placeholder:"标题",cols:10,class: 'form-control',style: 'margin-bottom:15px' %>
-    <hr>
-    <p>你好,</p>
-    <%= text_area_tag :content,nil,placeholder:"邮件内容",rows:5,cols:10,class: 'form-control',style: 'margin-bottom:15px',required:true %>
-    <%= autocomplete_field_tag 'title', '', autocomplete_candidate_title_candidates_path, placeholder:"Title",size:10,class: 'form-control',style:"margin-bottom:15px",required:true %>
-    <%= text_field_tag :city,nil,placeholder:"城市",class: 'form-control',style: 'margin-bottom:15px',required:true %>
-    <%= number_field_tag :job_id,nil,placeholder:"职位",class: 'form-control',style: 'margin-bottom:15px',required:true %>
-    <%= submit_tag "群发邮件", class: "btn btn-success",style: 'margin-bottom:15px'  %>
-    <% end %>
-    </div>
-  </div>
-
-</div>
-
-
-  </div>	
-</div><!--end col-md-2-->
-<div class='col-md-10' id='candidate_list' style='padding-top:100px'>
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist" style='float:right'>
-    <li role="presentation" class="active"><a href="#candidate" aria-controls="home" role="tab" data-toggle="tab">人才</a></li>
-    <li role="presentation"><a href="#history" aria-controls="profile" role="tab" data-toggle="tab">历史</a></li>
-    <li role="presentation"><a href="#summary" aria-controls="profile" role="tab" data-toggle="tab">统计</a></li>
   </ul>
   <br>
   <!-- Tab panes -->
@@ -60,6 +7,82 @@
           <div class='col-md-12'>
 		  
 		  <div style="text-align:center;">
+			  <video autoplay></video>
+			  
+			  <script>
+				  function hasGetUserMedia() {
+					    return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+					                navigator.mozGetUserMedia || navigator.msGetUserMedia);
+							}
+							
+							if (hasGetUserMedia()) {
+								  // Good to go!
+									  } else {
+									    alert('getUserMedia() is not supported in your browser');
+									    }
+									    var errorCallback = function(e) {
+				        console.log('Reeeejected!', e);
+					  };
+					  
+					    // Not showing vendor prefixes.
+					      navigator.getUserMedia({video: true, audio: true}, function(localMediaStream) {
+					          var video = document.querySelector('video');
+						      video.src = window.URL.createObjectURL(localMediaStream);
+						      
+						          // Note: onloadedmetadata doesn't fire in Chrome when using it with getUserMedia.
+							      // See crbug.com/110938.
+							          video.onloadedmetadata = function(e) {
+								        // Ready to go. Do some stuff.
+									    };
+									      }, errorCallback);
+									      MediaStreamTrack.getSources(function(sourceInfos) {
+									        var audioSource = null;
+									  var videoSource = null;
+								  
+								    for (var i = 0; i != sourceInfos.length; ++i) {
+							        var sourceInfo = sourceInfos[i];
+							    if (sourceInfo.kind === 'audio') {
+						          console.log(sourceInfo.id, sourceInfo.label || 'microphone');
+						  
+						        audioSource = sourceInfo.id;
+						    } else if (sourceInfo.kind === 'video') {
+					          console.log(sourceInfo.id, sourceInfo.label || 'camera');
+					  
+					        videoSource = sourceInfo.id;
+					    } else {
+				          console.log('Some other kind of source: ', sourceInfo);
+				      }
+			        }
+			
+			  sourceSelected(audioSource, videoSource);
+			  });
+		  
+			  function sourceSelected(audioSource, videoSource) {
+		    var constraints = {
+	        audio: {
+	      optional: [{sourceId: audioSource}]
+          },
+      video: {
+            optional: [{sourceId: videoSource}]
+        }
+  };navigator.getUserMedia(constraints, successCallback, errorCallback);
+  }// Not showing vendor prefixes or code that works cross-browser:
+  
+  function fallback(e) {
+    video.src = 'fallbackvideo.webm';
+    }
+    
+    function success(stream) {
+      video.src = window.URL.createObjectURL(stream);
+      }
+      
+      if (!navigator.getUserMedia) {
+        fallback();
+	} else {
+  navigator.getUserMedia({video: true}, success, fallback);
+  }</script>
+								      <video id="basic-stream" class="videostream" autoplay></video>
+			      <p><button id="capture-button">Capture video</button> <button id="stop-button">Stop</button></p>
 		      </div><%= form_tag candidates_path,method: :post,remote:true do %>
                       <div style='padding:7px' class='col-md-1'>  </div>
                       <div style='padding:7px' class='col-md-1'><%= text_field_tag :name,nil,placeholder:"姓名",    style:'border:0px' %>      </div>

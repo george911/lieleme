@@ -2,11 +2,11 @@ Rails.application.configure do
 	config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
 		address: "smtp.exmail.qq.com",
-#		address: "smtp.mxhichina.com",
-		port: 25,
+		port: 465,#25也可
 		domain: "exmail.qq.com",
-		#domain: "qiye.aliyun.com",
 		authentication: :login,
+		# 碰到net::Readtimeout错误的解决办法,
+		tls:true,
 		user_name: "mrjobs@lieleme.com",
 		#user_name: "george.qiao@lieleme.com",
 		password: "Lieleme1"

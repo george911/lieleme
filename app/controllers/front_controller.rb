@@ -22,4 +22,7 @@ class FrontController < ApplicationController
         @interviews = current_user.sent_interviews }
     end
   end
+
+  def rtc
+  end
 end
