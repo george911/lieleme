@@ -434,7 +434,473 @@ if (!navigator.getUserMedia) {
   <p><button id="capture-button">Capture video</button> <button id="stop-button">Stop</button></p>
 </div>
 
+<h2 id="toc-screenshot">Taking screenshots</h2>
 
+<p>The <code>&lt;canvas&gt;</code> API's <code>ctx.drawImage(video, 0, 0)</code> method makes it trivial to draw
+<code>&lt;video&gt;</code> frames to <code>&lt;canvas&gt;</code>. Of course, now that we have video
+input via <code>getUserMedia()</code>,  it's just as easy to create a photo booth application
+with realtime video:</p>
+<pre class="prettyprint"><code>&lt;video autoplay&gt;&lt;/video&gt;
+&lt;img src=""&gt;
+&lt;canvas style="display:none;"&gt;&lt;/canvas&gt;
+
+&lt;script&gt;
+  var video = document.querySelector('video');
+  var canvas = document.querySelector('canvas');
+  var ctx = canvas.getContext('2d');
+  var localMediaStream = null;
+
+  function snapshot() {
+    if (localMediaStream) {
+      ctx.drawImage(video, 0, 0);
+      // "image/webp" works in Chrome.
+      // Other browsers will fall back to image/png.
+      document.querySelector('img').src = canvas.toDataURL('image/webp');
+    }
+  }
+
+  video.addEventListener('click', snapshot, false);
+
+  // Not showing vendor prefixes or code that works cross-browser.
+  navigator.getUserMedia({video: true}, function(stream) {
+    video.src = window.URL.createObjectURL(stream);
+    localMediaStream = stream;
+  }, errorCallback);
+&lt;/script&gt;
+</code></pre>
+<div style="text-align:center;">
+  <video id="screenshot-stream" class="videostream" autoplay></video>
+  <img id="screenshot" src="">
+  <canvas id="screenshot-canvas" style="display:none;"></canvas>
+  <p><button id="screenshot-button">Capture</button> <button id="screenshot-stop-button">Stop</button></p>
+</div>
+
+<h2 id="toc-effects">Applying Effects</h2>
+
+<h3 id="toc-effects-css">CSS Filters</h3>
+
+<p>Using <a href="https://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html">CSS Filters</a>, we can apply some gnarly effects to the <code>&lt;video&gt;</code>
+as it is captured:</p>
+<pre class="prettyprint"><code>&lt;style&gt;
+video {
+  width: 307px;
+  height: 250px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid #ccc;
+}
+.grayscale {
+  <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#including_a_mixin" id="tooltip160.8" target="_blank" data-tooltip="/*Vendor prefixes required. Try Compass/SASS.*/
+-webkit-filter: ...
+   -moz-filter: ...
+    -ms-filter: ...
+     -o-filter: ...
+        filter: ..." role="tooltip" aria-describedby="tooltip160.8" class="noexternal tooltip">+<span class="property">filter:</span> grayscale(1);</a>
+}
+.sepia {
+  <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#including_a_mixin" id="tooltip160.8" target="_blank" data-tooltip="/*Vendor prefixes required. Try Compass/SASS.*/
+-webkit-filter: ...
+   -moz-filter: ...
+    -ms-filter: ...
+     -o-filter: ...
+        filter: ..." role="tooltip" aria-describedby="tooltip160.8" class="noexternal tooltip">+<span class="property">filter:</span> sepia(1);</a>
+}
+.blur {
+  <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#including_a_mixin" id="tooltip160.8" target="_blank" data-tooltip="/*Vendor prefixes required. Try Compass/SASS.*/
+-webkit-filter: ...
+   -moz-filter: ...
+    -ms-filter: ...
+     -o-filter: ...
+        filter: ..." role="tooltip" aria-describedby="tooltip160.8" class="noexternal tooltip">+<span class="property">filter:</span> blur(3px);</a>
+}
+...
+&lt;/style&gt;
+
+&lt;video autoplay&gt;&lt;/video&gt;
+
+&lt;script&gt;
+var idx = 0;
+var filters = ['grayscale', 'sepia', 'blur', 'brightness',
+               'contrast', 'hue-rotate', 'hue-rotate2',
+               'hue-rotate3', 'saturate', 'invert', ''];
+
+function changeFilter(e) {
+  var el = e.target;
+  el.className = '';
+  var effect = filters[idx++ % filters.length]; // loop through filters.
+  if (effect) {
+    el.classList.add(effect);
+  }
+}
+
+document.querySelector('video').addEventListener(
+    'click', changeFilter, false);
+&lt;/script&gt;
+</code></pre>
+<div style="text-align:center;">
+  <video id="cssfilters-stream" class="videostream" autoplay title="Click me to apply CSS Filters" alt="Click me to apply CSS Filters"></video>
+  <p>Click the video to cycle through CSS filters</p>
+  <p><button id="capture-button2">Capture video</button> <button id="stop-button2">Stop</button></p>
+</div>
+
+<h3 id="toc-effects-webgl">WebGL Textures</h3>
+
+<p>One amazing use case for video capture is to render live input as a WebGL texture.
+Since I know absolutely nothing about WebGL (other than it's sweet), I'm going
+to suggest you give Jerome Etienne's <a href="http://learningthreejs.com/blog/2012/02/07/live-video-in-webgl/">tutorial</a>
+and <a href="http://learningthreejs.com/data/live-video-in-webgl/">demo</a> a look. 
+It talks about how to use <code>getUserMedia()</code> and <a href="/tutorials/three/intro/">Three.js</a>
+to render live video into WebGL.</p>
+<h2 id="toc-webaudio-api">Using getUserMedia with the Web Audio API</h2>
+
+<p>One of my dreams is to build AutoTune in the browser with nothing more than open web technology! </p>
+<p>Chrome supports live microphone input from <code>getUserMedia()</code> to the <a href="/tutorials/webaudio/intro/">Web Audio API</a> for real-time effects. Piping microphone input to the Web Audio API looks like this:</p>
+<pre class="prettyprint"><code>window.AudioContext = window.AudioContext ||
+                      window.webkitAudioContext;
+
+var context = new AudioContext();
+
+navigator.getUserMedia({audio: true}, function(stream) {
+  var microphone = context.createMediaStreamSource(stream);
+  var filter = context.createBiquadFilter();
+
+  // microphone -&gt; filter -&gt; destination.
+  microphone.connect(filter);
+  filter.connect(context.destination);
+}, errorCallback);
+</code></pre>
+<p>Demos:</p>
+<ul>
+<li><a href="http://webaudiodemos.appspot.com/input/index.html">Live Input Visualizer</a></li>
+<li><a href="http://webaudiodemos.appspot.com/AudioRecorder/index.html">Audio Recorder</a></li>
+<li><a href="http://webaudiodemos.appspot.com/pitchdetect/index.html">Pitch Detector</a></li>
+</ul>
+<p>For more information, see <a href="http://updates.html5rocks.com/2012/09/Live-Web-Audio-Input-Enabled">Chris Wilson's post</a>.</p>
+<h2 id="toc-conclusion">Conclusion</h2>
+
+<p>In general, device access on the web has been a tough cookie to crack. Many
+<a href="http://www.slideshare.net/jamesgpearce/mobile-device-apis">people have tried</a>,
+few have succeeded. Most of the early ideas have never taken hold outside of a
+proprietary environment nor have they gained widespread adoption.</p>
+<p>The real problem is that the web's security model is <em>very</em> different from the native world.
+For example, I probably don't want every Joe Shmoe web site to have random access to my
+video camera. It's a tough problem to get right.</p>
+<p>Bridging frameworks like <a href="http://phonegap.com/">PhoneGap</a> have helped push the boundary,
+but they're only a start and a temporary solution to an underlying problem. To make web
+apps competitive to their desktop counterparts, we need access to native devices.</p>
+<p><code>getUserMedia()</code> is but the first wave of access to new types of devices. I hope
+we'll continue to see more in the very near future!</p>
+<h2 id="toc-resources">Additional resources</h2>
+
+<ul>
+<li><a href="http://dev.w3.org/2011/webrtc/editor/getusermedia.html">W3C specification</a></li>
+<li>Bruce Lawson's <a href="http://html5doctor.com/getusermedia/">HTML5Doctor article</a></li>
+<li>Bruce Lawson's <a href="http://dev.opera.com/articles/view/getusermedia-access-camera-privacy-ui/">dev.opera.com article</a></li>
+</ul>
+<h3 id="toc-demos">Demos</h3>
+
+<ul>
+<li><a href="http://html5-demos.appspot.com/static/getusermedia/photobooth.html">Live Photo booth</a></li>
+<li>Paul Neave's <a href="http://neave.com/webcam/html5/">WebGL Camera Effects</a></li>
+<li><a href="http://html5photobooth.com/">Snapster</a></li>
+<li><a href="http://learningthreejs.com/data/live-video-in-webgl/">Live video in WebGL</a></li>
+<li><a href="http://www.soundstep.com/blog/experiments/jsdetection/">Play Xylophone with your hands</a></li>
+</ul>
+<script>
+function errorCallback(e) {
+  if (e.code == 1) {
+    alert('User denied access to their camera');
+  } else {
+    alert('getUserMedia() not supported in your browser.');
+  }
+  //e.target.src = 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv';
+}
+
+(function() {
+var video = document.querySelector('#basic-stream');
+var button = document.querySelector('#capture-button');
+var localMediaStream = null;
+
+button.addEventListener('click', function(e) {
+  if (navigator.getUserMedia) {
+    navigator.getUserMedia('video', function(stream) {
+      video.src = stream;
+      video.controls = true;
+      localMediaStream = stream;
+    }, errorCallback);
+  } else if (navigator.webkitGetUserMedia) {
+    navigator.webkitGetUserMedia({video: true}, function(stream) {
+      video.src = window.URL.createObjectURL(stream);
+      video.controls = true;
+      localMediaStream = stream;
+    }, errorCallback);
+  } else {
+    errorCallback({target: video});
+  }
+}, false);
+
+document.querySelector('#stop-button').addEventListener('click', function(e) {
+  video.pause();
+  localMediaStream.stop(); // Doesn't do anything in Chrome.
+}, false);
+})();
+
+(function() {
+var video = document.querySelector('#screenshot-stream');
+var button = document.querySelector('#screenshot-button');
+var canvas = document.querySelector('#screenshot-canvas');
+var img = document.querySelector('#screenshot');
+var ctx = canvas.getContext('2d');
+var localMediaStream = null;
+
+function sizeCanvas() {
+  // video.onloadedmetadata not firing in Chrome so we have to hack.
+  // See crbug.com/110938.
+  setTimeout(function() {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    img.height = video.videoHeight;
+    img.width = video.videoWidth;
+  }, 100);
+}
+
+function snapshot() {
+  ctx.drawImage(video, 0, 0);
+  img.src = canvas.toDataURL('image/webp');
+}
+
+button.addEventListener('click', function(e) {
+  if (localMediaStream) {
+    snapshot();
+    return;
+  }
+
+  if (navigator.getUserMedia) {
+    navigator.getUserMedia('video', function(stream) {
+      video.src = stream;
+      localMediaStream = stream;
+      sizeCanvas();
+      button.textContent = 'Take Shot';
+    }, errorCallback);
+  } else if (navigator.webkitGetUserMedia) {
+    navigator.webkitGetUserMedia({video: true}, function(stream) {
+      video.src = window.URL.createObjectURL(stream);
+      localMediaStream = stream;
+      sizeCanvas();
+      button.textContent = 'Take Shot';
+    }, errorCallback);
+  } else {
+    errorCallback({target: video});
+  }
+}, false);
+
+video.addEventListener('click', snapshot, false);
+
+document.querySelector('#screenshot-stop-button').addEventListener('click', function(e) {
+  video.pause();
+  localMediaStream.stop(); // Doesn't do anything in Chrome.
+}, false);
+})();
+
+(function() {
+var video = document.querySelector('#cssfilters-stream');
+var button = document.querySelector('#capture-button2');
+var localMediaStream = null;
+
+var idx = 0;
+var filters = [
+  'grayscale',
+  'sepia',
+  'blur',
+  'brightness',
+  'contrast',
+  'hue-rotate', 'hue-rotate2', 'hue-rotate3',
+  'saturate',
+  'invert',
+  ''
+];
+
+function changeFilter(e) {
+  var el = e.target;
+  el.className = '';
+  var effect = filters[idx++ % filters.length];
+  if (effect) {
+    el.classList.add(effect);
+  }
+}
+
+button.addEventListener('click', function(e) {
+  if (navigator.getUserMedia) {
+    navigator.getUserMedia('video, audio', function(stream) {
+      video.src = stream;
+      localMediaStream = stream;
+    }, errorCallback);
+  } else if (navigator.webkitGetUserMedia) {
+    navigator.webkitGetUserMedia({video: true}, function(stream) {
+      video.src = window.URL.createObjectURL(stream);
+      localMediaStream = stream;
+    }, errorCallback);
+  } else {
+    errorCallback({target: video});
+  }
+}, false);
+
+document.querySelector('#stop-button2').addEventListener('click', function(e) {
+  video.pause();
+  localMediaStream.stop(); // Doesn't do anything in Chrome.
+}, false);
+
+video.addEventListener('click', changeFilter, false);
+})();
+</script>
+
+      </div>
+    </section>
+  </article>
+
+  
+  <section class="disqus pattern-bg-lighter">
+
+    <div id="disqus" class="container">
+
+      <h2>Comments</h2>
+
+      <div id="disqus_thread">
+
+        <a href="#disqus_thread" class="load-comments" data-disqus-identifier="http://www.html5rocks.com/tutorials/getusermedia/intro/">0</a>
+
+      </div>
+    </div>
+
+    <noscript>
+      <p class="center">
+        <strong>
+          <a href="http://disqus.com/?ref_noscript">Please enable JavaScript to view the comments powered by Disqus.</a>
+        </strong>
+      </p>
+    </noscript>
+
+    <script>
+
+      var disqus_shortname = 'html5rocks';
+      var disqus_identifier = 'http://www.html5rocks.com/tutorials/getusermedia/intro/';
+      var disqus_url = 'http://www.html5rocks.com/tutorials/getusermedia/intro/';
+      var disqus_developer = 0;
+
+      var disqus_config = function () {
+        var funky_language_code_mapping = {
+          'de': 'de_inf',
+          'es': 'es_ES',
+          'pt': 'pt_EU',
+          'sr': 'sr_CYRL',
+          'sv': 'sv_SE',
+          'zh': 'zh_HANT'
+        };
+        this.language = funky_language_code_mapping['en'] ||
+                        'en';
+
+        this.callbacks.onReady = [ function () {
+                                      try {
+                                        ga('send', 'event', 'View comments');
+                                      } catch(err){}
+                                   } ];
+        this.callbacks.onNewComment = [ function (comment) {
+                                          try {
+                                            ga('send', 'event', 'Commented');
+                                          } catch(err){}
+                                        } ];
+      };
+
+      window.addEventListener('load', function(e) {
+
+        var c = document.createElement('script');
+        c.type = 'text/javascript';
+        c.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        c.async = true;
+
+        var s = document.getElementsByTagName('script')[0], sp = s.parentNode;
+        sp.insertBefore(c, s);
+
+        if (window.location.hash === '#disqus_thread')
+          loadComments();
+
+      }, false);
+
+      var disqus_loaded = false;
+      function loadComments() {
+
+        if (disqus_loaded)
+          return;
+
+        disqus_loaded = true;
+
+        ga('send', 'event', 'Interactions', 'Comments', 'Comments Loaded');
+
+        var s = document.getElementsByTagName('script')[0], sp = s.parentNode;
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+
+        var disqusContainer = document.getElementById('disqus');
+        disqusContainer.classList.add('active');
+
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        sp.insertBefore(dsq, s);
+      }
+
+      function outgoing(url) {
+        try {
+          ga('send', 'event', 'Outbound Links' , url);
+        } catch(err){}
+      }
+      // Open external links (also that don't have a target defined) in a new tab.
+      var externLinks = document.querySelectorAll('article.tutorial a[href^="http"]:not([target])');
+      for(var i = 0, a; a = externLinks[i]; ++i) {
+        a.target = '_blank';
+        a.addEventListener('click', new Function('outgoing(' + '"' + a.href.replace(/.*?:\/\//g, "") + '"' + ');'));
+      }
+
+      var loadCommentsButtons = document.querySelectorAll('.load-comments');
+      for(var l = 0; l < loadCommentsButtons.length; l++)
+        loadCommentsButtons[l].addEventListener('click', loadComments);
+
+    </script>
+  </section>
+  
+
+  <footer>
+    <div class="container">
+
+      
+        <h1>Next steps</h2>
+
+        
+
+        <aside class="panel share">
+          <h2>Share</h2>
+
+            <a href="https://twitter.com/share?url=http://www.html5rocks.com/tutorials/getusermedia/intro/&text=Capturing Audio &amp; Video in HTML5&lang=en&via=ChromiumDev&related=ChromiumDev" class="twitter" target="_blank">Twitter</a>
+
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.html5rocks.com/tutorials/getusermedia/intro/" class="facebook" target="_blank">Facebook</a>
+
+            <a href="https://plus.google.com/share?url=http://www.html5rocks.com/tutorials/getusermedia/intro/" class="gplus" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">Google+</a>
+
+        </aside>
+
+        <aside class="panel rss">
+          <h2>Subscribe</h2>
+          <p>Enjoyed this article? Grab the <a href="http://feeds.feedburner.com/html5rocks">RSS feed</a> and stay up-to-date.</p>
+        </aside>
+
+      
+
+      <p class="licensing">
+      
+        Except as otherwise <a href="http://code.google.com/policies.html#restrictions">noted</a>, the content of this page is licensed under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>, and code samples are licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>.
+      
+      </p>
+
+    </div>
+  </footer>
 
   <script>
     window.isCompatible = function() {
