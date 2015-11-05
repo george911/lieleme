@@ -38,7 +38,13 @@ var button = document.querySelector('#capture-button');
 var localMediaStream = null;
 
 button.addEventListener('click', function(e) {
-if (navigator.webkitGetUserMedia) {
+  if (navigator.getUserMedia) {
+    navigator.getUserMedia('video', function(stream) {
+      video.src = stream;
+      video.controls = true;
+      localMediaStream = stream;
+    }, errorCallback);
+  } else if (navigator.webkitGetUserMedia) {
     # To use the webcam or microphone, we need to request permission. The first parameter to getUserMedia() is an object specifying the details and requirements for each type of media you want to access. 
     navigator.webkitGetUserMedia({video: true}, function(stream) {
       video.src = window.URL.createObjectURL(stream);
