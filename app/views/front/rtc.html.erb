@@ -36,6 +36,30 @@ function errorCallback(e) {
 var video = document.querySelector('#basic-stream');
 var button = document.querySelector('#capture-button');
 var localMediaStream = null;
+var hdConstraints = {
+  video: {
+    mandatory: {
+      minWidth: 280,
+      minHeight: 20
+    }
+  }
+};
+
+navigator.getUserMedia(hdConstraints, successCallback, errorCallback);
+
+...
+
+var vgaConstraints = {
+  video: {
+    mandatory: {
+      maxWidth: 40,
+      maxHeight: 60
+    }
+  }
+};
+
+navigator.getUserMedia(vgaConstraints, successCallback, errorCallback);
+
 
 button.addEventListener('click', function(e) {
 
