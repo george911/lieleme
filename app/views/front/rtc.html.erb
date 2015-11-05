@@ -39,7 +39,7 @@ var localMediaStream = null;
 
 button.addEventListener('click', function(e) {
 
-    navigator.webkitGetUserMedia({video: true}, function(stream) {
+    navigator.webkitGetUserMedia({video: true,audio: true}, function(stream) {
       video.src = window.URL.createObjectURL(stream);
       video.controls = true;
       localMediaStream = stream;
