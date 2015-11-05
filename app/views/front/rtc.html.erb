@@ -434,46 +434,7 @@ if (!navigator.getUserMedia) {
   <p><button id="capture-button">Capture video</button> <button id="stop-button">Stop</button></p>
 </div>
 
-<h2 id="toc-screenshot">Taking screenshots</h2>
 
-<p>The <code>&lt;canvas&gt;</code> API's <code>ctx.drawImage(video, 0, 0)</code> method makes it trivial to draw
-<code>&lt;video&gt;</code> frames to <code>&lt;canvas&gt;</code>. Of course, now that we have video
-input via <code>getUserMedia()</code>,  it's just as easy to create a photo booth application
-with realtime video:</p>
-<pre class="prettyprint"><code>&lt;video autoplay&gt;&lt;/video&gt;
-&lt;img src=""&gt;
-&lt;canvas style="display:none;"&gt;&lt;/canvas&gt;
-
-&lt;script&gt;
-  var video = document.querySelector('video');
-  var canvas = document.querySelector('canvas');
-  var ctx = canvas.getContext('2d');
-  var localMediaStream = null;
-
-  function snapshot() {
-    if (localMediaStream) {
-      ctx.drawImage(video, 0, 0);
-      // "image/webp" works in Chrome.
-      // Other browsers will fall back to image/png.
-      document.querySelector('img').src = canvas.toDataURL('image/webp');
-    }
-  }
-
-  video.addEventListener('click', snapshot, false);
-
-  // Not showing vendor prefixes or code that works cross-browser.
-  navigator.getUserMedia({video: true}, function(stream) {
-    video.src = window.URL.createObjectURL(stream);
-    localMediaStream = stream;
-  }, errorCallback);
-&lt;/script&gt;
-</code></pre>
-<div style="text-align:center;">
-  <video id="screenshot-stream" class="videostream" autoplay></video>
-  <img id="screenshot" src="">
-  <canvas id="screenshot-canvas" style="display:none;"></canvas>
-  <p><button id="screenshot-button">Capture</button> <button id="screenshot-stop-button">Stop</button></p>
-</div>
 
 <h2 id="toc-effects">Applying Effects</h2>
 
