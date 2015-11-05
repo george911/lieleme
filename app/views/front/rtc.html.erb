@@ -36,10 +36,18 @@ function errorCallback(e) {
 var video = document.querySelector('#basic-stream');
 var button = document.querySelector('#capture-button');
 var localMediaStream = null;
+var hdConstraints = {
+  video: {
+    mandatory: {
+      minWidth: 280,
+      minHeight: 20
+    }
+  }
+};
 
 button.addEventListener('click', function(e) {
 
-    navigator.webkitGetUserMedia({video: true,audio: true}, function(stream) {
+    navigator.webkitGetUserMedia(hdConstraints, function(stream) {
       video.src = window.URL.createObjectURL(stream);
       video.controls = true;
       localMediaStream = stream;
