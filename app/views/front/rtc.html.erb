@@ -61,49 +61,7 @@ document.querySelector('#stop-button').addEventListener('click', function(e) {
 }, false);
 })();
 
-(function() {
-var video = document.querySelector('#screenshot-stream');
-var button = document.querySelector('#screenshot-button');
-var canvas = document.querySelector('#screenshot-canvas');
-var img = document.querySelector('#screenshot');
-var ctx = canvas.getContext('2d');
-var localMediaStream = null;
 
-
-
-
-button.addEventListener('click', function(e) {
-  if (localMediaStream) {
-    snapshot();
-    return;
-  }
-
-  if (navigator.getUserMedia) {
-    navigator.getUserMedia('video', function(stream) {
-      video.src = stream;
-      localMediaStream = stream;
-      sizeCanvas();
-      button.textContent = 'Take Shot';
-    }, errorCallback);
-  } else if (navigator.webkitGetUserMedia) {
-    navigator.webkitGetUserMedia({video: true}, function(stream) {
-      video.src = window.URL.createObjectURL(stream);
-      localMediaStream = stream;
-      sizeCanvas();
-      button.textContent = 'Take Shot';
-    }, errorCallback);
-  } else {
-    errorCallback({target: video});
-  }
-}, false);
-
-video.addEventListener('click', snapshot, false);
-
-document.querySelector('#screenshot-stop-button').addEventListener('click', function(e) {
-  video.pause();
-  localMediaStream.stop(); // Doesn't do anything in Chrome.
-}, false);
-})();
 
 (function() {
 var video = document.querySelector('#cssfilters-stream');
