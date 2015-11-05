@@ -33,7 +33,7 @@
     <%= text_area_tag :content,nil,placeholder:"邮件内容",rows:5,cols:10,class: 'form-control',style: 'margin-bottom:15px',required:true %>
     <%= autocomplete_field_tag 'title', '', autocomplete_candidate_title_candidates_path, placeholder:"Title",size:10,class: 'form-control',style:"margin-bottom:15px",required:true %>
     <%= text_field_tag :city,nil,placeholder:"城市",class: 'form-control',style: 'margin-bottom:15px',required:true %>
-    <%= number_field_tag :job_id,nil,placeholder:"职位",class: 'form-control',style: 'margin-bottom:15px',required:true %>
+    <%= number_field_tag :job_id,nil,placeholder:"岗位ID",class: 'form-control',style: 'margin-bottom:15px',required:true %>
     <%= submit_tag "群发邮件", class: "btn btn-success",style: 'margin-bottom:15px'  %>
     <% end %>
     </div>
