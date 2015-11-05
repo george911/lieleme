@@ -32,7 +32,7 @@ function errorCallback(e) {
   //e.target.src = 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv';
 }
 
-function() {
+(function() {
 var video = document.querySelector('#basic-stream');
 var button = document.querySelector('#capture-button');
 var localMediaStream = null;
@@ -43,7 +43,6 @@ var hdConstraints = {
       minHeight: 20
     }
   }
-}
 };
 
 navigator.getUserMedia(hdConstraints, successCallback, errorCallback);
@@ -59,6 +58,7 @@ var vgaConstraints = {
 };
 
 navigator.getUserMedia(vgaConstraints, successCallback, errorCallback);
+)
 
 
 button.addEventListener('click', function(e) {
