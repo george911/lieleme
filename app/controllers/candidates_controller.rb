@@ -1,4 +1,11 @@
 class CandidatesController < InheritedResources::Base
+rescue_from Exception do |e|
+    current_user.mail_histories.create(total_num:@candidates.size,sent_num:session[:sent_num],status:"发送到#{session[:stop_id]}终止",content:params[:content],email:params[:email],name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
+    @error = e
+    flash[:notice] = "#{@error},发送到id#{session[:stop_id]},总共#{session[:sent_num]}封邮件"
+    @candidates = Candidate.where(id:session[:stop_id]).page(params[:page]).per(100)
+    render :index
+  end
 rescue_from Net::SMTPFatalError, with: :frequency_limited
 autocomplete :candidate,:title,full:true,limit:10,:scopes=>[:unique_title]
 
@@ -16,7 +23,7 @@ def mail_history
     @candidates = @candidates.where("year >= ?",params[:year]) unless params[:year].blank?
     @candidates = @candidates.where(city:params[:city]) unless params[:city].blank?
     @candidates = @candidates.where(employer:params[:employer]) unless params[:employer].blank?
-    @candidates = @candidates.where("id > 8680")
+    @candidates = @candidates.where("id > 35556")
     my_self = current_user.candidates.build(name:"我自己",email:"cvsend@139.com")
     JobNotifier.job_list(my_self,params[:job_id],params[:content],current_user,params[:subject]).deliver_now
     @candidates.each_with_index do |f,u|
