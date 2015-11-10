@@ -5,5 +5,4 @@
 #	f.destroy
 #end
 #require File.expand_path('../clear_all', __FILE__)
-Job.delete_all
 #Candidate.dedupe

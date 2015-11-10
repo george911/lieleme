@@ -1,5 +1,5 @@
 ActiveAdmin.register Job do
-      permit_params :origin,:status,:avatar,:title, :interview,:employer,:addr, :city, :industry, :commission, :role, :requirement, :base_pay, :month, :bonus, :allowance, :stock, :stock_num, :concall_date, :user_id, :peer, :memo, :company_info, :work_year,
+      permit_params :tag1,:tag2,:tag3,:notified,:origin,:status,:avatar,:title, :interview,:employer,:addr, :city, :industry, :commission, :role, :requirement, :base_pay, :month, :bonus, :allowance, :stock, :stock_num, :concall_date, :user_id, :peer, :memo, :company_info, :work_year,
 	bosses_attributes: [:title]
 				 
  index do

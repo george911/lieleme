@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151101031428) do
+ActiveRecord::Schema.define(version: 20151108122654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,11 +76,12 @@ ActiveRecord::Schema.define(version: 20151101031428) do
     t.string   "city"
     t.string   "note"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "age"
     t.integer  "year"
     t.integer  "followers"
+    t.integer  "base_salary"
   end
 
   add_index "candidates", ["user_id"], name: "index_candidates_on_user_id", using: :btree
@@ -237,6 +238,10 @@ ActiveRecord::Schema.define(version: 20151101031428) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "origin"
+    t.boolean  "notified"
+    t.string   "tag1"
+    t.string   "tag2"
+    t.string   "tag3"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -292,6 +297,13 @@ ActiveRecord::Schema.define(version: 20151101031428) do
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
   add_index "microposts", ["user_id"], name: "index_microposts_on_user_id", using: :btree
+
+  create_table "notified_jobs", force: :cascade do |t|
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "candidate_id"
+    t.integer  "job_id"
+  end
 
   create_table "overall_averages", force: :cascade do |t|
     t.integer  "rateable_id"

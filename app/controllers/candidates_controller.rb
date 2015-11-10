@@ -1,6 +1,6 @@
 class CandidatesController < InheritedResources::Base
 rescue_from Exception do |e|
-    current_user.mail_histories.create(total_num:@candidates.size,sent_num:session[:sent_num],status:"发送到#{session[:stop_id]}终止",content:params[:content],email:params[:email],name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
+    current_user.mail_histories.create(sent_num:session[:sent_num],status:"发送到#{session[:stop_id]}终止",content:params[:content])
     @error = e
     flash[:notice] = "#{@error},发送到id#{session[:stop_id]},总共#{session[:sent_num]}封邮件"
     @candidates = Candidate.where(id:session[:stop_id]).page(params[:page]).per(100)
@@ -13,26 +13,34 @@ def mail_history
   end
   
   def group_email
-    session[:sent_num]= nil
+    session[:sent_num]= 0
     session[:stop_id] = nil
     @candidates = current_user.candidates.all
-    @candidates = @current_user.candidates.where(name:params[:name]) unless params[:name].blank?
-    @candidates = @current_user.candidates.where(email:params[:email]) unless params[:email].blank?
-    #邮件要精确发送，不带Regex
-    @candidates = @candidates.where(title:params[:title]) unless params[:title].blank?
-    @candidates = @candidates.where("year >= ?",params[:year]) unless params[:year].blank?
-    @candidates = @candidates.where(city:params[:city]) unless params[:city].blank?
-    @candidates = @candidates.where(employer:params[:employer]) unless params[:employer].blank?
-    @candidates = @candidates.where("id > 35556")
-    my_self = current_user.candidates.build(name:"我自己",email:"cvsend@139.com")
-    JobNotifier.job_list(my_self,params[:job_id],params[:content],current_user,params[:subject]).deliver_now
+    #@candidates = @current_user.candidates.where(name:params[:name]) unless params[:name].blank?
+    #@candidates = @current_user.candidates.where(email:params[:email]) unless params[:email].blank?
+    ##邮件要精确发送，不带Regex
+    #@candidates = @candidates.where(title:params[:title]) unless params[:title].blank?
+    #@candidates = @candidates.where("year >= ?",params[:year]) unless params[:year].blank?
+    #@candidates = @candidates.where(city:params[:city]) unless params[:city].blank?
+    #@candidates = @candidates.where(employer:params[:employer]) unless params[:employer].blank?
+    #@candidates = @candidates.where("id > 3572")
+
     @candidates.each_with_index do |f,u|
-      sleep 60
-      session[:sent_num]=u+1
-      session[:stop_id]= f.id
-      JobNotifier.job_list(f,params[:job_id],params[:content],current_user,params[:subject]).deliver_now
+      Job.where(city:f.city).each do |job|
+        if f.notified_jobs.where(job_id:job.id).empty? #该名候选人没有发送过这个职位
+          if (job.tag1 == f.title or job.tag2 == f.title or job.tag3 == f.title) and (f.base_salary <= job.base_pay)
+            JobNotifier.job_list(f,job.id,params[:content],current_user,params[:subject]).deliver_now
+            session[:sent_num] += 1
+            session[:stop_id]= f.id
+            f.notified_jobs.create(job_id:job.id)
+            sleep 55
+          end
+        end
+      end
+          
     end
-    current_user.mail_histories.create(total_num:@candidates.size,sent_num:session[:sent_num],status:"发送全部#{@candidates.size}封邮件",content:params[:content],email:params[:email],name:params[:name],title:params[:title],year:params[:year],city:params[:city],employer:params[:employer],job_id:params[:job_id])
+    current_user.mail_histories.create(total_num:@candidates.size,sent_num:session[:sent_num],content:params[:content],status:"发送全部k#{session[:sent_num]}封邮件",
+      content:params[:content])
     flash[:notice]="发送了#{session[:sent_num]}封邮件"
     @candidates = @candidates.page(params[:page]).per(100)
     respond_to do |format|
@@ -122,6 +130,6 @@ def mail_history
     end
 
     def candidate_params
-      params.require(:candidate).permit(:year,:age,:name, :title, :employer, :mobile, :email, :city, :note)
+      params.require(:candidate).permit(:base_salary,:year,:age,:name, :title, :employer, :mobile, :email, :city, :note)
     end
 end

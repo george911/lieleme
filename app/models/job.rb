@@ -1,4 +1,5 @@
 class Job < ActiveRecord::Base
+  after_initialize :init
   after_update :set_invite_status
   after_create :create_job_rate
   has_one :job_rate, dependent: :destroy
@@ -95,6 +96,10 @@ class Job < ActiveRecord::Base
     self.build_job_rate
   end
 
+  def init
+    self.notified ||= false
+  end
+  
   def set_invite_status
     if self.status == "closed"
       self.invitations.update_all(status:"closed")
