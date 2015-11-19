@@ -12,6 +12,7 @@ ActiveAdmin.register Job do
     column :industry
     column :interview
     column :poster_id
+    column :created_at
   end
   filter :title_or_employer_or_status_or_city_or_industry, as: :string
   # See permitted parameters documentation:
