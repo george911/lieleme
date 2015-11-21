@@ -119,9 +119,8 @@
               <td >
                      <%= f.name %>
                 </td>
-	      <td><% if @job.present? %>
-			      <%= link_to "#{@job.title}",job_path(@job),target:"_blank" %>
-		  <% end %></td>
+	      <td><%= f.title %></td>
+	      <td><%= link_to "#{@job.title}",job_path(@job),target:"_blank" %></td>
 	      <td><%= f.sent_num %></td>
               <td ><%= f.created_at.strftime("%m %d") %></td>
             </tr> 
