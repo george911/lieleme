@@ -6,6 +6,7 @@ class Job < ActiveRecord::Base
   has_many :job_savers, class_name:"User", through: :saving_lists,source: :user
   has_many :saving_lists # 这句不加，上面那句会报错
 
+  has_many :mail_history
 
   # avatar设置
   has_attached_file :avatar, :styles => {:medium => "100x100#", :small => "50x50#"},:default_url => "job_default.jpg"

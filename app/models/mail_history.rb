@@ -1,4 +1,4 @@
 class MailHistory < ActiveRecord::Base
   belongs_to :user
-  has_one :job
+  belongs_to :job
 end
