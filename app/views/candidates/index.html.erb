@@ -112,7 +112,7 @@
             </thead>
             <tbody>
               <% current_user.mail_histories.order("created_at desc").each do |f| %>
-            <% @job = Job.where(id:f.job_id) unless f.job_id == nil %>
+            <% @job = Job.where(id:f.job_id) unless (f.job_id.nil? or f.job_id.blank?) %>
             <tr>
               <td style='font-size:8px'>
                   <%= f.user_id %></td>
