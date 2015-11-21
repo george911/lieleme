@@ -119,7 +119,6 @@
               <td >
                      <%= f.name %>
                 </td>
-	      <td><%= f.title %></td>
 	      <td><% if @job.present? %>
 			      <%= link_to "#{@job.title}",job_path(@job),target:"_blank" %>
 		  <% end %></td>
