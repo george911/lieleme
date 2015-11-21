@@ -120,7 +120,6 @@
                      <%= f.name %>
                 </td>
 	      <td><%= f.title %></td>
-	      <td><%= link_to_if((@job != nil),"#{@job.title}",job_path(@job),target:"_blank") %></td>
 	      <td><%= f.sent_num %></td>
               <td ><%= f.created_at.strftime("%m %d") %></td>
             </tr> 
