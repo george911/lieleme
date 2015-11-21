@@ -2,7 +2,7 @@ class CandidatesController < InheritedResources::Base
 rescue_from Net::SMTPFatalError, with: :frequency_limited
 autocomplete :candidate,:title,full:true,limit:10,:scopes=>[:unique_title]
 
-def mail_history
+  def mail_history
   end
   
   def group_email
@@ -16,18 +16,23 @@ def mail_history
     #@candidates = @candidates.where("year >= ?",params[:year]) unless params[:year].blank?
     #@candidates = @candidates.where(city:params[:city]) unless params[:city].blank?
     #@candidates = @candidates.where(employer:params[:employer]) unless params[:employer].blank?
-    #@candidates = @candidates.where("id > 3572")
+    @candidates = @candidates.where("id > 1855")
 
     @candidates.each_with_index do |f,u|
-      Job.where(city:f.city).each do |job|
+      Job.where("created_at >= ?",Time.now.days_ago(14)).where(city:f.city).each do |job|
         if f.notified_jobs.where(job_id:job.id).empty?  and (f.updated_at < Time.now.days_ago(1))#该名候选人没有发送过这个职位
           if (job.tag1 == f.title or job.tag2 == f.title or job.tag3 == f.title) and (f.base_salary.nil? || job.base_pay.nil? || f.base_salary <= job.base_pay )
             JobNotifier.job_list(f,job.id,params[:content],current_user,params[:subject]).deliver_now
+            current_user.mail_histories.create(total_num:@candidates.size,sent_num:session[:sent_num],content:params[:content],job_id:job.id,name:f.name,title:f.title,city:f.city)
 	    f.touch # 该候选人这次将不能再发邮件
             session[:sent_num] += 1
             session[:stop_id]= f.id
             f.notified_jobs.create(job_id:job.id)
-	    MailSummary.where("title LIKE ? and city LIKE ?",f.title,f.city).update if MailSummary.where("title LIKE ? and city LIKE ?",f.title,f.city).present?
+	    if MailSummary.where("title LIKE ? and city LIKE ?",f.title,f.city).present?
+	      MailSummary.where("title LIKE ? and city LIKE ?",f.title,f.city).each do |f|
+		      f.touch
+	      end
+	    end
             sleep 55
           end
         end

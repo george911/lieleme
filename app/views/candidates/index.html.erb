@@ -102,8 +102,10 @@
       <div class='row'>
         <table class='table table-striped table-condensed'>
             <thead>
-              <th >邮件内容</th>
-              <th >发送状态</th>
+              <th >ID</th>
+              <th >姓名</th>
+              <th >Title</th>
+              <th >职位</th>
     	      <th >完成数</th>
               <th >发送时间</th>
             </thead>
@@ -112,10 +114,12 @@
             <% @job = Job.where(id:f.job_id) unless f.job_id == nil %>
             <tr>
               <td style='font-size:8px'>
-                  <%= f.content %></td>
+                  <%= f.user_id %></td>
               <td >
-                     <%= f.status %>
+                     <%= f.name %>
                 </td>
+	      <td><%= f.title %></td>
+	      <td><%= link_to "#{@job.title}",job_path(@job),target:"_blank" %></td>
 	      <td><%= f.sent_num %></td>
               <td ><%= f.created_at.strftime("%m %d") %></td>
             </tr> 

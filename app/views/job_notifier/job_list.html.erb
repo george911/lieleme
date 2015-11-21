@@ -4,11 +4,10 @@
   </p>
   <p>
     <% if @candidate.employer.present? %>
-	    请问你还在<%=@candidate.employer%>吗?
+	    <!--请问你还在  @candidate.employer%>吗? -->
     <% end %>&nbsp;
     <%= @content.gsub(/\n/,'</p><p>').html_safe unless @content.blank? %></p>
 <% if @job.present? %>
-  <p>如果这种岗位不是您的菜, 麻烦告诉一声哪个技术方向是您的茶,以后推荐更加精准。<p>
 <div style='border-radius:5px;border: solid 1px #ccc;padding:10px'>
 
 <h3><%= @job.title unless @job == nil%></h3>
@@ -114,9 +113,8 @@
     <br />
   </div>
 </div>
+  <p>如果这种岗位不是您的菜, 麻烦告诉一声哪个技术方向是您的茶,以后推荐更加精准。<p>
 
-
-如果您需要了解职位背景,请联系我.<br>
 <% end %>
 <div style='border-radius:5px;width:300px;padding:10px 0px 10px 15px;background-image:url("http://www.lieleme.com/assets/Ruby_poster.jpg")'>
   <table><tr>

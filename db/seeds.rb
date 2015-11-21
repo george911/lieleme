@@ -5,4 +5,8 @@
 #end
 #require File.expand_path('../clear_all', __FILE__)
 #Candidate.dedupe
-Candidate.gen_mail_summary
+#Candidate.gen_mail_summary
+Job.all.each do |f|
+  f.destroy
+end
+
