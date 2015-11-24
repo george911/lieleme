@@ -5,7 +5,7 @@ class JobsController < ApplicationController
   before_action :set_job, except: [:batch_job,:index,:new,:create,:apply]
   layout 'home',except:[:index,:show,:apply] # 因为moadal不能放在layout:home下面
 #  load_and_authorize_resource
-  skip_before_action :authenticate_user!,only: [:show,:show_job_on_mobile,:show_company_on_mobile]
+  skip_before_action :authenticate_user!,only: [:online_interview,:show,:show_job_on_mobile,:show_company_on_mobile]
   skip_before_action :prepare_for_mobile, only:[:show_job_on_mobile,:show_company_on_mobile]
   skip_load_resource :only => [:apply]
 
