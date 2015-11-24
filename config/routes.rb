@@ -2,7 +2,7 @@ require 'resque/server'
 
 Rails.application.routes.draw do
   mount Resque::Server.new, at: "/resque"	
-  get 'online_interview',to:'candidates#online_interview'
+  get 'online_interview',to:'jobs#online_interview'
   get 'rtc',to:'front#rtc'
   get 'profile', to:'users#show'
   get 'like',to:'comments#like'
