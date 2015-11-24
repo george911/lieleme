@@ -9,7 +9,48 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-["HTML"].each do |language|
+
+private 
+def convert(a)
+  case a
+  when "Shanghai"
+	  return "上海"
+  when "Beijing"
+	  return "北京"
+  when "Shenzhen"
+	  return "深圳"
+  when "Guangzhou"
+          return "广州"
+  when "Hangzhou"
+	  return "杭州"
+  when "Chengdu"
+	  return "成都"
+  when "Nanjing"
+	  return "南京"
+  when "Xiamen"
+	  return "厦门"
+  when "Wuhan"
+	  return "武汉"
+  when "Dalian"
+	  return "大连"
+  when "Hefei"
+	  return "合肥"
+  when "Fuzhou"
+	  return "福州"
+  when "Dongguan"
+	  return "东莞"
+  when "Suzhou"
+	  return "苏州"
+  when "Wuxi"
+	  return "无锡"
+  when "Qingdao"
+	  return "青岛"
+  when "Chongqin"
+	  return "重庆"
+  end
+end
+
+["Erlang"].each do |language|
   [	  "Shanghai",
 	  "Beijing","Guangzhou",
 	  "Shenzhen",
@@ -47,7 +88,7 @@ require 'open-uri'
           if item.css("a").last.text =~/\b[A-Z0-9._%a-z\-]+@(?:[A-Z0-9a-z\-]+\.)+[A-Za-z]{2,4}\z/
 	    email_text = item.css("a").last.text
 	    Candidate.create(user_id:10000,followers:followers,year:year,employer:employer,name:item.text.split.second,
-			     title:(language=="C%23" ? "C#" : "#{language}"),email:email_text,city:location)
+			     title:(language=="C%23" ? "C#" : "#{language}"),email:email_text,city:convert(location))
 	  end
 	  sleep 5
         end
@@ -55,4 +96,6 @@ require 'open-uri'
     end
   end
 end
+
+
 

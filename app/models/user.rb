@@ -13,11 +13,11 @@ class User < ActiveRecord::Base
   acts_as_reader :scope => -> { readers }
   acts_as_voter
 
-  has_many :mail_histories
-
+  
   acts_as_readable :scope => -> { talents },:on => :created_at
   
   ratyrate_rater
+  has_many :mail_histories
   has_many :jobrates, class_name:"Rate", foreign_key:"rater_id"
   has_many :sent_resumes, class_name:"TalentPool",foreign_key:"talent_id", dependent: :destroy
   has_many :talent_pools,foreign_key:"hunter_id"

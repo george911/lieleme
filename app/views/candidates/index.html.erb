@@ -113,7 +113,7 @@
               <% current_user.mail_histories.order("created_at desc").each do |f| %>
             <tr>
               <td style='font-size:8px'>
-                  <%= f.user_id %></td>
+                  <%= f.candidate_id %></td>
               <td >
                      <%= f.name %>
                 </td>
@@ -147,7 +147,7 @@
             <th>大连</th>
             <th>青岛</th>
           </thead>
-          <% ["Java","PHP","iOS",'Android','C','C++','C#','Python','Ruby','HTML'].each do |title| %>
+          <% ["Java","PHP","iOS",'Android','C','C++','C#','Python','Ruby','HTML','Erlang'].each do |title| %>
             <tr>
               <td><%= title %></td>
           	<% ["北京","上海","深圳","广州","杭州","成都","南京","厦门","武汉","大连","青岛"].each do |city| %>

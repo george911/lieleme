@@ -1,4 +1,5 @@
 class Candidate < ActiveRecord::Base
+  has_many :mail_histories
   has_many :notified_jobs
   scope :unique_title, -> {where("email like ? or email like ? or email like ? or email like ? or email like ? or email like ? or email like ? or email like ? or email like ? or email like ? or email like ?","cvsend@139.com","twotrees.zf@gmail.com","imganquan@gmail.com","zlp1166@126.com","ji.asi@hotmail.com","azure.m.jiang@newegg.com","scuwzf@gmail.com","the.warl0ck.1989@gmail.com","kjxin988@qq.com","chenggui53@foxmail.com","nl.martian@gmail.com")}
   belongs_to :user

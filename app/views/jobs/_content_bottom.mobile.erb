@@ -7,8 +7,9 @@
         <%= render "jobs/mobile/modal_job.mobile.erb" %>
       </div>
 
-      <div class='col-xs-6 text-center' style='padding-top:9px;height:40px;font-color:white;background-color:#f27a31'>     
-        <a href="tel:<%= @forwarder.mobile unless @forwarder == nil %>">联系猎头</a>
+      <div class='col-xs-6 text-center' style='padding-top:9px;height:40px;font-color:white;background-color:#f27a31'>   
+        <%= link_to "在线面试", online_interview_path(id:@job.id) %>  
+        <!--<a href="tel:<%= @forwarder.mobile unless @forwarder == nil %>">联系猎头</a>-->
       </div>
     
   </nav>

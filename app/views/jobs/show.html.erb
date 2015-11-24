@@ -78,7 +78,38 @@
   <div class='row'>
     <div class='col-lg-6' id='orange'>
       <%= button_to "收藏", save_job_path,method: :post, class: 'btn-orange' %>
-      <%= button_to '应聘',job_accept_path(@job),method: :patch, class: 'btn-orange' %>
+      <button type='button' class='btn-orange' data-toggle="modal" data-target="#QRcode">
+          分享
+      </button>
+
+         <!-- Modal -->
+         <div class="modal fade" id="QRcode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                 <div style='width:400px' class="modal-dialog">
+                   <div class="modal-content">
+                     <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                 <h4 class="modal-title" id="myModalLabel">扫描下方二维码分享到微信</h4>
+               </div>
+
+               <div class="modal-body">
+           <% if user_signed_in? %>
+             <%= raw @qr.as_html %>
+           <% else %>
+             您还没有登陆
+           <% end %>
+               </div><!--modal body end -->
+                         
+                   <div class="modal-footer">
+                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+
+                 </div>
+
+
+                   </div>
+                 </div>
+               </div>
+
+
       <button type='button' class='btn-orange' data-toggle="modal" data-target="#myModal">
         推荐
       </button>
@@ -135,39 +166,23 @@
 
       </div>
       <div class='col-lg-2'>
-	      <button type='button' class='btn-green' data-toggle="modal" data-target="#QRcode">
-          分享到
-      </button>
-
-         <!-- Modal -->
-         <div class="modal fade" id="QRcode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                 <div style='width:400px' class="modal-dialog">
-                   <div class="modal-content">
-                     <div class="modal-header">
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                 <h4 class="modal-title" id="myModalLabel">扫描下方二维码分享到微信</h4>
-               </div>
-
-               <div class="modal-body">
-		       <% if user_signed_in? %>
-			       <%= raw @qr.as_html %>
-		       <% else %>
-			       您还没有登陆
-		       <% end %>
-               </div><!--modal body end -->
-                         
-                   <div class="modal-footer">
-                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-
-                 </div>
-
-
-                   </div>
-                 </div>
-               </div>
+          <button type="button" class="btn-green" data-toggle="modal" data-target=".bs-example-modal-lg">在线面试</button>
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="background-color:#000">
+                     <div class="modal-body">
+                       <iframe src="http://www.sina.com.cn" height="400px"width="600px" scrolling="no"></iframe>
+                     </div>
+                     <div class="modal-footer">
+                       <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+                     </div>
+                  
+                </div>
+              </div>
+            </div>
 
       </div>
-    </div>
+  </div><!-- end row -->
   <div><!--divide-->
     <br />  <br />
   </div>
