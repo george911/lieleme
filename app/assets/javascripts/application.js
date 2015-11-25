@@ -32,10 +32,10 @@
 $(function() {
 	if(window.innerHeight > window.innerWidth){
 		$("#iframe").addClass("portrait");
-		$("#iframe").removeClass("landscope");
+		$("#iframe").removeClass("landscope");}
         else{
 		$("#iframe").addClass("landscope");
-		$("#iframe").removeClass("portrait");
+		$("#iframe").removeClass("portrait");}
 });
 $(function() {
   $('#job_avatar, #micropost_avatar').on('change', function(event) {
