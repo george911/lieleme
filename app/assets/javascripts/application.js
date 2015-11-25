@@ -30,6 +30,11 @@
 //= require fullcalendar
 
 $(function() {
+	if(window.innerHeight > window.innerWidth){
+		    alert("Please use Landscape!");
+	}
+});
+$(function() {
   $('#job_avatar, #micropost_avatar').on('change', function(event) {
     var files = event.target.files;
     var image = files[0]
