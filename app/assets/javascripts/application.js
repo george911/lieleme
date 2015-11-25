@@ -30,9 +30,13 @@
 //= require fullcalendar
 $(window).on( "orientationchange", function(event) {
 	if(window.innerHeight > window.innerWidth){
-		$("#iframe").addClass("portrait");
+		$("#iframe_padding").addClass("padding_portrait");
+		$("#iframe_padding").removeClass("padding_landscope");
+		$("#iframe").removeClass("portrait");}
 		$("#iframe").removeClass("landscope");}
         else{
+		$("#iframe_padding").removeClass("padding_portrait");
+		$("#iframe_padding").addClass("padding_landscope");
 		$("#iframe").addClass("landscope");
 		$("#iframe").removeClass("portrait")};
 });

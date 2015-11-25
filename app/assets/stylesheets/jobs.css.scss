@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .jobs {
+.padding_portrait{
+  height: 20%;}
+.padding_landscope{
+  height: 5%;}
+
+.portrait {
+  width: 90%;}
+.landscope {
+  width: 70%;}
+
 .comment-header{
   border-top: 1px solid #EEE;
   border-bottom: 1px solid #EEE;
