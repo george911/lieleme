@@ -31,8 +31,11 @@
 
 $(function() {
 	if(window.innerHeight > window.innerWidth){
-		    alert("Please use Landscape!");
-	}
+		$("#iframe").addClass("portrait");
+		$("#iframe").removeClass("landscope");
+        else{
+		$("#iframe").addClass("landscope");
+		$("#iframe").removeClass("portrait");
 });
 $(function() {
   $('#job_avatar, #micropost_avatar').on('change', function(event) {

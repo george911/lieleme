@@ -24,6 +24,11 @@ html,body {
 @import 'bootstrap-datetimepicker';
 font-family:Hiragino Sans GB;
 height: 100%;
+.portrait {
+  width: 90%;}
+.landscope {
+  width: 50%;}
+
 footer {
   background-image: url(footer-background-mobile.png);
   a {
