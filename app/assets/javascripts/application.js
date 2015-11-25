@@ -28,9 +28,13 @@
 //= require bootstrap-datetimepicker
 // fullcalendar放到datetimepicker后面
 //= require fullcalendar
-
-$( window ).on( "orientationchange", function( event ) {
-	  $( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
+$(window).on( "orientationchange", function(event) {
+	if(window.innerHeight > window.innerWidth){
+		$("#iframe").addClass("portrait");
+		$("#iframe").removeClass("landscope");}
+        else{
+		$("#iframe").addClass("landscope");
+		$("#iframe").removeClass("portrait")};
 });
 $(function() {
   $('#job_avatar, #micropost_avatar').on('change', function(event) {
