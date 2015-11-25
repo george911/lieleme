@@ -29,13 +29,8 @@
 // fullcalendar放到datetimepicker后面
 //= require fullcalendar
 
-$(function() {
-	if(window.innerHeight > window.innerWidth){
-		$("#iframe").addClass("portrait");
-		$("#iframe").removeClass("landscope");}
-        else{
-		$("#iframe").addClass("landscope");
-		$("#iframe").removeClass("portrait");}
+$( window ).on( "orientationchange", function( event ) {
+	  $( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
 });
 $(function() {
   $('#job_avatar, #micropost_avatar').on('change', function(event) {
