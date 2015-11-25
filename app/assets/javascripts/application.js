@@ -28,6 +28,19 @@
 //= require bootstrap-datetimepicker
 // fullcalendar放到datetimepicker后面
 //= require fullcalendar
+$(function() {
+	if(window.innerHeight > window.innerWidth){
+		$("#iframe_padding").addClass("padding_portrait");
+		$("#iframe_padding").removeClass("padding_landscope");
+		$("#iframe").addClass("portrait");
+		$("#iframe").removeClass("landscope");}
+        else{
+		$("#iframe_padding").removeClass("padding_portrait");
+		$("#iframe_padding").addClass("padding_landscope");
+		$("#iframe").addClass("landscope");
+		$("#iframe").removeClass("portrait")}
+});
+		
 $(window).on( "orientationchange", function(event) {
 	if(window.innerHeight > window.innerWidth){
 		$("#iframe_padding").addClass("padding_portrait");
