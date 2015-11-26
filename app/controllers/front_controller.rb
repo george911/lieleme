@@ -24,5 +24,9 @@ class FrontController < ApplicationController
   end
 
   def rtc
+    respond_to do |format|
+	    format.js
+	    format.mobile
+    end
   end
 end
