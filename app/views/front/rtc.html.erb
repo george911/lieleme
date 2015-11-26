@@ -1,56 +1,142 @@
-
 <!DOCTYPE html>
-<!--
- *  Copyright (c) 2014 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
--->
 <html>
+
 <head>
 
-  <meta charset="utf-8">
-  <meta name="description" content="WebRTC code samples">
-  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
-  <meta itemprop="description" content="Client-side WebRTC code samples">
-  <meta itemprop="image" content="../../../images/webrtc-icon-192x192.png">
-  <meta itemprop="name" content="WebRTC code samples">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta id="theme-color" name="theme-color" content="#ffffff">
+<meta name="keywords" content="JavaScript, WebRTC" />
+<meta name="description" content="WebRTC codelab" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-  <base target="_blank">
+<title>WebRTC codelab: step 3</title>
 
-  <title>getUserMedia</title>
-
-  <link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png">
-  <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="../../../css/main.css">
-
+<style>
+</style>
+<%= javascript_include_tag "adapter" %>
 </head>
-
 <body>
 
-  <div id="container">
+	<table>
+		<tr>
+			<td><video id="localVideo" autoplay muted></video></td>
+			<td><video id="remoteVideo" autoplay muted></video></td>
+		</tr>
+	</table>
 
-    <h1><a href="//webrtc.github.io/samples/" title="WebRTC samples homepage">WebRTC samples</a> <span>getUserMedia</span></h1>
-
-    <video id="gum-local" autoplay></video>
-
-    <div id="errorMsg"></div>
-
-    <p>Display the video stream from <code>getUserMedia()</code> in a video element.</p>
-
-    <p>The <code>MediaStream</code> object <code>stream</code> passed to the <code>getUserMedia()</code> callback is in global scope, so you can inspect it from the console.</p>
-
-    <a href="https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/gum" title="View source for this page on GitHub" id="viewSource">View source on GitHub</a>
+  <div>
+    <button id="startButton">Start</button>
+    <button id="callButton">Call</button>
+    <button id="hangupButton">Hang Up</button>
   </div>
+<script>
+var localStream, localPeerConnection, remotePeerConnection;
+var localVideo = document.getElementById("localVideo");
+var remoteVideo = document.getElementById("remoteVideo");
 
-  <script src="bower_components/webrtc-adapter/adapter.js"></script>
-  <script src="../../../js/common.js"></script>
-  <script src="js/main.js"></script>
+var startButton = document.getElementById("startButton");
+var callButton = document.getElementById("callButton");
+var hangupButton = document.getElementById("hangupButton");
+startButton.disabled = false;
+callButton.disabled = true;
+hangupButton.disabled = true;
+startButton.onclick = start;
+callButton.onclick = call;
+hangupButton.onclick = hangup;
 
-  <script src="../../../js/lib/ga.js"></script>
+function trace(text) {
+  console.log((performance.now() / 1000).toFixed(3) + ": " + text);
+}
+
+function gotStream(stream){
+  trace("Received local stream");
+  localVideo.src = URL.createObjectURL(stream);
+  localStream = stream;
+  callButton.disabled = false;
+}
+
+function start() {
+  trace("Requesting local stream");
+  startButton.disabled = true;
+  getUserMedia({audio:true, video:true}, gotStream,
+    function(error) {
+      trace("getUserMedia error: ", error);
+    });
+
+}
+
+function call() {
+  callButton.disabled = true;
+  hangupButton.disabled = false;
+  trace("Starting call");
+
+  if (localStream.getVideoTracks().length > 0) {
+    trace('Using video device: ' + localStream.getVideoTracks()[0].label);
+  }
+  if (localStream.getAudioTracks().length > 0) {
+    trace('Using audio device: ' + localStream.getAudioTracks()[0].label);
+  }
+
+  var servers = null;
+
+  localPeerConnection = new RTCPeerConnection(servers);
+  trace("Created local peer connection object localPeerConnection");
+  localPeerConnection.onicecandidate = gotLocalIceCandidate;
+
+  remotePeerConnection = new RTCPeerConnection(servers);
+  trace("Created remote peer connection object remotePeerConnection");
+  remotePeerConnection.onicecandidate = gotRemoteIceCandidate;
+  remotePeerConnection.onaddstream = gotRemoteStream;
+
+  localPeerConnection.addStream(localStream);
+  trace("Added localStream to localPeerConnection");
+  localPeerConnection.createOffer(gotLocalDescription,handleError);
+}
+
+function gotLocalDescription(description){
+  localPeerConnection.setLocalDescription(description);
+  trace("Offer from localPeerConnection: \n" + description.sdp);
+  remotePeerConnection.setRemoteDescription(description);
+  remotePeerConnection.createAnswer(gotRemoteDescription,handleError);
+}
+
+function gotRemoteDescription(description){
+  remotePeerConnection.setLocalDescription(description);
+  trace("Answer from remotePeerConnection: \n" + description.sdp);
+  localPeerConnection.setRemoteDescription(description);
+}
+
+function hangup() {
+  trace("Ending call");
+  localPeerConnection.close();
+  remotePeerConnection.close();
+  localPeerConnection = null;
+  remotePeerConnection = null;
+  hangupButton.disabled = true;
+  callButton.disabled = false;
+}
+
+function gotRemoteStream(event){
+  remoteVideo.src = URL.createObjectURL(event.stream);
+  trace("Received remote stream");
+}
+
+function gotLocalIceCandidate(event){
+  if (event.candidate) {
+    remotePeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+    trace("Local ICE candidate: \n" + event.candidate.candidate);
+  }
+}
+
+function gotRemoteIceCandidate(event){
+  if (event.candidate) {
+    localPeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+    trace("Remote ICE candidate: \n " + event.candidate.candidate);
+  }
+}
+
+function handleError(){}
+
+</script>
 
 </body>
+
 </html>
