@@ -50,8 +50,8 @@ class JobsController < ApplicationController
      end
      if current_user
 	if Rails.env.production?
-	  #@qr = RQRCode::QRCode.new( "http://www.lieleme.com/cn/jobs/#{@job.id}?utf8=✓&forwarder=#{current_user.id}", :size => 8, :level => :h )
-	  @qr = RQRCode::QRCode.new( "http://www.lieleme.com/rtc", :size => 8, :level => :h )
+	  @qr = RQRCode::QRCode.new( "http://www.lieleme.com/cn/jobs/#{@job.id}?utf8=✓&forwarder=#{current_user.id}", :size => 8, :level => :h )
+	  #@qr = RQRCode::QRCode.new( "http://www.lieleme.com/rtc", :size => 8, :level => :h )
 	else
 	  @qr = RQRCode::QRCode.new( "http://192.168.0.100:3000/cn/jobs/#{@job.id}?utf8=✓&forwarder=#{current_user.id}", :size => 8, :level => :h )
 	end
