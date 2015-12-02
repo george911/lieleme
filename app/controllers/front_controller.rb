@@ -25,6 +25,7 @@ class FrontController < ApplicationController
 
   def rtc
     respond_to do |format|
+	    format.html { render :index }
 	    format.js
 	    format.mobile
     end

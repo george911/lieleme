@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Woogeen Basic Example</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10">
+	<%= javascript_include_tag "ieMediaStream" %>
+	<%= javascript_include_tag "woogeen.sdk" %>
+	<%= javascript_include_tag "woogeen.sdk.ui" %>
+	<%= javascript_include_tag "adapter" %>
+	<%= javascript_include_tag "script2" %>
+  </head>
+
+  <body>
+    <div id="buttons" style="width:100%;">
+      <button id="shareScreen" type="button" style="display:none">Share Screen!</button>
+    </div>
+    <!-- <button id="recordButton" onclick="startRecording()">Toggle Recording</button> -->
+    <div style="width:640px" title="local medias">
+      <div id="myVideo" style="width:320px; height: 240px;" title="my camera"></div>
+      <div id="myScreen" title="my screen"></div>
+    </div>
+  </body>
+</html>
