@@ -1,78 +1,20 @@
 <!DOCTYPE html>
+<html>
+  <head><title>getUserMedia</title>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="//js.pusher.com/3.0/pusher.min.js"></script>
 
-
-
-<html lang="en" dir="ltr" itemscope itemtype="http://schema.org/Article">
-<head>
-
-
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5-els.js"></script>
-  <![endif]-->
+<!-- Downloaded in step 1 -->
+<script src="pusher-realtime-chat-widget/src/js/PusherChatWidget.js"></script>
+<link href="pusher-realtime-chat-widget/src/pusher-chat.css" rel="stylesheet" />
 
 </head>
-<body data-href="tutorials-getusermedia-intro" onload="" class="article tutorial">
+  <body>
+    <video autoplay></video>
+
+   
 
 
-<h3 id="toc-basic-demo">Basic demo</h3>
-
-<div style="text-align:center;">
-  <video id="basic-stream" class="videostream" ></video>
-  <p><button id="capture-button">Capture video</button> <button id="stop-button">Stop</button></p>
-</div>
-
-<script>
-function errorCallback(e) {
-  if (e.code == 1) {
-    alert('User denied access to their camera');
-  } else {
-    alert('getUserMedia() not supported in your browser.');
-  }
-  //e.target.src = 'http://www.html5rocks.com/en/tutorials/video/basics/Chrome_ImF.ogv';
-}
-
-(function() {
-var video = document.querySelector('#basic-stream');
-var button = document.querySelector('#capture-button');
-var localMediaStream = null;
-var hdConstraints = {
-  video: {
-    mandatory: {
-      minWidth: 80,
-      minHeight: 80
-    }
-  }
-};
-
-button.addEventListener('click', function(e) {
-
-    navigator.webkitGetUserMedia(hdConstraints, function(stream) {
-      video.src = window.URL.createObjectURL(stream);
-      video.controls = true;
-      localMediaStream = stream;
-    }, errorCallback);
-  
-}, false);
-
-document.querySelector('#stop-button').addEventListener('click', function(e) {
-  video.pause();
-  localMediaStream.stop(); // Doesn't do anything in Chrome.
-}, false);
-})();
-
-</script>
-
-      </div>
-    </section>
-  </article>
-
-<!-- End Google Tag Manager -->
-
-
-  </div>
-
-  
-<!-- End Google Tag Manager -->
-</body>
+  </body>
 </html>

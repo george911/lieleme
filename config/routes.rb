@@ -2,6 +2,7 @@ require 'resque/server'
 
 Rails.application.routes.draw do
   mount Resque::Server.new, at: "/resque"	
+  match '/pusher/auth' => 'pusher#auth', via: :post
   get 'online_interview',to:'jobs#online_interview'
   get 'rtc',to:'front#rtc'
   get 'profile', to:'users#show'

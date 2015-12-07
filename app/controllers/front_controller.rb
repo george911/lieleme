@@ -1,6 +1,7 @@
 class FrontController < ApplicationController
   skip_before_action :authenticate_user! #devise认证user
   before_action :prepare_for_mobile
+  layout :false,only: :rtc
 
   def show
     @offers=LineItem.where("status = ?","offer")#where能够取出然后使用.each函数,find_by不能
@@ -24,8 +25,8 @@ class FrontController < ApplicationController
   end
 
   def rtc
+
     respond_to do |format|
-	    format.html { render :index }
 	    format.js
 	    format.mobile
     end

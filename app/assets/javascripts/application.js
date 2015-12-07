@@ -28,6 +28,9 @@
 //= require bootstrap-datetimepicker
 // fullcalendar放到datetimepicker后面
 //= require fullcalendar
+
+
+
 $(function() {
 	if(window.innerHeight > window.innerWidth){
 		$("#iframe_padding").addClass("padding_portrait");

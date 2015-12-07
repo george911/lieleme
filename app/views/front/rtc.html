@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head><title>getUserMedia</title></head>
+  <body>
+    <video autoplay></video>
+
+    <script>
+      navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+      var constraints = { audio: false, video: true };
+      var video = document.querySelector("video");
+      function successCallback(stream) {
+        video.src = window.URL.createObjectURL(stream);
+      }
+      function errorCallback(error){
+        console.log("getUserMedia error: ", error);
+      }
+      navigator.getUserMedia(constraints, successCallback, errorCallback);
+    </script>
+  </body>
+</html>

@@ -1,5 +1,5 @@
 class InterviewNotifier < ActionMailer::Base
-  default from: "george@lieleme.com"
+  default from: "mrjobs@lieleme.com"
 
   def accepted(sender,recipient)
     @sender = sender

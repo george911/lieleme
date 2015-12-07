@@ -1,6 +1,10 @@
 # Ruby通过brew install ruby安装,rails通过gem 'rails','xxx'安装
 source 'https://ruby.taobao.org'
-#source 'http://rubygems.org'
+#§source 'http://rubygems.org'
+
+gem 'slim-rails'
+gem 'pusher'
+
 gem 'rails4-autocomplete'
 # source 'http://ruby.taobao.org'
 # add blog editor
