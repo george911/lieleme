@@ -9,6 +9,8 @@ Bundler.require(*Rails.groups(assets: %w(development test production)))
 # module Site20
   module Lieyohui
   class Application < Rails::Application
+    config.assets.paths << "#{Rails.root}/app/assets/videos"
+    
     # config.active_job.queue_adapter = :resque
     config.active_record.raise_in_transactional_callbacks = true
     

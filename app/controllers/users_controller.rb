@@ -69,9 +69,15 @@ class UsersController < ApplicationController
       case @user.user_type
       when "猎头"
         #@resume_bank = User.where(bank_id: @user.id)
-        render 'hunter'
+        respond_to do |format|
+	  format.html { render 'hunter'}
+	  format.js 
+	end
       when "求职者"
-        render 'talent' 
+        respond_to do |format|
+	  format.html { render 'talent'}
+	  format.js 
+	end
       when "人事"
 	render "hr"
       end
