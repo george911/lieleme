@@ -1,5 +1,7 @@
                                  Prefix Verb       URI Pattern                                                         Controller#Action
                                                    /resque                                                             #<Resque::Server app_file="/usr/local/lib/ruby/gems/2.2.0/gems/resque-1.25.2/lib/resque/server.rb">
+                             add_iframe GET        /add_iframe(.:format)                                               jobs#add_iframe
+                            pusher_auth POST       /pusher/auth(.:format)                                              pusher#auth
                        online_interview GET        /online_interview(.:format)                                         jobs#online_interview
                                     rtc GET        /rtc(.:format)                                                      front#rtc
                                 profile GET        /profile(.:format)                                                  users#show

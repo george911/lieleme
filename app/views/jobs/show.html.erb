@@ -163,48 +163,42 @@
                    </div>
                  </div>
                </div>
-
       </div>
       <div class='col-lg-2'>
-	                           <!-- Button trigger modal -->
-    <button  type="button" data-toggle="modal" data-target="#interviewRoom">
-  <span class='glyphicon glyphicon-play-circle' style='color:#639fca;'></span>&nbsp;<strong style='color:#639fca'>在线面试</strong>
-    </button>
+        <!-- Button trigger modal -->
+        <button class="btn-green" type="button" data-toggle="modal" data-target="#interviewRoom">在线面试</button>
 
       <!-- Modal -->
       <div class="modal fade bs-example-modal-lg" id="interviewRoom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
             <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel"><%= @job.id %>号面试间 </h4>
+	       <%= button_to "进入面试间",add_iframe_path,class: "btn btn-primary",method: :get, remote:true %>
             </div>
       <div class="modal-body" style='background-color:#233035'>
                       <!-- 16:9 aspect ratio -->
                       <div class="embed-responsive embed-responsive-16by9">
                       <div id="OnlineInterview" class='col-md-9' style='height:480px'>
-
-                        <iframe scrolling="no" src="http://www.lieleme.com:3001"></iframe></div>
+		      </div>
 
                       <div class='col-md-3' style=''>
-                          <div style='padding:10px 10px 10px 10px'>
+                          <div class="row"style='padding:0px'>
                             <table>
                               <tr>
-                                 <td width='40px'style='padding-right:0px'>
+                                 <td width=''style=''>
                                     <%= link_to image_tag(@job.poster.avatar.url,size: "60x60",class: "img-circle"),blog_home_path(@job.poster) %>
                                         </td>
                                         <td style='padding-left:10px'>
                                    
-                                    <h5 style='color:white'><%= @job.poster.user_name %></h5>
-                                     <button style='border-radius:3px;background-color:white;border:1px solid #e57866;padding:0px 5px 0px 5px;font-size:10px;color:#e57866'>
-                                     <%= @job.poster.title %>
-                                    </button>
-                                    
+                                          <h5 style='color:white'><%= @job.poster.user_name %></h5>
+                                          <button style='border-radius:3px;background-color:white;border:1px solid #e57866;padding:0px 5px 0px 5px;font-size:10px;color:#e57866'>
+                                            <%= @job.poster.title %>
+                                        </button>
                                  </td>
-                                 <td width='' rowspan='2' class='text-right'>
-                                 </td>
+                   <td width='' rowspan='2' class='text-right'>
+                   </td>
                                </tr>
-                          </table>
+                             </table>
                           </div>
                           <div class="nav-side-menu">
                               

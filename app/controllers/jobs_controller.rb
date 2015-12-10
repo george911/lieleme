@@ -2,13 +2,19 @@ class JobsController < ApplicationController
   require 'rqrcode'
   before_action :prepare_for_mobile, only: [:show,:online_interview]
   before_action :clear_session, except: [:create]
-  before_action :set_job, except: [:batch_job,:index,:new,:create,:apply]
+  before_action :set_job, except: [:batch_job,:index,:new,:create,:apply,:add_iframe]
   layout 'home',except:[:index,:show,:apply] # 因为moadal不能放在layout:home下面
 #  load_and_authorize_resource
   skip_before_action :authenticate_user!,only: [:online_interview,:show,:show_job_on_mobile,:show_company_on_mobile]
   skip_before_action :prepare_for_mobile, only:[:show_job_on_mobile,:show_company_on_mobile]
   skip_load_resource :only => [:apply]
 
+  def add_iframe
+    respond_to do |format|
+	    format.js
+	    end
+    end
+  
   def online_interview
      respond_to do |format|
        #format.html { render :show }
