@@ -4,7 +4,7 @@ ActiveAdmin.register Candidate do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :updated_at
+  permit_params :tag1,:tag2,:tag3
   #
   # or
   #

@@ -28,7 +28,9 @@
       <%= form_tag group_email_path,method:'get',remote:true do %>
     <%= text_field_tag :subject,nil,placeholder:"标题",cols:10,class: 'form-control',style: 'margin-bottom:15px' %>
     <br>
-    <%= text_area_tag :content,nil,placeholder:"邮件内容",rows:5,cols:10,class: 'form-control',style: 'margin-bottom:15px',required:true %>
+    <%= text_area_tag :content,nil,placeholder:"邮件内容",rows:5,cols:10,class: 'form-control',required:true %>
+    <%= check_box_tag :all_over, true, false %><!--check_box_tag :name, value, checked -->&nbsp;<span style="font-size:12px">忽略地域限制</span>
+    <br><br>
     <%= submit_tag "群发邮件", class: "btn btn-success",style: 'margin-bottom:15px'  %>
     <% end %>
     </div>
@@ -78,7 +80,20 @@
                   <% @candidates.order('updated_at desc').each do |candidate| %>
                     <tr ><td style= "font-size:12px;padding:0px" width="100%"><div style='padding:0px' id="candidate_<%=candidate.id%>">
                         <div class='col-md-1' style='padding:7px'><%= candidate.name %></div>
-        	        <div class='col-md-1' style='padding:7px'><%= candidate.title %></div>
+			<div class='col-md-1' style='padding:7px'>
+				<table>
+					<tr><td><%= candidate.title %></td></tr>
+				      <% if candidate.tag1.present? %>
+					      <tr><td><%= candidate.tag1 %></td></tr>
+				      <% end %>
+				      <% if candidate.tag2.present? %>
+					      <tr><td><%= candidate.tag2 %></td></tr>
+				      <% end %>
+              <% if candidate.tag3.present? %>
+                <tr><td><%= candidate.tag3 %></td></tr>
+              <% end %>
+				</table>
+			      </div>
                         <div class='col-md-1' style='padding:7px'><%= candidate.year %></div>
                         <div class='col-md-1' style='padding:7px'><%= candidate.city %></div>
                         <div class='col-md-1' style='padding:7px'><%= candidate.employer %></div>
@@ -98,6 +113,7 @@
           <%= paginate @candidates %>
     </div>
 
+    <!--发送历史-->
     <div role="tabpanel" class="tab-pane" id="history">
       <div class='row'>
         <table class='table table-striped table-condensed'>

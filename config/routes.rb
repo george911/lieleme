@@ -1,6 +1,7 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
+  mount TalkingStick::Engine, at: '/talking_stick'
   mount Resque::Server.new, at: "/resque"	
   get 'add_iframe',to: "jobs#add_iframe"
   match '/pusher/auth' => 'pusher#auth', via: :post

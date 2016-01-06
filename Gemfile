@@ -1,7 +1,8 @@
 # Ruby通过brew install ruby安装,rails通过gem 'rails','xxx'安装
 source 'https://ruby.taobao.org'
-#§source 'http://rubygems.org'
+#source 'http://rubygems.org'
 
+gem 'talking_stick'
 gem 'slim-rails'
 gem 'pusher'
 
@@ -113,7 +114,8 @@ gem 'kaminari'
 gem 'jquery-turbolinks'
 
 # Use jquery as the JavaScript library,注意要指定"~> 2.3.0"否则application.js里//= require jquery-ui会报错
-gem 'jquery-rails', "~> 2.3.0" 
+# gem 'jquery-rails', "~> 2.3.0" 
+gem 'jquery-rails', "~> 4.0" 
 
 # 翻译
 gem 'rails-i18n', '~> 4.0.0'

@@ -28,7 +28,7 @@
 //= require bootstrap-datetimepicker
 // fullcalendar放到datetimepicker后面
 //= require fullcalendar
-
+//= require talking_stick/application
 
 $(function() {
 	if(window.innerHeight > window.innerWidth){

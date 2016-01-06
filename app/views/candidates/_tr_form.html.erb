@@ -1,5 +1,17 @@
 	<div class='col-md-1' style='padding:7px'><%= @candidate.name %></div>
-	<div class='col-md-1' style='padding:7px'><%= @candidate.title %></div>
+	<div class='col-md-1' style='padding:7px'>
+				<table>
+					<tr><td><%= @candidate.title %></td></tr>
+				      <% if @candidate.tag1.present? %>
+					      <tr><td><%= @candidate.tag1 %></td></tr>
+				      <% end %>
+				      <% if @candidate.tag2.present? %>
+					      <tr><td><%= @candidate.tag2 %></td></tr>
+				      <% end %>
+              <% if @candidate.tag3.present? %>
+                <tr><td><%= @candidate.tag3 %></td></tr>
+              <% end %>
+				</table></div>
         <div class='col-md-1' style='padding:7px'><%= @candidate.year %></div>
         <div class='col-md-1' style='padding:7px'><%= @candidate.city %></div>
         <div class='col-md-1' style='padding:7px'><%= @candidate.employer %></div>

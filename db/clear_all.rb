@@ -2,7 +2,6 @@ module ClearAll
   puts 'in clear_all'
   #Target.delete_all
   #MailHistory.delete_all
-  #Candidate.delete_all
   #ClientEmail.delete_all
   #Hr.delete_all
   #Client.delete_all

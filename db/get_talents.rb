@@ -50,8 +50,8 @@ def convert(a)
   end
 end
 
-["Erlang"].each do |language|
-  [	  "Shanghai",
+["CSS"].each do |language|
+  [	  # "Shanghai", 
 	  "Beijing","Guangzhou",
 	  "Shenzhen",
 	  "Hangzhou", "Chengdu",
@@ -89,6 +89,7 @@ end
 	    email_text = item.css("a").last.text
 	    Candidate.create(user_id:10000,followers:followers,year:year,employer:employer,name:item.text.split.second,
 			     title:(language=="C%23" ? "C#" : "#{language}"),email:email_text,city:convert(location))
+	    puts "#{item.text.split.second}"
 	  end
 	  sleep 5
         end
