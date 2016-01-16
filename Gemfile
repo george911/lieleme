@@ -2,6 +2,8 @@
 source 'https://ruby.taobao.org'
 #source 'http://rubygems.org'
 
+gem 'acts-as-taggable-on'
+
 gem 'talking_stick'
 gem 'slim-rails'
 gem 'pusher'

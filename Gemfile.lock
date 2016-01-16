@@ -81,6 +81,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (3.5.0)
+      activerecord (>= 3.2, < 5)
     acts_as_votable (0.10.0)
     addressable (2.3.8)
     arbre (1.0.3)
@@ -442,6 +444,7 @@ DEPENDENCIES
   actionpack-action_caching
   actionpack-page_caching
   activeadmin!
+  acts-as-taggable-on
   acts_as_votable (~> 0.10.0)
   bootstrap-sass (~> 3.3.4)
   bootstrap3-datetimepicker-rails (~> 4.7.14)

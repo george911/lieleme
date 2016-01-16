@@ -1,5 +1,13 @@
 module ApplicationHelper
-  # render ajax会出错,因为hiddent_div_if 会在条件满足时隐藏div,导致$()找不到element
+  def tag_cloud(tags, classes)
+    max = tags.sort_by(&:count).last
+    tags.each do |tag|
+      index = tag.count.to_f / max.count * (classes.size - 1)
+      yield(tag, classes[index.round])
+    end
+  end
+
+# render ajax会出错,因为hiddent_div_if 会在条件满足时隐藏div,导致$()找不到element
   def hidden_div_if(condition, attributes = {}, &block)
     if condition
       attributes["style"] = "display: none"

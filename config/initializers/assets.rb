@@ -2,6 +2,7 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
+Rails.application.config.assets.precompile += %w( clientXHRSignalingChannel.js )
 Rails.application.config.assets.precompile += %w( adapter.js )
 Rails.application.config.assets.precompile += %w( ieMediaStream.js )
 Rails.application.config.assets.precompile += %w( woogeen.sdk.js )
