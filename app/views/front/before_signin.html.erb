@@ -1,50 +1,28 @@
  <header>
  <div class="header-content">
             <div class="header-content-inner">
-                <h1>1个职位, &nbsp;3个靠谱的猎头, 2周出offer</h1>
-                <hr>
-                <h4>基于大数据的职位与猎头匹配, 摆脱公司桎梏的猎头创业平台</h4>
-                <p>我们不把职位众包, 只对招聘结果负责</p>
-                  <button type="button" class="btn btn-xl" data-toggle="modal" data-target="#exampleModal">我要招人</button>
-                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                      <div class="modal-dialog" role="document">
-                        <!--content的颜色要设置，否则会因为header的白色字体而默认白色-->
-                        <div class="modal-content">
-                                <div class="modal-header" style=''>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                  <h4 class="modal-title" id="exampleModalLabel">联系详情</h4>
-                                </div>
-                                <div class="modal-body" style='padding-bottom:20px'>
-                                  <div class='container-fluid'><!--container-fluid不加, modal-body高度永远只有一行-->
-                                    <div class='col-md-3'>
-                                      <%= image_tag("dishuihu.jpg",class:'img-squre', size: '100x100') %>
-                                    </div>
-                                    <div class='col-md-9'>
-                                      <row>
-                                        <div class='col-md-3'>
-                                          联系地址
-                                        </div>
-                                        <div class='col-md-12'>
-                                          浦东新区环湖西一路99号滴水湖软件园112B10室
-                                        </div>
-                                      </row>
-                                      <row>
-                                        <div class='col-md-3'>
-                                          电话
-                                        </div>
-                                        <div class='col-md-12'>
-                                          021-50175594
-                                        </div>
-                                      </row>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">我知道了</button>
-                                </div>
-                        </div>
-                      </div>
+              <%= image_tag("slogan.png",style:'margin-top:40px') %>
+                <%= form_tag search_path, method: "get",style:"col-md-8" do %>
+                  <div class="col-md-3">
                   </div>
+                  <div class="col-md-6 well " style="padding: 20px;background-color:rgba(255,255,255,0.4);border:0px" >
+                    <div class="input-group" style="padding-right:0">
+                      <%= text_field_tag :query, params[:query], size:20,style:"height:45px",class: "form-control", placeholder:"技能 年限 地点如: Java 5 上海/Java 数据库" %>
+                      <div class="input-group-btn">
+                        <%= select_tag :q,options_for_select([['工作','职位'],['职业顾问','猎头']]), style:"height:45px",class:'button',type:"button" %>
+                      </div>
+                      <div style="margin-left:20px;">
+                        <%= submit_tag "搜索",class:"btn btn-lg btn-block btn-danger",style:"height:45px" %>
+                        <% end %>
+                      </div><!-- /btn-group -->
+                      
+                    </div><!-- /input-group -->
+  
+                  </div><!-- /.col-lg-6 --> 
+
+                  
+		  <!--<a style='color:white;font-size:12px' data-toggle="modal" data-target=".bs-example-modal-sm">搜索贴士</a>-->
+  
             </div>
         </div>
     </header>

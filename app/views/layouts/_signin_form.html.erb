@@ -1,8 +1,8 @@
 <ul class="nav navbar-nav navbar-right">
           		<li><%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           	        	<%= f.submit "登录",id: 'submit',class: 'btn btn-success  navbar-right navbar-form',style:'width:50px;height:34px;' %>
-              			<%= f.password_field :password, placeholder: '密码',class: 'navbar-form form-group form-control navbar-right',style:'margin-left:20px;margin-right:5px',         autocomplete: "off" %>
-          			<%= f.email_field :email,style:"padding-right:30px",placeholder: '注册邮箱', class: 'navbar-form form-group form-control navbar-right',autofocus: true %>
+              			<%= f.password_field :password, placeholder: '密码',size:10,class: 'navbar-form form-group form-control navbar-right',style:'margin-left:20px;margin-right:5px',         autocomplete: "off" %>
+          			<%= f.email_field :email,style:"padding-right:30px",size:10,placeholder: '注册邮箱', class: 'navbar-form form-group form-control navbar-right',autofocus: true %>
           		<% end %><!--form end --></li>
           		<li><%= button_to '加入',sign_up_path,method: :get, class: 'btn btn-success navbar-form navbar-right',style:'margin-left: 20px;margin-right:          10px;width:50px;height:34px;'  %> </li>
           	</ul>
