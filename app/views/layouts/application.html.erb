@@ -24,7 +24,7 @@
   <!--navbar-inverse设置bar的颜色是黑色-->
   <nav class="navbar navbar-color navbar-fixed-top" style="<%= (controller.controller_name == "front" and not user_signed_in?) ? "background: transparent" : "background: #3b5893" %>">
   <%= render 'layouts/logo.html.erb' %> 
-      <div class="container">
+      <div class="">
         <div class="navbar-header">       
             <%= render 'layouts/search_form' %>
         </div>
