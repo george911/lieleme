@@ -8,10 +8,10 @@
                   <div class="col-md-6 well " style="padding: 20px;background-color:rgba(255,255,255,0.4);border:0px" >
                     <div class="input-group" style="padding-right:0">
                       <%= text_field_tag :query, params[:query], size:20,style:"height:45px",class: "form-control", placeholder:"技能 年限 地点如: Java 5 上海/Java 数据库" %>
-                      <div class="input-group-btn">
-                        <%= select_tag :q,options_for_select([['工作','职位'],['职业顾问','猎头']]), style:"height:45px",class:'button',type:"button" %>
-                      </div>
+                      <div style="margin-left:20px;">
+                        <%= submit_tag "搜索",class:"btn btn-lg btn-block btn-danger",style:"height:45px" %>
                         <% end %>
+                      </div><!-- /btn-group -->
                       
                     </div><!-- /input-group -->
   
