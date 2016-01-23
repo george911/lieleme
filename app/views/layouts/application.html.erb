@@ -25,9 +25,9 @@
   <nav class="navbar navbar-color navbar-fixed-top" style="<%= (controller.controller_name == "front" and not user_signed_in?) ? "background: transparent" : "background: #3b5893" %>">
   <%= render 'layouts/logo.html.erb' %> 
   <!--<div class="container"> 加上container类在IE下navbar登录框会到中间去-->
-      <div>
+      <div style="padding-right:20px">
         <div class="navbar-header">       
-            <%= render 'layouts/search_form' %>
+	  <%= render 'layouts/search_form' unless controller.controller_name == "front" %>
         </div>
 
 	<div id="navbar" class="navbar-collapse collapse">
