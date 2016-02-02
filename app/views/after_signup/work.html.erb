@@ -74,7 +74,7 @@
                       </div>
                          
                       <div class='select col-lg-12'><!--因为_work_fields.html.erb里面没div,所以select加在这里-->
-                          <%= f.fields_for :works,@user.works.build do |work| %>
+			      <span style="text-size:14px;font-weight:bold">最近</span><%= f.fields_for :works,@user.works.build do |work| %>
                           <%= render 'work_fields',f:work %>   
                           <%= link_to_add_fields "增加工作经验",f,:works %>
                           <% end %>

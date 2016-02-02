@@ -69,7 +69,7 @@
 			  <% @user.sent_line_items.where.not(comment:nil).each do |f| %>
 				<div class='row'>
 					<div class='col-lg-3'>
-						    <p><b><%= f.job.title %></b></p>
+						    <p><b><%= f.job.title unless f.job.nil? %></b></p>
 						    <p><%= f.created_at.strftime("%b %Y") %></p>
 						    <p><span style='font-size:17px;font-family:Arial,"Microsoft YaHei", "微软雅黑";color:#fa6464'><%= f.status %></span></p>
 					</div>

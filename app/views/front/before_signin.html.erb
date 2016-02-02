@@ -33,7 +33,7 @@
     <div class='row'>
       <div style='border-right:solid 1px #dddddd;padding:10px 20px;float:left'><!--都要加float:left让后面一个div紧贴右边-->
         <div style='padding-bottom:10px'>
-          <span style='font-size:30px'>10, 000+</span>专业猎头
+          <span style='font-size:30px'>10, 000+</span>专业顾问
         </div>
         <%= image_tag("lateral/peoplesprite.png",size:"265x130") %>
       </div>
@@ -44,7 +44,7 @@
            </div>
            <div style='float:left;padding:10px 20px'>
              <span style='font-size:30px'>8640+</span>小时
-             <p>每月人才寻访时间</p>
+             <p>每月视频面试时间</p>
            </div>
         </div>
         <div class='row' style='border-top:solid 1px #dddddd'>
@@ -52,7 +52,7 @@
             <i class='fa fa-users' style='font-size:45px'></i>
           </div>
           <div style='padding-top:20px'>
-            <span style='font-size:30px'>750</span>个猎头
+            <span style='font-size:30px'>750</span>个职业顾问
             <p>每周不间断工作</p>
           </div>
         </div>
@@ -71,7 +71,7 @@
            </div>
            <div style='float:left;padding:10px 20px'>
              每周<span style='font-size:30px'>300+</span>
-             <p>每周面试场数</p>
+             <p>每周视频面试场数</p>
            </div>
         </div>
         <div class='row' style='border-top:solid 1px #dddddd'>
@@ -92,57 +92,28 @@
 </section>
 
 <section style='background:#f0f3f6'>
-      <div class="row"><!--加了row才能让section之间没有gap-->
-          <div class="board">
-              <div>
-                <h1 align='center'style='color:#f48260;padding-bottom:20px'>这里的世界很精彩</h1>
-              </div>
-              <% if @offers != nil and @first_offer != nil %>
-              <div>
-                <div class='col-md-5' style='padding-left:80px'>
-	                 
-	                   <% @offers.order('created_at asc').first(15).each_with_index do |f,index| %>
-                      <div class='col-md-4'>  
-                 	      <% if f.recipient != nil %>
-                 	        <%= link_to image_tag(f.sender.avatar.url(:small),size:"60x60", class: " img-circle"), root_path(offer_id:f.id),remote:true %>
-                        <% end %>            
-               	      </div> 
-                 	  <% end %>
-                </div>
-                <div id='popover' class='col-md-6 well arrow_box' style=''>
-                    <div style=''>
-                      <div class='row'>
-                        <div class='col-md-3' style='padding:0px'>
-			                    
-				                    <%= link_to image_tag(@first_offer.sender.avatar.url(:small),size:"60x60", class: " img-circle"), user_path(@first_offer.sender),target:"_blank",style:                 "padding-left:0px" %>
-			                 
-                        </div>
-                        <div class='col-md-9' style='padding:0px'>
-                            <li style='padding-top:10px;list-style:none;font-size:15px;color:#7b91a8'><%= @first_offer.sender.user_name %>&nbsp;<%= @first_offer.sender.title %></li>
-                            <li style='padding-top:5px;list-style:none;font-size:15px;color:#7b91a8'>在猎了么完成了<%= @first_offer.sender.offers.size %>个offer,&nbsp;最近成了<%= @first_offer.sender.offers.where("created_at >= :half_year_before",{half_year_before:6.months.ago}).size %>单</li>
-                        </div>
-                      </div>
-                      <hr>
-                      <div class='row'>
-                        <div class='col-md-12'>
-			<!-- 成单猎头的三个offer -->
-			  <% @first_offer.sender.offers.order("created_at asc").first(3).each do |offer| %>
-                            <li style='padding-top:15px;list-style:none;font-size:15px;color:#7b91a8'>
-                              <%= link_to "#{offer.job.title}",job_path(offer.job), target:"_blank" unless offer.job.nil? %>职位于<%=offer.updated_at.strftime("%m-%d") %>获得offer</li>
-                          <% end %>
-                        </div>
-                      </div>  
-                    </div>
-                </div>
-              
-              </div>
-              <% end %>
+    <div class='row' style="margin:20px auto">
+      <h2 class='text-center'>超过1000位专家和职业发展顾问</h2>
+      <h4 class='text-center' style="color:#999999">覆盖100多个行业</h4> 
+    </div>
+      <div class="row" style='width:80%;margin:auto'><!--加了row才能让section之间没有gap-->
+          <% User.where("user_type = '猎头'").first(5).each do |f| %>
+            <div class="consultant" style="text-align:center" >
 
-              <div class='col-lg-12'>
-                <h1 align='center' style='color:#f48260'>你的精彩在哪里</h1>
+                <%= image_tag(f.avatar.url, size:"120x120",class:"home_star") %>
+
+              <div >
+                <%= f.user_name %>
               </div>
-</div>
-</div>
+              <p style='height:30px'>
+                <%= f.title %>
+              </p>
+              <p style='color: #999999;height:30px'>
+                <%= f.works.first.employer unless f.works.first.nil? %>
+              </p>
+            </div>
+          <% end %>
+      </div>
    
 
 </section>

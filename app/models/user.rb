@@ -138,7 +138,7 @@ class User < ActiveRecord::Base
     def sum_of_commission
     sum = 0
     sent_line_items.where(status:"offer").each do |f|
-       sum += f.job.commission
+       sum += f.job.commission unless f.job.nil?
       end
     return sum 
   end
