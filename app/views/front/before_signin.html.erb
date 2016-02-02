@@ -96,20 +96,20 @@
       <h2 class='text-center'>超过1000位专家和职业发展顾问</h2>
       <h4 class='text-center' style="color:#999999">覆盖100多个行业</h4> 
     </div>
-      <div class="row" style='width:80%;margin:auto'><!--加了row才能让section之间没有gap-->
+      <div class="row" style='width:90%;margin:auto'><!--加了row才能让section之间没有gap-->
           <% User.where("user_type = '猎头'").first(5).each do |f| %>
             <div class="consultant" style="text-align:center" >
 
-                <%= image_tag(f.avatar.url, size:"120x120",class:"home_star") %>
+                <%= image_tag(f.avatar.url, size:"150x150",class:"home_star") %>
 
               <div >
                 <%= f.user_name %>
               </div>
-              <p style='height:30px;max-width:120px'>
+              <p style='height:30px;max-width:150px'>
                 <%= f.title %>
               </p>
-              <p style='color: #999999;height:30px;max-width:120px'>
-                <%= f.works.first.employer unless f.works.first.nil? %>
+              <p style='color: #999999;height:30px;max-width:150px'>
+                <%= f.works.first.employer.first(10) unless f.works.first.nil? %>
               </p>
             </div>
           <% end %>
