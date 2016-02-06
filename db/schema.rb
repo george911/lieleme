@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106131009) do
+ActiveRecord::Schema.define(version: 20160203034017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -386,10 +386,9 @@ ActiveRecord::Schema.define(version: 20160106131009) do
   add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "rooms", force: :cascade do |t|
-    t.string   "name"
-    t.string   "sessionID"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "job_id"
   end
 
   create_table "saving_lists", force: :cascade do |t|
@@ -443,40 +442,6 @@ ActiveRecord::Schema.define(version: 20160106131009) do
   add_index "talent_pools", ["hunter_id"], name: "index_talent_pools_on_hunter_id", using: :btree
   add_index "talent_pools", ["talent_id", "hunter_id"], name: "index_talent_pools_on_talent_id_and_hunter_id", unique: true, using: :btree
   add_index "talent_pools", ["talent_id"], name: "index_talent_pools_on_talent_id", using: :btree
-
-  create_table "talking_stick_participants", force: :cascade do |t|
-    t.string   "name"
-    t.string   "ip"
-    t.string   "guid"
-    t.datetime "joined_at"
-    t.datetime "last_seen"
-    t.integer  "room_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "talking_stick_participants", ["guid"], name: "index_talking_stick_participants_on_guid", using: :btree
-  add_index "talking_stick_participants", ["room_id"], name: "index_talking_stick_participants_on_room_id", using: :btree
-
-  create_table "talking_stick_rooms", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "last_used"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "talking_stick_signals", force: :cascade do |t|
-    t.integer  "room_id"
-    t.integer  "sender_id"
-    t.integer  "recipient_id"
-    t.string   "signal_type"
-    t.text     "data"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "talking_stick_signals", ["recipient_id"], name: "index_talking_stick_signals_on_recipient_id", using: :btree
-  add_index "talking_stick_signals", ["sender_id"], name: "index_talking_stick_signals_on_sender_id", using: :btree
 
   create_table "targets", force: :cascade do |t|
     t.string   "name"

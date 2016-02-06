@@ -103,10 +103,10 @@
                 <%= image_tag(f.avatar.url, size:"150x150",class:"home_star") %>
 
               <div >
-                <%= f.user_name %>
+                <%= f.user_name.first(20) %>
               </div>
               <p style='height:30px;max-width:150px'>
-                <%= f.title %>
+                <%= f.title.first(20) %>
               </p>
               <p style='color: #999999;height:30px;max-width:150px'>
                 <%= f.works.first.employer.first(20) unless f.works.first.nil? %>

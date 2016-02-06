@@ -17,7 +17,37 @@
         <div class='col-md-1' style='padding:7px'><%= @candidate.employer %></div>
         <div class='col-md-1' style='padding:7px'><%= @candidate.mobile %></div>
         <div class='col-md-2' style='padding:7px'><%= @candidate.email %></div>
-        <div class='col-md-1' style='padding:7px'><%= @candidate.note %></div>
+        <div class='col-md-1' style='padding:7px'>
+
+                          <!-- Button trigger modal -->
+                          <a data-toggle="modal" data-target="#<%=@candidate.id%>">
+                            <%= @candidate.note.first(10) unless @candidate.note.nil? %>
+                            <% if (@candidate.note.present? and @candidate.note.length>10 ) %>
+                              &middot;&middot;&middot;
+                            <% end %>
+
+                          </a>
+                          
+                          <!-- Modal -->
+                          <div class="modal fade" id="<%=@candidate.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <h4 class="modal-title" id="myModalLabel">更改<%= @candidate.name %>的备忘</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <%= form_for(@candidate) do |candidate| %>
+                                    <%= candidate.text_area :note, class:"form-control",rows:2,cols:15 %>
+                                    <%= candidate.submit "保存",class:"btn btn-success",style:"margin-top:10px;width:100px" %>
+                                  <% end %>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
         <div class='col-md-1' style='padding:7px'><%= @candidate.base_salary %></div>
         <div class='col-md-2' style='padding:7px'><%= link_to 'Edit', edit_candidate_path(id:@candidate.id,candidate_id:@candidate.id), remote:true %>
               &nbsp;&nbsp;<%= link_to 'Destroy', @candidate, method: :delete, remote:true %></td>

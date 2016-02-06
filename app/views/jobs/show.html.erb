@@ -14,95 +14,6 @@
     </div>
   </div>
 
- <div id="media-list"></div>
-
-    <script>
-        (function ($) {
-
-            // 声明变量
-            var session;
-            var localStream;
-            var mediaList = document.querySelector('#media-list');
-
-            /********************************
-             *           工具函数
-             ********************************/
-            // 初始化流
-            function initStream(options, callback) {
-                localStream = new RTCat.Stream(options);
-                localStream.on('access-accepted', function () {
-                        session.send({stream: localStream, data: true});
-                        callback(localStream);
-                    }
-                );
-                localStream.on('access-failed', function (err) {
-                    console.log(err);
-                });
-
-                localStream.on('play-error', function (err) {
-                    console.log(err);
-                });
-                localStream.init();
-            }
-
-            // 显示流
-            function displayStream(id, stream) {
-
-                // Video container
-                var videoContainer = document.createElement("div");
-                videoContainer.setAttribute('style', "width: 300px; height:300px;");
-
-                // Video player
-                var videoPlayer = document.createElement('div');
-                videoPlayer.setAttribute("id", "peer-" + id);
-
-                videoContainer.appendChild(videoPlayer);
-                mediaList.appendChild(videoContainer);
-
-                stream.play("peer-" + id);
-            }
-
-            /**************************************
-            *               建立会话
-            ***************************************/
-
-            // 使用token新建会话，请将此处的Token替换为
-            // 从http://dashboard.shishimao.com/生成的Token
-            session = new RTCat.Session("fb0df632-db86-43ed-9a75-ceea789bd41e");
-
-            session.connect();
-
-            session.on('connected', function (users) {
-                console.log('Session connected');
-                initStream({video: true, audio: true, data: true}, function (stream) {
-                    displayStream('self', stream)
-                });
-            });
-
-            session.on('in', function (token) {
-                if (localStream) {
-                    session.sendTo({to: token, stream: localStream, data: true});
-                }
-                console.log('someone in');
-            });
-
-            session.on('out', function (token) {
-                console.log('someone out');
-            });
-
-            session.on('remote', function (r_channel) {
-                var id = r_channel.getId();
-                r_channel.on('stream', function (stream) {
-                    displayStream(id, stream);
-                });
-                r_channel.on('close', function () {
-                    $('#peer-' + id).parent().remove();
-                });
-            });
-
-        }).apply(this, [jQuery]);
-    </script>
-    
   <div class='row'>
     <div class='col-lg-6'>
       <table>
@@ -256,9 +167,9 @@
       <div class='col-lg-2'>
         
 	      <!-- link_to "在线面试", "http://www.lieleme.com:5001/start.html?key=#{@job.id}&&call=#{@job.id}",class: "btn-green"--> 
-	      <%= link_to "在线面试", "http://www.lieleme.com:3001",class: "btn-green" %>
+	      <%= link_to "在线面试", new_room_path(job_id:@job.id), class: "btn btn-success" %>
 
-
+       
       </div>
   </div><!-- end row -->
   <div><!--divide-->

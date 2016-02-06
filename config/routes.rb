@@ -1,6 +1,8 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
+  resources :rooms
+  resources :rooms
   mount TalkingStick::Engine, at: '/talking_stick'
   mount Resque::Server.new, at: "/resque"	
   get 'add_iframe',to: "jobs#add_iframe"
@@ -26,8 +28,7 @@ Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
   devise_for :users, :controllers => { :sessions => "users/sessions",:confirmations => "users/confirmations" ,:registrations => "registrations" } #新建registrations controller,为了能够注册后重定向到after_signup_path
   scope '(:locale)' do #:locale是插入语，放在path前面，代表了地址里面出现的:locale参数如(en,cn等),
-    resources :rooms
-    match '/party/:id', :to => 'rooms#party', :as => :party, :via => :get
+      match '/party/:id', :to => 'rooms#party', :as => :party, :via => :get
        
     get 'mobile_show_job', to:'jobs#show_job_on_mobile'
     get 'mobile_show_company', to: 'jobs#show_company_on_mobile'

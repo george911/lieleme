@@ -1,4 +1,21 @@
                                  Prefix Verb       URI Pattern                                                         Controller#Action
+                                  rooms GET        /rooms(.:format)                                                    rooms#index
+                                        POST       /rooms(.:format)                                                    rooms#create
+                               new_room GET        /rooms/new(.:format)                                                rooms#new
+                              edit_room GET        /rooms/:id/edit(.:format)                                           rooms#edit
+                                   room GET        /rooms/:id(.:format)                                                rooms#show
+                                        PATCH      /rooms/:id(.:format)                                                rooms#update
+                                        PUT        /rooms/:id(.:format)                                                rooms#update
+                                        DELETE     /rooms/:id(.:format)                                                rooms#destroy
+                                        GET        /rooms(.:format)                                                    rooms#index
+                                        POST       /rooms(.:format)                                                    rooms#create
+                                        GET        /rooms/new(.:format)                                                rooms#new
+                                        GET        /rooms/:id/edit(.:format)                                           rooms#edit
+                                        GET        /rooms/:id(.:format)                                                rooms#show
+                                        PATCH      /rooms/:id(.:format)                                                rooms#update
+                                        PUT        /rooms/:id(.:format)                                                rooms#update
+                                        DELETE     /rooms/:id(.:format)                                                rooms#destroy
+                          talking_stick            /talking_stick                                                      TalkingStick::Engine
                                                    /resque                                                             #<Resque::Server app_file="/usr/local/lib/ruby/gems/2.2.0/gems/resque-1.25.2/lib/resque/server.rb">
                              add_iframe GET        /add_iframe(.:format)                                               jobs#add_iframe
                             pusher_auth POST       /pusher/auth(.:format)                                              pusher#auth
@@ -137,14 +154,6 @@
                       user_confirmation POST       /users/confirmation(.:format)                                       users/confirmations#create
                   new_user_confirmation GET        /users/confirmation/new(.:format)                                   users/confirmations#new
                                         GET        /users/confirmation(.:format)                                       users/confirmations#show
-                                  rooms GET        (/:locale)/rooms(.:format)                                          rooms#index
-                                        POST       (/:locale)/rooms(.:format)                                          rooms#create
-                               new_room GET        (/:locale)/rooms/new(.:format)                                      rooms#new
-                              edit_room GET        (/:locale)/rooms/:id/edit(.:format)                                 rooms#edit
-                                   room GET        (/:locale)/rooms/:id(.:format)                                      rooms#show
-                                        PATCH      (/:locale)/rooms/:id(.:format)                                      rooms#update
-                                        PUT        (/:locale)/rooms/:id(.:format)                                      rooms#update
-                                        DELETE     (/:locale)/rooms/:id(.:format)                                      rooms#destroy
                                   party GET        (/:locale)/party/:id(.:format)                                      rooms#party
                         mobile_show_job GET        (/:locale)/mobile_show_job(.:format)                                jobs#show_job_on_mobile
                     mobile_show_company GET        (/:locale)/mobile_show_company(.:format)                            jobs#show_company_on_mobile
@@ -327,3 +336,22 @@ autocomplete_candidate_title_candidates GET        (/:locale)/candidates/autocom
                                         PATCH      (/:locale)/users/:id(.:format)                                      users#update
                                         PUT        (/:locale)/users/:id(.:format)                                      users#update
                                         DELETE     (/:locale)/users/:id(.:format)                                      users#destroy
+
+Routes for TalkingStick::Engine:
+room_participant_signals POST   /rooms/:room_id/participants/:participant_id/signals(.:format) talking_stick/rooms#signal
+       room_participants GET    /rooms/:room_id/participants(.:format)                         talking_stick/participants#index
+                         POST   /rooms/:room_id/participants(.:format)                         talking_stick/participants#create
+    new_room_participant GET    /rooms/:room_id/participants/new(.:format)                     talking_stick/participants#new
+   edit_room_participant GET    /rooms/:room_id/participants/:id/edit(.:format)                talking_stick/participants#edit
+        room_participant GET    /rooms/:room_id/participants/:id(.:format)                     talking_stick/participants#show
+                         PATCH  /rooms/:room_id/participants/:id(.:format)                     talking_stick/participants#update
+                         PUT    /rooms/:room_id/participants/:id(.:format)                     talking_stick/participants#update
+                         DELETE /rooms/:room_id/participants/:id(.:format)                     talking_stick/participants#destroy
+                   rooms GET    /rooms(.:format)                                               talking_stick/rooms#index
+                         POST   /rooms(.:format)                                               talking_stick/rooms#create
+                new_room GET    /rooms/new(.:format)                                           talking_stick/rooms#new
+               edit_room GET    /rooms/:id/edit(.:format)                                      talking_stick/rooms#edit
+                    room GET    /rooms/:id(.:format)                                           talking_stick/rooms#show
+                         PATCH  /rooms/:id(.:format)                                           talking_stick/rooms#update
+                         PUT    /rooms/:id(.:format)                                           talking_stick/rooms#update
+                         DELETE /rooms/:id(.:format)                                           talking_stick/rooms#destroy

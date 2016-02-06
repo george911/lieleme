@@ -26,7 +26,7 @@
   <%= render 'layouts/search_tips' %>
 
   <!--navbar-inverse设置bar的颜色是黑色-->
-  <nav class="navbar navbar-color navbar-fixed-top" style="<%= (controller.controller_name == "front" and not user_signed_in?) ? "background: transparent" : "background: #3b5893" %>">
+  <nav class="navbar navbar-color navbar-fixed-top" style="background: transparent">
   <%= render 'layouts/logo.html.erb' %> 
   <!--<div class="container"> 加上container类在IE下navbar登录框会到中间去-->
       <div style="padding-right:20px">
@@ -54,8 +54,5 @@
 <div id="content"><%= content_for?(:content) ? yield(:content) : yield %></div>
 <div class='row'>
 </div>
-<% cache('footer') do %>
-	<%= render 'layouts/footer' %>
-<% end %>
 </body>
 </html>
