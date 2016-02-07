@@ -1,8 +1,6 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
-  resources :rooms
-  resources :rooms
   mount TalkingStick::Engine, at: '/talking_stick'
   mount Resque::Server.new, at: "/resque"	
   get 'add_iframe',to: "jobs#add_iframe"
@@ -110,7 +108,7 @@ Rails.application.routes.draw do
       resources :build, controller: 'jobs/build'
     end
     resources :after_signup
-    
+    resources :rooms 
     resources :users do
       resources :interviews,only:[:new,:show,:create,:update,:edit]
       member do
