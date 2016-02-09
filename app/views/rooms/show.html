@@ -37,17 +37,25 @@
     });
     return result;
 }
-        (function ($) {
+    (function ($) {
       var session_id=parse("session_id");
       var xhr = new XMLHttpRequest();
-
       var params = "type=p2p&session_id="+session_id;
-       
-        xhr.open('post','https://api.realtimecat.com/v0.2/sessions/'+session_id+'/tokens',true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.setRequestHeader("X-RTCAT-APIKEY","4d42369b-4c39-40d1-abec-75e7de12204b");
-        xhr.setRequestHeader("X-RTCAT-SECRET","a478180b-2023-4f0f-8adb-a2e3806335ba");
-        xhr.send("type=pub");
+      //xhr2用来检测房间的人数
+      var xhr2 = new XMLHttpRequest();
+        xhr2.open('get','https://api.realtimecat.com/v0.2/sessions/'+session_id+'/tokens',true);
+        xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr2.setRequestHeader("X-RTCAT-APIKEY","4d42369b-4c39-40d1-abec-75e7de12204b");
+        xhr2.setRequestHeader("X-RTCAT-SECRET","a478180b-2023-4f0f-8adb-a2e3806335ba");
+        xhr2.send(null);
+        xhr2.onload = function() {
+          count = 
+          console.log(xhr2.responseText)
+          if (JSON.parse(xhr2.responseText).count != 0){
+            document.getElementById("copyRoomUrl").setAttribute("class","hidden");}
+
+        }
+
 
         xhr.onload = function() {
             console.log("tokenId = "+xhr.responseText);
@@ -137,7 +145,14 @@
                     $('#peer-' + id).parent().remove();
                 });
             });
-    }      
+    }    
+
+
+        xhr.open('post','https://api.realtimecat.com/v0.2/sessions/'+session_id+'/tokens',true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("X-RTCAT-APIKEY","4d42369b-4c39-40d1-abec-75e7de12204b");
+        xhr.setRequestHeader("X-RTCAT-SECRET","a478180b-2023-4f0f-8adb-a2e3806335ba");
+        xhr.send("type=pub");  
 
         }).apply(this, [jQuery]);
 </script> 
@@ -206,11 +221,13 @@
 </nav>
 
 <div style="padding-top:100px">
+  <div class="row" id="copyRoomUrl">
     <div id="wizard" style='text-align:center;margin: auto;width:60%'>
         <%= image_tag("ask-for-allowance.png",style:"margin:auto") %></div>
     <div style="padding:10px;width:30%;margin:auto;font-size:16px;color:white">
       您是此房间中的第一个人,分享房间链接给好友
     </div>
+  </div>
     <div style="width:30%;margin:auto;padding:10px">
       <%= text_field_tag "roomURL", "www.lieleme.com/cn/rooms/#{@room.id}/?session_id=#{params[:session_id]}", class:"form-control" %>
     </div>
