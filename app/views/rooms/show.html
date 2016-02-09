@@ -1,5 +1,27 @@
-<div style="margin-top:100px">
-<div id="media-list"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 加载实时猫 JavaScript SDK v0.2 -->
+  <script src="//dn-learning-tech.qbox.me/realtimecat/realtimecat-0.2.min.js"></script>
+  <!-- 非必须，本例中使用 jQuery -->
+  <script src="//dn-learning-tech.qbox.me/realtimecat/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Career Talk -- 在线职业发展平台</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+</head>
+<body style="background: #181818">
 <script>
   function parse(val) {
     var result = "Not found",
@@ -84,10 +106,14 @@
             session.connect();
 
             session.on('connected', function (users) {
+            
                 console.log('Session connected');
                 initStream({video: true, audio: true, data: true}, function (stream) {
                     displayStream('self', stream)
+                                    // 把引导打开摄像头的提示图片隐藏
+            document.getElementById("wizard").setAttribute("class","hidden");
                 });
+
             });
 
             session.on('in', function (token) {
@@ -95,6 +121,7 @@
                     session.sendTo({to: token, stream: localStream, data: true});
                 }
                 console.log('someone in');
+
             });
 
             session.on('out', function (token) {
@@ -114,4 +141,98 @@
 
         }).apply(this, [jQuery]);
 </script> 
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background: transparent">
+  <div class="container-fluid">
+    <div class="navbar-header " >
+      <div style="margin-top:7px">
+        
+        <%= link_to image_tag("logo.png"), root_path %>
+      </div>
+    </div>
+    <div class="" style="width:40%;margin:auto">
+      <ul class="nav navbar-nav navbar-center">
+        <li>
+          <a  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="邀请面试">
+            <i class="fa fa-share-square-o"></i>
+          </a>
+        </li>
+        <li>
+          <a  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="聊天">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+        <li>
+          <a  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="关闭视频">
+            <i class="fa fa-eye-slash"></i>
+          </a>
+        </li>
+        <li>
+          <a  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="关闭声音">
+            <i class="fa fa-microphone-slash"></i>
+          </a>
+        </li>
+        <li>
+          <a  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="分享屏幕">
+            <i class="fa fa-desktop"></i>
+          </a>
+        </li>
+        <li>
+          <a  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="白板">
+            <i class="fa fa-clipboard"></i>
+
+          </a>
+        </li>
+        <li>
+          <a  data-toggle="modal" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="离开房间">
+            <i class="fa fa-sign-out"></i>
+          </a>
+        </li>
+        <li>
+            <a data-toggle="dropdown"><span style='color:white'><%= current_user.user_name unless current_user==nil %></span><span class="caret"></span></a>
+                     <ul class="dropdown-menu" role="menu">
+           <li><%= link_to "我的博客", blog_home_path(current_user) %></li>
+                       <li><a href="#">我的佣金</a></li>
+                       <li><a href="#">个人设置</a></li>
+                       <li class="divider"></li>
+                       <li class="dropdown-header">帮助中心</li>
+                       <li><a href="#"><%= link_to '退出',sign_out_path %></a></li>
+         </ul>
+        </li>
+      </ul>
+      
+
+    </div>
+  </div>
+</nav>
+
+<div style="padding-top:800px">
+    <div id="wizard" style='text-align:center;margin: auto;width:60%'>
+        <%= image_tag("ask-for-allowance.png",style:"margin:auto") %></div>
+    <div style="padding:10px;width:30%;margin:auto;font-size:16px;color:white">
+      您是此房间中的第一个人,分享房间链接给好友
+    </div>
+    <div style="width:30%;margin:auto;padding:10px">
+      <%= text_field_tag "roomURL", "www.lieleme.com/cn/rooms/#{@room.id}/?session_id=#{params[:session_id]}", class:"form-control" %>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="media-list"></div>
+
 </div>
+</body>

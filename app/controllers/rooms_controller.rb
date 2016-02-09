@@ -1,6 +1,6 @@
 class RoomsController < InheritedResources::Base
   before_action :set_room, only: :show
-
+  layout :false, except: :new
   def new
     @room = Room.new
   end
@@ -12,10 +12,11 @@ class RoomsController < InheritedResources::Base
     @room = Room.new(room_params)
     respond_to do |format|
       if @room.save
-	format.html {
-	  redirect_to room_path(@room,session_id:@room.session_id) }
+	format.html { redirect_to room_path(@room,session_id:@room.session_id) }
+      else
+	render new
       end
-  end
+    end
   end
   private
   def set_room
