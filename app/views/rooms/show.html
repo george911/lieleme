@@ -49,7 +49,6 @@
         xhr2.setRequestHeader("X-RTCAT-SECRET","a478180b-2023-4f0f-8adb-a2e3806335ba");
         xhr2.send(null);
         xhr2.onload = function() {
-          count = 
           console.log(xhr2.responseText)
           if (JSON.parse(xhr2.responseText).count != 0){
             document.getElementById("copyRoomUrl").setAttribute("class","hidden");}
@@ -89,18 +88,37 @@
             // 显示流
             function displayStream(id, stream) {
 
-                // Video container
-                var videoContainer = document.createElement("div");
-                videoContainer.setAttribute('style', "width: 300px; height:300px;");
+                
+                if (id == "self"){
+                  // 我的Video container
+                  var videoContainer = document.createElement("div");
+                  
+                  videoContainer.setAttribute('style', "width: 300px;height:0px;");
+                  
+  
+                  // Video player
+                  var videoPlayer = document.createElement('div');
+                  videoPlayer.setAttribute("id", "peer-" + id);
+  
+                  videoContainer.appendChild(videoPlayer);
+                  mediaList.appendChild(videoContainer);
+                  stream.play("peer-" + id,{width:"20%"});
+                  document.getElementById("peer-self").setAttribute("style","position:fixed;left:100px;top:100px")}
+                else {
+                  // peer's Video container
+                  var videoContainer = document.createElement("div");
+  
+                  videoContainer.setAttribute('style', "width: 300px;height:300px;");
+                  
+  
+                  // Video player
+                  var videoPlayer = document.createElement('div');
+                  videoPlayer.setAttribute("id", "peer-" + id);
+  
+                  videoContainer.appendChild(videoPlayer);
+                  mediaList.appendChild(videoContainer);
+                  stream.play("peer-" + id,{width:"200%"});}
 
-                // Video player
-                var videoPlayer = document.createElement('div');
-                videoPlayer.setAttribute("id", "peer-" + id);
-
-                videoContainer.appendChild(videoPlayer);
-                mediaList.appendChild(videoContainer);
-
-                stream.play("peer-" + id);
             }
 
             /**************************************
@@ -145,6 +163,7 @@
                     $('#peer-' + id).parent().remove();
                 });
             });
+
     }    
 
 
@@ -220,8 +239,8 @@
   </div>
 </nav>
 
-<div style="padding-top:100px">
-  <div class="row" id="copyRoomUrl">
+<div id="copyRoomUrl" style="padding-top:100px">
+  <div class="row" >
     <div id="wizard" style='text-align:center;margin: auto;width:60%'>
         <%= image_tag("ask-for-allowance.png",style:"margin:auto") %></div>
     <div style="padding:10px;width:30%;margin:auto;font-size:16px;color:white">
@@ -249,7 +268,8 @@
         </div>
       </div>
     </div>
-    <div id="media-list"></div>
-
+</div>
+<div class='row' style='margin-top:100px'>
+  <div id="media-list" style="width:50%;margin:auto"></div>
 </div>
 </body>
