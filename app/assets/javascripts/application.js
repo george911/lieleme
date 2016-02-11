@@ -29,6 +29,7 @@
 // fullcalendar放到datetimepicker后面
 //= require fullcalendar
 //= require talking_stick/application
+//= require zeroclipboard
 
 $(function() {
 	if(window.innerHeight > window.innerWidth){

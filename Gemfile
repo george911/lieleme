@@ -1,6 +1,9 @@
 # Ruby通过brew install ruby安装,rails通过gem 'rails','xxx'安装
 source 'https://ruby.taobao.org'
-#source 'http://rubygems.org'
+# source 'http://rubygems.org'
+
+# clip to board
+gem 'zeroclipboard-rails'
 
 gem 'acts-as-taggable-on'
 

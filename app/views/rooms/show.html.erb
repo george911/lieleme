@@ -105,6 +105,7 @@
                   stream.play("peer-" + id,{width:"20%"});
                   document.getElementById("peer-self").setAttribute("style","position:fixed;left:100px;top:100px")}
                 else {
+                  document.getElementById("copyRoomUrl").setAttribute("class","hidden");
                   // peer's Video container
                   var videoContainer = document.createElement("div");
   
@@ -136,7 +137,8 @@
                 console.log('Session connected');
                 initStream({video: true, audio: true, data: true}, function (stream) {
                     displayStream('self', stream)
-                                    // 把引导打开摄像头的提示图片隐藏
+            
+            // 把引导打开摄像头的提示图片隐藏
             document.getElementById("wizard").setAttribute("class","hidden");
                 });
 
@@ -233,7 +235,7 @@
          </ul>
         </li>
       </ul>
-      
+    
 
     </div>
   </div>
@@ -247,9 +249,18 @@
       您是此房间中的第一个人,分享房间链接给好友
     </div>
   </div>
-    <div style="width:30%;margin:auto;padding:10px">
-      <%= text_field_tag "roomURL", "www.lieleme.com/cn/rooms/#{@room.id}/?session_id=#{params[:session_id]}", class:"form-control" %>
+    <div class="input-group" style="width:30%;margin:auto;padding:10px">
+      <%= text_field_tag "roomURL", "www.lieleme.com/cn/rooms/#{@room.id}/?session_id=#{params[:session_id]}", id:"room_url", class:"my_clip_button form-control" %>
+      <span class="input-group-btn">
+        <button class="btn btn-default" data-clipboard-target="room_url" id = "clip_button" type="button">复制</button>
+      </span>
     </div>
+    <script>
+  $(document).ready(function() {
+    var clip = new ZeroClipboard($("#clip_button"))
+  });
+</script>
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
@@ -270,6 +281,9 @@
     </div>
 </div>
 <div class='row' style='margin-top:100px'>
+  
   <div id="media-list" style="width:50%;margin:auto"></div>
 </div>
+
+
 </body>
