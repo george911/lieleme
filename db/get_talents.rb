@@ -50,14 +50,16 @@ def convert(a)
   end
 end
 
-["CSS"].each do |language|
-  [	  # "Shanghai", 
-	  "Beijing","Guangzhou",
-	  "Shenzhen",
-	  "Hangzhou", "Chengdu",
-	  "Nanjing","Xiamen",
-	  "Wuhan","Dalian","Hefei","Fuzhou","Dongguan",
-	  "Suzhou","Wuxi","Qingdao","Chongqin"].each do |location|
+["JavaScript"].each do |language|
+  [#	  "Shanghai" ,
+	  #"Beijing","Guangzhou",
+	  #"Shenzhen",
+	  #"Hangzhou", "Chengdu",
+	  #"Nanjing",
+	  #"Xiamen",
+	  #"Wuhan","Dalian","Hefei","Fuzhou","Dongguan",
+	  "Suzhou","Wuxi","Qingdao","Chongqin"
+	  ].each do |location|
     url1 = "https://github.com/search?utf8=%E2%9C%93&q=language%3A#{language}+location%3A#{location}&type=Users&ref=searchresults"
     doc1 = Nokogiri::HTML(open(url1))
     if doc1.css(".pagination").css(".gap").empty?

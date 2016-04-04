@@ -1,4 +1,4 @@
-	             <a data-toggle="dropdown"><span style='color:white'><%= current_user.user_name unless current_user==nil %></span><span class="caret"></span></a>
+	             <a data-toggle="dropdown"><span style=''><%= current_user.user_name unless current_user==nil %></span><span class="caret"></span></a>
                      <ul class="dropdown-menu" role="menu">
 		       <li><%= link_to "我的博客", blog_home_path(current_user) %></li>
                        <li><a href="#">我的佣金</a></li>

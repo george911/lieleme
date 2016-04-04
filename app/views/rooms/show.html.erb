@@ -252,7 +252,7 @@
     <div class="input-group" style="width:30%;margin:auto;padding:10px">
       <%= text_field_tag "roomURL", "www.lieleme.com/cn/rooms/#{@room.id}/?session_id=#{params[:session_id]}", id:"room_url", class:"my_clip_button form-control" %>
       <span class="input-group-btn">
-        <button class="btn btn-default" data-clipboard-target="room_url" id = "clip_button" type="button">复制</button>
+        <button class="btn btn-danger" data-clipboard-target="room_url" id = "clip_button" type="button">复制</button>
       </span>
     </div>
     <script>

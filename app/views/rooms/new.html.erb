@@ -26,12 +26,17 @@
     </script>
 
     <div style='padding-top:150px'>
-  <div align="center" style="width:60%;margin:auto">
+  <div align="center" style="width:40%;margin:auto">
 	  <h1 style="color:white">创建面试间与顾问一对一面试</h1> 
-	  <%= form_for @room do |f| %>
-	    <%= f.text_field :session_id, class: 'form-control' %>
-	    <%= f.submit class: 'btn btn-default' %>
-	  <% end %>
+	    <%= form_for @room do |f| %>
+        <div class="input-group" >
+	        <%= f.text_field :session_id, class: 'form-control' %>
+          <span class="input-group-btn" >
+	          <%= f.submit "进入面试间", class: 'btn btn-success' %>
+          </span>
+        </div>
+	    <% end %>
+
   </div>
 </div>
 

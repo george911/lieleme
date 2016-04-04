@@ -2,14 +2,13 @@
 source 'https://ruby.taobao.org'
 # source 'http://rubygems.org'
 
+gem 'axlsx_rails'
 # clip to board
 gem 'zeroclipboard-rails'
 
 gem 'acts-as-taggable-on'
 
-gem 'talking_stick'
-gem 'slim-rails'
-gem 'pusher'
+# gem 'slim-rails'
 
 gem 'rails4-autocomplete'
 # source 'http://ruby.taobao.org'
@@ -20,8 +19,6 @@ gem 'rails4-autocomplete'
 #gem 'whatlanguage'
 #gem 'wtf_lang'
 
-# tokbox
-gem "opentok", "~> 2.3"
 
 # source 'http://rubygems.org'
 gem 'fullcalendar-rails'

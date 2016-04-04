@@ -31,7 +31,7 @@
   <!--<div class="container"> 加上container类在IE下navbar登录框会到中间去-->
       <div style="padding-right:20px">
         <div class="navbar-header">       
-	  <%= render 'layouts/search_form' unless controller.controller_name == "front" %>
+	  <%= render 'layouts/search_form' unless hidden_search %>
         </div>
 
 	<div id="navbar" class="navbar-collapse collapse">

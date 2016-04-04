@@ -1,4 +1,10 @@
 module ApplicationHelper
+  def hidden_search
+    if controller.controller_name == "front" and user_signed_in? == false
+      return true
+    end
+  end
+  
   def tag_cloud(tags, classes)
     max = tags.sort_by(&:count).last
     tags.each do |tag|

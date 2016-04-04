@@ -10,7 +10,7 @@ module ClearAll
   #Boss.delete_all
   #Education.delete_all
   #Experience.delete_all
-  Job.delete_all
+  #Job.delete_all
   #LineItem.delete_all
   #Rate.delete_all
   #Review.delete_all

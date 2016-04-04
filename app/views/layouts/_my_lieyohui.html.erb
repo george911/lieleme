@@ -1,9 +1,9 @@
 <a href='#' class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"><!--href不能丢掉,否则系统不认为它是link-->
-		                <span style="color:white">我的猎友会
+		                <span>我的猎友会
 		                  <% if current_user.received_invitations.where(accept:nil).count != 0 %>
 			                  <span class='badge'><%= current_user.received_invitations.where(accept:nil).count%></span>
 			                <% end %></span>
-                    <span class="caret" style="color:white"></span>
+                    <span class="caret"></span>
                   </a>
 	                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 				            <li role='presentation'>

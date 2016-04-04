@@ -28,7 +28,6 @@
 //= require bootstrap-datetimepicker
 // fullcalendar放到datetimepicker后面
 //= require fullcalendar
-//= require talking_stick/application
 //= require zeroclipboard
 
 $(function() {

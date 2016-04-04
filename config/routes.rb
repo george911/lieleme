@@ -1,7 +1,6 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
-  mount TalkingStick::Engine, at: '/talking_stick'
   mount Resque::Server.new, at: "/resque"	
   get 'add_iframe',to: "jobs#add_iframe"
   match '/pusher/auth' => 'pusher#auth', via: :post
@@ -70,6 +69,7 @@ Rails.application.routes.draw do
       end
     root 'front#show'
 
+    get 'download_candidates',to:'candidates#download'
     get 'candidate_search',to:'candidates#search'
     get 'mail_history_path',to:'candidates#mail_history'
     get 'group_email',to:'candidates#group_email'

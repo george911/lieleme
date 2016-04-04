@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   scope :readers, -> { where(user_type:"人事") }
   
   # unread function需要
-  acts_as_reader :scope => -> { readers }
+  acts_as_reader 
   acts_as_voter
 
   

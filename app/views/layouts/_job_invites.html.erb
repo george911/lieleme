@@ -1,9 +1,9 @@
 					  <a href='#' class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"><!--href不能丢掉,否则系统不认为它是link-->
-		                    <span style="color:white">职位邀请
+		                    <span style="">职位邀请
 		                      <% if current_user.received_line_items.where(status:"等待应聘").count != 0 %>
 			                      <span class='badge'><%= current_user.received_line_items.where(status:"等待应聘").count %></span>
 			                    <% end %></span>
-                        <span class="caret" style="color:white"></span>
+                        <span class="caret" style=""></span>
                       </a>
 
                       <!--下拉菜单中的项目-->
